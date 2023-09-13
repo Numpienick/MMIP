@@ -375,6 +375,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+.DS_Store
 
 # VS Code files for those working on multiple tools
 .vscode/*
@@ -387,6 +388,9 @@ FodyWeavers.xsd
 # Local History for Visual Studio Code
 .history/
 
+# Only the "snapshots" directory should be added to Git, not the "snapshots-diff" directory
+snapshots-diff/
+
 # Windows Installer files from build outputs
 *.cab
 *.msi
@@ -396,3 +400,13 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# .NET Maui ignores
+
+# Android Studio
+.gradle/
+.idea/
+local.properties
+
+# Directory Build overrides for local setups
+Directory.Build.Override.props
