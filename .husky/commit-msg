@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+case "$OSTYPE" in
+  darwin*)  npx --no -- commitlint --edit ${1};; 
+  linux*)   npx --no -- commitlint --edit ${1};;
+  msys*)    wsl npx --no -- commitlint --edit ${1};;
+  *)        echo "unknown: $OSTYPE" ;;
+esac
