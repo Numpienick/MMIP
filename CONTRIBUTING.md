@@ -88,4 +88,3 @@ Make sure to follow the following process when making changes to the project:
 
 - Install the required dependencies by running the following commands in the root directory of the project:
   - `npm install`
-  - `dotnet tool restore`
