@@ -10,7 +10,7 @@ ci/cd:
 
 # Add 'docs' label to any change in the docs folder
 docs:
-- *.md
+- /**/*.md
 
 # TODO: create a test folder and update path
 # # Add 'test' label to any change in the test folder
