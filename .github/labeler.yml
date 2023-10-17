@@ -1,0 +1,26 @@
+# This file is used by the GitHub Action to automatically add labels to pull requests
+
+# Add 'repo' label to any root file changes
+repo:
+- '*'
+
+# Add 'ci/cd' label to any change in the .github folder
+ci/cd:
+- .github/**
+
+# Add 'docs' label to any change in the docs folder
+docs:
+- *.md
+
+# TODO: create a test folder and update path
+# # Add 'test' label to any change in the test folder
+# test:
+# - src/
+
+# Add 'backend' label to any change to src files within the source directory
+backend:
+- src/**/*.cs
+
+# Add 'frontend` label to any change to *.js, *.css, *.html, *.razor files within the source directory
+frontend:
+- any: ['src/**/*.js', 'src/**/*.css', 'src/**/*.html', 'src/**/*.razor']
