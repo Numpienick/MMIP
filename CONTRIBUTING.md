@@ -41,6 +41,10 @@ type(scope?): subject
 body?
 footer?
 ```
+When referencing a Jira item, mention the issue key in the scope like so:
+```
+docs(MAT-69): creating the best contributing.md ever
+```
 
 ## Making changes
 
