@@ -1,6 +1,14 @@
 properties:
   resources:
     - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Git
+      directives:
+        description: Install Git
+        allowPrerelease: false
+      settings:
+        id: Git.Git
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: DotNet
       directives:
         description: Install DotNet SDK 7
@@ -31,4 +39,4 @@ properties:
       settings:
         id: OpenJS.NodeJS
         source: winget
-  configurationVersion: 0.2.0
+configurationVersion: 0.2.0

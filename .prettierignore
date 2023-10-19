@@ -2,6 +2,7 @@
 **/.svn
 **/.hg
 **/node_modules
+.devMachineConfig.yaml
 
 # User-specific files
 *.rsuser
