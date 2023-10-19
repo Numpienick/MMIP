@@ -1,0 +1,4 @@
+# This file is used by the Semantic PRs bot to force semantic Pull Request titles
+
+# Validate the PR title, and ignore all commit messages
+titleOnly: true
