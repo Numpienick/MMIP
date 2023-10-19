@@ -14,7 +14,7 @@
   - [Writing unit tests](#writing-unit-tests)
 
 ## Setting up for Windows
-- First install the required software (mostly NPM) and cloned the repository, like told in the [contributing guidelines](CONTRIBUTING.md).
+- First install the required software (mostly Node.js) and cloned the repository, like told in the [contributing guidelines](/docs/CONTRIBUTING.md).
 
 ## UI-tests
 The UI-tests will be run by [Playwright](https://playwright.dev/docs/intro). Playwright is a framework for Web Testing and Automation. It allows testing Chromium, Firefox and WebKit with a single API. Playwright is built to enable cross-browser web automation that is ever-green, capable, reliable and fast.
