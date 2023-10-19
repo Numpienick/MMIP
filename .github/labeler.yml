@@ -8,7 +8,7 @@ repo:
 ci/cd:
   - .github/**
 
-# Add 'docs' label to any change in the docs folder
+# Add 'docs' label to any change in .md files
 docs:
   - /**/*.md
 
@@ -16,10 +16,10 @@ docs:
 test:
   - src/Test/**
 
-# Add 'backend' label to any change to src files within the source directory
-backend:
-  - src/**/*.cs
+# Add 'Server' label to any change to src files within the 'Server' directory
+server:
+  - src/Server/**
 
-# Add 'frontend` label to any change to *.js, *.css, *.html, *.razor files within the source directory
-frontend:
-  - any: [ "src/**/*.js", "src/**/*.css", "src/**/*.html", "src/**/*.razor" ]
+# Add 'client' label to any change to src files within the 'Client' directory
+client:
+  - src/Client/**
