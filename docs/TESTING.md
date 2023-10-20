@@ -15,6 +15,7 @@
 
 ## Setting up for Windows
 - First install the required software (mostly Node.js) and cloned the repository, like told in the [contributing guidelines](/docs/CONTRIBUTING.md).
+- In the root, you might need to re-run `npm install` to install playwright.
 
 ## UI-tests
 The UI-tests will be run by [Playwright](https://playwright.dev/docs/intro). Playwright is a framework for Web Testing and Automation. It allows testing Chromium, Firefox and WebKit with a single API. Playwright is built to enable cross-browser web automation that is ever-green, capable, reliable and fast.
@@ -33,7 +34,7 @@ Inside that directory, you can run several commands:
 
 ### Writing UI-tests
 > #### Manually
-UI-tests are buildup in different parts: Navigation, Actions, Assertions (what you expect). And these tests can be isolated, compare this to a method if you will. 
+UI-tests consist of three different parts: Navigation, Actions, Assertions (what you expect). And these tests can be isolated, compare this to a method if you will. 
 [Docs](https://playwright.dev/docs/writing-tests).
 
 An example of a spec.ts can look like this:
@@ -58,13 +59,11 @@ An example of a spec.ts can look like this:
 Playwright comes with the ability to generate tests out of the box and is a great way to quickly get started with testing. It will open two windows, a browser window where you interact with the website you wish to test and the Playwright Inspector window where you can record your tests, copy the tests, clear your tests as well as change the language of your tests.
 [Docs](https://playwright.dev/docs/codegen-intro).
 
-To start recording test code you can just start the codegen and start testing, `the first step should always be opening the correct URL/this can also be set behind the command`.
-
-`npx playwright codegen`
+To start recording test code you can just start the codegen and start testing, `the first step should always be opening the correct URL/this can also be set behind the command`. This command runs the codegen: `npx playwright codegen`
 
 The generated code can be used for testing!
 
-Other (emulation) options that can be configured include devices, color theme, geolocation, language, timezones
+Other (emulation) [options](https://playwright.dev/docs/codegen-intro#emulation) that can be configured include devices, color theme, geolocation, language, timezones
 (The website at the end of the command can be changed to whatever you like).
 Emulation options, respectively:
 - `npx playwright codegen --device="iPhone 13" playwright.dev`
@@ -82,7 +81,7 @@ Emulation options, respectively:
 > Coming soon
 
 ## Unit tests
-The unit tests structure we are using is called Component Based unit testing. This basically means that every seperate folder in the application has a seperate folder in the testing folder. This makes it easier to find and edit tests based on components.
+We employ a unit testing structure known as Component-Based Unit Testing. In this approach, each individual folder within the application corresponds to a distinct folder in the testing directory. This organization simplifies the process of locating and modifying tests associated with specific components.
 ### Running unit tests
 - When the project is opened in Visual Studio you can open right click on the `Test` project.
 - The tests can be directly started by clicking `Run tests`.
