@@ -12,6 +12,7 @@
     - [Commit Messages](#commit-messages)
   - [Making changes](#making-changes)
   - [Setting up for Windows](#setting-up-for-windows)
+    - [Using Visual Studio](#using-visual-studio)
     - [Installing the requirements automatically](#installing-the-requirements-automatically)
     - [Installing the requirements manually](#installing-the-requirements-manually)
     - [Before running the project](#before-running-the-project)
@@ -41,6 +42,10 @@ type(scope?): subject
 body?
 footer?
 ```
+When referencing a Jira item, mention the issue key in the scope like so:
+```
+docs(MAT-69): creating the best contributing.md ever
+```
 
 ## Making changes
 
@@ -60,7 +65,13 @@ Make sure to follow the following process when making changes to the project:
 
 - Clone the repository to your local machine.
   - **RECOMMENDED** If you are using a new version of Windows 11, try setting up a Dev Drive and clone your repository to it by following the [Microsoft guide](https://learn.microsoft.com/en-us/windows/dev-drive/).
-- Install WSL2 and Ubuntu using the following commands, or follow the [Microsoft guide](https://learn.microsoft.com/en-us/windows/wsl/install):
+
+### Using Visual Studio
+- You can install Visual Studio 2022 from [here](https://visualstudio.microsoft.com/vs/).
+- When installing Visual Studio, or modifying your exisiting installation, make sure to select the "**ASP.NET and web development**" and "**.NET desktop development"** workload.
+![A screenshot of modifying a Visual Studio installation](images/vs2022installer.png)
+
+<!-- - Install WSL2 and Ubuntu using the following commands, or follow the [Microsoft guide](https://learn.microsoft.com/en-us/windows/wsl/install):
   - `wsl --install`
   - `wsl --set-default-version 2`
   - `wsl --set-default Ubuntu`
@@ -70,11 +81,13 @@ Make sure to follow the following process when making changes to the project:
   - Navigate to **Settings**.
   - From the **General** tab, select **Use WSL 2 based engine**..
     - If you have installed Docker Desktop on a system that supports WSL 2, this option is turned on by default.
-  - Select **Apply & Restart**.
+  - Select **Apply & Restart**. -->
 
 ### Installing the requirements automatically
 
-- To easily install the requirements for this project, we recommend using [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/). This way you can run the following command to install all the required applications:
+- To easily install the requirements for this project, we recommend using [winget](https://docs.microsoft.com/en-us/windows/package-manager/winget/).
+- Run the following command to install the required applications:
+  - To skip all the administrative prompts, launch your terminal in Administrator mode.
   - `winget configure -f ./devMachineConfig.yaml`
 
 ### Installing the requirements manually

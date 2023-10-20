@@ -4,7 +4,7 @@ properties:
       id: DotNet
       directives:
         description: Install DotNet SDK 7
-        allowPrerelease: false
+        allowPrerelease: true
       settings:
         id: Microsoft.DotNet.SDK.7
         source: winget
@@ -12,7 +12,7 @@ properties:
       id: AspNetCore
       directives:
         description: Install AspNetCore 7 runtime
-        allowPrerelease: false
+        allowPrerelease: true
       settings:
         id: Microsoft.DotNet.AspNetCore.7
         source: winget
@@ -20,15 +20,15 @@ properties:
       id: Git
       directives:
         description: Install Git
-        allowPrerelease: false
+        allowPrerelease: true
       settings:
         id: Git.Git
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
         description: Install Node.js
-        allowPrerelease: false
+        allowPrerelease: true
       settings:
         id: OpenJS.NodeJS
         source: winget
-  configurationVersion: 0.2.0
+  configurationVersion: 0.2.2
