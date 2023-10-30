@@ -59,7 +59,12 @@ An example of a spec.ts can look like this:
 Playwright comes with the ability to generate tests out of the box and is a great way to quickly get started with testing. It will open two windows, a browser window where you interact with the website you wish to test and the Playwright Inspector window where you can record your tests, copy the tests, clear your tests as well as change the language of your tests.
 [Docs](https://playwright.dev/docs/codegen-intro).
 
-To start recording test code you can just start the codegen and start testing, `the first step should always be opening the correct URL/this can also be set behind the command`. This command runs the codegen: `npx playwright codegen`
+To start recording test code you can just start the codegen and start testing.
+> The first step should always be opening the correct URL/this can also be set behind the command. 
+
+To run the codegen, run the following command in the root of the project:
+
+```npx playwright codegen```
 
 The generated code can be used for testing!
 
