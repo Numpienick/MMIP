@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server.Repositories
 {
-    internal class OrganizationRepository : IRepository
+    internal class OrganizationRepository : BaseEntityRepository
     {
     }
 }

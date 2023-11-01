@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Entities
+namespace Shared.Controllers
 {
-    public class Text : EntityBase
+    public class ChallengeController
     {
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server.Services
 {
-    public class ChallengeService
+    public class ChallengeService : BaseService
     {
     }
 }

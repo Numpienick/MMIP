@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Enums
+namespace Shared.Controllers
 {
-    public class Branche
+    public class ReactionController
     {
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Controllers
+namespace Shared.Controllers
 {
-    public class ChallengeController
+    public class OrganizationController
     {
     }
 }

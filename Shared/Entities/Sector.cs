@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Entities
+namespace Shared.Entities
 {
-    public abstract class EntityBase
+    public enum Sector
     {
     }
 }

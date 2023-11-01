@@ -1,13 +1,12 @@
-﻿using Server.Repositories;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Services
+namespace Server.Repositories
 {
-    public class UserService : BaseService
+    internal class BaseEntityRepository : IRepository
     {
     }
 }

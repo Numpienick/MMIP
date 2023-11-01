@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Entities
+namespace Shared.Controllers
 {
-    public class Organization : EntityBase, IProfile
+    public class UserController
     {
     }
 }

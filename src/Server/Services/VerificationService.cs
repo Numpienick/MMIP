@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Database
+namespace Server.Services
 {
-    public class ReactionType
+    public class VerificationService : BaseService 
     {
     }
 }

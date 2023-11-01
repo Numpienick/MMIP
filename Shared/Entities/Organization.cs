@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Database
+namespace Shared.Entities
 {
-    public class Phase
+    public class Organization : BaseEntity, IProfile
     {
     }
 }

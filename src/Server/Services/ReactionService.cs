@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server.Services
 {
-    public class ReactionService
+    public class ReactionService : BaseService
     {
     }
 }

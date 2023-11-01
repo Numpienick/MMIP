@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Entities
+namespace Server.Services
 {
-    public class Challenge : EntityBase
+    public interface IBaseService
     {
     }
 }

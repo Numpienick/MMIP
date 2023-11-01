@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Entities
+namespace Shared.Entities
 {
-    public class Reaction : EntityBase
+    public class Text : BaseEntity
     {
     }
 }

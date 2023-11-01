@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server.Services
 {
-    public class OrganizationService
+    public class OrganizationService : BaseService
     {
     }
 }
