@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class ReactionService : BaseService
+    public class ReactionService : BaseEntityService
     {
     }
 }

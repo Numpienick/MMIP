@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class AuthenticationService : BaseService
+    public class AuthenticationService
     {
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class ChallengeService : BaseService
+    public class ChallengeService : BaseEntityService
     {
     }
 }
