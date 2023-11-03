@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Services
+namespace Infrastructure.Services
 {
-    public class ChallengeService : BaseService
+    public class AuthenticationService : BaseService
     {
     }
 }

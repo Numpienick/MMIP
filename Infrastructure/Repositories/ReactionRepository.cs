@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Repositories
+namespace Infrastructure.Repositories
 {
-    internal interface IRepository
+    internal class ReactionRepository : BaseEntityRepository
     {
     }
 }

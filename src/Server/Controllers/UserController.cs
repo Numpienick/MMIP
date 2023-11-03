@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.Controllers
+namespace Server.Controllers
 {
-    public class ReactionController
+    public class UserController
     {
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared.Entities
 {
-    public class ReactionType
+    public class ReactionType : BaseEntity
     {
     }
 }

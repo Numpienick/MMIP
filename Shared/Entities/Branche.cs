@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shared.Entities
 {
-    public class Branche
+    public class Branche : BaseEntity
     {
     }
 }

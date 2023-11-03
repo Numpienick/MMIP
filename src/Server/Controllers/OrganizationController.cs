@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.Repositories
+namespace Server.Controllers
 {
-    internal class OrganizationRepository : BaseEntityRepository
+    public class OrganizationController
     {
     }
 }

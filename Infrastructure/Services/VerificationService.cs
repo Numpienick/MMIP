@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.Controllers
+namespace Infrastructure.Services
 {
-    public class OrganizationController
+    public class VerificationService : BaseService 
     {
     }
 }
