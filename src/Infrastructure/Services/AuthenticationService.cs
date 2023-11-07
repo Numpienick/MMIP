@@ -1,4 +1,4 @@
-﻿using Server.Repositories;
+﻿using Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,5 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class AuthenticationService
-    {
-    }
+    public class AuthenticationService { }
 }
