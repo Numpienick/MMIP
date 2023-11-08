@@ -8,5 +8,8 @@ namespace Shared.Entities
 {
     public class Text : BaseEntity
     {
+        public string Value { get; set; }
+        public Guid ParentId { get; set; }
+        public string LanguageIso { get; set; }
     }
 }
