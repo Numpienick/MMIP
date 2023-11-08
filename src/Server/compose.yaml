@@ -4,8 +4,9 @@ services:
     image: mmip-server
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://+:5238
+      - ASPNETCORE_URLS=https://+:5238
     build:
       dockerfile: ./Dockerfile
     ports:
-      - "8090:5238"
+      - "7070:5238"
+      - "5238:5238"
