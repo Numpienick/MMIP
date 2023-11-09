@@ -10,6 +10,7 @@ using Shared.Filters;
 
 namespace Server.Controllers
 {
+    [ApiController]
     public class ChallengeController
     {
         public IActionResult CreateChallenge()
