@@ -5,10 +5,4 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Shared\Shared.csproj" />
-    <ProjectReference Include="..\Client\Client.csproj" />
-    <ProjectReference Include="..\Server\Server.csproj" />
-  </ItemGroup>
 </Project>
