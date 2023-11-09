@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Client.Filtering
+namespace Shared.Filters
 {
-    public class AndCriteria : ICriteria
-    {
-    }
+    public interface ICriteria { }
 }
