@@ -12,7 +12,6 @@ namespace Shared.Entities
         //TODO: Make it work with Text instead of string
         [Required(ErrorMessage = "Required")]
         public string Title { get; set; }
-
         [Required(ErrorMessage = "Required")]
         [StringLength(1000, ErrorMessage = "Max description is 1000")]
         public string Description { get; set; }
