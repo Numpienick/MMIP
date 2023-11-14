@@ -1,0 +1,45 @@
+﻿.muudstrap-navbar .mud-button {
+  text-transform: none;
+}
+
+.muudstrap-navbar .mud-expand-panel-header {
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  flex: none;
+}
+
+.mud-button {
+  background-color: var(--secondary-color);
+}
+
+.mud-button-label {
+  color: white;
+}
+
+.mud-appbar,
+.mud-toolbar,
+.mud-expand-panel {
+  background-color: var(--primary-color);
+}
+
+.muudstrap-navbar-expand {
+  background-color: var(--tertiary-color);
+}
+
+.mud-nav-link-text {
+  color: white;
+}
+
+.nav-hamburger {
+  color: white;
+  right: 2%;
+  position: fixed;
+}
+
+.mud-expand-panel-styling {
+  top: -11px;
+  left: 0;
+  background-color: inherit;
+  position: fixed;
+}

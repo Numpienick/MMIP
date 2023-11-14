@@ -31,30 +31,11 @@ body {
   background-color: var(--main-bg-color);
 }
 
-.mud-button {
-  background-color: var(--secondary-color);
+.logo-style {
+  height: 64px;
 }
 
-.mud-button-label {
-  color: white;
-}
-
-.mud-appbar,
-.mud-toolbar,
-.mud-expand-panel {
-  background-color: var(--primary-color);
-}
-
-.muudstrap-navbar-expand {
-  background-color: var(--tertiary-color);
-}
-
-.mud-nav-link-text {
-  color: white;
-}
-
-.nav-hamburger {
-  color: white;
-  right: 2%;
-  position: fixed;
+.align-right {
+  position: absolute;
+  right: 0;
 }
