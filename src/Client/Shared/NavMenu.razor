@@ -1,0 +1,65 @@
+﻿<style>
+
+    .muudstrap-navbar .mud-button{
+        text-transform: none;
+    }
+    .muudstrap-navbar .mud-expand-panel-header{
+        padding:0px;
+        width: 100%;
+        height: 100%;
+        flex:none;
+    }
+
+    .logo-style {
+        height: 64px;
+    }
+
+    .align-right {
+        position: absolute;
+        right: 0;
+    }
+</style>
+
+@* https://gist.github.com/pawelel/fdbd8af84d54f36078b524e2446ac225 *@
+
+
+<MudAppBar Fixed="false" Elevation="0" DisableGutters="true" Class="muudstrap-navbar">
+    <div class="d-none d-md-flex align-center px-6">
+        <a href="/">
+            <img class="logo-style" src="Assets/Img/MatchmakerLogo.png" alt="Homepage"/>
+        </a>
+        <div class="align-right">
+            @* TODO: Add challenge page for this redirection *@
+            <MudButton Color="Color.Inherit" Link="challenge">Challenges</MudButton>
+            <MudButton Color="Color.Inherit" Link="login">Inloggen</MudButton>
+            <MudButton Color="Color.Inherit" Link="register">Registreren</MudButton>
+        </div>
+    </div>
+    @* Makes sure that there is a navbar when it is a smaller screen *@
+    <div class="d-flex d-md-none fixed">
+        <MudExpansionPanels Square="true" Elevation="0" Class="mud-height-full" Style="top:-11px;left:0; background-color:Inherit; position: fixed;">
+            <MudExpansionPanel HideIcon="true" Class="mud-width-full" >
+                <TitleContent>
+                    <div class="d-flex justify-space-between mud-width-full align-center px-6">
+                        <div class="d-flex align-center">
+                            <a href="/">
+                                <img class="logo-style" src="Assets/Img/MatchmakerLogo.png" alt="Homepage"/>
+                            </a>
+                        </div>
+                        <MudIcon class="nav-hamburger" Icon="@Icons.Material.Filled.Menu" />
+                    </div>
+                </TitleContent>
+                <ChildContent>
+                    <div class="py-6 mx-n6 muudstrap-navbar-expand" >
+                        <MudNavMenu>
+                            @* TODO: Add challenge page for this redirection *@
+                            <MudNavLink Href="/challenge">Challenges</MudNavLink>
+                            <MudNavLink Href="/login">Login</MudNavLink>
+                            <MudNavLink Href="/register">Register</MudNavLink>
+                        </MudNavMenu>
+                    </div>
+                </ChildContent>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+    </div>
+</MudAppBar>
