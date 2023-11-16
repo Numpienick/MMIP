@@ -8,9 +8,9 @@
 @page "/challenges-overview"
 
 @* TODO: Change styling according to stylesheet. *@
-<h1 class="whitespace-bottom">Challenges</h1>
+<h1 class="mb-15">Challenges</h1>
 
-<MudGrid Justify="Justify.Center" Class="whitespace-bottom">
+<MudGrid Justify="Justify.Center" Class="mb-15">
     <MudItem md="8">
         <MudTextField @bind-Value="SearchTerms" Label="Zoektermen" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" />
     </MudItem>
@@ -30,7 +30,7 @@
     </MudGrid>
 }
 
-<MudGrid Justify="Justify.Center" Class="whitespace-top">
+<MudGrid Justify="Justify.Center" Class="mt-15">
     <MudItem md="6">
         <MudButton @onclick="@LoadChallengeBatchOnClick" FullWidth="true" Variant="Variant.Filled" Color="Color.Inherit" Disabled="@LoadMoreChallenges">Laad meer challenges</MudButton>
     </MudItem>
@@ -56,7 +56,7 @@
     public void GetAllChallenges()
     {
         List<Challenge> challenges = CreateChallengesTemp();
-        SortChallengesByDate(challenges);
+        SortChallengesByDateAscending(challenges);
         AllChallenges = challenges;
     }
 
@@ -89,7 +89,7 @@
         }
     }
 
-    public void SortChallengesByDate(List<Challenge> challenges)
+    public void SortChallengesByDateAscending(List<Challenge> challenges)
     {
         challenges.Sort((x, y) => x.StartDate.CompareTo(y.StartDate));
     }
