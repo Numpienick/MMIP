@@ -16,6 +16,6 @@ namespace Shared.Entities
         [StringLength(8, ErrorMessage = "Description length needs to be more than 8.")]
         public Text Description { get; set; }
         public DateTimeOffset Deadline { get; set; }
-        public Text FinalReport { get; set; }
+        public string FinalReport { get; set; }
     }
 }
