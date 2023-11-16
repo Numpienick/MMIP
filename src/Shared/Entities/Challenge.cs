@@ -16,6 +16,6 @@ namespace Shared.Entities
         [StringLength(1000, ErrorMessage = "Max description is 1000")]
         public string Description { get; set; }
         public DateTimeOffset Deadline { get; set; }
-        public Text FinalReport { get; set; }
+        public string FinalReport { get; set; }
     }
 }
