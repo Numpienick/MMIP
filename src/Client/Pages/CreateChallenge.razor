@@ -1,0 +1,16 @@
+﻿@page "/challenge/create"
+
+@using global::Shared.Entities
+
+<h3>CreateChallenge</h3>
+
+@code {
+    Challenge model = new();
+}
+
+<FormComponent Model=@model>
+    <FormFields>
+        <MudTextField Variant="Variant.Outlined" Label="Title" @bind-Value="model.Title" For="@(() => model.Title)"/>
+        <MudTextField Variant="Variant.Outlined" Label="Description" @bind-Value="model.Description" For="@(() => model.Description)"/>
+    </FormFields>
+</FormComponent>
