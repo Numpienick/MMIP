@@ -43,3 +43,31 @@
   background-color: inherit;
   position: fixed;
 }
+
+.mudcard-background {
+  background-color: var(--main-bg-color);
+}
+
+.carousel-height {
+  height: 200px;
+}
+
+.carousel-image-style {
+  height: 200px;
+  overflow: hidden;
+}
+
+.carousel-alignment {
+  display: grid;
+  align-items: center;
+}
+
+.grid-margin {
+  margin-top: 10px;
+}
+
+.alignment-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

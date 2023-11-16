@@ -1,13 +1,13 @@
 ﻿<MudAppBar Fixed="false" Elevation="0" DisableGutters="true" Class="muudstrap-navbar">
     <div class="d-none d-md-flex align-center">
         <a href="/">
-            <img class="logo-style" src="Assets/Img/MatchmakerLogo.png" alt="Homepage"/>
+            <img class="logo-style" src="Assets/Img/MatchmakerLogo.png" alt="MatchMaker logo"/>
         </a>
         <div class="align-right">
             @* TODO: Add challenge page for this redirection *@
-            <MudButton Color="Color.Inherit" Link="challenge">Challenges</MudButton>
-            <MudButton Color="Color.Inherit" Link="login">Inloggen</MudButton>
-            <MudButton Color="Color.Inherit" Link="register">Registreren</MudButton>
+            <MudButton Color="Color.Inherit" Href="">Challenges</MudButton>
+            <MudButton Color="Color.Inherit" Href="/login">Inloggen</MudButton>
+            <MudButton Color="Color.Inherit" Href="/register">Registreren</MudButton>
         </div>
     </div>
     @* Makes sure that there is a navbar when it is a smaller screen *@
@@ -18,7 +18,7 @@
                     <div class="d-flex justify-space-between mud-width-full align-center">
                         <div class="d-flex align-center">
                             <a href="/">
-                                <img class="logo-style" src="Assets/Img/MatchmakerLogo.png" alt="Homepage"/>
+                                <img class="logo-style" src="Assets/Img/MatchmakerLogo.png" alt="MatchMaker logo"/>
                             </a>
                         </div>
                         <MudIcon class="nav-hamburger" Icon="@Icons.Material.Filled.Menu" />
@@ -28,7 +28,7 @@
                     <div class=" mx-n6 muudstrap-navbar-expand" >
                         <MudNavMenu>
                             @* TODO: Add challenge page for this redirection *@
-                            <MudNavLink Href="/challenge">Challenges</MudNavLink>
+                            <MudNavLink Href="">Challenges</MudNavLink>
                             <MudNavLink Href="/login">Login</MudNavLink>
                             <MudNavLink Href="/register">Register</MudNavLink>
                         </MudNavMenu>
