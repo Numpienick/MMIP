@@ -5,10 +5,10 @@
 @using System.Threading.Tasks;
 @using global::Shared.Entities;
 
-@page "/ChallengesOverview"
+@page "/challenges-overview"
 
 @* TODO: Change styling according to stylesheet. *@
-<h1 class="whitespace-bottom" style="color: darkblue; text-align: center">Challenges</h1>
+<h1 class="whitespace-bottom">Challenges</h1>
 
 <MudGrid Justify="Justify.Center" Class="whitespace-bottom">
     <MudItem md="8">
@@ -22,8 +22,8 @@
         @foreach (Challenge challenge in batch)
         {
             <Client.Components.ChallengeCardComponent OrganizationName="@challenge.Organization.Name"
-                                                      Title="@challenge.Title.Value"
-                                                      Description="@challenge.Description.Value"
+                                                      Title="@challenge.Title"
+                                                      Description="@challenge.Description"
                                                       Tags="@challenge.Tags">
             </Client.Components.ChallengeCardComponent>
         }
@@ -32,7 +32,7 @@
 
 <MudGrid Justify="Justify.Center" Class="whitespace-top">
     <MudItem md="6">
-        <MudButton @onclick="@LoadChallengeBatchOnClick" FullWidth="true" Variant="Variant.Filled" Color="Color.Primary" Disabled="@LoadMoreChallenges">Laad meer challenges</MudButton>
+        <MudButton @onclick="@LoadChallengeBatchOnClick" FullWidth="true" Variant="Variant.Filled" Color="Color.Inherit" Disabled="@LoadMoreChallenges">Laad meer challenges</MudButton>
     </MudItem>
 </MudGrid>
 
@@ -105,8 +105,8 @@
         List<Challenge> challenges = new List<Challenge>();
 
         Challenge challenge1 = new Challenge();
-        challenge1.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[2] Recyclen plastic bekertjes");
-        challenge1.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Plastic is slecht voor het milieu. Voor deze challenge zoeken wij mensen die goede oplossingen hebben voor het plastic probleem.");
+        challenge1.Title = "[2] Recyclen plastic bekertjes";
+        challenge1.Description = "Plastic is slecht voor het milieu. Voor deze challenge zoeken wij mensen die goede oplossingen hebben voor het plastic probleem.";
         challenge1.Tags = new string[] { "Recyclen", "Plastic", "Milieu" };
         challenge1.StartDate = new DateTimeOffset(new DateTime(2023, 9, 3));
         challenge1.Organization = new Organization();
@@ -114,8 +114,8 @@
         challenges.Add(challenge1);
 
         Challenge challenge2 = new Challenge();
-        challenge2.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[3] Jongere docenten voor de klas");
-        challenge2.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
+        challenge2.Title = "[3] Jongere docenten voor de klas";
+        challenge2.Description = "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
         challenge2.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
         challenge2.StartDate = new DateTimeOffset(new DateTime(2023, 10, 3));
         challenge2.Organization = new Organization();
@@ -123,8 +123,8 @@
         challenges.Add(challenge2);
 
         Challenge challenge3 = new Challenge();
-        challenge3.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[1] Jongere docenten voor de klas");
-        challenge3.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
+        challenge3.Title = "[1] Jongere docenten voor de klas";
+        challenge3.Description = "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
         challenge3.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
         challenge3.StartDate = new DateTimeOffset(new DateTime(2023, 7, 3));
         challenge3.Organization = new Organization();
@@ -132,8 +132,8 @@
         challenges.Add(challenge3);
 
         Challenge challenge4 = new Challenge();
-        challenge4.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[5] Jongere docenten voor de klas");
-        challenge4.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
+        challenge4.Title = "[5] Jongere docenten voor de klas";
+        challenge4.Description = "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
         challenge4.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
         challenge4.StartDate = new DateTimeOffset(new DateTime(2023, 10, 21));
         challenge4.Organization = new Organization();
@@ -141,8 +141,8 @@
         challenges.Add(challenge4);
 
         Challenge challenge5 = new Challenge();
-        challenge5.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[4] Jongere docenten voor de klas");
-        challenge5.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
+        challenge5.Title = "[4] Jongere docenten voor de klas";
+        challenge5.Description = "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
         challenge5.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
         challenge5.StartDate = new DateTimeOffset(new DateTime(2023, 10, 19));
         challenge5.Organization = new Organization();
@@ -150,8 +150,8 @@
         challenges.Add(challenge5);
 
         Challenge challenge6 = new Challenge();
-        challenge6.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[6] Jongere docenten voor de klas");
-        challenge6.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
+        challenge6.Title = "[6] Jongere docenten voor de klas";
+        challenge6.Description = "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
         challenge6.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
         challenge6.StartDate = new DateTimeOffset(new DateTime(2023, 11, 19));
         challenge6.Organization = new Organization();
@@ -159,67 +159,13 @@
         challenges.Add(challenge6);
 
         Challenge challenge7 = new Challenge();
-        challenge7.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[7] Jongere docenten voor de klas");
-        challenge7.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
+        challenge7.Title = "[7] Jongere docenten voor de klas";
+        challenge7.Description = "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
         challenge7.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
         challenge7.StartDate = new DateTimeOffset(new DateTime(2023, 11, 25));
         challenge7.Organization = new Organization();
         challenge7.Organization.Name = "Company Name";
         challenges.Add(challenge7);
-
-        Challenge challenge8 = new Challenge();
-        challenge8.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[8] Jongere docenten voor de klas");
-        challenge8.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
-        challenge8.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
-        challenge8.StartDate = new DateTimeOffset(new DateTime(2023, 11, 26));
-        challenge8.Organization = new Organization();
-        challenge8.Organization.Name = "Company Name";
-        challenges.Add(challenge8);
-
-        Challenge challenge9 = new Challenge();
-        challenge9.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[9] Jongere docenten voor de klas");
-        challenge9.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
-        challenge9.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
-        challenge9.StartDate = new DateTimeOffset(new DateTime(2023, 11, 27));
-        challenge9.Organization = new Organization();
-        challenge9.Organization.Name = "Company Name";
-        challenges.Add(challenge9);
-
-        Challenge challenge10 = new Challenge();
-        challenge10.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[10] Jongere docenten voor de klas");
-        challenge10.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
-        challenge10.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
-        challenge10.StartDate = new DateTimeOffset(new DateTime(2023, 11, 28));
-        challenge10.Organization = new Organization();
-        challenge10.Organization.Name = "Company Name";
-        challenges.Add(challenge10);
-
-        Challenge challenge11 = new Challenge();
-        challenge11.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[11] Jongere docenten voor de klas");
-        challenge11.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
-        challenge11.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
-        challenge11.StartDate = new DateTimeOffset(new DateTime(2023, 11, 29));
-        challenge11.Organization = new Organization();
-        challenge11.Organization.Name = "Company Name";
-        challenges.Add(challenge11);
-
-        Challenge challenge12 = new Challenge();
-        challenge12.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[12] Jongere docenten voor de klas");
-        challenge12.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
-        challenge12.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
-        challenge12.StartDate = new DateTimeOffset(new DateTime(2023, 12, 3));
-        challenge12.Organization = new Organization();
-        challenge12.Organization.Name = "Company Name";
-        challenges.Add(challenge12);
-
-        Challenge challenge13 = new Challenge();
-        challenge13.Title = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "[13] Jongere docenten voor de klas");
-        challenge13.Description = new Text(new DateTimeOffset(), new Guid(), "NL", new Guid(), new DateTimeOffset(), "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!");
-        challenge13.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
-        challenge13.StartDate = new DateTimeOffset(new DateTime(2023, 12, 3));
-        challenge13.Organization = new Organization();
-        challenge13.Organization.Name = "Company Name";
-        challenges.Add(challenge13);
 
         return challenges;
     }
