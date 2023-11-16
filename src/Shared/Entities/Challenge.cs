@@ -17,5 +17,7 @@ namespace Shared.Entities
         public Text Description { get; set; }
         public DateTimeOffset Deadline { get; set; }
         public Text FinalReport { get; set; }
+        public string[] Tags { get; set; }
+        public DateTimeOffset StartDate { get; set; }
     }
 }
