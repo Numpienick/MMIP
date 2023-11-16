@@ -26,9 +26,18 @@ p {
   font-size: 12px;
 }
 
+em {
+  color: black;
+  font-size: 12px;
+}
+
 body {
   font-family: Helvetica;
   background-color: var(--main-bg-color);
+}
+
+.content {
+  margin: 2%;
 }
 
 .logo-style {
