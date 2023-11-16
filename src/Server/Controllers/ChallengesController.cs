@@ -1,12 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.Json;
 using Shared.Filters;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Server.Controllers
 {
@@ -15,11 +10,14 @@ namespace Server.Controllers
     public class ChallengesController
     {
         [HttpPost]
-        public IActionResult CreateChallenge([FromBody] Challenge challenge)
+        public IActionResult CreateChallenge([FromBody] string json)
         {
+            //TODO: doesn't work yet, investigate why it doesn't get here
+            Challenge challenge = JsonSerializer.Deserialize<Challenge>(json);
+            Console.WriteLine(challenge);
             try
             {
-                Console.WriteLine("Succesfully created challenge: " + challenge.Title.Value);
+                Console.WriteLine("Succesfully created challenge: " + challenge.Title);
                 return new OkResult();
             }
             catch (Exception e)

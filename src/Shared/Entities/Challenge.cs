@@ -9,12 +9,12 @@ namespace Shared.Entities
 {
     public class Challenge : BaseEntity
     {
+        //TODO: Make it work with Text instead of string
         [Required(ErrorMessage = "Required")]
-        public Text Title { get; set; }
-
+        public string Title { get; set; }
         [Required(ErrorMessage = "Required")]
-        [StringLength(8, ErrorMessage = "Description length needs to be more than 8.")]
-        public Text Description { get; set; }
+        [StringLength(1000, ErrorMessage = "Max description is 1000")]
+        public string Description { get; set; }
         public DateTimeOffset Deadline { get; set; }
         public Text FinalReport { get; set; }
         public string[] Tags { get; set; }
