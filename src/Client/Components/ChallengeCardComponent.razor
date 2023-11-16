@@ -10,15 +10,15 @@
         <MudCardContent>
             <MudGrid>
                 <MudItem md="6">
-                    <h3 style="color: lightblue; text-align: center; margin-top: 25%">MatchMaker</h3>
+                    <h3 class="card-company-title" style="color: lightblue">@OrganizationName</h3>
                 </MudItem>
                 <MudItem md="6">
-                    <MudCardMedia Image="ImagesTemp/1600x888.jpg" Height="100"></MudCardMedia>
+                    <MudCardMedia Image="ImagesTemp/1600x888.jpg" Height="80"></MudCardMedia>
                 </MudItem>
             </MudGrid>
         </MudCardContent>
         <MudCardContent>
-            <p style="text-align: center">@Description</p>
+            <p class="card-short-challenge-description">@Description</p>
         </MudCardContent>
         <MudDivider></MudDivider>
         <MudCardContent>
@@ -33,6 +33,9 @@
 </MudItem>
 
 @code {
+    [Parameter]
+    public string? OrganizationName { get; set; }
+
     [Parameter]
     public string? Title { get; set; }
 

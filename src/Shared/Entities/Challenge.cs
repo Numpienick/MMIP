@@ -19,5 +19,6 @@ namespace Shared.Entities
         public Text FinalReport { get; set; }
         public string[] Tags { get; set; }
         public DateTimeOffset StartDate { get; set; }
+        public Organization Organization { get; set; }
     }
 }
