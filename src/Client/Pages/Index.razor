@@ -1,3 +1,69 @@
 ﻿@page "/"
 
-<h1>Hello, world!</h1>
+<PageTitle>MatchMaker innovatieplatform</PageTitle>
+
+<h1>MatchMaker</h1>
+
+<MudGrid Justify="Justify.Center" Class="grid-margin">
+    <MudItem md="6" xs="12" Class="carousel-alignment">
+        <MudCard Class="mudcard-background" Elevation="0">
+            <MudCarousel Class="carousel-height" TData="object" ShowBullets="false" AutoCycleTime="TimeSpan.FromSeconds(10)">
+                <MudCarouselItem>
+                    <div class="alignment-center">
+                        <a>
+                            <img class="carousel-image-style" src="Assets/Img/MatchmakerLogo.png" alt="MatchMaker logo" />
+                        </a>
+                    </div>
+                </MudCarouselItem>
+                <MudCarouselItem Class="alignment-center">
+                    <div class="alignment-center">
+                        <a href="/login">
+                            <h2>Inloggen</h2>
+                        </a>
+                    </div> 
+                </MudCarouselItem>
+            </MudCarousel>
+        </MudCard>
+    </MudItem>
+    <MudItem md="6" xs="12">
+        <MudCard>
+            @* TODO: Add better text*@
+            <MudCardContent>
+                <h2>Over MatchMaker</h2>
+                <p>
+                    Het bedrijf MatchMaker maakt zich sterk om innovatie bij het MKB in de regio Noord-Nederland te
+                    bevorderen. Het innoveren is geen doel op zich maar moet zorgen voor een vitale regio waarin het
+                    MKB meerwaarde kan blijven in de regio bieden via Business-to-Business en Business-to-Consumer.
+                </p>
+            </MudCardContent>
+            <MudCardContent>
+                <h3>Onze missie</h3>
+                <em>
+                    Wij zorgen dat elke ondernemer met een gerust hart de toekomst tegemoet kan zien!
+                </em>
+            </MudCardContent>
+            <MudCardContent>
+                <h3>Onze visie</h3>
+                <em>
+                    MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in
+                    innovatie.
+                </em>
+            </MudCardContent>
+            <MudCardContent>
+                <h3>Het doel</h3>
+                <em>
+                    MatchMaker zal zich richten op het actief identificeren van innovatiekansen binnen het MKB
+                    in Noord-Nederland en het faciliteren van samenwerkingen tussen ondernemers en experts
+                    om duurzame groei te stimuleren. Hiervoor zal dit online platform dienen als basis.
+                </em>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+@* TODO: Add list with carousel items and randomize them *@
+
+@code
+{
+ 
+}
