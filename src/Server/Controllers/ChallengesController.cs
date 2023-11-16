@@ -12,6 +12,7 @@ namespace Server.Controllers
         [HttpPost]
         public IActionResult CreateChallenge([FromBody] string json)
         {
+            //TODO: doesn't work yet, investigate why it doesn't get here
             Challenge challenge = JsonSerializer.Deserialize<Challenge>(json);
             Console.WriteLine(challenge);
             try

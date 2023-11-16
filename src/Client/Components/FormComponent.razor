@@ -1,9 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
 @using System.Text.Json
 @using System.Net.Http.Headers
-@using global::Shared.Entities
-@using System.Globalization
-<h3>Form</h3>
+
+<EditForm Model=@Model OnValidSubmit=@ValidFormSubmitted OnInvalidSubmit=@InvalidFormSubmitted>
+    <DataAnnotationsValidator />
+    @FormFields
+    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
+</EditForm>
 
 @code {
     [Inject] 
@@ -12,22 +15,12 @@
     public RenderFragment FormFields { get; set; }
     [Parameter]
     public object Model { get; set; }
-    Challenge model = new()
-    {
-        Title = "test",
-        Description = "awdwad"
-
-    };
     public string modelName;
-
     private static readonly HttpClient Client = new HttpClient();
 
-}
-@functions{
     protected override void OnInitialized()
     {
         modelName = Model.GetType().Name;
-        Console.WriteLine(modelName);
         base.OnInitialized();
     }
 
@@ -57,11 +50,4 @@
         Console.WriteLine(byteContent);
         await Client.PostAsync(requestUri, byteContent);
     }
-
 }
-<EditForm Model=@Model OnValidSubmit=@ValidFormSubmitted OnInvalidSubmit=@InvalidFormSubmitted>
-    <DataAnnotationsValidator />
-    @FormFields
-    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
-</EditForm>
-
