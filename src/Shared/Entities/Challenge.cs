@@ -12,11 +12,13 @@ namespace Shared.Entities
         //TODO: Make it work with Text instead of string
         [Required(ErrorMessage = "Required")]
         public string Title { get; set; }
-
         [Required(ErrorMessage = "Required")]
         [StringLength(1000, ErrorMessage = "Max description is 1000")]
         public string Description { get; set; }
         public DateTimeOffset Deadline { get; set; }
         public Text FinalReport { get; set; }
+        public string[] Tags { get; set; }
+        public DateTimeOffset StartDate { get; set; }
+        public Organization Organization { get; set; }
     }
 }
