@@ -17,6 +17,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="wwwroot\ImagesTemp\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Include="wwwroot\ImagesTemp\556x200.jpg" />
       <Folder Include="wwwroot\Assets\Img\" />
     </ItemGroup>
 

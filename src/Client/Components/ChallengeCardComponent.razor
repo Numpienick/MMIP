@@ -1,0 +1,47 @@
+﻿@using global::Shared.Entities;
+
+@* TODO: Change styling according to stylesheet *@
+<MudItem md="3" xs="6">
+    <MudCard Elevation="4" Class="rounded-lg">
+        <MudCardMedia Image="ImagesTemp/556x200.jpg" Height="100"></MudCardMedia>
+        <MudCardContent>
+            <h2 class="card-centered-text">@Title</h2>
+        </MudCardContent>
+        <MudCardContent>
+            <MudGrid>
+                <MudItem md="6">
+                    <h3 class="card-organization-title">@OrganizationName</h3>
+                </MudItem>
+                <MudItem md="6">
+                    <MudCardMedia Image="ImagesTemp/1600x888.jpg" Height="80"></MudCardMedia>
+                </MudItem>
+            </MudGrid>
+        </MudCardContent>
+        <MudCardContent>
+            <p class="card-centered-text">@Description</p>
+        </MudCardContent>
+        <MudDivider></MudDivider>
+        <MudCardContent>
+            <MudGrid Justify="Justify.Center">
+                @foreach (string tag in Tags)
+                {
+                    <MudChip>@tag</MudChip>
+                }
+            </MudGrid>
+        </MudCardContent>
+    </MudCard>
+</MudItem>
+
+@code {
+    [Parameter]
+    public string? OrganizationName { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    [Parameter]
+    public string? Description { get; set; }
+
+    [Parameter]
+    public string[]? Tags { get; set; }
+}
