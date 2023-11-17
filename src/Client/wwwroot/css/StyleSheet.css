@@ -31,6 +31,11 @@ em {
   font-size: 12px;
 }
 
+a {
+  text-decoration: underline;
+  color: blue;
+}
+
 body {
   font-family: Helvetica;
   background-color: var(--main-bg-color);
@@ -47,4 +52,15 @@ body {
 .align-right {
   position: absolute;
   right: 0;
+}
+
+.alignment-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mud-input-root {
+  background: white !important;
+  margin: 0 !important;
 }
