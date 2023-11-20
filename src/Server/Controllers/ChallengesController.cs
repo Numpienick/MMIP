@@ -10,14 +10,12 @@ namespace Server.Controllers
     public class ChallengesController
     {
         [HttpPost]
-        public IActionResult CreateChallenge([FromBody] string json)
+        public IActionResult CreateChallenge([FromBody] Challenge challenge)
         {
-            //TODO: doesn't work yet, investigate why it doesn't get here
-            Challenge challenge = JsonSerializer.Deserialize<Challenge>(json);
-            Console.WriteLine(challenge);
             try
             {
-                Console.WriteLine("Succesfully created challenge: " + challenge.Title);
+                //TODO: handle it and put in the database
+                Console.WriteLine("Sucscesfully created challenge: " + challenge.Title);
                 return new OkResult();
             }
             catch (Exception e)

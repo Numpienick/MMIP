@@ -1,9 +1,12 @@
 ﻿@page "/challenge/create"
 
+@using Microsoft.Extensions.Localization;
 @using global::Shared.Entities
 @using Microsoft.AspNetCore.Components.Forms
-<h1>Challenge aanmaken</h1>
-<FormComponent Model=@model>
+@inject IStringLocalizer<ApplicationResource> _localizer
+
+<h1>@_localizer["CreateChallengeTitle"]</h1>
+<FormComponent Model=@model SaveButton=@_localizer["FormChallengeSave"]>
     <FormFields>
         <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="UploadFiles" MaximumFileCount="1">
             <ButtonTemplate>
@@ -11,20 +14,30 @@
                            Variant="Variant.Filled"
                            Color="Color.Primary"
                            StartIcon="@Icons.Material.Filled.CloudUpload"
+                           Class="d-flex" 
                            for="@context">
-                    Klik hier om een bannerafbeelding te uploaden
+                    @_localizer["FormChallengeUpload"]
                 </MudButton>
             </ButtonTemplate>
         </MudFileUpload>
-        <MudTextField Variant="Variant.Outlined" Label="Challenge titel" @bind-Value="model.Title" For="@(() => model.Title)"/>
-        <MudTextField Variant="Variant.Outlined" Label="Uitgebreide challenge beschrijving" @bind-Value="model.Description" For="@(() => model.Description)"/>
-        <MudTextField Variant="Variant.Outlined" Label="Korte challenge beschrijving" @bind-Value="model.ShortDescription" For="@(() => model.Description)"/>
-        <MudSelect Variant="Variant.Outlined" Label="Zichtbaarheid" @bind-Value="model.ChallengeVisibility" T="int">
-            @foreach (var visibility in Challenge.Visiblities)
-            {
-                <MudSelectItem Value="@visibility.Id" T="int">@visibility.Name</MudSelectItem>
-            }
-        </MudSelect>
+        <MudTextField Variant="Variant.Outlined" Label=@_localizer["FormChallengeTitle"] @bind-Value="model.Title" For="@(() => model.Title)" />
+        <MudTextField Variant="Variant.Outlined" Lines="10" Label=@_localizer["FormChallengeDescription"] @bind-Value="model.Description" For="@(() => model.Description)" />
+        <MudGrid>
+            <MudItem xs="12" md="4">
+                <MudTextField Variant="Variant.Outlined" Lines="5" Label=@_localizer["FormChallengeShortDescription"] @bind-Value="model.ShortDescription" For="@(() => model.Description)" />
+            </MudItem>
+            <MudItem xs="12" md="4">
+                <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormChallengeVisibility"] @bind-Value="model.ChallengeVisibility" T="int">
+                @foreach (var visibility in Challenge.Visiblities)
+                {
+                    <MudSelectItem Value="@visibility.Id" T="int">@visibility.VisibleTo</MudSelectItem>
+                }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="12" md="4">
+                <MudDatePicker Variant="Variant.Outlined" Label=@_localizer["FormChallengeDate"] Editable="true" @bind-Date="model.Deadline" Mask="@(new DateMask("dd-MM-yyyy"))" DateFormat="dd.MM.yyyy" Placeholder="dd-mm-yyyy" />
+            </MudItem>
+        </MudGrid>
     </FormFields>
 </FormComponent>
 

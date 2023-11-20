@@ -2,11 +2,12 @@
 @using System.Text.Json
 @using System.Net.Http.Headers
 @using global::Shared.Entities
+@inject IStringLocalizer<ApplicationResource> _localizer
 
 <EditForm Model=@Model OnValidSubmit=@ValidFormSubmitted OnInvalidSubmit=@InvalidFormSubmitted>
     <DataAnnotationsValidator />
     @FormFields
-    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
+    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@SaveButton</MudButton>
 </EditForm>
 
 @code {
@@ -16,6 +17,9 @@
     public RenderFragment FormFields { get; set; }
     [Parameter]
     public object Model { get; set; }
+    [Parameter]
+    public object SaveButton { get; set; }
+
     public string modelName;
     private static readonly HttpClient Client = new HttpClient();
 
@@ -25,9 +29,9 @@
         base.OnInitialized();
     }
 
-    void ValidFormSubmitted(EditContext context)
+    async void ValidFormSubmitted(EditContext context)
     {
-        Post();
+        await Post();
         Snackbar.Add(Model.GetType().Name + " toegevoegd!", Severity.Success);
         StateHasChanged();
     }
@@ -38,17 +42,13 @@
         StateHasChanged();
     }
 
-    //TODO: post doesn't work yet, need to fix. Something in controller and routing of it is brokey.
     async Task Post()
     {
         string requestUri = ("https://localhost:5238/" + Model.GetType().Name + 's').ToLower();
-        string myContent = JsonSerializer.Serialize(Model);
-
-        Console.WriteLine(myContent);
-        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+        string serializedJson = JsonSerializer.Serialize(Model);
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(serializedJson);
         var byteContent = new ByteArrayContent(buffer);
         byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-        Console.WriteLine(byteContent);
         await Client.PostAsync(requestUri, byteContent);
     }
 }
