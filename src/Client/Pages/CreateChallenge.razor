@@ -1,14 +1,40 @@
 ﻿@page "/challenge/create"
 
 @using global::Shared.Entities
+@using Microsoft.AspNetCore.Components.Forms
 <h1>Challenge aanmaken</h1>
 <FormComponent Model=@model>
     <FormFields>
-        <MudTextField Variant="Variant.Outlined" Label="Title" @bind-Value="model.Title" For="@(() => model.Title)" />
-        <MudTextField Variant="Variant.Outlined" Label="Description" @bind-Value="model.Description" For="@(() => model.Description)" />
+        <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="UploadFiles" MaximumFileCount="1">
+            <ButtonTemplate>
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           StartIcon="@Icons.Material.Filled.CloudUpload"
+                           for="@context">
+                    Klik hier om een bannerafbeelding te uploaden
+                </MudButton>
+            </ButtonTemplate>
+        </MudFileUpload>
+        <MudTextField Variant="Variant.Outlined" Label="Challenge titel" @bind-Value="model.Title" For="@(() => model.Title)"/>
+        <MudTextField Variant="Variant.Outlined" Label="Uitgebreide challenge beschrijving" @bind-Value="model.Description" For="@(() => model.Description)"/>
+        <MudTextField Variant="Variant.Outlined" Label="Korte challenge beschrijving" @bind-Value="model.ShortDescription" For="@(() => model.Description)"/>
+        <MudSelect Variant="Variant.Outlined" Label="Zichtbaarheid" @bind-Value="model.ChallengeVisibility" T="int">
+            @foreach (var visibility in Challenge.Visiblities)
+            {
+                <MudSelectItem Value="@visibility.Id" T="int">@visibility.Name</MudSelectItem>
+            }
+        </MudSelect>
     </FormFields>
 </FormComponent>
 
 @code {
     Challenge model = new();
+    IList<IBrowserFile> files = new List<IBrowserFile>();
+
+    private void UploadFiles(IBrowserFile file)
+    {
+        files.Add(file);
+    //TODO upload the files to the server
+    }
 }

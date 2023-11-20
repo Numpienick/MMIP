@@ -3,7 +3,7 @@
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
-
+@* <MudThemeProvider Theme="MatchMakerTheme" /> *@
 <main>
     <header>
         <NavMenu/>
@@ -12,3 +12,16 @@
         @Body
     </div>
 </main>
+
+
+@* @code {
+    MudTheme MatchMakerTheme = new MudTheme()
+        {
+            Palette = new PaletteLight()
+            {
+                Primary = "#071952",
+                Secondary = "#088395",
+                Tertiary = "#35a29f"
+            }
+        };
+} *@
