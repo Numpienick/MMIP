@@ -10,15 +10,25 @@ namespace Shared.Entities
     public class Challenge : BaseEntity
     {
         //TODO: Make it work with Text instead of string
-        [Required(ErrorMessage = "Required")]
+        [Required(ErrorMessage = "Challenge titel is vereist.")]
         public string Title { get; set; }
-        [Required(ErrorMessage = "Required")]
-        [StringLength(1000, ErrorMessage = "Max description is 1000")]
+
+        [Required(ErrorMessage = "Omschrijving is vereist.")]
         public string Description { get; set; }
-        public DateTimeOffset Deadline { get; set; }
-        public Text FinalReport { get; set; }
-        public string[] Tags { get; set; }
+
+        [Required(ErrorMessage = "Korte omschrijving is vereist.")]
+        [StringLength(1000, ErrorMessage = "Maximale omschrijving is 1000 karakters.")]
+        public string ShortDescription { get; set; }
+        public string? BannerImagePath { get; set; }
+
+        [Required(ErrorMessage = "Challenge heeft deadline nodig.")]
+        public DateTime? Deadline { get; set; }
         public DateTimeOffset StartDate { get; set; }
-        public Organization Organization { get; set; }
+        public string? FinalReport { get; set; }
+        public string[]? Tags { get; set; } //TODO: add tags to creating challenges
+        public Organization? Organization { get; set; } //TODO: add organization to creating challenges
+
+        [Required(ErrorMessage = "Zichtbaarheid moet gedefinieerd worden.")]
+        public int ChallengeVisibility { get; set; }
     }
 }

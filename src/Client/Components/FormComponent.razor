@@ -1,11 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Components.Forms
 @using System.Text.Json
 @using System.Net.Http.Headers
+@using global::Shared.Entities
+@inject IStringLocalizer<ApplicationResource> _localizer
 
-<EditForm Model=@Model OnValidSubmit=@ValidFormSubmitted OnInvalidSubmit=@InvalidFormSubmitted>
+<EditForm Model=@Model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
     <DataAnnotationsValidator />
     @FormFields
-    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Save</MudButton>
+    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@SaveButton</MudButton>
 </EditForm>
 
 @code {
@@ -15,6 +17,9 @@
     public RenderFragment FormFields { get; set; }
     [Parameter]
     public object Model { get; set; }
+    [Parameter]
+    public object SaveButton { get; set; }
+
     public string modelName;
     private static readonly HttpClient Client = new HttpClient();
 
@@ -24,30 +29,26 @@
         base.OnInitialized();
     }
 
-    void ValidFormSubmitted(EditContext context)
+    private async void _validFormSubmitted(EditContext context)
     {
-        Post();
+        await _post();
         Snackbar.Add(Model.GetType().Name + " toegevoegd!", Severity.Success);
         StateHasChanged();
     }
 
-    void InvalidFormSubmitted(EditContext context)
+    private void _invalidFormSubmitted(EditContext context)
     {
         Snackbar.Add("Er is iets fout gegaan", Severity.Error);
         StateHasChanged();
     }
 
-    //TODO: post doesn't work yet, need to fix. Something in controller and routing of it is brokey.
-    async Task Post()
+    private async Task _post()
     {
         string requestUri = ("https://localhost:5238/" + Model.GetType().Name + 's').ToLower();
-        string myContent = JsonSerializer.Serialize(Model);
-
-        Console.WriteLine(myContent);
-        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
+        string serializedJson = JsonSerializer.Serialize(Model);
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(serializedJson);
         var byteContent = new ByteArrayContent(buffer);
         byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-        Console.WriteLine(byteContent);
         await Client.PostAsync(requestUri, byteContent);
     }
 }

@@ -1,29 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared.Entities;
-using System.Text.Json;
 using Shared.Filters;
 
 namespace Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ChallengesController
+    public class ChallengesController : Controller
     {
         [HttpPost]
-        public IActionResult CreateChallenge([FromBody] string json)
+        public IActionResult CreateChallenge([FromBody] Challenge challenge)
         {
-            //TODO: doesn't work yet, investigate why it doesn't get here
-            Challenge challenge = JsonSerializer.Deserialize<Challenge>(json);
-            Console.WriteLine(challenge);
             try
             {
-                Console.WriteLine("Succesfully created challenge: " + challenge.Title);
-                return new OkResult();
+                //TODO: handle it and put in the database
+                Console.WriteLine("Sucscesfully created challenge: " + challenge.Title);
+                return Ok();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return new BadRequestResult();
+                return BadRequest();
             }
         }
 
