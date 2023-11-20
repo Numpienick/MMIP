@@ -14,11 +14,35 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="wwwroot\Assets\Img\" />
+    </ItemGroup>
+
+    <ItemGroup>
       <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\Assets\Img\" />
+      <Compile Update="Resources\ApplicationResource.en.Designer.cs">
+        <DependentUpon>ApplicationResource.en.resx</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+      <Compile Update="Resources\ApplicationResource.Designer.cs">
+        <DependentUpon>ApplicationResource.resx</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Update="Resources\ApplicationResource.en.resx">
+        <LastGenOutput>ApplicationResource.en.Designer.cs</LastGenOutput>
+        <Generator>ResXFileCodeGenerator</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Resources\ApplicationResource.resx">
+        <LastGenOutput>ApplicationResource.Designer.cs</LastGenOutput>
+        <Generator>ResXFileCodeGenerator</Generator>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>
