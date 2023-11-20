@@ -30,11 +30,5 @@ namespace Shared.Entities
 
         [Required(ErrorMessage = "Zichtbaarheid moet gedefinieerd worden.")]
         public int ChallengeVisibility { get; set; }
-        public static IEnumerable<Visibility> Visiblities = new List<Visibility>()
-        {
-            Visibility.VisibleForAll(),
-            Visibility.VisibleForLoggedin(),
-            Visibility.VisibleForEmployees(),
-        };
     }
 }

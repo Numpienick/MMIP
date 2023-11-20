@@ -8,7 +8,7 @@
 <h1>@_localizer["CreateChallengeTitle"]</h1>
 <FormComponent Model=@model SaveButton=@_localizer["FormChallengeSave"]>
     <FormFields>
-        <MudFileUpload T="IBrowserFile" Accept=".png, .jpg" FilesChanged="UploadFiles" MaximumFileCount="1">
+        <MudFileUpload T="IBrowserFile" Accept=".png, .jpg, .jpeg, .gif, .webp, svg" FilesChanged="UploadFiles" MaximumFileCount="1">
             <ButtonTemplate>
                 <MudButton HtmlTag="label"
                            Variant="Variant.Filled"
@@ -28,9 +28,9 @@
             </MudItem>
             <MudItem xs="12" md="4">
                 <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormChallengeVisibility"] @bind-Value="model.ChallengeVisibility" T="int">
-                @foreach (var visibility in Challenge.Visiblities)
+                @foreach (Visibility visibility in Enum.GetValues(typeof(Visibility)))
                 {
-                    <MudSelectItem Value="@visibility.Id" T="int">@visibility.VisibleTo</MudSelectItem>
+                        <MudSelectItem Value="@model.ChallengeVisibility" T="int">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
                 }
                 </MudSelect>
             </MudItem>

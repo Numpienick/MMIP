@@ -136,7 +136,7 @@
     <value>Challenge titel</value>
   </data>
   <data name="FormChallengeUpload" xml:space="preserve">
-    <value>Klik hier om een banneruploading te uploaden</value>
+    <value>Klik hier om een bannerafbeelding te uploaden</value>
   </data>
   <data name="FormChallengeVisibility" xml:space="preserve">
     <value>Challenge zichtbaarheid</value>

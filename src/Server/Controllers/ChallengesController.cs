@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared.Entities;
-using System.Text.Json;
 using Shared.Filters;
 
 namespace Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ChallengesController
+    public class ChallengesController : Controller
     {
         [HttpPost]
         public IActionResult CreateChallenge([FromBody] Challenge challenge)
@@ -16,12 +15,12 @@ namespace Server.Controllers
             {
                 //TODO: handle it and put in the database
                 Console.WriteLine("Sucscesfully created challenge: " + challenge.Title);
-                return new OkResult();
+                return Ok();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return new BadRequestResult();
+                return BadRequest();
             }
         }
 

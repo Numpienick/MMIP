@@ -115,7 +115,7 @@ namespace Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Klik hier om een banneruploading te uploaden.
+        ///   Looks up a localized string similar to Klik hier om een bannerafbeelding te uploaden.
         /// </summary>
         internal static string FormChallengeUpload {
             get {

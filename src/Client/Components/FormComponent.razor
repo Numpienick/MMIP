@@ -4,7 +4,7 @@
 @using global::Shared.Entities
 @inject IStringLocalizer<ApplicationResource> _localizer
 
-<EditForm Model=@Model OnValidSubmit=@ValidFormSubmitted OnInvalidSubmit=@InvalidFormSubmitted>
+<EditForm Model=@Model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
     <DataAnnotationsValidator />
     @FormFields
     <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@SaveButton</MudButton>
@@ -29,20 +29,20 @@
         base.OnInitialized();
     }
 
-    async void ValidFormSubmitted(EditContext context)
+    private async void _validFormSubmitted(EditContext context)
     {
-        await Post();
+        await _post();
         Snackbar.Add(Model.GetType().Name + " toegevoegd!", Severity.Success);
         StateHasChanged();
     }
 
-    void InvalidFormSubmitted(EditContext context)
+    private void _invalidFormSubmitted(EditContext context)
     {
         Snackbar.Add("Er is iets fout gegaan", Severity.Error);
         StateHasChanged();
     }
 
-    async Task Post()
+    private async Task _post()
     {
         string requestUri = ("https://localhost:5238/" + Model.GetType().Name + 's').ToLower();
         string serializedJson = JsonSerializer.Serialize(Model);

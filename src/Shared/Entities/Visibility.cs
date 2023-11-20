@@ -1,29 +1,16 @@
-﻿namespace Shared.Entities
+﻿using System.ComponentModel;
+
+namespace Shared.Entities
 {
-    public class Visibility
+    public enum Visibility
     {
-        public int Id { get; set; }
-        public string VisibleTo { get; set; }
+        [Description("Zichtbaar voor iedereen")]
+        VisibleToAll,
 
-        public Visibility(int id, string visibleTo)
-        {
-            Id = id;
-            VisibleTo = visibleTo;
-        }
+        [Description("Zichtbaar voor werknemers en ingelogde gebruikers")]
+        VisibleToLoggedIn,
 
-        public static Visibility VisibleForAll()
-        {
-            return new Visibility(0, "Zichtbaar voor iedereen");
-        }
-
-        public static Visibility VisibleForLoggedin()
-        {
-            return new Visibility(1, "Zichtbaar voor werknemers en ingelogde gebruikers");
-        }
-
-        public static Visibility VisibleForEmployees()
-        {
-            return new Visibility(2, "Zichtbaar voor alleen werknemers");
-        }
+        [Description("Zichtbaar voor alleen werknemers")]
+        VisibleToEmployees
     }
 }
