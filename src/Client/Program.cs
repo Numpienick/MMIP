@@ -13,4 +13,5 @@ builder.Services.AddScoped(
 );
 builder.Services.AddLocalization();
 
+builder.Services.AddMudServices();
 await builder.Build().RunAsync();

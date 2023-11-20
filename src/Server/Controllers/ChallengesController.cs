@@ -31,6 +31,7 @@ namespace Server.Controllers
             return null;
         }
 
+        // TODO: Fill method.
         [HttpGet]
         public static IActionResult GetChallenges(ICriteria filterCriteria)
         {

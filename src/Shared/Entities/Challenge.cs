@@ -23,7 +23,10 @@ namespace Shared.Entities
 
         [Required(ErrorMessage = "Challenge heeft deadline nodig.")]
         public DateTime? Deadline { get; set; }
+        public DateTimeOffset StartDate { get; set; }
         public string? FinalReport { get; set; }
+        public string[]? Tags { get; set; } //TODO: add tags to creating challenges
+        public Organization? Organization { get; set; } //TODO: add organization to creating challenges
 
         [Required(ErrorMessage = "Zichtbaarheid moet gedefinieerd worden.")]
         public int ChallengeVisibility { get; set; }
