@@ -1,0 +1,113 @@
+﻿@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Text;
+@using System.Threading.Tasks;
+@using Client.StateContainers;
+@using global::Shared.Entities;
+@* remove when database is working*@
+@inject TempStateContainer challengeStateContainer;
+
+@page "/challenge-view/{ChallengeId:guid}"
+
+<MudGrid Justify="Justify.Center">
+    <MudItem md="12">
+        <MudImage ObjectPosition="ObjectPosition.Center" Fluid="true" Src=@Challenge.BannerImagePath></MudImage>
+    </MudItem>
+</MudGrid>
+
+<h1 class="mb-15">@Challenge.Title</h1>
+
+@if (Challenge.FinalReport != null)
+{
+    <MudGrid Justify="Justify.Center">
+        <h2>Eindverslag</h2>
+        <MudItem>
+            <p>@Challenge.FinalReport</p>
+        </MudItem>
+    </MudGrid>
+}
+
+<MudGrid Class="mb-8" Justify="Justify.Center">
+    <MudItem md="10">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <MudGrid Justify="Justify.SpaceBetween">
+                    <MudItem md="3">
+                        <h2 class="card-centered-text mb-2">Startdatum challenge</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@Challenge.StartDate</h3>
+                    </MudItem>
+                    <MudItem md="3">
+                        <h2 class="card-centered-text mb-2">Deadline challenge</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@Challenge.Deadline</h3>
+                    </MudItem>
+                    <MudItem md="3">
+                        <h2 class="card-centered-text mb-2">Fase challenge</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@Challenge</h3>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            <MudDivider Class="mt-5" DividerType="DividerType.FullWidth"></MudDivider>
+            <MudCardContent>
+                <h2 class="mt-4">Challenge beschrijving</h2>
+                <p>@Challenge.Description</p>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Class="mb-8" Justify="Justify.Center">
+    <MudItem md="5">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem md="7">
+                        <MudCardMedia Image="ImagesTemp/1600x888.jpg" Height="150"></MudCardMedia>
+                    </MudItem>
+                    <MudItem md="5">
+                        <h2 class="card-organization-title">@Challenge.Organization.Name</h2>
+                        <MudDivider Class="mt-2 mb-5"></MudDivider>
+                        <h3 class="card-centered-text">Martin Molema</h3>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+@* TODO: Post reactions (MAT-117) *@
+<MudGrid Justify="Justify.Center">
+    <MudItem md="10">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <h2>Reacties</h2>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+@code {
+    [Parameter]
+    public Guid ChallengeId { get; set; }
+
+    public Challenge Challenge { get; set; }
+
+    public List<Reaction> Reactions { get; set; }
+
+    // TODO: Replace state container with GetChallenge() when database is working.
+    protected override void OnInitialized()
+    {
+        Challenge = challengeStateContainer.Challenge;
+        //Reactions = Challenge.Reactions();
+        base.OnInitialized();
+    }
+
+    // TODO: Use ChallengeId to get the Challenge from the database.
+    public void GetChallenge()
+    {
+        Challenge = new Challenge();
+    }
+}
