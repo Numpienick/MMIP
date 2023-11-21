@@ -1,5 +1,6 @@
 ﻿@page "/challenge/create"
 
+@using Client.Resources;
 @using Microsoft.Extensions.Localization;
 @using global::Shared.Entities
 @using global::Shared.Enums;
@@ -29,10 +30,10 @@
                 <MudTextField Variant="Variant.Outlined" Lines="5" Label=@_localizer["FormChallengeShortDescription"] @bind-Value="model.ShortDescription" For="@(() => model.ShortDescription)" />
             </MudItem>
             <MudItem xs="12" md="4">
-                <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormChallengeVisibility"] @bind-Value="model.ChallengeVisibility" T="int">
+                <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormChallengeVisibility"] @bind-Value="model.ChallengeVisibility" T="Visibility">
                 @foreach (Visibility visibility in Enum.GetValues(typeof(Visibility)))
                 {
-                        <MudSelectItem Value="@model.ChallengeVisibility" T="int">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
+                        <MudSelectItem Value="@model.ChallengeVisibility" T="Visibility">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
                 }
                 </MudSelect>
             </MudItem>
