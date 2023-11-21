@@ -3,6 +3,7 @@
 @using System.Net.Http.Headers
 @using global::Shared.Entities
 @inject IStringLocalizer<ApplicationResource> _localizer
+@inject HttpClient Client
 
 <EditForm Model=@Model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
     <DataAnnotationsValidator />
@@ -21,7 +22,6 @@
     public object SaveButton { get; set; }
 
     public string modelName;
-    private static readonly HttpClient Client = new HttpClient();
 
     protected override void OnInitialized()
     {
@@ -44,11 +44,6 @@
 
     private async Task _post()
     {
-        string requestUri = ("https://localhost:5238/" + Model.GetType().Name + 's').ToLower();
-        string serializedJson = JsonSerializer.Serialize(Model);
-        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(serializedJson);
-        var byteContent = new ByteArrayContent(buffer);
-        byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-        await Client.PostAsync(requestUri, byteContent);
+        await Client.PostAsJsonAsync((Model.GetType().Name + 's').ToLower(), Model);
     }
 }

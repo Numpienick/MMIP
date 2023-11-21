@@ -2,13 +2,16 @@
   "profiles": {
     "MMIP.Client": {
       "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:8080",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "API_URL": "https://localhost:5238"
+      },
       "dotnetRunMessages": true,
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
       "applicationUrl": "https://localhost:5119;http://localhost:8080",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "API_URL": "http://localhost:7070"
-      }
+      "nativeDebugging": true
     }
   }
 }
