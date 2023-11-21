@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Components.Forms
+@using System.Text.Json
+@using System.Net.Http.Headers
+@using global::Shared.Entities
+@inject IStringLocalizer<ApplicationResource> _localizer
+
+<EditForm Model=@Model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
+    <DataAnnotationsValidator />
+    @FormFields
+    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@SaveButton</MudButton>
+</EditForm>
+
+@code {
+    [Inject] 
+    ISnackbar Snackbar { get; set; }
+    [Parameter]
+    public RenderFragment FormFields { get; set; }
+    [Parameter]
+    public object Model { get; set; }
+    [Parameter]
+    public object SaveButton { get; set; }
+
+    public string modelName;
+    private static readonly HttpClient Client = new HttpClient();
+
+    protected override void OnInitialized()
+    {
+        modelName = Model.GetType().Name;
+        base.OnInitialized();
+    }
+
+    private async void _validFormSubmitted(EditContext context)
+    {
+        await _post();
+        Snackbar.Add(Model.GetType().Name + " toegevoegd!", Severity.Success);
+        StateHasChanged();
+    }
+
+    private void _invalidFormSubmitted(EditContext context)
+    {
+        Snackbar.Add("Er is iets fout gegaan", Severity.Error);
+        StateHasChanged();
+    }
+
+    private async Task _post()
+    {
+        string requestUri = ("https://localhost:5238/" + Model.GetType().Name + 's').ToLower();
+        string serializedJson = JsonSerializer.Serialize(Model);
+        byte[] buffer = System.Text.Encoding.UTF8.GetBytes(serializedJson);
+        var byteContent = new ByteArrayContent(buffer);
+        byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+        await Client.PostAsync(requestUri, byteContent);
+    }
+}
