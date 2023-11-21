@@ -44,6 +44,7 @@
 
     private async Task _post()
     {
-        await Client.PostAsJsonAsync((Model.GetType().Name + 's').ToLower(), Model);
+        await Client.PostAsJsonAsync($"{Model.GetType().Name.ToLower()}s", Model);
+
     }
 }
