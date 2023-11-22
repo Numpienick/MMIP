@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shared.Enums;
 
 namespace Shared.Entities
 {
@@ -29,6 +30,7 @@ namespace Shared.Entities
         public Organization? Organization { get; set; } //TODO: add organization to creating challenges
 
         [Required(ErrorMessage = "Zichtbaarheid moet gedefinieerd worden.")]
+        public Visibility ChallengeVisibility { get; set; }
         public int ChallengeVisibility { get; set; }
         public Phase? Phase { get; set; }
     }
