@@ -31,7 +31,6 @@ namespace Shared.Entities
 
         [Required(ErrorMessage = "Zichtbaarheid moet gedefinieerd worden.")]
         public Visibility ChallengeVisibility { get; set; }
-        public int ChallengeVisibility { get; set; }
         public Phase? Phase { get; set; }
     }
 }
