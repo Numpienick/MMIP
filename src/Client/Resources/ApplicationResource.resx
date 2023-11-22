@@ -141,4 +141,41 @@
   <data name="FormChallengeVisibility" xml:space="preserve">
     <value>Challenge zichtbaarheid</value>
   </data>
+  <data name="PrivacyDeclaration" xml:space="preserve">
+    <value>&lt;h1&gt;Privacyverklaring en Gegevensbeschermingsbeleid&lt;/h1&gt;
+
+&lt;h2&gt;1. Inleiding&lt;/h2&gt;
+&lt;p&gt;Dit Privacyverklaring en Gegevensbeschermingsbeleid (hierna "Verklaring") beschrijft hoe MatchMaker Innovation Platform ("wij," "ons," of "onze") persoonlijke gegevens die worden verstrekt door de bezoekers van onze website &lt;a href="https://mm.innovation.io/"&gt;https://mm.innovation.io/&lt;/a&gt; ("de website") worden verzamelt, gebruikt, openbaar maakt en beschermt.&lt;/p&gt;
+
+&lt;h2&gt;2. Verzamelde Gegevens&lt;/h2&gt;
+&lt;p&gt;Wij verzamelen persoonlijke gegevens die vrijwillig door jou worden verstrekt bij het invullen van formulieren op onze website, zoals naam, e-mailadres enzovoort. We verzamelen ook automatisch bepaalde informatie over je bezoek aan onze website, waaronder je IP-adres, browsertype, datum en tijd van toegang, en de pagina's die je hebt bezocht.&lt;/p&gt;
+
+&lt;h2&gt;3. Doel van Gegevensverwerking&lt;/h2&gt;
+&lt;p&gt;De verzamelde gegevens worden gebruikt voor de volgende doeleinden:&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;Om je verzoeken te verwerken en te beantwoorden.&lt;/li&gt;
+    &lt;li&gt;Om je op de hoogte te houden van nieuws, aanbiedingen en evenementen (indien je hebt ingestemd met dergelijke communicatie).&lt;/li&gt;
+    &lt;li&gt;Om de functionaliteit en prestaties van de website te verbeteren.&lt;/li&gt;
+    &lt;li&gt;Om te voldoen aan wettelijke verplichtingen.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;4. Delen van Gegevens&lt;/h2&gt;
+&lt;p&gt;Wij delen jouw persoonlijke gegevens niet met derden, tenzij dit nodig is voor de uitvoering van de hierboven genoemde doeleinden of wettelijk vereist is.&lt;/p&gt;
+
+&lt;h2&gt;5. Beveiliging van Gegevens&lt;/h2&gt;
+&lt;p&gt;Wij nemen passende technische en organisatorische maatregelen om persoonlijke gegevens te beschermen tegen ongeoorloofde toegang, openbaarmaking, wijziging en vernietiging.&lt;/p&gt;
+
+&lt;h2&gt;6. Cookies&lt;/h2&gt;
+&lt;p&gt;Onze website maakt gebruik van cookies om de gebruikerservaring te verbeteren. Je kunt cookies uitschakelen via de instellingen van je webbrowser.&lt;/p&gt;
+
+&lt;h2&gt;7. Jouw Rechten&lt;/h2&gt;
+&lt;p&gt;Je hebt het recht om toegang te vragen tot, rectificatie van, of verwijdering van je persoonlijke gegevens. Neem contact met ons op via &lt;a href="mailto:contact@innovation.io"&gt;contact@innovation.io&lt;/a&gt; voor verzoeken met betrekking tot jouw rechten.&lt;/p&gt;
+
+&lt;h2&gt;8. Wijzigingen in het Beleid&lt;/h2&gt;
+&lt;p&gt;
+    Dit beleid kan worden gewijzigd zonder voorafgaande kennisgeving. De bijgewerkte versie zal op deze pagina worden geplaatst met de datum van de herziening.
+    Door onze website te gebruiken, ga je akkoord met de voorwaarden van dit Privacyverklaring en Gegevensbeschermingsbeleid.
+    Voor vragen of opmerkingen over dit beleid, neem contact met ons op via &lt;a href="mailto:contact@innovation.io"&gt;contact@innovation.io&lt;/a&gt;.
+&lt;/p&gt;</value>
+  </data>
 </root>

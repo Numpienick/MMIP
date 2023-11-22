@@ -36,6 +36,11 @@ body {
   background-color: var(--main-bg-color);
 }
 
+ul {
+  list-style: inside;
+  font-size: 12px;
+}
+
 .content {
   margin: 2%;
 }
