@@ -131,5 +131,20 @@ namespace Client.Resources {
                 return ResourceManager.GetString("FormChallengeVisibility", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;h1&gt;Privacyverklaring en Gegevensbeschermingsbeleid&lt;/h1&gt;
+        ///
+        ///&lt;h2&gt;1. Inleiding&lt;/h2&gt;
+        ///&lt;p&gt;Dit Privacyverklaring en Gegevensbeschermingsbeleid (hierna &quot;Verklaring&quot;) beschrijft hoe MatchMaker Innovation Platform (&quot;wij,&quot; &quot;ons,&quot; of &quot;onze&quot;) persoonlijke gegevens die worden verstrekt door de bezoekers van onze website &lt;a href=&quot;https://mm.innovation.io/&quot;&gt;https://mm.innovation.io/&lt;/a&gt; (&quot;de website&quot;) worden verzamelt, gebruikt, openbaar maakt en beschermt.&lt;/p&gt;
+        ///
+        ///&lt;h2&gt;2. Verzamelde Gegevens&lt;/h2&gt;
+        ///&lt;p&gt;Wij verzamelen persoo [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PrivacyDeclaration {
+            get {
+                return ResourceManager.GetString("PrivacyDeclaration", resourceCulture);
+            }
+        }
     }
 }
