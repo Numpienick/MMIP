@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared.Entities;
 using Shared.Filters;
+using Shared.StateContainers;
+using Infrastructure.Services;
+using System.Text.Json;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace Server.Controllers
 {
@@ -8,6 +12,8 @@ namespace Server.Controllers
     [Route("[controller]")]
     public class ChallengesController : Controller
     {
+        private ChallengeService _challengeService = new ChallengeService();
+
         [HttpPost]
         public IActionResult CreateChallenge([FromBody] Challenge challenge)
         {
@@ -25,16 +31,16 @@ namespace Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public static IActionResult GetChallenge(Guid id)
+        public IActionResult GetChallenge(Guid id)
         {
-            return null;
+            return Ok(_challengeService.GetChallenge(id));
         }
 
-        // TODO: Fill method.
         [HttpGet]
-        public static IActionResult GetChallenges(ICriteria filterCriteria)
+        public IActionResult GetChallenges([FromQuery] string filterCriteria)
         {
-            return null;
+            ICriteria criteria = JsonSerializer.Deserialize<ICriteria>(filterCriteria);
+            return Ok(_challengeService.GetChallenges(criteria));
         }
 
         [HttpPatch]

@@ -1,12 +1,10 @@
-﻿@using Client.StateContainers;
+﻿@using global::Shared.StateContainers;
 @using global::Shared.Entities;
 
 @inject NavigationManager navigationManager;
-@* TODO: Remove when database is working.*@
-@inject TempStateContainer challengeStateContainer;
 
 <MudItem md="3" xs="6">
-    <MudCard @onclick="() => NavigateToChallengeView(Challenge.Id)" Elevation="4" Class="rounded-lg">
+    <MudCard @onclick="() => NavigateToChallengeView(Challenge.Id)" Elevation="4" Class="rounded-lg custom-card">
         <MudCardMedia Image=@Challenge.BannerImagePath Height="100"></MudCardMedia>
         <MudCardContent>
             <h2 class="card-centered-text">@Challenge.Title</h2>
@@ -17,7 +15,7 @@
                     <h3 class="card-organization-title">@Challenge.Organization.Name</h3>
                 </MudItem>
                 <MudItem md="6">
-                    <MudCardMedia Image="ImagesTemp/1600x888.jpg" Height="80"></MudCardMedia>
+                    <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="80"></MudCardMedia>
                 </MudItem>
             </MudGrid>
         </MudCardContent>
@@ -40,10 +38,8 @@
     [Parameter]
     public Challenge Challenge { get; set; }
 
-    // TODO: Remove state container when database is working.
     public void NavigateToChallengeView(Guid challengeId)
     {
-        challengeStateContainer.SetValue(Challenge);
         navigationManager.NavigateTo($"/challenge-view/{challengeId}");
     }
 }

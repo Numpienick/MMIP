@@ -3,18 +3,15 @@
 @using System.Linq;
 @using System.Text;
 @using System.Threading.Tasks;
-@using Client.StateContainers;
 @using global::Shared.Entities;
-@* remove when database is working*@
-@inject TempStateContainer challengeStateContainer;
+
+@inject HttpClient Client;
 
 @page "/challenge-view/{ChallengeId:guid}"
 
-<MudGrid Justify="Justify.Center">
-    <MudItem md="12">
-        <MudImage ObjectPosition="ObjectPosition.Center" Fluid="true" Src=@Challenge.BannerImagePath></MudImage>
-    </MudItem>
-</MudGrid>
+<div Width="100%" class="banner-image">
+    <MudImage ObjectPosition="ObjectPosition.Center" ObjectFit="ObjectFit.Fill" Src="@Challenge.BannerImagePath" style="width: 100%; max-height: inherit;"></MudImage>
+</div>
 
 <h1 class="mb-15">@Challenge.Title</h1>
 
@@ -33,7 +30,7 @@
 }
 
 <MudGrid Class="mb-8" Justify="Justify.Center">
-    <MudItem md="10">
+    <MudItem md="10" Class="justify-center">
         <MudCard Elevation="4" Class="rounded-lg">
             <MudCardContent>
                 <MudGrid Justify="Justify.SpaceBetween">
@@ -72,12 +69,12 @@
             <MudCardContent>
                 <MudGrid>
                     <MudItem md="7">
-                        <MudCardMedia Image="ImagesTemp/1600x888.jpg" Height="150"></MudCardMedia>
+                        <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="150"></MudCardMedia>
                     </MudItem>
                     <MudItem md="5">
                         <h2 class="card-organization-title">@Challenge.Organization.Name</h2>
                         <MudDivider Class="mt-2 mb-5"></MudDivider>
-                        <h3 class="card-centered-text">Martin Molema</h3>
+                        <h3 class="card-centered-text">Leander Jelgersma</h3>
                     </MudItem>
                 </MudGrid>
             </MudCardContent>
@@ -100,21 +97,19 @@
     [Parameter]
     public Guid ChallengeId { get; set; }
 
-    public Challenge Challenge { get; set; }
+    public Challenge? Challenge { get; set; }
 
     public List<Reaction> Reactions { get; set; }
 
-    // TODO: Replace state container with GetChallenge() when database is working.
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Challenge = challengeStateContainer.Challenge;
+        Challenge = await GetChallenge();
         //Reactions = Challenge.Reactions();
         base.OnInitialized();
     }
 
-    // TODO: Use ChallengeId to get the Challenge from the database.
-    public void GetChallenge()
+    public async Task<Challenge> GetChallenge()
     {
-        Challenge = new Challenge();
+        return await Client.GetFromJsonAsync<Challenge>($"challenges/{ChallengeId}");
     }
 }

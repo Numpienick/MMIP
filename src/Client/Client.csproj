@@ -14,21 +14,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\Assets\Img\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Environment\Environment.csproj" />
       <ProjectReference Include="..\Shared\Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="wwwroot\ImagesTemp\" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Include="wwwroot\ImagesTemp\556x200.jpg" />
-      <Folder Include="wwwroot\Assets\Img\" />
+      <None Include="wwwroot\Assets\Img\556x200.jpg" />
     </ItemGroup>
   
     <ItemGroup>

@@ -1,5 +1,5 @@
 using Client;
-using Client.StateContainers;
+using Shared.StateContainers;
 using Environment;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
