@@ -7,20 +7,21 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    internal abstract class BaseEntityRepository : IRepository
+    internal abstract class BaseEntityRepository<TEntity> : IRepository<TEntity>
+        where TEntity : BaseEntity
     {
-        public abstract BaseEntity GetById(Guid id);
+        public abstract Task<TEntity> GetById(Guid id);
 
-        public abstract BaseEntity GetReadonlyById(Guid id);
+        public abstract Task<TEntity> GetReadonlyById(Guid id);
 
-        public abstract IEnumerable<BaseEntity> GetAll();
+        public abstract Task<IQueryable<TEntity>> GetAll();
 
-        public abstract IEnumerable<BaseEntity> GetAllReadonly();
+        public abstract Task<IQueryable<TEntity>> GetAllReadonly();
 
-        public abstract void Create(BaseEntity entity);
+        public abstract void Create(TEntity entity);
 
-        public abstract void Update(BaseEntity entity);
+        public abstract void Update(TEntity entity);
 
-        public abstract void Delete(BaseEntity entity);
+        public abstract void Delete(TEntity entity);
     }
 }

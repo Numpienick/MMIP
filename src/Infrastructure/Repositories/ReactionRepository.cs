@@ -7,39 +7,39 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    internal class ReactionRepository : BaseEntityRepository
+    internal class ReactionRepository : BaseEntityRepository<Reaction>
     {
-        public override void Create(BaseEntity entity)
+        public override void Create(Reaction reaction)
         {
             throw new NotImplementedException();
         }
 
-        public override void Delete(BaseEntity entity)
+        public override void Delete(Reaction reaction)
         {
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<BaseEntity> GetAll()
+        public override Task<IQueryable<Reaction>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<BaseEntity> GetAllReadonly()
+        public override Task<IQueryable<Reaction>> GetAllReadonly()
         {
             throw new NotImplementedException();
         }
 
-        public override BaseEntity GetById(Guid id)
+        public override Task<Reaction> GetById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public override BaseEntity GetReadonlyById(Guid id)
+        public override Task<Reaction> GetReadonlyById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public override void Update(BaseEntity entity)
+        public override void Update(Reaction reaction)
         {
             throw new NotImplementedException();
         }

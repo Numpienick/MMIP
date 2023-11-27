@@ -1,4 +1,5 @@
-﻿using Shared.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Shared.Entities;
 using Shared.StateContainers;
 using System;
 using System.Collections.Generic;
@@ -8,24 +9,26 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    internal class ChallengeRepository : BaseEntityRepository
+    internal class ChallengeRepository : BaseEntityRepository<Challenge>
     {
-        public override BaseEntity GetById(Guid id)
+        public override async Task<Challenge> GetById(Guid id)
         {
-            IEnumerable<Challenge> challenges = (IEnumerable<Challenge>)GetAll();
+            // TODO: Use this when TempStateContainer can be removed.
+            //return await GetAll().Result.FirstOrDefaultAsync(c => c.Id == id);
+            var challenges = GetAll();
             return TempStateContainer
                 .Instance()
                 .Challenges.FirstOrDefault(challenge => challenge.Id == id);
         }
 
-        public override BaseEntity GetReadonlyById(Guid id)
+        public override async Task<Challenge> GetReadonlyById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<BaseEntity> GetAll()
+        public override async Task<IQueryable<Challenge>> GetAll()
         {
-            IEnumerable<Challenge> allChallenges;
+            IQueryable<Challenge> allChallenges;
             List<Challenge> challenges = new List<Challenge>();
             Phase ongoing = new Phase();
             ongoing.Name = new Text(
@@ -51,7 +54,7 @@ namespace Infrastructure.Repositories
 
             Challenge challenge1 = new Challenge();
             challenge1.Id = Guid.NewGuid();
-            challenge1.Title = "[2] Recyclen plastic bekertjes";
+            challenge1.Title = "Recyclen plastic bekertjes";
             challenge1.ShortDescription =
                 "Plastic is slecht voor het milieu. Voor deze challenge zoeken wij mensen die goede oplossingen hebben voor het plastic probleem.";
             challenge1.Tags = new string[] { "Recyclen", "Plastic", "Milieu" };
@@ -67,7 +70,7 @@ namespace Infrastructure.Repositories
 
             Challenge challenge2 = new Challenge();
             challenge2.Id = Guid.NewGuid();
-            challenge2.Title = "[3] Jongere docenten voor de klas";
+            challenge2.Title = "Jongere docenten voor de klas";
             challenge2.ShortDescription =
                 "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
             challenge2.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
@@ -83,17 +86,11 @@ namespace Infrastructure.Repositories
             challenge2.Phase = finished;
             challenges.Add(challenge2);
 
-            Challenge challenge3 = new Challenge();
-            challenge3.Id = Guid.NewGuid();
-            challenge3.Title = "[1] Jongere docenten voor de klas";
-            challenge3.ShortDescription =
-                "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
-            challenge3.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
-            challenge3.StartDate = new DateTimeOffset(new DateTime(2023, 7, 3));
-            challenge3.Organization = new Organization();
-            challenge3.Organization.Name = "Company Name";
-            challenge3.BannerImagePath = "Assets/Img/556x200.jpg";
-            challenges.Add(challenge3);
+            challenges.Add(challenge2);
+            challenges.Add(challenge2);
+            challenges.Add(challenge2);
+            challenges.Add(challenge2);
+            challenges.Add(challenge2);
 
             Challenge challenge4 = new Challenge();
             challenge4.Id = Guid.NewGuid();
@@ -143,27 +140,27 @@ namespace Infrastructure.Repositories
             challenge7.BannerImagePath = "Assets/Img/556x200.jpg";
             challenges.Add(challenge7);
 
-            allChallenges = challenges;
+            allChallenges = challenges.AsQueryable();
 
             return allChallenges;
         }
 
-        public override IEnumerable<BaseEntity> GetAllReadonly()
+        public override async Task<IQueryable<Challenge>> GetAllReadonly()
         {
             throw new NotImplementedException();
         }
 
-        public override void Create(BaseEntity entity)
+        public override void Create(Challenge challenge)
         {
             throw new NotImplementedException();
         }
 
-        public override void Update(BaseEntity entity)
+        public override void Update(Challenge challenge)
         {
             throw new NotImplementedException();
         }
 
-        public override void Delete(BaseEntity entity)
+        public override void Delete(Challenge challenge)
         {
             throw new NotImplementedException();
         }

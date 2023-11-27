@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Repositories;
+using Microsoft.AspNetCore.Components;
 using Shared.Entities;
 using Shared.Filters;
 using Shared.StateContainers;
@@ -18,19 +19,20 @@ namespace Infrastructure.Services
 
         public Challenge GetChallenge(Guid id)
         {
-            return (Challenge)_challengeRepository.GetById(id);
+            return _challengeRepository.GetById(id).Result;
         }
 
         // TODO: Filter challenges based on filter criteria.
         public IEnumerable<Challenge> GetChallenges(ICriteria filterCriteria)
         {
-            IEnumerable<Challenge> challenges =
-                (IEnumerable<Challenge>)_challengeRepository.GetAll();
-
             if (TempStateContainer.Instance().Challenges == null)
             {
-                TempStateContainer.Instance().Challenges = challenges;
+                var challenges = _challengeRepository.GetAll();
+                TempStateContainer.Instance().Challenges = challenges.Result;
             }
+
+            // TODO: Return this when TempStateContainer can be removed.
+            //return _challengeRepository.GetAll().Result;
 
             return TempStateContainer.Instance().Challenges;
         }

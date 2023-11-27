@@ -53,6 +53,7 @@
         base.OnInitialized();
     }
 
+    // TODO: Change this to only get 6 from the database each time.
     public void LoadBatch()
     {
         for (int i = 0; i < RowsPerBatch; i++)
@@ -92,6 +93,7 @@
         LoadBatch();
     }
 
+    // TODO: Change to take only 6 challanges a time.
     public async Task<List<Challenge>> GetChallenges()
     {
         string jsonObject = JsonSerializer.Serialize(_filterCriteria);

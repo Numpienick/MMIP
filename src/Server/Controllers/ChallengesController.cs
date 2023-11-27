@@ -5,6 +5,8 @@ using Shared.StateContainers;
 using Infrastructure.Services;
 using System.Text.Json;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Components;
+using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace Server.Controllers
 {
@@ -12,7 +14,11 @@ namespace Server.Controllers
     [Route("[controller]")]
     public class ChallengesController : Controller
     {
-        private ChallengeService _challengeService = new ChallengeService();
+        [Inject]
+        private ChallengeService _challengeService { get; set; }
+
+        public ChallengesController(ChallengeService challengeService) =>
+            _challengeService = challengeService;
 
         [HttpPost]
         public IActionResult CreateChallenge([FromBody] Challenge challenge)

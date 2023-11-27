@@ -7,39 +7,39 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    internal class UserRepository : BaseEntityRepository
+    internal class UserRepository : BaseEntityRepository<User>
     {
-        public override void Create(BaseEntity entity)
+        public override void Create(User user)
         {
             throw new NotImplementedException();
         }
 
-        public override void Delete(BaseEntity entity)
+        public override void Delete(User user)
         {
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<BaseEntity> GetAll()
+        public override Task<IQueryable<User>> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public override IEnumerable<BaseEntity> GetAllReadonly()
+        public override Task<IQueryable<User>> GetAllReadonly()
         {
             throw new NotImplementedException();
         }
 
-        public override BaseEntity GetById(Guid id)
+        public override Task<User> GetById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public override BaseEntity GetReadonlyById(Guid id)
+        public override Task<User> GetReadonlyById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public override void Update(BaseEntity entity)
+        public override void Update(User user)
         {
             throw new NotImplementedException();
         }
