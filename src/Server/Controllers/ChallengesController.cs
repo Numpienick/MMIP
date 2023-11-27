@@ -14,7 +14,6 @@ namespace Server.Controllers
     [Route("[controller]")]
     public class ChallengesController : Controller
     {
-        [Inject]
         private ChallengeService _challengeService { get; set; }
 
         public ChallengesController(ChallengeService challengeService) =>
