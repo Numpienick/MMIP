@@ -14,16 +14,14 @@
 <DataAnnotationsValidator />
     <FormFields>
         <MudFileUpload T="IBrowserFile" Accept=".png, .jpg, .jpeg, .gif, .webp, svg" FilesChanged="UploadFiles" MaximumFileCount="1">
-            <ButtonTemplate>
-                <MudButton HtmlTag="label"
-                           Variant="Variant.Filled"
-                           Color="Color.Primary"
-                           StartIcon="@Icons.Material.Filled.CloudUpload"
-                           Class="d-flex" 
-                           for="@context">
-                    @_localizer["FormChallengeUpload"]
-                </MudButton>
-            </ButtonTemplate>
+            <MudButton HtmlTag="label"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       StartIcon="@Icons.Material.Filled.CloudUpload"
+                       Class="d-flex" 
+                       for="@context">
+                @_localizer["FormChallengeUpload"]
+            </MudButton>
         </MudFileUpload>
         <MudTextField Variant="Variant.Outlined" Label=@_localizer["FormChallengeTitle"] @bind-Value="model.Title" For="@(() => model.Title)" />
         <MudTextField Variant="Variant.Outlined" Lines="10" Label=@_localizer["FormChallengeDescription"] @bind-Value="model.Description" For="@(() => model.Description)" />

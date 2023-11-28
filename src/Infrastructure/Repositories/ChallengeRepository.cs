@@ -11,6 +11,8 @@ namespace Infrastructure.Repositories
 {
     internal class ChallengeRepository : BaseEntityRepository<Challenge>
     {
+        List<Challenge> challenges = new List<Challenge>();
+
         public override async Task<Challenge> GetById(Guid id)
         {
             // TODO: Use this when TempStateContainer can be removed.
@@ -29,7 +31,6 @@ namespace Infrastructure.Repositories
         public override async Task<IQueryable<Challenge>> GetAll()
         {
             IQueryable<Challenge> allChallenges;
-            List<Challenge> challenges = new List<Challenge>();
             Phase ongoing = new Phase();
             ongoing.Name = new Text(
                 new DateTimeOffset(),
@@ -152,7 +153,7 @@ namespace Infrastructure.Repositories
 
         public override void Create(Challenge challenge)
         {
-            throw new NotImplementedException();
+            challenges.Add(challenge);
         }
 
         public override void Update(Challenge challenge)

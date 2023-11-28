@@ -15,7 +15,15 @@ namespace Infrastructure.Services
     {
         private ChallengeRepository _challengeRepository = new ChallengeRepository();
 
-        public void CreateChallenge() { }
+        public void CreateChallenge(Challenge challenge)
+        {
+            _challengeRepository.Create(challenge);
+            if (TempStateContainer.Instance().Challenges == null)
+            {
+                var challenges = _challengeRepository.GetAll();
+                TempStateContainer.Instance().Challenges = challenges.Result;
+            }
+        }
 
         public Challenge GetChallenge(Guid id)
         {
