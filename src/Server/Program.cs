@@ -1,3 +1,8 @@
+using Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using Server.Controllers;
+
 var builder = WebApplication.CreateBuilder(args);
 
 //Cors
@@ -8,6 +13,7 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddSingleton<ChallengeService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
