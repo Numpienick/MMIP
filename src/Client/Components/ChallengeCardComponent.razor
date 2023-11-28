@@ -1,29 +1,31 @@
-﻿@using global::Shared.Entities;
+﻿@using global::Shared.StateContainers;
+@using global::Shared.Entities;
 
-@* TODO: Change styling according to stylesheet *@
+@inject NavigationManager navigationManager;
+
 <MudItem md="3" xs="6">
-    <MudCard Elevation="4" Class="rounded-lg">
-        <MudCardMedia Image="ImagesTemp/556x200.jpg" Height="100"></MudCardMedia>
+    <MudCard @onclick="() => NavigateToChallengeView(Challenge.Id)" Elevation="4" Class="rounded-lg custom-card">
+        <MudCardMedia Image=@Challenge.BannerImagePath Height="100"></MudCardMedia>
         <MudCardContent>
-            <h2 class="card-centered-text">@Title</h2>
+            <h2 class="card-centered-text">@Challenge.Title</h2>
         </MudCardContent>
         <MudCardContent>
             <MudGrid>
                 <MudItem md="6">
-                    <h3 class="card-organization-title">@OrganizationName</h3>
+                    <h3 class="card-organization-title">@Challenge.Organization.Name</h3>
                 </MudItem>
                 <MudItem md="6">
-                    <MudCardMedia Image="ImagesTemp/1600x888.jpg" Height="80"></MudCardMedia>
+                    <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="80"></MudCardMedia>
                 </MudItem>
             </MudGrid>
         </MudCardContent>
         <MudCardContent>
-            <p class="card-centered-text">@Description</p>
+            <p class="card-centered-text">@Challenge.ShortDescription</p>
         </MudCardContent>
         <MudDivider></MudDivider>
         <MudCardContent>
             <MudGrid Justify="Justify.Center">
-                @foreach (string tag in Tags)
+                @foreach (string tag in Challenge.Tags)
                 {
                     <MudChip>@tag</MudChip>
                 }
@@ -34,14 +36,10 @@
 
 @code {
     [Parameter]
-    public string? OrganizationName { get; set; }
+    public Challenge Challenge { get; set; }
 
-    [Parameter]
-    public string? Title { get; set; }
-
-    [Parameter]
-    public string? Description { get; set; }
-
-    [Parameter]
-    public string[]? Tags { get; set; }
+    public void NavigateToChallengeView(Guid challengeId)
+    {
+        navigationManager.NavigateTo($"/challenge-view/{challengeId}");
+    }
 }

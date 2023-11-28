@@ -1,4 +1,5 @@
 using Client;
+using Shared.StateContainers;
 using Environment;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -13,5 +14,7 @@ builder.Services.AddScoped(
 );
 builder.Services.AddLocalization();
 
+// TODO: Remove when database access is available.
+builder.Services.AddSingleton<TempStateContainer>();
 builder.Services.AddMudServices();
 await builder.Build().RunAsync();

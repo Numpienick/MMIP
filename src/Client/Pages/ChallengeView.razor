@@ -1,0 +1,115 @@
+﻿@using System;
+@using System.Collections.Generic;
+@using System.Linq;
+@using System.Text;
+@using System.Threading.Tasks;
+@using global::Shared.Entities;
+
+@inject HttpClient Client;
+
+@page "/challenge-view/{ChallengeId:guid}"
+
+<div Width="100%" class="banner-image">
+    <MudImage ObjectPosition="ObjectPosition.Center" ObjectFit="ObjectFit.Fill" Src="@Challenge.BannerImagePath" style="width: 100%; max-height: inherit;"></MudImage>
+</div>
+
+<h1 class="mb-15">@Challenge.Title</h1>
+
+@if (Challenge.FinalReport != null)
+{
+    <MudGrid Class="mb-8" Justify="Justify.Center">
+        <MudItem md="10">
+            <MudCard Elevation="4" Class="rounded-lg">
+                <MudCardContent>
+                    <h2>Challenge eindverslag</h2>
+                    <p>@Challenge.FinalReport</p>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+}
+
+<MudGrid Class="mb-8" Justify="Justify.Center">
+    <MudItem md="10" Class="justify-center">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <MudGrid Justify="Justify.SpaceBetween">
+                    <MudItem md="4">
+                        <h2 class="card-centered-text mb-2">Startdatum challenge</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@Challenge.StartDate.DateTime.Date.ToString("dd/MM/yyyy")</h3>
+                    </MudItem>
+                    <MudItem md="4">
+                        <h2 class="card-centered-text mb-2">Deadline challenge</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@Challenge.Deadline.Value.Date.ToString("dd/MM/yyyy")</h3>
+                    </MudItem>
+                    <MudItem md="4">
+                        <h2 class="card-centered-text mb-2">Fase challenge</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@Challenge.Phase.Name.Value</h3>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            @* TODO: Change progress max value according to maximum phase order. *@
+            <MudCardContent>
+                <MudProgressLinear Color="Color.Success" Rounded="true" Size="Size.Large" Value="@Challenge.Phase.Order" Min="0" Max="7" />
+            </MudCardContent>
+            <MudCardContent>
+                <h2 class="mt-4">Challenge beschrijving</h2>
+                <p>@Challenge.Description</p>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Class="mb-8" Justify="Justify.Center">
+    <MudItem md="5">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem md="7">
+                        <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="150"></MudCardMedia>
+                    </MudItem>
+                    <MudItem md="5">
+                        <h2 class="card-organization-title">@Challenge.Organization.Name</h2>
+                        <MudDivider Class="mt-2 mb-5"></MudDivider>
+                        <h3 class="card-centered-text">Leander Jelgersma</h3>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+@* TODO: Post and view reactions (MAT-117) *@
+<MudGrid Justify="Justify.Center">
+    <MudItem md="10">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <h2>Reacties</h2>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+@code {
+    [Parameter]
+    public Guid ChallengeId { get; set; }
+
+    public Challenge? Challenge { get; set; }
+
+    public List<Reaction> Reactions { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Challenge = await GetChallenge();
+        //Reactions = Challenge.Reactions();
+        base.OnInitialized();
+    }
+
+    public async Task<Challenge> GetChallenge()
+    {
+        return await Client.GetFromJsonAsync<Challenge>($"challenges/{ChallengeId}");
+    }
+}
