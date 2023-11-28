@@ -6,10 +6,12 @@
 @using global::Shared.Enums;
 @using global::Shared.Utilities;
 @using Microsoft.AspNetCore.Components.Forms
+@using Client.Controllers
 @inject IStringLocalizer<ApplicationResource> _localizer
 
 <h1>@_localizer["CreateChallengeTitle"]</h1>
-<FormComponent Model=@model SaveButton=@_localizer["FormChallengeSave"]>
+<EditForm Model=@model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
+<DataAnnotationsValidator />
     <FormFields>
         <MudFileUpload T="IBrowserFile" Accept=".png, .jpg, .jpeg, .gif, .webp, svg" FilesChanged="UploadFiles" MaximumFileCount="1">
             <ButtonTemplate>
@@ -31,10 +33,10 @@
             </MudItem>
             <MudItem xs="12" md="4">
                 <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormChallengeVisibility"] @bind-Value="model.ChallengeVisibility" T="Visibility">
-                @foreach (Visibility visibility in Enum.GetValues(typeof(Visibility)))
-                {
+                    @foreach (Visibility visibility in Enum.GetValues(typeof(Visibility)))
+                    {
                         <MudSelectItem Value="@model.ChallengeVisibility" T="Visibility">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
-                }
+                    }
                 </MudSelect>
             </MudItem>
             <MudItem xs="12" md="4">
@@ -42,12 +44,28 @@
             </MudItem>
         </MudGrid>
     </FormFields>
-</FormComponent>
+    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@_localizer["FormChallengeSave"]</MudButton>
+</EditForm>
 
 @code {
     Challenge model = new();
     IList<IBrowserFile> files = new List<IBrowserFile>();
 
+    [Inject] 
+    ISnackbar Snackbar { get; set; }
+
+    private async void _validFormSubmitted(EditContext context)
+    {
+        await RequestController.Post("challenges", model);
+        Snackbar.Add(model.GetType().Name + " toegevoegd!", Severity.Success);
+        StateHasChanged();
+    }
+
+    private void _invalidFormSubmitted(EditContext context)
+    {
+        Snackbar.Add("Er is iets fout gegaan", Severity.Error);
+        StateHasChanged();
+    }
     private void UploadFiles(IBrowserFile file)
     {
         files.Add(file);

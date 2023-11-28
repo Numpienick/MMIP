@@ -14,7 +14,7 @@ namespace Server.Controllers
             try
             {
                 //TODO: handle it and put in the database
-                Console.WriteLine("Sucscesfully created challenge: " + challenge.Title);
+                Console.WriteLine("Successfully created challenge: " + challenge.Title);
                 return Ok();
             }
             catch (Exception e)
