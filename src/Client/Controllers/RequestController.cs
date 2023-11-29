@@ -16,8 +16,8 @@ namespace Client.Controllers
             _httpClient.BaseAddress = new Uri(EnvironmentConstants.ApiUrl);
         }
 
-        internal async Task<string> Post<TEnitity>(string uri, TEnitity model)
-            where TEnitity : BaseEntity
+        public async Task<string> Post<TEntity>(string uri, TEntity model)
+            where TEntity : BaseEntity
         {
             var response = await _httpClient.PostAsJsonAsync(uri, model);
             try
