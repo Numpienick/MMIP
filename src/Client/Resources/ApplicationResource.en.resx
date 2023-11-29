@@ -179,7 +179,7 @@
 &lt;/p&gt;</value>
   </data>
   <data name="Request_NotFound" xml:space="preserve">
-    <value>Successfully created challenge: </value>
+    <value>Something happened on our side, try again later</value>
   </data>
   <data name="Request_ServiceUnavailable" xml:space="preserve">
     <value>Server is unreachable</value>

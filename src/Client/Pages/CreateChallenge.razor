@@ -1,16 +1,14 @@
 ﻿@page "/challenge/create"
-
-@using Client.Resources;
-@using Microsoft.Extensions.Localization;
 @using global::Shared.Entities
 @using global::Shared.Enums;
 @using global::Shared.Utilities;
 @using Microsoft.AspNetCore.Components.Forms
 @using Client.Controllers
+@inject RequestController RequestController
 @inject IStringLocalizer<ApplicationResource> _localizer
 
 <h1>@_localizer["CreateChallengeTitle"]</h1>
-<EditForm Model=@model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
+<EditForm Model=@_model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
 <DataAnnotationsValidator />
     <FormFields>
         <MudFileUpload T="IBrowserFile" Accept=".png, .jpg, .jpeg, .gif, .webp, svg" FilesChanged="UploadFiles" MaximumFileCount="1">
@@ -23,22 +21,22 @@
                 @_localizer["FormChallengeUpload"]
             </MudButton>
         </MudFileUpload>
-        <MudTextField Variant="Variant.Outlined" Label=@_localizer["FormChallengeTitle"] @bind-Value="model.Title" For="@(() => model.Title)" />
-        <MudTextField Variant="Variant.Outlined" Lines="10" Label=@_localizer["FormChallengeDescription"] @bind-Value="model.Description" For="@(() => model.Description)" />
+        <MudTextField Variant="Variant.Outlined" Label=@_localizer["FormChallengeTitle"] @bind-Value="_model.Title" For="@(() => _model.Title)" />
+        <MudTextField Variant="Variant.Outlined" Lines="10" Label=@_localizer["FormChallengeDescription"] @bind-Value="_model.Description" For="@(() => _model.Description)" />
         <MudGrid>
             <MudItem xs="12" md="4">
-                <MudTextField Variant="Variant.Outlined" Lines="5" Label=@_localizer["FormChallengeShortDescription"] @bind-Value="model.ShortDescription" For="@(() => model.ShortDescription)" />
+                <MudTextField Variant="Variant.Outlined" Lines="5" Label=@_localizer["FormChallengeShortDescription"] @bind-Value="_model.ShortDescription" For="@(() => _model.ShortDescription)" />
             </MudItem>
             <MudItem xs="12" md="4">
-                <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormChallengeVisibility"] @bind-Value="model.ChallengeVisibility" T="Visibility">
+                <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormChallengeVisibility"] @bind-Value="_model.ChallengeVisibility" T="Visibility">
                     @foreach (Visibility visibility in Enum.GetValues(typeof(Visibility)))
                     {
-                        <MudSelectItem Value="@model.ChallengeVisibility" T="Visibility">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
+                        <MudSelectItem Value="@_model.ChallengeVisibility" T="Visibility">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
                     }
                 </MudSelect>
             </MudItem>
             <MudItem xs="12" md="4">
-                <MudDatePicker Variant="Variant.Outlined" Label=@_localizer["FormChallengeDate"] Editable="true" @bind-Date="model.Deadline" Mask="@(new DateMask("dd-MM-yyyy"))" DateFormat="dd.MM.yyyy" Placeholder="dd-mm-yyyy" />
+                <MudDatePicker Variant="Variant.Outlined" Label=@_localizer["FormChallengeDate"] Editable="true" @bind-Date="_model.Deadline" Mask="@(new DateMask("dd-MM-yyyy"))" DateFormat="dd.MM.yyyy" Placeholder="dd-mm-yyyy" />
             </MudItem>
         </MudGrid>
     </FormFields>
@@ -46,27 +44,26 @@
 </EditForm>
 
 @code {
-    Challenge model = new();
-    IList<IBrowserFile> files = new List<IBrowserFile>();
-
+    private Challenge _model = new();
+    private IList<IBrowserFile> _files = new List<IBrowserFile>();
     [Inject] 
-    ISnackbar Snackbar { get; set; }
+    private ISnackbar _snackbar { get; set; }
 
     private async void _validFormSubmitted(EditContext context)
     {
-        await RequestController.Post("challenges", model);
-        Snackbar.Add(model.GetType().Name + " toegevoegd!", Severity.Success);
+        await RequestController.Post("challenges", _model);
+        _snackbar.Add("Challenge toegevoegd!", Severity.Success);
         StateHasChanged();
     }
 
     private void _invalidFormSubmitted(EditContext context)
     {
-        Snackbar.Add("Er is iets fout gegaan", Severity.Error);
+        _snackbar.Add("Er is iets fout gegaan", Severity.Error);
         StateHasChanged();
     }
     private void UploadFiles(IBrowserFile file)
     {
-        files.Add(file);
+        _files.Add(file);
     //TODO upload the files to the server
     }
 }

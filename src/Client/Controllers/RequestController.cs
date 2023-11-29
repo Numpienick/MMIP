@@ -11,17 +11,21 @@ using Client.Resources;
 
 namespace Client.Controllers
 {
-    public static class RequestController
+    public class RequestController
     {
-        private static HttpClient _httpClient;
+        private HttpClient _httpClient;
 
-        static RequestController()
+        [Inject]
+        ISnackbar Snackbar { get; set; }
+
+        public RequestController()
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri(EnvironmentConstants.ApiUrl);
         }
 
-        public static async Task<string> Post(string uri, Challenge model)
+        public async Task<string> Post<TEnitity>(string uri, TEnitity model)
+            where TEnitity : BaseEntity
         {
             var response = await _httpClient.PostAsJsonAsync(uri, model);
             try
