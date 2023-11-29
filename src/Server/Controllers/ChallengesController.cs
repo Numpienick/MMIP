@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared.Entities;
 using Shared.Filters;
-using Shared.StateContainers;
 using Infrastructure.Services;
 using System.Text.Json;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Components;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace Server.Controllers
@@ -24,9 +21,9 @@ namespace Server.Controllers
         {
             try
             {
-                //TODO: handle it and put in the database
-                Console.WriteLine("Sucscesfully created challenge: " + challenge.Title);
-                return Ok();
+                Console.WriteLine("Successfully created challenge: " + challenge.Title);
+                _challengeService.CreateChallenge(challenge);
+                return Ok("Successfully created challenge: " + challenge.Title);
             }
             catch (Exception e)
             {

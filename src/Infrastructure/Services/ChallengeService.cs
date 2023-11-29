@@ -1,13 +1,7 @@
 ﻿using Infrastructure.Repositories;
-using Microsoft.AspNetCore.Components;
 using Shared.Entities;
 using Shared.Filters;
 using Shared.StateContainers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
@@ -15,7 +9,23 @@ namespace Infrastructure.Services
     {
         private ChallengeRepository _challengeRepository = new ChallengeRepository();
 
-        public void CreateChallenge() { }
+        public void CreateChallenge(Challenge challenge)
+        {
+            try
+            {
+                _challengeRepository.Create(challenge);
+                if (TempStateContainer.Instance().Challenges == null)
+                {
+                    var challenges = _challengeRepository.GetAll();
+                    TempStateContainer.Instance().Challenges = challenges.Result;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         public Challenge GetChallenge(Guid id)
         {

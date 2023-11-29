@@ -178,4 +178,13 @@
     Voor vragen of opmerkingen over dit beleid, neem contact met ons op via &lt;a href="mailto:contact@innovation.io"&gt;contact@innovation.io&lt;/a&gt;.
 &lt;/p&gt;</value>
   </data>
+  <data name="Request_NotFound" xml:space="preserve">
+    <value>Er is iets fout gegaan aan onze kant, probeer het later nog een keer</value>
+  </data>
+  <data name="Request_ServiceUnavailable" xml:space="preserve">
+    <value>De server is onbereikbaar</value>
+  </data>
+  <data name="Request_TooLarge" xml:space="preserve">
+    <value>De opgegeven data is te groot</value>
+  </data>
 </root>

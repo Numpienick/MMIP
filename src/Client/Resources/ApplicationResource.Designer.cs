@@ -146,5 +146,32 @@ namespace Client.Resources {
                 return ResourceManager.GetString("PrivacyDeclaration", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Er is iets fout gegaan aan onze kant, probeer het later nog een keer.
+        /// </summary>
+        internal static string Request_NotFound {
+            get {
+                return ResourceManager.GetString("Request_NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to De server is onbereikbaar.
+        /// </summary>
+        internal static string Request_ServiceUnavailable {
+            get {
+                return ResourceManager.GetString("Request_ServiceUnavailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to De opgegeven data is te groot.
+        /// </summary>
+        internal static string Request_TooLarge {
+            get {
+                return ResourceManager.GetString("Request_TooLarge", resourceCulture);
+            }
+        }
     }
 }
