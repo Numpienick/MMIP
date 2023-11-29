@@ -23,7 +23,7 @@ namespace Server.Controllers
             {
                 Console.WriteLine("Successfully created challenge: " + challenge.Title);
                 _challengeService.CreateChallenge(challenge);
-                return Ok();
+                return Ok("Successfully created challenge: " + challenge.Title);
             }
             catch (Exception e)
             {

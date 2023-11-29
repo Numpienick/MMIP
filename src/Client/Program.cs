@@ -11,12 +11,14 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddMudServices();
+builder.Services.AddLocalization();
 
 builder.Services.AddScoped(
-    sp => new HttpClient { BaseAddress = new Uri(EnvironmentConstants.ApiUrl) }
+    _ => new HttpClient { BaseAddress = new Uri(EnvironmentConstants.ApiUrl) }
 );
-builder.Services.AddLocalization();
 builder.Services.AddScoped<RequestController>();
+
+builder.Services.AddSingleton<Snackbar>();
 
 // TODO: Remove when database access is available.
 builder.Services.AddSingleton<TempStateContainer>();
