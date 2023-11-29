@@ -16,7 +16,7 @@ builder.Services.AddScoped(
     sp => new HttpClient { BaseAddress = new Uri(EnvironmentConstants.ApiUrl) }
 );
 builder.Services.AddLocalization();
-builder.Services.AddSingleton<RequestController>();
+builder.Services.AddScoped<RequestController>();
 
 // TODO: Remove when database access is available.
 builder.Services.AddSingleton<TempStateContainer>();

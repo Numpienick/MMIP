@@ -1,9 +1,4 @@
-﻿using MudBlazor;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Net;
-using System.Reflection;
-using System;
-using Microsoft.AspNetCore.Components;
+﻿using System.Net;
 using System.Net.Http.Json;
 using Shared.Entities;
 using Environment;
@@ -11,20 +6,17 @@ using Client.Resources;
 
 namespace Client.Controllers
 {
-    public class RequestController
+    internal class RequestController
     {
         private HttpClient _httpClient;
 
-        [Inject]
-        ISnackbar Snackbar { get; set; }
-
-        public RequestController()
+        internal RequestController()
         {
             _httpClient = new HttpClient();
             _httpClient.BaseAddress = new Uri(EnvironmentConstants.ApiUrl);
         }
 
-        public async Task<string> Post<TEnitity>(string uri, TEnitity model)
+        internal async Task<string> Post<TEnitity>(string uri, TEnitity model)
             where TEnitity : BaseEntity
         {
             var response = await _httpClient.PostAsJsonAsync(uri, model);
