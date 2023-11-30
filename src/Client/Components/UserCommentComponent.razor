@@ -1,5 +1,6 @@
 ﻿@using global::Shared.Entities;
 @using global::Shared.StateContainers;
+@using global::Shared.Utilities;
 
 @inject NavigationManager navigationManager;
 
@@ -22,11 +23,11 @@
             <MudItem md="2">
                 <MudTooltip Arrow="true" Placement="Placement.Right" Class="grey lighten-2 icon-tooltip">
                     <ChildContent>
-                        <MudImage Src="@Reaction.ReactionType.IconPath" Height="80"></MudImage>
+                        <MudImage Src="@Reaction.ReactionType.GetReactionTypePropertyValue("IconPath")" Height="80"></MudImage>
                     </ChildContent>
                     <TooltipContent>
-                        <h3>@Reaction.ReactionType.Name</h3>
-                        <p>@Reaction.ReactionType.Description</p>
+                        <h3>@Reaction.ReactionType.GetReactionTypePropertyValue("Name")</h3>
+                        <p>@Reaction.ReactionType.GetReactionTypePropertyValue("Description")</p>
                     </TooltipContent>
                 </MudTooltip>
             </MudItem>

@@ -1,4 +1,5 @@
 ﻿using Shared.Entities;
+using Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,28 +26,28 @@ namespace Infrastructure.Repositories
             List<Reaction> list = new List<Reaction>();
 
             Reaction reaction = new Reaction();
-            reaction.ReactionType = ReactionType.Participate();
+            reaction.ReactionType = ReactionType.Participation;
             reaction.Concluded = false;
             reaction.Text =
                 "Dit is een reactie. Ik wil kaas. Ik hou van mandjes. Ik shop altijd bij de lijdel";
             list.Add(reaction);
 
             Reaction reaction2 = new Reaction();
-            reaction2.ReactionType = ReactionType.Feedback();
+            reaction2.ReactionType = ReactionType.Feedback;
             reaction2.Concluded = false;
             reaction2.Text =
                 "Dit is even een iets langere reactie. Deze reactie gaat over het testen van een lange reactie die veel tekst bevat. Is dat niet even leuk en gezellig? MAND! Dit is even een iets langere reactie. Deze reactie gaat over het testen van een lange reactie die veel tekst bevat. Is dat niet even leuk en gezellig? MAND! Dit is even een iets langere reactie. Deze reactie gaat over het testen van een lange reactie die veel tekst bevat. Is dat niet even leuk en gezellig? MAND!";
             list.Add(reaction2);
 
             Reaction reaction3 = new Reaction();
-            reaction3.ReactionType = ReactionType.Question();
+            reaction3.ReactionType = ReactionType.Question;
             reaction3.Concluded = false;
             reaction3.Text =
                 "Dit is een reactie. Ik wil kaas. Ik hou van mandjes. Ik shop altijd bij de lijdel";
             list.Add(reaction3);
 
             Reaction reaction4 = new Reaction();
-            reaction4.ReactionType = ReactionType.Idea();
+            reaction4.ReactionType = ReactionType.Idea;
             reaction4.Concluded = false;
             reaction4.Text =
                 "Dit is een reactie. Ik wil kaas. Ik hou van mandjes. Ik shop altijd bij de lijdel";
