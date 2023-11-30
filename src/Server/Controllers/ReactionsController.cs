@@ -14,10 +14,17 @@ namespace Server.Controllers
     [Route("[controller]")]
     public class ReactionsController : Controller
     {
-        ReactionService _reactionService = new ReactionService();
-        ChallengeService _challengeService = new ChallengeService();
+        ReactionService _reactionService { get; set; }
+        ChallengeService _challengeService { get; set; }
 
-        public ReactionsController() { }
+        public ReactionsController(
+            ReactionService reactionService,
+            ChallengeService challengeService
+        )
+        {
+            _reactionService = reactionService;
+            _challengeService = challengeService;
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetReaction(Guid id)

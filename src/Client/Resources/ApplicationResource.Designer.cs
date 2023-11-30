@@ -61,6 +61,78 @@ namespace Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reacties.
+        /// </summary>
+        internal static string ChallengeComments {
+            get {
+                return ResourceManager.GetString("ChallengeComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Einddatum challenge.
+        /// </summary>
+        internal static string ChallengeDeadline {
+            get {
+                return ResourceManager.GetString("ChallengeDeadline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Challenge beschrijving.
+        /// </summary>
+        internal static string ChallengeDescription {
+            get {
+                return ResourceManager.GetString("ChallengeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Challenge eindverslag.
+        /// </summary>
+        internal static string ChallengeFinalReport {
+            get {
+                return ResourceManager.GetString("ChallengeFinalReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Er zijn nog geen reacties aanwezig!.
+        /// </summary>
+        internal static string ChallengeNoComments {
+            get {
+                return ResourceManager.GetString("ChallengeNoComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fase challenge.
+        /// </summary>
+        internal static string ChallengePhase {
+            get {
+                return ResourceManager.GetString("ChallengePhase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Laad meer challenges.
+        /// </summary>
+        internal static string ChallengesLoadMore {
+            get {
+                return ResourceManager.GetString("ChallengesLoadMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start datum challenge.
+        /// </summary>
+        internal static string ChallengeStartDate {
+            get {
+                return ResourceManager.GetString("ChallengeStartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Challenge aanmaken.
         /// </summary>
         internal static string CreateChallengeTitle {

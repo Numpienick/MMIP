@@ -5,6 +5,7 @@
 @using System.Threading.Tasks;
 @using global::Shared.Entities;
 
+@inject IStringLocalizer<ApplicationResource> _localizer
 @inject HttpClient Client;
 
 @page "/challenge-view/{ChallengeId:guid}"
@@ -21,7 +22,7 @@
         <MudItem md="10">
             <MudCard Elevation="4" Class="rounded-lg">
                 <MudCardContent>
-                    <h2>Challenge eindverslag</h2>
+                    <h2>@_localizer["ChallengeFinalReport"]</h2>
                     <p>@Challenge.FinalReport</p>
                 </MudCardContent>
             </MudCard>
@@ -35,17 +36,17 @@
             <MudCardContent>
                 <MudGrid Justify="Justify.SpaceBetween">
                     <MudItem md="4">
-                        <h2 class="card-centered-text mb-2">Startdatum challenge</h2>
+                        <h2 class="card-centered-text mb-2">@_localizer["ChallengeStartDate"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
                         <h3 class="card-centered-text">@Challenge.StartDate.DateTime.Date.ToString("dd/MM/yyyy")</h3>
                     </MudItem>
                     <MudItem md="4">
-                        <h2 class="card-centered-text mb-2">Deadline challenge</h2>
+                        <h2 class="card-centered-text mb-2">@_localizer["ChallengeDeadline"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
                         <h3 class="card-centered-text">@Challenge.Deadline.Value.Date.ToString("dd/MM/yyyy")</h3>
                     </MudItem>
                     <MudItem md="4">
-                        <h2 class="card-centered-text mb-2">Fase challenge</h2>
+                        <h2 class="card-centered-text mb-2">@_localizer["ChallengePhase"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
                         <h3 class="card-centered-text">@Challenge.Phase.Name.Value</h3>
                     </MudItem>
@@ -56,7 +57,7 @@
                 <MudProgressLinear Color="Color.Success" Rounded="true" Size="Size.Large" Value="@Challenge.Phase.Order" Min="0" Max="7" />
             </MudCardContent>
             <MudCardContent>
-                <h2 class="mt-4">Challenge beschrijving</h2>
+                <h2 class="mt-4">@_localizer["ChallengeDescription"]</h2>
                 <p>@Challenge.Description</p>
             </MudCardContent>
         </MudCard>
@@ -87,14 +88,14 @@
     <MudItem md="8">
         <MudCard Elevation="4" Class="rounded-lg">
             <MudCardContent>
-                <h2>Reacties</h2>
+                <h2>@_localizer["ChallengeComments"]</h2>
             </MudCardContent>
             <MudDivider Class="mt-6 mb-6" DividerType="DividerType.FullWidth"></MudDivider>
             <MudCardContent>
                 @{
                     if (Reactions.Count == 0)
                     {
-                        <h2 class="card-centered-text">Er zijn nog geen reacties geplaatst!</h2>
+                        <h2 class="card-centered-text">@_localizer["ChallengeNoComments"]</h2>
                     }
 
                     else
@@ -122,18 +123,18 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Challenge = await GetChallenge();
-        Reactions = await GetReactions();
+        Challenge = await _getChallenge();
+        Reactions = await _getReactions();
         base.OnInitialized();
     }
 
-    public async Task<Challenge> GetChallenge()
+    private async Task<Challenge> _getChallenge()
     {
         return await Client.GetFromJsonAsync<Challenge>($"challenges/{ChallengeId}");
     }
 
     // TODO: Get reactions from specific challenge.
-    public async Task<List<Reaction>> GetReactions()
+    private async Task<List<Reaction>> _getReactions()
     {
         return await Client.GetFromJsonAsync<List<Reaction>>($"reactions?=challengeId={ChallengeId}");
     }
