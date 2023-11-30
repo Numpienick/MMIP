@@ -8,5 +8,8 @@ namespace Shared.Entities
 {
     public class Reaction : BaseEntity
     {
+        public string Text { get; set; }
+        public bool Concluded { get; set; }
+        public ReactionType ReactionType { get; set; }
     }
 }

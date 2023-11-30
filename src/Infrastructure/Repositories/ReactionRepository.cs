@@ -19,9 +19,41 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public override Task<IQueryable<Reaction>> GetAll()
+        public override async Task<IQueryable<Reaction>> GetAll()
         {
-            throw new NotImplementedException();
+            IQueryable<Reaction> reactions;
+            List<Reaction> list = new List<Reaction>();
+
+            Reaction reaction = new Reaction();
+            reaction.ReactionType = ReactionType.Participate();
+            reaction.Concluded = false;
+            reaction.Text =
+                "Dit is een reactie. Ik wil kaas. Ik hou van mandjes. Ik shop altijd bij de lijdel";
+            list.Add(reaction);
+
+            Reaction reaction2 = new Reaction();
+            reaction2.ReactionType = ReactionType.Feedback();
+            reaction2.Concluded = false;
+            reaction2.Text =
+                "Dit is even een iets langere reactie. Deze reactie gaat over het testen van een lange reactie die veel tekst bevat. Is dat niet even leuk en gezellig? MAND! Dit is even een iets langere reactie. Deze reactie gaat over het testen van een lange reactie die veel tekst bevat. Is dat niet even leuk en gezellig? MAND! Dit is even een iets langere reactie. Deze reactie gaat over het testen van een lange reactie die veel tekst bevat. Is dat niet even leuk en gezellig? MAND!";
+            list.Add(reaction2);
+
+            Reaction reaction3 = new Reaction();
+            reaction3.ReactionType = ReactionType.Question();
+            reaction3.Concluded = false;
+            reaction3.Text =
+                "Dit is een reactie. Ik wil kaas. Ik hou van mandjes. Ik shop altijd bij de lijdel";
+            list.Add(reaction3);
+
+            Reaction reaction4 = new Reaction();
+            reaction4.ReactionType = ReactionType.Idea();
+            reaction4.Concluded = false;
+            reaction4.Text =
+                "Dit is een reactie. Ik wil kaas. Ik hou van mandjes. Ik shop altijd bij de lijdel";
+            list.Add(reaction4);
+
+            reactions = list.AsQueryable();
+            return reactions;
         }
 
         public override Task<IQueryable<Reaction>> GetAllReadonly()
@@ -29,9 +61,10 @@ namespace Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public override Task<Reaction> GetById(Guid id)
+        public override async Task<Reaction> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var reactions = GetAll();
+            return reactions.Result.FirstOrDefault();
         }
 
         public override Task<Reaction> GetReadonlyById(Guid id)

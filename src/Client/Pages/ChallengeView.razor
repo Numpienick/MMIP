@@ -82,12 +82,31 @@
     </MudItem>
 </MudGrid>
 
-@* TODO: Post and view reactions (MAT-117) *@
+@* TODO: Create challenge using form. *@
 <MudGrid Justify="Justify.Center">
-    <MudItem md="10">
+    <MudItem md="8">
         <MudCard Elevation="4" Class="rounded-lg">
             <MudCardContent>
                 <h2>Reacties</h2>
+            </MudCardContent>
+            <MudDivider Class="mt-6 mb-6" DividerType="DividerType.FullWidth"></MudDivider>
+            <MudCardContent>
+                @{
+                    if (Reactions.Count == 0)
+                    {
+                        <h2 class="card-centered-text">Er zijn nog geen reacties geplaatst!</h2>
+                    }
+
+                    else
+                    {
+                        foreach (Reaction reaction in Reactions)
+                        {
+                            <MudGrid Justify="Justify.Center" Class="mb-10">
+                                <UserCommentComponent Reaction="reaction"></UserCommentComponent>
+                            </MudGrid>
+                        }
+                    }
+                }
             </MudCardContent>
         </MudCard>
     </MudItem>
@@ -104,12 +123,18 @@
     protected override async Task OnInitializedAsync()
     {
         Challenge = await GetChallenge();
-        //Reactions = Challenge.Reactions();
+        Reactions = await GetReactions();
         base.OnInitialized();
     }
 
     public async Task<Challenge> GetChallenge()
     {
         return await Client.GetFromJsonAsync<Challenge>($"challenges/{ChallengeId}");
+    }
+
+    // TODO: Get reactions from specific challenge.
+    public async Task<List<Reaction>> GetReactions()
+    {
+        return await Client.GetFromJsonAsync<List<Reaction>>($"reactions?=challengeId={ChallengeId}");
     }
 }
