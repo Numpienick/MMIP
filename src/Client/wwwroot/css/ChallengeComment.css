@@ -8,5 +8,5 @@
 }
 
 .concluded-comment {
-  background-color: #eaffe1;
+  background-color: var(--concluded-color);
 }

@@ -34,20 +34,24 @@ namespace Shared.Utilities
             Type type = value.GetType();
             string name = Enum.GetName(type, value);
 
-            if (name != null)
+            try
             {
                 FieldInfo field = type.GetField(name);
                 if (field != null)
                 {
-                    ReactionTypeAttribute attribute =
+                    if (
                         Attribute.GetCustomAttribute(field, typeof(ReactionTypeAttribute))
-                        as ReactionTypeAttribute;
-                    if (attribute != null)
+                        is ReactionTypeAttribute attribute
+                    )
                     {
                         var propertyInfo = typeof(ReactionTypeAttribute).GetProperty(propertyName);
                         return propertyInfo.GetValue(attribute, null).ToString();
                     }
                 }
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
             }
 
             return name;
