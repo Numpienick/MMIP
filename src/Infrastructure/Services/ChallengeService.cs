@@ -1,26 +1,50 @@
 ﻿using Infrastructure.Repositories;
 using Shared.Entities;
 using Shared.Filters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shared.StateContainers;
 
 namespace Infrastructure.Services
 {
     public class ChallengeService : BaseEntityService
     {
-        public void CreateChallenge() { }
+        private ChallengeRepository _challengeRepository = new ChallengeRepository();
+
+        public void CreateChallenge(Challenge challenge)
+        {
+            try
+            {
+                _challengeRepository.Create(challenge);
+                if (TempStateContainer.Instance().Challenges == null)
+                {
+                    var challenges = _challengeRepository.GetAll();
+                    TempStateContainer.Instance().Challenges = challenges.Result;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         public Challenge GetChallenge(Guid id)
         {
-            return null;
+            return _challengeRepository.GetById(id).Result;
         }
 
+        // TODO: Filter challenges based on filter criteria.
         public IEnumerable<Challenge> GetChallenges(ICriteria filterCriteria)
         {
-            return null;
+            if (TempStateContainer.Instance().Challenges == null)
+            {
+                var challenges = _challengeRepository.GetAll();
+                TempStateContainer.Instance().Challenges = challenges.Result;
+            }
+
+            // TODO: Return this when TempStateContainer can be removed.
+            //return _challengeRepository.GetAll().Result;
+
+            return TempStateContainer.Instance().Challenges;
         }
 
         public void UpdateChallenge(Challenge challenge) { }

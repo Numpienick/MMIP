@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared.Entities;
 using Shared.Filters;
+using Infrastructure.Services;
+using System.Text.Json;
+using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace Server.Controllers
 {
@@ -8,14 +11,19 @@ namespace Server.Controllers
     [Route("[controller]")]
     public class ChallengesController : Controller
     {
+        private ChallengeService _challengeService { get; set; }
+
+        public ChallengesController(ChallengeService challengeService) =>
+            _challengeService = challengeService;
+
         [HttpPost]
         public IActionResult CreateChallenge([FromBody] Challenge challenge)
         {
             try
             {
-                //TODO: handle it and put in the database
-                Console.WriteLine("Sucscesfully created challenge: " + challenge.Title);
-                return Ok();
+                Console.WriteLine("Successfully created challenge: " + challenge.Title);
+                _challengeService.CreateChallenge(challenge);
+                return Ok("Successfully created challenge: " + challenge.Title);
             }
             catch (Exception e)
             {
@@ -25,16 +33,16 @@ namespace Server.Controllers
         }
 
         [HttpGet("{id}")]
-        public static IActionResult GetChallenge(Guid id)
+        public IActionResult GetChallenge(Guid id)
         {
-            return null;
+            return Ok(_challengeService.GetChallenge(id));
         }
 
-        // TODO: Fill method.
         [HttpGet]
-        public static IActionResult GetChallenges(ICriteria filterCriteria)
+        public IActionResult GetChallenges([FromQuery] string filterCriteria)
         {
-            return null;
+            ICriteria criteria = JsonSerializer.Deserialize<ICriteria>(filterCriteria);
+            return Ok(_challengeService.GetChallenges(criteria));
         }
 
         [HttpPatch]
