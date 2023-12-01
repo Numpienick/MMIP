@@ -34,7 +34,7 @@ namespace Infrastructure.Repositories
 
             Reaction reaction2 = new Reaction();
             reaction2.ReactionType = ReactionType.Feedback;
-            reaction2.Concluded = false;
+            reaction2.Concluded = true;
             reaction2.Text =
                 "Dit is even een iets langere reactie. Deze reactie gaat over het testen van een lange reactie die veel tekst bevat. Is dat niet even leuk en gezellig? MAND! Dit is even een iets langere reactie. Deze reactie gaat over het testen van een lange reactie die veel tekst bevat. Is dat niet even leuk en gezellig? MAND! Dit is even een iets langere reactie. Deze reactie gaat over het testen van een lange reactie die veel tekst bevat. Is dat niet even leuk en gezellig? MAND!";
             list.Add(reaction2);

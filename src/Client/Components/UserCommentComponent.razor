@@ -11,7 +11,7 @@
     </MudAvatar>
 </MudItem>
 <MudItem md="9">
-    <MudCard Elevation="4" Class="rounded-lg">
+    <MudCard Elevation="4" Class=@_concludedReaction()>
         <MudGrid>
             <MudItem md="10">
                 <MudCardContent>
@@ -40,5 +40,7 @@
     [Parameter]
     public Reaction Reaction { get; set; }
 
-    public bool IsChecked { get; set; }
+    public bool IsConcluded { get; set; }
+
+    private string _concludedReaction() => Reaction.Concluded ? "concluded-comment rounded-lg" : "rounded-lg";
 }
