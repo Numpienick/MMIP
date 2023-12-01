@@ -117,6 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChallengeComments" xml:space="preserve">
+    <value>Reacties</value>
+  </data>
+  <data name="ChallengeDeadline" xml:space="preserve">
+    <value>Einddatum challenge</value>
+  </data>
+  <data name="ChallengeDescription" xml:space="preserve">
+    <value>Challenge beschrijving</value>
+  </data>
+  <data name="ChallengeFinalReport" xml:space="preserve">
+    <value>Challenge eindverslag</value>
+  </data>
+  <data name="ChallengeNoComments" xml:space="preserve">
+    <value>Er zijn nog geen reacties aanwezig!</value>
+  </data>
+  <data name="ChallengePhase" xml:space="preserve">
+    <value>Fase challenge</value>
+  </data>
+  <data name="ChallengesLoadMore" xml:space="preserve">
+    <value>Laad meer challenges</value>
+  </data>
+  <data name="ChallengeStartDate" xml:space="preserve">
+    <value>Start datum challenge</value>
+  </data>
   <data name="CreateChallengeTitle" xml:space="preserve">
     <value>Challenge aanmaken</value>
   </data>
