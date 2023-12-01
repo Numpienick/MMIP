@@ -1,0 +1,12 @@
+﻿.icon-tooltip {
+  width: 280px;
+}
+
+.user-avatar {
+  width: 140px;
+  height: 140px;
+}
+
+.concluded-comment {
+  background-color: var(--concluded-color);
+}

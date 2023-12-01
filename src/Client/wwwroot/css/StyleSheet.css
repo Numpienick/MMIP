@@ -3,6 +3,7 @@
   --primary-color: #071952;
   --secondary-color: #088395;
   --tertiary-color: #35a29f;
+  --concluded-color: #eaffe1;
 }
 
 h1 {
@@ -39,6 +40,11 @@ a {
 body {
   font-family: Helvetica;
   background-color: var(--main-bg-color);
+}
+
+ul {
+  list-style: inside;
+  font-size: 12px;
 }
 
 .content {

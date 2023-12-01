@@ -1,43 +1,48 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shared.Entities;
-using System.Text.Json;
 using Shared.Filters;
+using Infrastructure.Services;
+using System.Text.Json;
+using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ChallengesController
+    public class ChallengesController : Controller
     {
+        private ChallengeService _challengeService { get; set; }
+
+        public ChallengesController(ChallengeService challengeService) =>
+            _challengeService = challengeService;
+
         [HttpPost]
-        public IActionResult CreateChallenge([FromBody] string json)
+        public IActionResult CreateChallenge([FromBody] Challenge challenge)
         {
-            //TODO: doesn't work yet, investigate why it doesn't get here
-            Challenge challenge = JsonSerializer.Deserialize<Challenge>(json);
-            Console.WriteLine(challenge);
             try
             {
-                Console.WriteLine("Succesfully created challenge: " + challenge.Title);
-                return new OkResult();
+                Console.WriteLine("Successfully created challenge: " + challenge.Title);
+                _challengeService.CreateChallenge(challenge);
+                return Ok("Successfully created challenge: " + challenge.Title);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return new BadRequestResult();
+                return BadRequest();
             }
         }
 
         [HttpGet("{id}")]
-        public static IActionResult GetChallenge(Guid id)
+        public IActionResult GetChallenge(Guid id)
         {
-            return null;
+            return Ok(_challengeService.GetChallenge(id));
         }
 
-        // TODO: Fill method.
         [HttpGet]
-        public static IActionResult GetChallenges(ICriteria filterCriteria)
+        public IActionResult GetChallenges([FromQuery] string filterCriteria)
         {
-            return null;
+            ICriteria criteria = JsonSerializer.Deserialize<ICriteria>(filterCriteria);
+            return Ok(_challengeService.GetChallenges(criteria));
         }
 
         [HttpPatch]
