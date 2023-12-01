@@ -272,5 +272,14 @@ namespace Client.Resources {
                 return ResourceManager.GetString("Request_TooLarge", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Er is iets fout gegaan..
+        /// </summary>
+        internal static string SnackbarInvalid {
+            get {
+                return ResourceManager.GetString("SnackbarInvalid", resourceCulture);
+            }
+        }
     }
 }

@@ -34,7 +34,7 @@ namespace Server.Controllers
                 _reactionService.CreateReaction(reaction);
                 return Ok("Successfully created reaction");
             }
-            catch (Exception e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e);
                 return BadRequest();

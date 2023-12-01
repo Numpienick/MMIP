@@ -176,7 +176,7 @@
 
     private void _invalidFormSubmitted(EditContext context)
     {
-        _snackbar.Add("Er is iets fout gegaan", Severity.Error);
+        _snackbar.Add(_localizer["SnackbarInvalid"], Severity.Error);
         StateHasChanged();
     }
 }

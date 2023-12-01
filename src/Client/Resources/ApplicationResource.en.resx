@@ -220,4 +220,7 @@
   <data name="Request_TooLarge" xml:space="preserve">
     <value>The given data is too big</value>
   </data>
+  <data name="SnackbarInvalid" xml:space="preserve">
+    <value>Something went wrong.</value>
+  </data>
 </root>
