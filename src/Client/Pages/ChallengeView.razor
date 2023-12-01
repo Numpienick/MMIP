@@ -3,8 +3,13 @@
 @using System.Linq;
 @using System.Text;
 @using System.Threading.Tasks;
+@using Microsoft.AspNetCore.Components.Forms;
+@using Client.Controllers;
+@using global::Shared.Enums;
 @using global::Shared.Entities;
+@using global::Shared.Utilities;
 
+@inject RequestController RequestController
 @inject IStringLocalizer<ApplicationResource> _localizer
 @inject HttpClient Client;
 
@@ -83,12 +88,30 @@
     </MudItem>
 </MudGrid>
 
-@* TODO: Create challenge using form. *@
 <MudGrid Justify="Justify.Center">
     <MudItem md="8">
         <MudCard Elevation="4" Class="rounded-lg">
             <MudCardContent>
-                <h2>@_localizer["ChallengeComments"]</h2>
+                <h2 class="mb-5">@_localizer["ChallengeComments"]</h2>
+                <EditForm Model="_model" OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
+                    <DataAnnotationsValidator />
+                    <MudGrid Justify="Justify.Center">
+                        <MudItem md="7">
+                            <MudTextField Lines="9" Variant="Variant.Outlined" Label=@_localizer["CreateReaction"] @bind-Value="_model.Text" For="@(() => _model.Text)" />
+                        </MudItem>
+                        <MudItem md="5">
+                            <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormReactionType"] @bind-Value="_model.ReactionType" T="ReactionType">
+                                @foreach (ReactionType reactionType in Enum.GetValues(typeof(ReactionType)))
+                                {
+                                    <MudSelectItem Value="@reactionType" T="ReactionType">@reactionType.GetReactionTypePropertyValue("Name")</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                        <MudItem md="6">
+                            <MudButton ButtonType="ButtonType.Submit" FullWidth Variant="Variant.Filled" Color="Color.Primary">@_localizer["CreateReactionButton"]</MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </EditForm>
             </MudCardContent>
             <MudDivider Class="mt-6 mb-6" DividerType="DividerType.FullWidth"></MudDivider>
             <MudCardContent>
@@ -121,6 +144,11 @@
 
     public List<Reaction> Reactions { get; set; }
 
+    private Reaction _model = new();
+
+    [Inject]
+    private ISnackbar _snackbar { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         Challenge = await _getChallenge();
@@ -137,5 +165,18 @@
     private async Task<List<Reaction>> _getReactions()
     {
         return await Client.GetFromJsonAsync<List<Reaction>>($"reactions?=challengeId={ChallengeId}");
+    }
+
+    private async void _validFormSubmitted(EditContext context)
+    {
+        await RequestController.Post("reactions", _model);
+        Reactions = await _getReactions();
+        StateHasChanged();
+    }
+
+    private void _invalidFormSubmitted(EditContext context)
+    {
+        _snackbar.Add("Er is iets fout gegaan", Severity.Error);
+        StateHasChanged();
     }
 }

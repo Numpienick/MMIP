@@ -142,6 +142,24 @@ namespace Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Schrijf een reactie.
+        /// </summary>
+        internal static string CreateReaction {
+            get {
+                return ResourceManager.GetString("CreateReaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reactie plaatsen.
+        /// </summary>
+        internal static string CreateReactionButton {
+            get {
+                return ResourceManager.GetString("CreateReactionButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Challenge deadline.
         /// </summary>
         internal static string FormChallengeDate {
@@ -201,6 +219,15 @@ namespace Client.Resources {
         internal static string FormChallengeVisibility {
             get {
                 return ResourceManager.GetString("FormChallengeVisibility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type reactie.
+        /// </summary>
+        internal static string FormReactionType {
+            get {
+                return ResourceManager.GetString("FormReactionType", resourceCulture);
             }
         }
         
