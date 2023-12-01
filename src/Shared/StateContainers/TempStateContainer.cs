@@ -13,6 +13,7 @@ namespace Shared.StateContainers
         private static TempStateContainer _instance;
 
         public IQueryable<Challenge> Challenges { get; set; }
+        public IQueryable<Reaction> Reactions { get; set; }
 
         public static TempStateContainer Instance()
         {

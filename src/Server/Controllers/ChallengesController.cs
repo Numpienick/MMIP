@@ -25,7 +25,7 @@ namespace Server.Controllers
                 _challengeService.CreateChallenge(challenge);
                 return Ok("Successfully created challenge: " + challenge.Title);
             }
-            catch (Exception e)
+            catch (ArgumentException e)
             {
                 Console.WriteLine(e);
                 return BadRequest();

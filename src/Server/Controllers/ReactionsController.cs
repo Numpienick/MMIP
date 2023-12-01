@@ -26,6 +26,21 @@ namespace Server.Controllers
             _challengeService = challengeService;
         }
 
+        [HttpPost]
+        public IActionResult CreateReaction([FromBody] Reaction reaction)
+        {
+            try
+            {
+                _reactionService.CreateReaction(reaction);
+                return Ok("Successfully created reaction");
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(e);
+                return BadRequest();
+            }
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetReaction(Guid id)
         {

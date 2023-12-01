@@ -142,6 +142,24 @@ namespace Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Schrijf een reactie.
+        /// </summary>
+        internal static string CreateReaction {
+            get {
+                return ResourceManager.GetString("CreateReaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reactie plaatsen.
+        /// </summary>
+        internal static string CreateReactionButton {
+            get {
+                return ResourceManager.GetString("CreateReactionButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Challenge deadline.
         /// </summary>
         internal static string FormChallengeDate {
@@ -205,6 +223,15 @@ namespace Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type reactie.
+        /// </summary>
+        internal static string FormReactionType {
+            get {
+                return ResourceManager.GetString("FormReactionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;h1&gt;Privacyverklaring en Gegevensbeschermingsbeleid&lt;/h1&gt;
         ///
         ///&lt;h2&gt;1. Inleiding&lt;/h2&gt;
@@ -243,6 +270,15 @@ namespace Client.Resources {
         internal static string Request_TooLarge {
             get {
                 return ResourceManager.GetString("Request_TooLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Er is iets fout gegaan..
+        /// </summary>
+        internal static string SnackbarInvalid {
+            get {
+                return ResourceManager.GetString("SnackbarInvalid", resourceCulture);
             }
         }
     }
