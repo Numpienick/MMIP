@@ -22,11 +22,7 @@ h3 {
   font-size: 14px;
 }
 
-p {
-  color: black;
-  font-size: 12px;
-}
-
+p,
 em {
   color: black;
   font-size: 12px;

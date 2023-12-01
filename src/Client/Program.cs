@@ -4,15 +4,22 @@ using Shared.StateContainers;
 using Environment;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.AspNetCore.Identity;
 using MudBlazor.Services;
+using Shared.Contexts;
 using MudBlazor;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
-builder.Services.AddMudServices();
 builder.Services.AddLocalization();
 
+builder.Services.AddMudServices();
+builder.Services.AddScoped<ProtectedSessionStorage>(); //Dependency injection
+builder.Services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<ChallengeContext>();
+;
+
+//builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped(
     _ => new HttpClient { BaseAddress = new Uri(EnvironmentConstants.ApiUrl) }
 );
