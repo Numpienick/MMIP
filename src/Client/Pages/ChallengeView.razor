@@ -1,9 +1,4 @@
-﻿@using System;
-@using System.Collections.Generic;
-@using System.Linq;
-@using System.Text;
-@using System.Threading.Tasks;
-@using Microsoft.AspNetCore.Components.Forms;
+﻿@using Microsoft.AspNetCore.Components.Forms;
 @using Client.Controllers;
 @using global::Shared.Enums;
 @using global::Shared.Entities;
@@ -97,18 +92,18 @@
                     <DataAnnotationsValidator />
                     <MudGrid Justify="Justify.Center">
                         <MudItem md="7">
-                            <MudTextField Lines="9" Variant="Variant.Outlined" Label=@_localizer["CreateReaction"] @bind-Value="_model.Text" For="@(() => _model.Text)" />
+                            <MudTextField Lines="9" Variant="Variant.Outlined" Label=@_localizer["CreateComment"] @bind-Value="_model.Text" For="@(() => _model.Text)" />
                         </MudItem>
                         <MudItem md="5">
-                            <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormReactionType"] @bind-Value="_model.ReactionType" T="ReactionType">
-                                @foreach (ReactionType reactionType in Enum.GetValues(typeof(ReactionType)))
+                            <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormCommentType"] @bind-Value="_model.CommentType" T="CommentType">
+                                @foreach (CommentType commentType in Enum.GetValues(typeof(CommentType)))
                                 {
-                                    <MudSelectItem Value="@reactionType" T="ReactionType">@reactionType.GetReactionTypePropertyValue("Name")</MudSelectItem>
+                                    <MudSelectItem Value="@commentType" T="CommentType">@commentType.GetCommentTypePropertyValue("Name")</MudSelectItem>
                                 }
                             </MudSelect>
                         </MudItem>
                         <MudItem md="6">
-                            <MudButton ButtonType="ButtonType.Submit" FullWidth Variant="Variant.Filled" Color="Color.Primary">@_localizer["CreateReactionButton"]</MudButton>
+                            <MudButton ButtonType="ButtonType.Submit" FullWidth Variant="Variant.Filled" Color="Color.Primary">@_localizer["CreateCommentButton"]</MudButton>
                         </MudItem>
                     </MudGrid>
                 </EditForm>
@@ -116,17 +111,17 @@
             <MudDivider Class="mt-6 mb-6" DividerType="DividerType.FullWidth"></MudDivider>
             <MudCardContent>
                 @{
-                    if (Reactions.Count == 0)
+                    if (Comments.Count == 0)
                     {
                         <h2 class="card-centered-text">@_localizer["ChallengeNoComments"]</h2>
                     }
 
                     else
                     {
-                        foreach (Reaction reaction in Reactions)
+                        foreach (var comment in Comments)
                         {
                             <MudGrid Justify="Justify.Center" Class="mb-10">
-                                <UserCommentComponent Reaction="reaction"></UserCommentComponent>
+                                <UserCommentComponent Comment="comment"></UserCommentComponent>
                             </MudGrid>
                         }
                     }
@@ -142,9 +137,9 @@
 
     public Challenge? Challenge { get; set; }
 
-    public List<Reaction> Reactions { get; set; }
+    public List<Comment> Comments { get; set; }
 
-    private Reaction _model = new();
+    private Comment _model = new();
 
     [Inject]
     private ISnackbar _snackbar { get; set; }
@@ -152,7 +147,7 @@
     protected override async Task OnInitializedAsync()
     {
         Challenge = await _getChallenge();
-        Reactions = await _getReactions();
+        Comments = await _getComments();
         base.OnInitialized();
     }
 
@@ -161,16 +156,16 @@
         return await Client.GetFromJsonAsync<Challenge>($"challenges/{ChallengeId}");
     }
 
-    // TODO: Get reactions from specific challenge.
-    private async Task<List<Reaction>> _getReactions()
+    // TODO: Get commentss from specific challenge.
+    private async Task<List<Comment>> _getComments()
     {
-        return await Client.GetFromJsonAsync<List<Reaction>>($"reactions?=challengeId={ChallengeId}");
+        return await Client.GetFromJsonAsync<List<Comment>>($"comments?=challengeId={ChallengeId}");
     }
 
     private async void _validFormSubmitted(EditContext context)
     {
-        await RequestController.Post("reactions", _model);
-        Reactions = await _getReactions();
+        await RequestController.Post("comments", _model);
+        Comments = await _getComments();
         StateHasChanged();
     }
 
