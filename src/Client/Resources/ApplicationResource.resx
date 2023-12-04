@@ -144,10 +144,10 @@
   <data name="CreateChallengeTitle" xml:space="preserve">
     <value>Challenge aanmaken</value>
   </data>
-  <data name="CreateReaction" xml:space="preserve">
+  <data name="CreateComment" xml:space="preserve">
     <value>Schrijf een reactie</value>
   </data>
-  <data name="CreateReactionButton" xml:space="preserve">
+  <data name="CreateCommentButton" xml:space="preserve">
     <value>Reactie plaatsen</value>
   </data>
   <data name="FormChallengeDate" xml:space="preserve">
@@ -171,7 +171,7 @@
   <data name="FormChallengeVisibility" xml:space="preserve">
     <value>Challenge zichtbaarheid</value>
   </data>
-  <data name="FormReactionType" xml:space="preserve">
+  <data name="FormCommentType" xml:space="preserve">
     <value>Type reactie</value>
   </data>
   <data name="PrivacyDeclaration" xml:space="preserve">

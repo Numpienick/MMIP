@@ -29,7 +29,7 @@ namespace Shared.Utilities
             return enumValue.ToString();
         }
 
-        public static string GetReactionTypePropertyValue(this Enum value, string propertyName)
+        public static string GetCommentTypePropertyValue(this Enum value, string propertyName)
         {
             Type type = value.GetType();
             string name = Enum.GetName(type, value);
@@ -40,11 +40,11 @@ namespace Shared.Utilities
                 if (field != null)
                 {
                     if (
-                        Attribute.GetCustomAttribute(field, typeof(ReactionTypeAttribute))
-                        is ReactionTypeAttribute attribute
+                        Attribute.GetCustomAttribute(field, typeof(CommentTypeAttribute))
+                        is CommentTypeAttribute attribute
                     )
                     {
-                        var propertyInfo = typeof(ReactionTypeAttribute).GetProperty(propertyName);
+                        var propertyInfo = typeof(CommentTypeAttribute).GetProperty(propertyName);
                         return propertyInfo.GetValue(attribute, null).ToString();
                     }
                 }
