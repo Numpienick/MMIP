@@ -14,11 +14,11 @@ namespace Test.Unit
         public void TooBigDescription_DoesntAddToDatabase()
         {
             ChallengeService challengeService = new ChallengeService();
-            var before = challengeService.GetChallenges(null);
-
             Challenge challenge;
+            Guid id = Guid.NewGuid();
             challenge = new Challenge
             {
+                Id = id,
                 Title = "Test",
                 FinalReport = "Final Report",
                 ShortDescription = "Short Description",
@@ -28,19 +28,18 @@ namespace Test.Unit
             };
 
             challengeService.CreateChallenge(challenge);
-            var after = challengeService.GetChallenges(null);
-            Assert.Equal(before.Count(), after.Count());
+            Assert.Null(challengeService.GetChallenge(id));
         }
 
         [Fact]
         public void Description_AddToDatabase()
         {
             ChallengeService challengeService = new ChallengeService();
-            var before = challengeService.GetChallenges(null);
-
             Challenge challenge;
+            Guid id = Guid.NewGuid();
             challenge = new Challenge
             {
+                Id = id,
                 Title = "Test",
                 FinalReport = "Final Report",
                 ShortDescription = "Short Description",
@@ -50,8 +49,7 @@ namespace Test.Unit
             };
 
             challengeService.CreateChallenge(challenge);
-            var after = challengeService.GetChallenges(null);
-            Assert.Equal(before.Count() + 1, after.Count());
+            Assert.NotNull(challengeService.GetChallenge(id));
         }
     }
 }
