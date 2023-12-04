@@ -1,4 +1,4 @@
-﻿using System.Text;
+﻿, using System.Text;
 using Shared.Entities;
 using Shared.Enums;
 using Client.Controllers;
@@ -11,21 +11,52 @@ namespace Test.Unit
     public class ChallengeTest
     {
         [Fact]
+        public void IsDescriptionSizeInvalid()
+        {
+            Challenge challenge;
+            try
+            {
+                challenge = new Challenge
+                {
+                    Title = "Test",
+                    FinalReport = "Final Report",
+                    ShortDescription = "Short Description",
+                    Description = new string('a', 100001),
+                    ChallengeVisibility = Visibility.VisibleToAll,
+                    Deadline = DateTime.Now
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            ChallengeService challengeService = new ChallengeService();
+            Assert.False(challengeService.CreateChallenge(challenge));
+        }
+        [Fact]
         public void IsDescriptionSizeValid()
         {
-            string longString = new string('a', unchecked(0x0FFFFFF));
-
-            var challenge = new Challenge
+            Challenge challenge;
+            try
             {
-                Title = "Test",
-                FinalReport = "Final Report",
-                ShortDescription = "Short Description",
-                Description = longString,
-                ChallengeVisibility = Visibility.VisibleToAll,
-                Deadline = DateTime.Now
-            };
+                challenge = new Challenge
+                {
+                    Title = "Test",
+                    FinalReport = "Final Report",
+                    ShortDescription = "Short Description",
+                    Description = new string('a', 99999),
+                    ChallengeVisibility = Visibility.VisibleToAll,
+                    Deadline = DateTime.Now
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
             ChallengeService challengeService = new ChallengeService();
-            challengeService.CreateChallenge(challenge);
+            Assert.True(challengeService.CreateChallenge(challenge));
         }
     }
 }
