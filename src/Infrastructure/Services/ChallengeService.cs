@@ -9,7 +9,7 @@ namespace Infrastructure.Services
     {
         private ChallengeRepository _challengeRepository = new ChallengeRepository();
 
-        public bool CreateChallenge(Challenge challenge)
+        public void CreateChallenge(Challenge challenge)
         {
             try
             {
@@ -18,7 +18,6 @@ namespace Infrastructure.Services
                 {
                     var challenges = _challengeRepository.GetAll();
                     TempStateContainer.Instance().Challenges = challenges.Result;
-                    return true;
                 }
             }
             catch (Exception e)
@@ -26,7 +25,6 @@ namespace Infrastructure.Services
                 Console.WriteLine(e);
                 throw;
             }
-            return false;
         }
 
         public Challenge GetChallenge(Guid id)

@@ -13,55 +13,48 @@ namespace Test.Unit
 {
     public class RequestTest
     {
-        [Fact]
-        public void ServiceNotFoundReturnsCorrectString()
+        private readonly RequestController _requestController;
+
+        public RequestTest()
         {
             var snackbar = Mock.Of<ISnackbar>();
             var httpClient = Mock.Of<HttpClient>();
-            RequestController requestController = new RequestController(snackbar, httpClient);
+            _requestController = new RequestController(snackbar, httpClient);
+        }
 
+        [Fact]
+        public void ServiceNotFound_ReturnsCorrectString()
+        {
             Assert.Equal(
                 ApplicationResource.Request_NotFound,
-                requestController.GetStringStatusCode(HttpStatusCode.NotFound)
+                _requestController.GetStringStatusCode(HttpStatusCode.NotFound)
             );
         }
 
         [Fact]
-        public void ServiceUnavailableReturnsCorrectString()
+        public void ServiceUnavailable_ReturnsCorrectString()
         {
-            var snackbar = Mock.Of<ISnackbar>();
-            var httpClient = Mock.Of<HttpClient>();
-            RequestController requestController = new RequestController(snackbar, httpClient);
-
             Assert.Equal(
                 ApplicationResource.Request_ServiceUnavailable,
-                requestController.GetStringStatusCode(HttpStatusCode.ServiceUnavailable)
+                _requestController.GetStringStatusCode(HttpStatusCode.ServiceUnavailable)
             );
         }
 
         [Fact]
-        public void RequestTooLargeReturnsCorrectString()
+        public void RequestTooLarge_ReturnsCorrectString()
         {
-            var snackbar = Mock.Of<ISnackbar>();
-            var httpClient = Mock.Of<HttpClient>();
-            RequestController requestController = new RequestController(snackbar, httpClient);
-
             Assert.Equal(
                 ApplicationResource.Request_TooLarge,
-                requestController.GetStringStatusCode(HttpStatusCode.RequestEntityTooLarge)
+                _requestController.GetStringStatusCode(HttpStatusCode.RequestEntityTooLarge)
             );
         }
 
         [Fact]
-        public void NotAcceptableReturnsCorrectString()
+        public void NotAcceptable_ReturnsCorrectString()
         {
-            var snackbar = Mock.Of<ISnackbar>();
-            var httpClient = Mock.Of<HttpClient>();
-            RequestController requestController = new RequestController(snackbar, httpClient);
-
             Assert.Equal(
                 ApplicationResource.Request_ServiceUnavailable,
-                requestController.GetStringStatusCode(HttpStatusCode.ServiceUnavailable)
+                _requestController.GetStringStatusCode(HttpStatusCode.ServiceUnavailable)
             );
         }
     }
