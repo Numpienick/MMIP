@@ -4,6 +4,7 @@ using Shared.Entities;
 using Environment;
 using Client.Resources;
 using MudBlazor;
+using System.Runtime.CompilerServices;
 
 namespace Client.Controllers
 {
@@ -28,23 +29,25 @@ namespace Client.Controllers
                 response.EnsureSuccessStatusCode();
                 _snackbar.Add(await response.Content.ReadAsStringAsync(), Severity.Success);
             }
-            catch (HttpRequestException ex) when (ex.StatusCode == HttpStatusCode.NotFound)
-            {
-                _snackbar.Add(ApplicationResource.Request_NotFound, Severity.Error);
-            }
             catch (HttpRequestException ex)
-                when (ex.StatusCode == HttpStatusCode.ServiceUnavailable)
             {
-                _snackbar.Add(ApplicationResource.Request_ServiceUnavailable, Severity.Error);
+                _snackbar.Add(GetStringStatusCode((HttpStatusCode)ex.StatusCode), Severity.Error);
             }
-            catch (HttpRequestException ex)
-                when (ex.StatusCode
-                        is HttpStatusCode.NotAcceptable
-                            or HttpStatusCode.RequestEntityTooLarge
-                )
+        }
+
+        public string GetStringStatusCode(HttpStatusCode statusCode)
+        {
+            switch (statusCode)
             {
-                _snackbar.Add(ApplicationResource.Request_TooLarge, Severity.Error);
+                case HttpStatusCode.NotFound:
+                    return ApplicationResource.Request_NotFound;
+                case HttpStatusCode.ServiceUnavailable:
+                    return ApplicationResource.Request_ServiceUnavailable;
+                case HttpStatusCode.NotAcceptable:
+                case HttpStatusCode.RequestEntityTooLarge:
+                    return ApplicationResource.Request_TooLarge;
             }
+            return "OK";
         }
     }
 }
