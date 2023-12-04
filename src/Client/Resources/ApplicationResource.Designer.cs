@@ -61,11 +61,101 @@ namespace Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reacties.
+        /// </summary>
+        internal static string ChallengeComments {
+            get {
+                return ResourceManager.GetString("ChallengeComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Einddatum challenge.
+        /// </summary>
+        internal static string ChallengeDeadline {
+            get {
+                return ResourceManager.GetString("ChallengeDeadline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Challenge beschrijving.
+        /// </summary>
+        internal static string ChallengeDescription {
+            get {
+                return ResourceManager.GetString("ChallengeDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Challenge eindverslag.
+        /// </summary>
+        internal static string ChallengeFinalReport {
+            get {
+                return ResourceManager.GetString("ChallengeFinalReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Er zijn nog geen reacties aanwezig!.
+        /// </summary>
+        internal static string ChallengeNoComments {
+            get {
+                return ResourceManager.GetString("ChallengeNoComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fase challenge.
+        /// </summary>
+        internal static string ChallengePhase {
+            get {
+                return ResourceManager.GetString("ChallengePhase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Laad meer challenges.
+        /// </summary>
+        internal static string ChallengesLoadMore {
+            get {
+                return ResourceManager.GetString("ChallengesLoadMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start datum challenge.
+        /// </summary>
+        internal static string ChallengeStartDate {
+            get {
+                return ResourceManager.GetString("ChallengeStartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Challenge aanmaken.
         /// </summary>
         internal static string CreateChallengeTitle {
             get {
                 return ResourceManager.GetString("CreateChallengeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schrijf een reactie.
+        /// </summary>
+        internal static string CreateReaction {
+            get {
+                return ResourceManager.GetString("CreateReaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reactie plaatsen.
+        /// </summary>
+        internal static string CreateReactionButton {
+            get {
+                return ResourceManager.GetString("CreateReactionButton", resourceCulture);
             }
         }
         
@@ -133,6 +223,15 @@ namespace Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type reactie.
+        /// </summary>
+        internal static string FormReactionType {
+            get {
+                return ResourceManager.GetString("FormReactionType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;h1&gt;Privacyverklaring en Gegevensbeschermingsbeleid&lt;/h1&gt;
         ///
         ///&lt;h2&gt;1. Inleiding&lt;/h2&gt;
@@ -171,6 +270,15 @@ namespace Client.Resources {
         internal static string Request_TooLarge {
             get {
                 return ResourceManager.GetString("Request_TooLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Er is iets fout gegaan..
+        /// </summary>
+        internal static string SnackbarInvalid {
+            get {
+                return ResourceManager.GetString("SnackbarInvalid", resourceCulture);
             }
         }
     }
