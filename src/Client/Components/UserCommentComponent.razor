@@ -1,0 +1,47 @@
+﻿@using global::Shared.Entities;
+@using global::Shared.StateContainers;
+@using global::Shared.Utilities;
+
+@inject IStringLocalizer<ApplicationResource> _localizer
+@inject NavigationManager navigationManager;
+
+<MudItem md="2">
+    <MudAvatar Style="height:140px; width:140px;">
+        <MudImage Src="Assets/Img/ProfilePictureTest.jpg"></MudImage>
+    </MudAvatar>
+</MudItem>
+<MudItem md="9">
+    <MudCard Elevation="4" Class=@_concludedReaction()>
+        <MudGrid>
+            <MudItem md="10">
+                <MudCardContent>
+@*                     TODO: Change according to the User and Organization linked to the comment.
+*@                   <h2 class="mb-2">Naam van de gebruiker</h2>
+                    <h3 class="mb-2">Naam van het bedrijf</h3>
+                    <MudDivider Class="mt-3 mb-6"></MudDivider>
+                    <p>@Reaction.Text</p>
+                </MudCardContent>
+            </MudItem>
+            <MudItem md="2">
+                <MudTooltip Arrow="true" Placement="Placement.Right" Class="grey lighten-2 icon-tooltip">
+                    <ChildContent>
+                        <MudImage Src="@Reaction.ReactionType.GetReactionTypePropertyValue("IconPath")" Height="80"></MudImage>
+                    </ChildContent>
+                    <TooltipContent>
+                        <h3>@Reaction.ReactionType.GetReactionTypePropertyValue("Name")</h3>
+                        <p>@Reaction.ReactionType.GetReactionTypePropertyValue("Description")</p>
+                    </TooltipContent>
+                </MudTooltip>
+            </MudItem>
+        </MudGrid>
+    </MudCard>
+</MudItem>
+
+@code {
+    [Parameter]
+    public Reaction Reaction { get; set; }
+
+    public bool IsConcluded { get; set; }
+
+    private string _concludedReaction() => Reaction.Concluded ? "concluded-comment rounded-lg" : "rounded-lg";
+}
