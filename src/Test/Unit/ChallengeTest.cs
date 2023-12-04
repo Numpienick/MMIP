@@ -1,4 +1,4 @@
-﻿, using System.Text;
+﻿using System.Text;
 using Shared.Entities;
 using Shared.Enums;
 using Client.Controllers;
@@ -34,6 +34,7 @@ namespace Test.Unit
             ChallengeService challengeService = new ChallengeService();
             Assert.False(challengeService.CreateChallenge(challenge));
         }
+
         [Fact]
         public void IsDescriptionSizeValid()
         {
