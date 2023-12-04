@@ -1,7 +1,7 @@
+using Environment;
+using Infrastructure;
 using Infrastructure.Services;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
-using Server.Controllers;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +13,23 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+#if DEBUG
+builder.Services.AddDbContextFactory<ApplicationContext>(
+    opt =>
+        opt.UseNpgsql(EnvironmentConstants.DatabaseConnectionString)
+            .UseSnakeCaseNamingConvention()
+            .EnableSensitiveDataLogging()
+);
+#else
+builder.Services.AddDbContextFactory<ApplicationContext>(
+    opt =>
+        opt.UseNpgsql(EnvironmentConstants.DatabaseConnectionString).UseSnakeCaseNamingConvention()
+);
+#endif
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 builder.Services.AddSingleton<ChallengeService>();
 builder.Services.AddSingleton<CommentService>();
 
@@ -27,6 +44,16 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+    app.UseMigrationsEndPoint();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var contextFactory = services.GetRequiredService<IDbContextFactory<ApplicationContext>>();
+    var context = contextFactory.CreateDbContext();
+    context.Database.EnsureCreated();
 }
 
 app.UseHttpsRedirection();
