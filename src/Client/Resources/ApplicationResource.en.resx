@@ -144,11 +144,11 @@
   <data name="CreateChallengeTitle" xml:space="preserve">
     <value>Create challenge</value>
   </data>
-  <data name="CreateReaction" xml:space="preserve">
-    <value>Write a reaction</value>
+  <data name="CreateComment" xml:space="preserve">
+    <value>Write a comment</value>
   </data>
-  <data name="CreateReactionButton" xml:space="preserve">
-    <value>Post reaction</value>
+  <data name="CreateCommentButton" xml:space="preserve">
+    <value>Post comment</value>
   </data>
   <data name="FormChallengeDate" xml:space="preserve">
     <value>Challenge deadline</value>
@@ -171,8 +171,8 @@
   <data name="FormChallengeVisibility" xml:space="preserve">
     <value>Challenge visibility</value>
   </data>
-  <data name="FormReactionType" xml:space="preserve">
-    <value>Reaction type</value>
+  <data name="FormCommentType" xml:space="preserve">
+    <value>Comment type</value>
   </data>
   <data name="PrivacyDeclaration" xml:space="preserve">
     <value>&lt;h1&gt;Privacy Statement and Data Protection Policy&lt;/h1&gt;
