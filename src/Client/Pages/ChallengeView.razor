@@ -3,8 +3,14 @@
 @using System.Linq;
 @using System.Text;
 @using System.Threading.Tasks;
+@using Microsoft.AspNetCore.Components.Forms;
+@using Client.Controllers;
+@using global::Shared.Enums;
 @using global::Shared.Entities;
+@using global::Shared.Utilities;
 
+@inject RequestController RequestController
+@inject IStringLocalizer<ApplicationResource> _localizer
 @inject HttpClient Client;
 
 @page "/challenge-view/{ChallengeId:guid}"
@@ -21,7 +27,7 @@
         <MudItem md="10">
             <MudCard Elevation="4" Class="rounded-lg">
                 <MudCardContent>
-                    <h2>Challenge eindverslag</h2>
+                    <h2>@_localizer["ChallengeFinalReport"]</h2>
                     <p>@Challenge.FinalReport</p>
                 </MudCardContent>
             </MudCard>
@@ -35,17 +41,17 @@
             <MudCardContent>
                 <MudGrid Justify="Justify.SpaceBetween">
                     <MudItem md="4">
-                        <h2 class="card-centered-text mb-2">Startdatum challenge</h2>
+                        <h2 class="card-centered-text mb-2">@_localizer["ChallengeStartDate"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
                         <h3 class="card-centered-text">@Challenge.StartDate.DateTime.Date.ToString("dd/MM/yyyy")</h3>
                     </MudItem>
                     <MudItem md="4">
-                        <h2 class="card-centered-text mb-2">Deadline challenge</h2>
+                        <h2 class="card-centered-text mb-2">@_localizer["ChallengeDeadline"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
                         <h3 class="card-centered-text">@Challenge.Deadline.Value.Date.ToString("dd/MM/yyyy")</h3>
                     </MudItem>
                     <MudItem md="4">
-                        <h2 class="card-centered-text mb-2">Fase challenge</h2>
+                        <h2 class="card-centered-text mb-2">@_localizer["ChallengePhase"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
                         <h3 class="card-centered-text">@Challenge.Phase.Name.Value</h3>
                     </MudItem>
@@ -56,7 +62,7 @@
                 <MudProgressLinear Color="Color.Success" Rounded="true" Size="Size.Large" Value="@Challenge.Phase.Order" Min="0" Max="7" />
             </MudCardContent>
             <MudCardContent>
-                <h2 class="mt-4">Challenge beschrijving</h2>
+                <h2 class="mt-4">@_localizer["ChallengeDescription"]</h2>
                 <p>@Challenge.Description</p>
             </MudCardContent>
         </MudCard>
@@ -82,12 +88,49 @@
     </MudItem>
 </MudGrid>
 
-@* TODO: Post and view reactions (MAT-117) *@
 <MudGrid Justify="Justify.Center">
-    <MudItem md="10">
+    <MudItem md="8">
         <MudCard Elevation="4" Class="rounded-lg">
             <MudCardContent>
-                <h2>Reacties</h2>
+                <h2 class="mb-5">@_localizer["ChallengeComments"]</h2>
+                <EditForm Model="_model" OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
+                    <DataAnnotationsValidator />
+                    <MudGrid Justify="Justify.Center">
+                        <MudItem md="7">
+                            <MudTextField Lines="9" Variant="Variant.Outlined" Label=@_localizer["CreateReaction"] @bind-Value="_model.Text" For="@(() => _model.Text)" />
+                        </MudItem>
+                        <MudItem md="5">
+                            <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormReactionType"] @bind-Value="_model.ReactionType" T="ReactionType">
+                                @foreach (ReactionType reactionType in Enum.GetValues(typeof(ReactionType)))
+                                {
+                                    <MudSelectItem Value="@reactionType" T="ReactionType">@reactionType.GetReactionTypePropertyValue("Name")</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                        <MudItem md="6">
+                            <MudButton ButtonType="ButtonType.Submit" FullWidth Variant="Variant.Filled" Color="Color.Primary">@_localizer["CreateReactionButton"]</MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </EditForm>
+            </MudCardContent>
+            <MudDivider Class="mt-6 mb-6" DividerType="DividerType.FullWidth"></MudDivider>
+            <MudCardContent>
+                @{
+                    if (Reactions.Count == 0)
+                    {
+                        <h2 class="card-centered-text">@_localizer["ChallengeNoComments"]</h2>
+                    }
+
+                    else
+                    {
+                        foreach (Reaction reaction in Reactions)
+                        {
+                            <MudGrid Justify="Justify.Center" Class="mb-10">
+                                <UserCommentComponent Reaction="reaction"></UserCommentComponent>
+                            </MudGrid>
+                        }
+                    }
+                }
             </MudCardContent>
         </MudCard>
     </MudItem>
@@ -101,15 +144,39 @@
 
     public List<Reaction> Reactions { get; set; }
 
+    private Reaction _model = new();
+
+    [Inject]
+    private ISnackbar _snackbar { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-        Challenge = await GetChallenge();
-        //Reactions = Challenge.Reactions();
+        Challenge = await _getChallenge();
+        Reactions = await _getReactions();
         base.OnInitialized();
     }
 
-    public async Task<Challenge> GetChallenge()
+    private async Task<Challenge> _getChallenge()
     {
         return await Client.GetFromJsonAsync<Challenge>($"challenges/{ChallengeId}");
+    }
+
+    // TODO: Get reactions from specific challenge.
+    private async Task<List<Reaction>> _getReactions()
+    {
+        return await Client.GetFromJsonAsync<List<Reaction>>($"reactions?=challengeId={ChallengeId}");
+    }
+
+    private async void _validFormSubmitted(EditContext context)
+    {
+        await RequestController.Post("reactions", _model);
+        Reactions = await _getReactions();
+        StateHasChanged();
+    }
+
+    private void _invalidFormSubmitted(EditContext context)
+    {
+        _snackbar.Add(_localizer["SnackbarInvalid"], Severity.Error);
+        StateHasChanged();
     }
 }
