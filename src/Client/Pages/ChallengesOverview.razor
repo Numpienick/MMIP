@@ -7,6 +7,7 @@
 @using global::Shared.Entities;
 @using global::Shared.Filters;
 
+@inject IStringLocalizer<ApplicationResource> _localizer
 @inject HttpClient Client;
 
 @page "/challenges-overview"
@@ -31,7 +32,7 @@
 
 <MudGrid Justify="Justify.Center" Class="mt-15">
     <MudItem md="6">
-        <MudButton @onclick="@LoadChallengeBatchOnClick" FullWidth="true" Variant="Variant.Filled" Color="Color.Inherit" Disabled="@_loadMoreChallenges">Laad meer challenges</MudButton>
+        <MudButton @onclick="@_loadChallengeBatchOnClick" FullWidth="true" Variant="Variant.Filled" Color="Color.Inherit" Disabled="@_loadMoreChallenges">@_localizer["ChallengesLoadMore"]</MudButton>
     </MudItem>
 </MudGrid>
 
@@ -47,8 +48,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        AllChallenges = await GetChallenges();
-        SortChallengesByDateAscending(AllChallenges);
+        AllChallenges = await _getChallenges();
+        _sortChallengesByDateAscending(AllChallenges);
         LoadBatch();
         base.OnInitialized();
     }
@@ -83,18 +84,18 @@
         }
     }
 
-    public void SortChallengesByDateAscending(List<Challenge> challenges)
+    private void _sortChallengesByDateAscending(List<Challenge> challenges)
     {
         challenges.Sort((x, y) => x.StartDate.CompareTo(y.StartDate));
     }
 
-    public void LoadChallengeBatchOnClick(MouseEventArgs mouseEventArgs)
+    private void _loadChallengeBatchOnClick(MouseEventArgs mouseEventArgs)
     {
         LoadBatch();
     }
 
     // TODO: Change to take only 6 challanges a time.
-    public async Task<List<Challenge>> GetChallenges()
+    private async Task<List<Challenge>> _getChallenges()
     {
         string jsonObject = JsonSerializer.Serialize(_filterCriteria);
         return await Client.GetFromJsonAsync<List<Challenge>>($"challenges?filterCriteria={jsonObject}");
