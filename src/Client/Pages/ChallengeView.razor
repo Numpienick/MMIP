@@ -48,14 +48,14 @@
                     <MudItem md="4">
                         <h2 class="card-centered-text mb-2">@_localizer["ChallengePhase"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
-                        // TODO: Change phase id to phase name by using the ChallengeService.
+                        @* TODO: Change phase id to phase name by using the ChallengeService. *@
                         <h3 class="card-centered-text">@Challenge.CurrentPhaseId</h3>
                     </MudItem>
                 </MudGrid>
             </MudCardContent>
             @* TODO: Change progress max value according to maximum phase order. *@
             <MudCardContent>
-                // TODO: Change phase id to phase by using the ChallengeService.
+                @* TODO: Change phase id to phase by using the ChallengeService. *@
                 @* <MudProgressLinear Color="Color.Success" Rounded="true" Size="Size.Large" Value="@Challenge.CurrentPhase.Order" Min="0" Max="7"/> *@
                 <MudProgressLinear Color="Color.Success" Rounded="true" Size="Size.Large" Value="new Random().Next(0, 7)" Min="0" Max="7"/>
             </MudCardContent>
@@ -76,7 +76,9 @@
                         <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="150"></MudCardMedia>
                     </MudItem>
                     <MudItem md="5">
-                        <h2 class="card-organization-title">@Challenge.Organization.Name</h2>
+                        @* TODO: create a view *@
+                        @* <h2 class="card-organization-title">@Challenge.Organization.Name</h2> *@
+                        <h2 class="card-organization-title">FIX CHALLENGE NAME</h2>
                         <MudDivider Class="mt-2 mb-5"></MudDivider>
                         <h3 class="card-centered-text">Leander Jelgersma</h3>
                     </MudItem>

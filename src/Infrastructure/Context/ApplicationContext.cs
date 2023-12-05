@@ -15,6 +15,7 @@ public class ApplicationContext : DbContext
     public DbSet<Phase> Phases { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserGroup> UserGroups { get; set; }
+    public DbSet<Tag> Tags { get; set; }
 
     public ApplicationContext(DbContextOptions<ApplicationContext> options)
         : base(options) { }
@@ -24,6 +25,7 @@ public class ApplicationContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new ChallengeConfiguration());
+        modelBuilder.ApplyConfiguration(new TagConfiguration());
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

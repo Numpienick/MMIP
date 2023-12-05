@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20231205152109_RemovedOrganizationNavigationFromChallenge")]
+    partial class RemovedOrganizationNavigationFromChallenge
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -265,31 +268,22 @@ namespace Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTimeOffset>("CreatedDate")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date")
-                        .HasDefaultValueSql("NOW()");
+                        .HasColumnName("created_date");
 
                     b.Property<DateTimeOffset>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date")
-                        .HasDefaultValueSql("NOW()");
+                        .HasColumnName("updated_date");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("character varying(16)")
+                        .HasColumnType("text")
                         .HasColumnName("value");
 
                     b.HasKey("Id")
-                        .HasName("pk_tags");
+                        .HasName("pk_tag");
 
-                    b.HasIndex("Value")
-                        .IsUnique()
-                        .HasDatabaseName("ix_tags_value");
-
-                    b.ToTable("tags", (string)null);
+                    b.ToTable("tag", (string)null);
                 });
 
             modelBuilder.Entity("Shared.Entities.User", b =>
@@ -370,6 +364,25 @@ namespace Infrastructure.Migrations
                     b.ToTable("challenge_phases", (string)null);
                 });
 
+            modelBuilder.Entity("challenge_tags", b =>
+                {
+                    b.Property<Guid>("_tagsId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("tag_id");
+
+                    b.Property<Guid>("challengesId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("challenge_id");
+
+                    b.HasKey("_tagsId", "challengesId")
+                        .HasName("pk_challenge_tags");
+
+                    b.HasIndex("challengesId")
+                        .HasDatabaseName("ix_challenge_tags_challenges_id");
+
+                    b.ToTable("challenge_tags", (string)null);
+                });
+
             modelBuilder.Entity("Shared.Entities.Branche", b =>
                 {
                     b.HasOne("Shared.Entities.Sector", "Sector")
@@ -415,6 +428,23 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_challenge_phases_phases_phases_id");
+                });
+
+            modelBuilder.Entity("challenge_tags", b =>
+                {
+                    b.HasOne("Shared.Entities.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("_tagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_challenge_tags_tag__tags_id");
+
+                    b.HasOne("Shared.Entities.Challenge", null)
+                        .WithMany()
+                        .HasForeignKey("challengesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_challenge_tags_challenges_challenges_id");
                 });
 
             modelBuilder.Entity("Shared.Entities.Organization", b =>

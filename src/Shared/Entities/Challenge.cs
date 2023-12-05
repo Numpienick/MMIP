@@ -17,27 +17,18 @@ namespace Shared.Entities
         [StringLength(1000, ErrorMessage = "Maximale omschrijving is 1000 karakters.")]
         public string ShortDescription { get; set; }
 
-        public string? BannerImagePath { get; set; }
-
         [Required(ErrorMessage = "Challenge heeft deadline nodig.")]
         public DateTime Deadline { get; set; }
-
-        public DateTimeOffset StartDate { get; set; }
-        public string? FinalReport { get; set; }
-
-        //TODO: add organization to creating challenges
-        public Organization Organization { get; set; }
-        public Guid OrganizationId { get; }
 
         [Required(ErrorMessage = "Zichtbaarheid moet gedefinieerd worden.")]
         public Visibility ChallengeVisibility { get; set; }
 
-        public string[] Tags =>
-            _tags.Any() ? _tags.Select(t => t.Value).ToArray() : Array.Empty<string>();
-        public IEnumerable<Phase> Phases { get; set; } = new List<Phase>();
-
+        public string? BannerImagePath { get; set; }
+        public string? FinalReport { get; set; }
+        public DateTimeOffset StartDate { get; set; }
+        public Guid OrganizationId { get; set; } // TODO: add organization to creating challenges
         public Guid CurrentPhaseId { get; set; }
-
-        private IEnumerable<Tag> _tags { get; set; }
+        public List<Tag> Tags = new();
+        public List<Phase> Phases { get; set; } = new();
     }
 }
