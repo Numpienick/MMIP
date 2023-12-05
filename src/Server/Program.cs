@@ -1,7 +1,8 @@
 using Environment;
-using Infrastructure;
+using Infrastructure.Context;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
+using Shared.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
