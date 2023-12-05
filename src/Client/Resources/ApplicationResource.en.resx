@@ -214,8 +214,8 @@
     For questions or comments about this policy, please contact us at &lt;a href="mailto:contact@innovation.io"&gt;contact@innovation.io&lt;/a&gt;.
 &lt;/p&gt;</value>
   </data>
-  <data name="RemaindingTags" xml:space="preserve">
-    <value>Remainding tags</value>
+  <data name="RemainingTags" xml:space="preserve">
+    <value>Remaining tags</value>
   </data>
   <data name="Request_NotFound" xml:space="preserve">
     <value>Something happened on our side, try again later</value>

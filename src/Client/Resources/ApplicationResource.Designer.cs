@@ -258,9 +258,9 @@ namespace Client.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Overige tags.
         /// </summary>
-        internal static string RemaindingTags {
+        internal static string RemainingTags {
             get {
-                return ResourceManager.GetString("RemaindingTags", resourceCulture);
+                return ResourceManager.GetString("RemainingTags", resourceCulture);
             }
         }
         
