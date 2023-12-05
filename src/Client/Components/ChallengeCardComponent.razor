@@ -1,6 +1,7 @@
 ﻿@using global::Shared.StateContainers;
 @using global::Shared.Entities;
 
+@inject IStringLocalizer<ApplicationResource> _localizer
 @inject NavigationManager navigationManager;
 
 <MudItem md="3" xs="6">
@@ -42,10 +43,10 @@
                             {
                                 <MudTooltip Arrow="true" Placement="Placement.Bottom" Class="grey lighten-2 icon-tooltip">
                                     <ChildContent>
-                                        <MudChip Size="Size.Small" Color="Color.Primary">+@_additionalTags andere tags</MudChip>
+                                        <MudChip Size="Size.Small" Color="Color.Primary">+@_additionalTags @_localizer["OtherTags"]</MudChip>
                                     </ChildContent>
                                     <TooltipContent>
-                                        <h3>Overige tags:</h3>
+                                        <h3>@_localizer["RemaindingTags"]:</h3>
                                         @for (int i = MaximumVisibleTags; i < Challenge.Tags.Length; i++)
                                         {
                                             <p>@Challenge.Tags[i]</p>

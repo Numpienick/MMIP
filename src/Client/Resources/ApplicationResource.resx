@@ -174,6 +174,9 @@
   <data name="FormCommentType" xml:space="preserve">
     <value>Type reactie</value>
   </data>
+  <data name="OtherTags" xml:space="preserve">
+    <value>andere tags</value>
+  </data>
   <data name="PrivacyDeclaration" xml:space="preserve">
     <value>&lt;h1&gt;Privacyverklaring en Gegevensbeschermingsbeleid&lt;/h1&gt;
 
@@ -211,6 +214,9 @@
     Voor vragen of opmerkingen over dit beleid, neem contact met ons op via &lt;a href="mailto:contact@innovation.io"&gt;contact@innovation.io&lt;/a&gt;.
 &lt;/p&gt;</value>
   </data>
+  <data name="RemaindingTags" xml:space="preserve">
+    <value>Overige tags</value>
+  </data>
   <data name="Request_NotFound" xml:space="preserve">
     <value>Er is iets fout gegaan aan onze kant, probeer het later nog een keer</value>
   </data>
@@ -219,6 +225,9 @@
   </data>
   <data name="Request_TooLarge" xml:space="preserve">
     <value>De opgegeven data is te groot</value>
+  </data>
+  <data name="SearchTerms" xml:space="preserve">
+    <value>Zoektermen</value>
   </data>
   <data name="SnackbarInvalid" xml:space="preserve">
     <value>Er is iets fout gegaan.</value>
