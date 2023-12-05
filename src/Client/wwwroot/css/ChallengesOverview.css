@@ -17,7 +17,8 @@
 }
 
 .custom-card {
-  transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.1s ease;
+  height: 465px;
 }
 
 .custom-card:hover {

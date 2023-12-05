@@ -57,8 +57,18 @@ namespace Infrastructure.Repositories
             challenge1.Id = Guid.NewGuid();
             challenge1.Title = "Recyclen plastic bekertjes";
             challenge1.ShortDescription =
-                "Plastic is slecht voor het milieu. Voor deze challenge zoeken wij mensen die goede oplossingen hebben voor het plastic probleem.";
-            challenge1.Tags = new string[] { "Recyclen", "Plastic", "Milieu" };
+                "Zit jij vol met innovatieve ideeën rond milieuverbetering? Dan zoeken we jou! 80";
+            challenge1.Tags = new string[]
+            {
+                "Voetbal",
+                "Mandje",
+                "Dit is een tag!",
+                "Plastic",
+                "Oceaan",
+                "Strand",
+                "Kaas",
+                "Recyclen"
+            };
             challenge1.StartDate = new DateTimeOffset(new DateTime(2023, 9, 3));
             challenge1.Organization = new Organization();
             challenge1.Organization.Name = "Company Name";
@@ -73,8 +83,18 @@ namespace Infrastructure.Repositories
             challenge2.Id = Guid.NewGuid();
             challenge2.Title = "Jongere docenten voor de klas";
             challenge2.ShortDescription =
-                "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
-            challenge2.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
+                "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag! Dit is 150C.";
+            challenge2.Tags = new string[]
+            {
+                "Dit is tag 1",
+                "Dit is tag 2",
+                "Dit is tag 3",
+                "Dit is tag 4",
+                "Dit is tag 5",
+                "Dit is tag 6",
+                "Dit is tag 7",
+                "Dit is tag 8"
+            };
             challenge2.StartDate = new DateTimeOffset(new DateTime(2023, 10, 3));
             challenge2.Organization = new Organization();
             challenge2.Organization.Name = "Company Name";

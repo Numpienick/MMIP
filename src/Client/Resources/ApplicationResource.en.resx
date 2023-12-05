@@ -138,6 +138,9 @@
   <data name="ChallengesLoadMore" xml:space="preserve">
     <value>Load more challenges</value>
   </data>
+  <data name="ChallengesPageTitle" xml:space="preserve">
+    <value>Challenges</value>
+  </data>
   <data name="ChallengeStartDate" xml:space="preserve">
     <value>Startdate challenge</value>
   </data>
@@ -173,6 +176,9 @@
   </data>
   <data name="FormCommentType" xml:space="preserve">
     <value>Comment type</value>
+  </data>
+  <data name="OtherTags" xml:space="preserve">
+    <value>other tags</value>
   </data>
   <data name="PrivacyDeclaration" xml:space="preserve">
     <value>&lt;h1&gt;Privacy Statement and Data Protection Policy&lt;/h1&gt;
@@ -211,6 +217,9 @@
     For questions or comments about this policy, please contact us at &lt;a href="mailto:contact@innovation.io"&gt;contact@innovation.io&lt;/a&gt;.
 &lt;/p&gt;</value>
   </data>
+  <data name="RemainingTags" xml:space="preserve">
+    <value>Remaining tags</value>
+  </data>
   <data name="Request_NotFound" xml:space="preserve">
     <value>Something happened on our side, try again later</value>
   </data>
@@ -219,6 +228,9 @@
   </data>
   <data name="Request_TooLarge" xml:space="preserve">
     <value>The given data is too big</value>
+  </data>
+  <data name="SearchTerms" xml:space="preserve">
+    <value>Search terms</value>
   </data>
   <data name="SnackbarInvalid" xml:space="preserve">
     <value>Something went wrong.</value>

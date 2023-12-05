@@ -12,27 +12,33 @@
 
 @page "/challenges-overview"
 
-<h1 class="mb-15">Challenges</h1>
+<h1 class="mb-10">@_localizer["ChallengesPageTitle"]</h1>
 
 <MudGrid Justify="Justify.Center" Class="mb-15">
-    <MudItem md="8">
-        <MudTextField @bind-Value="SearchTerms" Label="Zoektermen" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" />
-    </MudItem>
-</MudGrid>
+    <MudItem md="12">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudGrid Justify="Justify.Center">
+                <MudItem md="8" Class="mb-10 mt-8">
+                    <MudTextField @bind-Value="SearchTerms" Label="@_localizer["SearchTerms"]" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" />
+                </MudItem>
+            </MudGrid>
 
-@foreach (List<Challenge> batch in ChallengeBatches)
-{
-    <MudGrid Justify="Justify.Center" Spacing="8">
-        @foreach (Challenge challenge in batch)
-        {
-            <Client.Components.ChallengeCardComponent Challenge="@challenge"></Client.Components.ChallengeCardComponent>
-        }
-    </MudGrid>
-}
+            @foreach (List<Challenge> batch in ChallengeBatches)
+            {
+                <MudGrid Justify="Justify.Center" Spacing="8">
+                    @foreach (Challenge challenge in batch)
+                    {
+                        <ChallengeCardComponent Challenge="@challenge"></ChallengeCardComponent>
+                    }
+                </MudGrid>
+            }
 
-<MudGrid Justify="Justify.Center" Class="mt-15">
-    <MudItem md="6">
-        <MudButton @onclick="@_loadChallengeBatchOnClick" FullWidth="true" Variant="Variant.Filled" Color="Color.Inherit" Disabled="@_loadMoreChallenges">@_localizer["ChallengesLoadMore"]</MudButton>
+            <MudGrid Justify="Justify.Center" Class="mt-15">
+                <MudItem md="6">
+                    <MudButton @onclick="@_loadChallengeBatchOnClick" FullWidth="true" Variant="Variant.Filled" Color="Color.Inherit" Disabled="@_loadMoreChallenges">@_localizer["ChallengesLoadMore"]</MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudCard>
     </MudItem>
 </MudGrid>
 
