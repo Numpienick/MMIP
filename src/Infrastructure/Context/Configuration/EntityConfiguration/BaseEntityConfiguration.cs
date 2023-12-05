@@ -8,7 +8,7 @@ internal class BaseEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEnti
     where TEntity : BaseEntity
 {
     protected const int DESCRIPTION_MAX_LENGTH = 100000;
-    protected const int SHORT_DESCRIPTION_MAX_LENGTH = 1000;
+    protected const int SHORT_DESCRIPTION_MAX_LENGTH = 150;
 
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
