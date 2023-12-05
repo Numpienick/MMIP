@@ -17,7 +17,7 @@ builder.Services.AddControllers();
 #if DEBUG
 builder.Services.AddDbContextFactory<ApplicationContext>(
     opt =>
-        opt.UseNpgsql(EnvironmentConstants.DatabaseConnectionString)
+        opt.UseNpgsql(EnvironmentConstants.DatabaseConnectionString())
             .UseSnakeCaseNamingConvention()
             .EnableSensitiveDataLogging()
 );
@@ -52,8 +52,8 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var contextFactory = services.GetRequiredService<IDbContextFactory<ApplicationContext>>();
-    var context = contextFactory.CreateDbContext();
-    context.Database.EnsureCreated();
+    var context = await contextFactory.CreateDbContextAsync();
+    await context.Database.EnsureCreatedAsync();
 }
 
 app.UseHttpsRedirection();
