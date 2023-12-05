@@ -10,6 +10,7 @@ namespace Shared.Entities
         public string Title { get; set; }
 
         [Required(ErrorMessage = "Omschrijving is vereist.")]
+        [StringLength(100000, ErrorMessage = "Maximale omschrijving is 100.000 karakters.")]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Korte omschrijving is vereist.")]
