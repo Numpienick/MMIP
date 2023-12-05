@@ -138,6 +138,9 @@
   <data name="ChallengesLoadMore" xml:space="preserve">
     <value>Laad meer challenges</value>
   </data>
+  <data name="ChallengesPageTitle" xml:space="preserve">
+    <value>Challenges</value>
+  </data>
   <data name="ChallengeStartDate" xml:space="preserve">
     <value>Start datum challenge</value>
   </data>

@@ -124,6 +124,15 @@ namespace Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Challenges.
+        /// </summary>
+        internal static string ChallengesPageTitle {
+            get {
+                return ResourceManager.GetString("ChallengesPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start datum challenge.
         /// </summary>
         internal static string ChallengeStartDate {
