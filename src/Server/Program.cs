@@ -2,6 +2,8 @@ using Environment;
 using Infrastructure.Context;
 using Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
+using Server.Database;
+using Shared.Views;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,7 +55,11 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var contextFactory = services.GetRequiredService<IDbContextFactory<ApplicationContext>>();
     var context = await contextFactory.CreateDbContextAsync();
-    await context.Database.EnsureCreatedAsync();
+    // Uncomment if you want a fresh database on restart
+    // await context.Database.EnsureDeletedAsync();
+    await context.Database.MigrateAsync();
+    // Uncomment if you want random data inserted on restart
+    // await new DatabaseSeeder(context).Seed();
 }
 
 app.UseHttpsRedirection();

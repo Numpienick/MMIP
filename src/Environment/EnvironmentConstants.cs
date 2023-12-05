@@ -37,7 +37,7 @@
         {
             var connectionString =
                 System.Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING")
-                ?? "Host=localhost;Port=5432;Database=postgres;Username=mmip;Password=mmip123";
+                ?? "Host=localhost;Port=5432;Database=mmip_db;Username=mmip;Password=mmip123";
 
             return Environment switch
             {

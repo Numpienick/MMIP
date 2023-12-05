@@ -5,6 +5,7 @@ services:
     container_name: MMIP_Postgres
     restart: unless-stopped
     environment:
+      - POSTGRES_DB=mmip_db
       - POSTGRES_USER=mmip
       - POSTGRES_PASSWORD=mmip123
     ports:
