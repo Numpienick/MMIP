@@ -60,14 +60,14 @@ namespace Infrastructure.Repositories
                 "Zit jij vol met innovatieve ideeën rond milieuverbetering? Dan zoeken we jou! 80";
             challenge1.Tags = new string[]
             {
-                "Dit is een tags",
+                "Voetbal",
                 "Mandje",
-                "Dit is een tags",
-                "Dit is een tags",
-                "Dit is een tags",
-                "Dit is een tags",
+                "Dit is een tag!",
+                "Plastic",
+                "Oceaan",
+                "Strand",
                 "Kaas",
-                "Dit is een tags"
+                "Recyclen"
             };
             challenge1.StartDate = new DateTimeOffset(new DateTime(2023, 9, 3));
             challenge1.Organization = new Organization();
@@ -86,14 +86,14 @@ namespace Infrastructure.Repositories
                 "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag! Dit is 150C.";
             challenge2.Tags = new string[]
             {
-                "Dit is een tags",
-                "Dit is een tags",
-                "Dit is een tags",
-                "Dit is een tags",
-                "Dit is een tags",
-                "Dit is een tags",
-                "Dit is een tags",
-                "Dit is een tags"
+                "Dit is tag 1",
+                "Dit is tag 2",
+                "Dit is tag 3",
+                "Dit is tag 4",
+                "Dit is tag 5",
+                "Dit is tag 6",
+                "Dit is tag 7",
+                "Dit is tag 8"
             };
             challenge2.StartDate = new DateTimeOffset(new DateTime(2023, 10, 3));
             challenge2.Organization = new Organization();

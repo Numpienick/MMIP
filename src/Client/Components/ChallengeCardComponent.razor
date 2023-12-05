@@ -46,7 +46,7 @@
                                     </ChildContent>
                                     <TooltipContent>
                                         <h3>Overige tags:</h3>
-                                        @for (int i = MaximumVisibleTags; i < Challenge.Tags.Length - 1; i++)
+                                        @for (int i = MaximumVisibleTags; i < Challenge.Tags.Length; i++)
                                         {
                                             <p>@Challenge.Tags[i]</p>
                                         }
@@ -72,7 +72,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _additionalTags = Challenge.Tags.Length - MaximumVisibleTags - 1;
+        _additionalTags = Challenge.Tags.Length - MaximumVisibleTags;
         base.OnInitialized();
     }
 
