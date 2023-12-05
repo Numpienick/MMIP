@@ -25,9 +25,38 @@
         <MudDivider></MudDivider>
         <MudCardContent>
             <MudGrid Justify="Justify.Center">
-                @foreach (string tag in Challenge.Tags)
-                {
-                    <MudChip>@tag</MudChip>
+                @{
+                    int count = 0;
+
+                    foreach (string tag in Challenge.Tags)
+                    {
+                        if (count < MaximumVisibleTags)
+                        {
+                            <MudChip Size="Size.Small" Color="Color.Primary">@tag</MudChip>
+                            count++;
+                        }
+
+                        else
+                        {
+                            if (Challenge.Tags.Length > MaximumVisibleTags)
+                            {
+                                <MudTooltip Arrow="true" Placement="Placement.Bottom" Class="grey lighten-2 icon-tooltip">
+                                    <ChildContent>
+                                        <MudChip Size="Size.Small" Color="Color.Primary">+@_additionalTags andere tags</MudChip>
+                                    </ChildContent>
+                                    <TooltipContent>
+                                        <h3>Overige tags:</h3>
+                                        @for (int i = MaximumVisibleTags; i < Challenge.Tags.Length - 1; i++)
+                                        {
+                                            <p>@Challenge.Tags[i]</p>
+                                        }
+                                    </TooltipContent>
+                                </MudTooltip>
+                            }
+
+                            break;
+                        }
+                    }
                 }
             </MudGrid>
         </MudCardContent>
@@ -37,6 +66,15 @@
 @code {
     [Parameter]
     public Challenge Challenge { get; set; }
+
+    private const int MaximumVisibleTags = 5;
+    private int _additionalTags;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _additionalTags = Challenge.Tags.Length - MaximumVisibleTags - 1;
+        base.OnInitialized();
+    }
 
     public void NavigateToChallengeView(Guid challengeId)
     {

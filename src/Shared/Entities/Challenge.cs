@@ -14,7 +14,7 @@ namespace Shared.Entities
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Korte omschrijving is vereist.")]
-        [StringLength(1000, ErrorMessage = "Maximale omschrijving is 1000 karakters.")]
+        [StringLength(150, ErrorMessage = "Maximale omschrijving is 150 karakters.")]
         public string ShortDescription { get; set; }
         public string? BannerImagePath { get; set; }
 
