@@ -1,4 +1,4 @@
 ﻿namespace MMIP.Shared.Entities
 {
-    public class User : BaseEntity, IProfile { }
+    public class User : BaseEntity { }
 }
