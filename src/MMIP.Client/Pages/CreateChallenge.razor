@@ -10,7 +10,6 @@
 <h1>@Localizer["CreateChallengeTitle"]</h1>
 <EditForm Model=@_model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
 <DataAnnotationsValidator />
-    <FormFields>
         <MudFileUpload T="IBrowserFile" Accept=".png, .jpg, .jpeg, .gif, .webp, svg" FilesChanged="UploadFiles" MaximumFileCount="1">
             <MudButton HtmlTag="label"
                        Variant="Variant.Filled"
@@ -39,7 +38,6 @@
                 <MudDatePicker Variant="Variant.Outlined" Label=@Localizer["FormChallengeDate"] Editable="true" @bind-Date="_model.Deadline" Mask="@(new DateMask("dd-MM-yyyy"))" DateFormat="dd.MM.yyyy" Placeholder="dd-mm-yyyy" />
             </MudItem>
         </MudGrid>
-    </FormFields>
     <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer["FormChallengeSave"]</MudButton>
 </EditForm>
 
