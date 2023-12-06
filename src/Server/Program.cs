@@ -1,37 +1,19 @@
-using Environment;
-using Infrastructure.Context;
 using Infrastructure.Services;
-using Microsoft.EntityFrameworkCore;
-using Server.Database;
-using Shared.Views;
+using Server.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Cors
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    options.AddDefaultPolicy(b => b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddDatabase(false);
 
-#if DEBUG
-builder.Services.AddDbContextFactory<ApplicationContext>(
-    opt =>
-        opt.UseNpgsql(EnvironmentConstants.DatabaseConnectionString())
-            .UseSnakeCaseNamingConvention()
-            .EnableSensitiveDataLogging()
-);
-#else
-builder.Services.AddDbContextFactory<ApplicationContext>(
-    opt =>
-        opt.UseNpgsql(EnvironmentConstants.DatabaseConnectionString).UseSnakeCaseNamingConvention()
-);
-#endif
-
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
+// TODO: Move to a method in ServiceCollectionExtensions (and probably make transient)
 builder.Services.AddSingleton<ChallengeService>();
 builder.Services.AddSingleton<CommentService>();
 
@@ -50,18 +32,6 @@ if (app.Environment.IsDevelopment())
     app.UseMigrationsEndPoint();
 }
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var contextFactory = services.GetRequiredService<IDbContextFactory<ApplicationContext>>();
-    var context = await contextFactory.CreateDbContextAsync();
-    // Uncomment if you want a fresh database on restart
-    // await context.Database.EnsureDeletedAsync();
-    await context.Database.MigrateAsync();
-    // Uncomment if you want random data inserted on restart
-    // await new DatabaseSeeder(context).Seed();
-}
-
 app.UseHttpsRedirection();
 
 app.UseCors();
@@ -69,5 +39,7 @@ app.UseCors();
 app.UseAuthorization();
 
 app.MapControllers();
+
+await app.Initialize(false);
 
 app.Run();
