@@ -1,0 +1,177 @@
+﻿@using Microsoft.AspNetCore.Components.Forms;
+@using MMIP.Client.Controllers
+@using MMIP.Shared.Entities
+@using MMIP.Shared.Enums
+@using MMIP.Shared.Utilities
+
+@inject RequestController RequestController
+@inject IStringLocalizer<ApplicationResource> _localizer
+@inject HttpClient Client;
+
+@page "/challenge-view/{ChallengeId:guid}"
+
+<div Width="100%" class="banner-image">
+    <MudImage ObjectPosition="ObjectPosition.Center" ObjectFit="ObjectFit.Fill" Src="@Challenge.BannerImagePath" style="width: 100%; max-height: inherit;"></MudImage>
+</div>
+
+<h1 class="mb-15">@Challenge.Title</h1>
+
+@if (Challenge.FinalReport != null)
+{
+    <MudGrid Class="mb-8" Justify="Justify.Center">
+        <MudItem md="10">
+            <MudCard Elevation="4" Class="rounded-lg">
+                <MudCardContent>
+                    <h2>@_localizer["ChallengeFinalReport"]</h2>
+                    <p>@Challenge.FinalReport</p>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+}
+
+<MudGrid Class="mb-8" Justify="Justify.Center">
+    <MudItem md="10" Class="justify-center">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <MudGrid Justify="Justify.SpaceBetween">
+                    <MudItem md="4">
+                        <h2 class="card-centered-text mb-2">@_localizer["ChallengeStartDate"]</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@Challenge.StartDate.DateTime.Date.ToString("dd/MM/yyyy")</h3>
+                    </MudItem>
+                    <MudItem md="4">
+                        <h2 class="card-centered-text mb-2">@_localizer["ChallengeDeadline"]</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@Challenge.Deadline.Value.Date.ToString("dd/MM/yyyy")</h3>
+                    </MudItem>
+                    <MudItem md="4">
+                        <h2 class="card-centered-text mb-2">@_localizer["ChallengePhase"]</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@Challenge.Phase.Name.Value</h3>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            @* TODO: Change progress max value according to maximum phase order. *@
+            <MudCardContent>
+                <MudProgressLinear Color="Color.Success" Rounded="true" Size="Size.Large" Value="@Challenge.Phase.Order" Min="0" Max="7" />
+            </MudCardContent>
+            <MudCardContent>
+                <h2 class="mt-4">@_localizer["ChallengeDescription"]</h2>
+                <p>@Challenge.Description</p>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Class="mb-8" Justify="Justify.Center">
+    <MudItem md="5">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem md="7">
+                        <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="150"></MudCardMedia>
+                    </MudItem>
+                    <MudItem md="5">
+                        <h2 class="card-organization-title">@Challenge.Organization.Name</h2>
+                        <MudDivider Class="mt-2 mb-5"></MudDivider>
+                        <h3 class="card-centered-text">Leander Jelgersma</h3>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem md="8">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <h2 class="mb-5">@_localizer["ChallengeComments"]</h2>
+                <EditForm Model="_model" OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
+                    <DataAnnotationsValidator />
+                    <MudGrid Justify="Justify.Center">
+                        <MudItem md="7">
+                            <MudTextField Lines="9" Variant="Variant.Outlined" Label=@_localizer["CreateComment"] @bind-Value="_model.Text" For="@(() => _model.Text)" />
+                        </MudItem>
+                        <MudItem md="5">
+                            <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormCommentType"] @bind-Value="_model.CommentType" T="CommentType">
+                                @foreach (CommentType commentType in Enum.GetValues(typeof(CommentType)))
+                                {
+                                    <MudSelectItem Value="@commentType" T="CommentType">@commentType.GetCommentTypePropertyValue("Name")</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                        <MudItem md="6">
+                            <MudButton ButtonType="ButtonType.Submit" FullWidth Variant="Variant.Filled" Color="Color.Primary">@_localizer["CreateCommentButton"]</MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </EditForm>
+            </MudCardContent>
+            <MudDivider Class="mt-6 mb-6" DividerType="DividerType.FullWidth"></MudDivider>
+            <MudCardContent>
+                @{
+                    if (Comments.Count == 0)
+                    {
+                        <h2 class="card-centered-text">@_localizer["ChallengeNoComments"]</h2>
+                    }
+
+                    else
+                    {
+                        foreach (var comment in Comments)
+                        {
+                            <MudGrid Justify="Justify.Center" Class="mb-10">
+                                <UserCommentComponent Comment="comment"></UserCommentComponent>
+                            </MudGrid>
+                        }
+                    }
+                }
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+@code {
+    [Parameter]
+    public Guid ChallengeId { get; set; }
+
+    public Challenge? Challenge { get; set; }
+
+    public List<Comment> Comments { get; set; }
+
+    private Comment _model = new();
+
+    [Inject]
+    private ISnackbar _snackbar { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Challenge = await _getChallenge();
+        Comments = await _getComments();
+        base.OnInitialized();
+    }
+
+    private async Task<Challenge> _getChallenge()
+    {
+        return await Client.GetFromJsonAsync<Challenge>($"challenges/{ChallengeId}");
+    }
+
+    // TODO: Get commentss from specific challenge.
+    private async Task<List<Comment>> _getComments()
+    {
+        return await Client.GetFromJsonAsync<List<Comment>>($"comments?=challengeId={ChallengeId}");
+    }
+
+    private async void _validFormSubmitted(EditContext context)
+    {
+        await RequestController.Post("comments", _model);
+        Comments = await _getComments();
+        StateHasChanged();
+    }
+
+    private void _invalidFormSubmitted(EditContext context)
+    {
+        _snackbar.Add(_localizer["SnackbarInvalid"], Severity.Error);
+        StateHasChanged();
+    }
+}
