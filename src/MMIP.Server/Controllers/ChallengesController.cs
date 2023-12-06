@@ -1,8 +1,8 @@
-﻿using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MMIP.Infrastructure.Services;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Filters;
+using System.Text.Json;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
 namespace MMIP.Server.Controllers

@@ -1,8 +1,8 @@
-﻿using System.Net;
-using System.Net.Http.Json;
-using MMIP.Client.Resources;
+﻿using MMIP.Client.Resources;
 using MMIP.Shared.Entities;
 using MudBlazor;
+using System.Net;
+using System.Net.Http.Json;
 
 namespace MMIP.Client.Controllers
 {

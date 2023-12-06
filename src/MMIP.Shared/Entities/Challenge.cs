@@ -1,5 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using MMIP.Shared.Enums;
+﻿using MMIP.Shared.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace MMIP.Shared.Entities
 {

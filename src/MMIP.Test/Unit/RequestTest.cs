@@ -1,8 +1,8 @@
-﻿using System.Net;
-using MMIP.Client.Controllers;
+﻿using MMIP.Client.Controllers;
 using MMIP.Client.Resources;
 using Moq;
 using MudBlazor;
+using System.Net;
 
 namespace MMIP.Test.Unit
 {

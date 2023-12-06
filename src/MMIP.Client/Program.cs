@@ -1,11 +1,11 @@
-using MMIP.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using MMIP.Client;
 using MMIP.Client.Controllers;
 using MMIP.Environment;
 using MMIP.Shared.StateContainers;
-using MudBlazor.Services;
 using MudBlazor;
+using MudBlazor.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

@@ -12,5 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MMIP.Client\MMIP.Client.csproj" />
+    <ProjectReference Include="..\MMIP.Shared\MMIP.Shared.csproj" />
   </ItemGroup>
 </Project>
