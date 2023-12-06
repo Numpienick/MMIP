@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
@@ -13,21 +13,30 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.ProtectedBrowserStorage" Version="5.0.0-rc.1.20451.17" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.10" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.10" PrivateAssets="all" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.14" />
         <PackageReference Include="MudBlazor" Version="6.11.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Environment\Environment.csproj" />
-      <ProjectReference Include="..\Shared\Shared.csproj" />
+      <ProjectReference Include="..\MMIP.Environment\MMIP.Environment.csproj" />
+      <ProjectReference Include="..\MMIP.Shared\MMIP.Shared.csproj" />
     </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="MMIP.Test" />
+  </ItemGroup>
 
     <ItemGroup>
       <None Include="wwwroot\Assets\Img\556x200.jpg" />
     </ItemGroup>
   
     <ItemGroup>
+      <Compile Update="Resources\ApplicationResource.en.Designer.cs">
+        <DependentUpon>ApplicationResource.en.resx</DependentUpon>
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+      </Compile>
       <Compile Update="Resources\ApplicationResource.Designer.cs">
         <DependentUpon>ApplicationResource.resx</DependentUpon>
         <DesignTime>True</DesignTime>
