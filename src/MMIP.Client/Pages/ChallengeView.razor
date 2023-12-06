@@ -38,12 +38,12 @@
                     <MudItem md="4">
                         <h2 class="card-centered-text mb-2">@_localizer["ChallengeStartDate"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
-                        <h3 class="card-centered-text">@Challenge.StartDate.DateTime.Date.ToString("dd/MM/yyyy")</h3>
+                        <h3 class="card-centered-text">@Challenge.StartDate.Date.ToString("dd/MM/yyyy")</h3>
                     </MudItem>
                     <MudItem md="4">
                         <h2 class="card-centered-text mb-2">@_localizer["ChallengeDeadline"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
-                        <h3 class="card-centered-text">@Challenge.Deadline.ToString("dd/MM/yyyy")</h3>
+                        <h3 class="card-centered-text">@Challenge.Deadline.Value.ToString("dd/MM/yyyy")</h3>
                     </MudItem>
                     <MudItem md="4">
                         <h2 class="card-centered-text mb-2">@_localizer["ChallengePhase"]</h2>
