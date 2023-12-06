@@ -220,6 +220,9 @@
   <data name="RemainingTags" xml:space="preserve">
     <value>Remaining tags</value>
   </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
   <data name="Request_NotFound" xml:space="preserve">
     <value>Something happened on our side, try again later</value>
   </data>
