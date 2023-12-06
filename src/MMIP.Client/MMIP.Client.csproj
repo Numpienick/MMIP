@@ -20,6 +20,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MMIP.Environment\MMIP.Environment.csproj" />
+      <ProjectReference Include="..\MMIP.Infrastructure\MMIP.Infrastructure.csproj" />
       <ProjectReference Include="..\MMIP.Shared\MMIP.Shared.csproj" />
     </ItemGroup>
 

@@ -9,7 +9,6 @@ using MudBlazor;
 using Microsoft.AspNetCore.Identity;
 using MudBlazor.Services;
 using MMIP.Shared.Contexts;
-using Microsoft.AspNetCore.Authentication;
 using MMIP.Infrastructure.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -21,7 +20,10 @@ builder.Services.AddMudServices();
 builder.Services.AddScoped<ProtectedSessionStorage>(); //Dependency injection
 builder.Services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<ChallengeContext>();
 
-builder.Services.AddScoped<Infrastructure.Services.IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<
+    MMIP.Infrastructure.Services.IAuthenticationService,
+    AuthenticationService
+>();
 
 //builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped(
