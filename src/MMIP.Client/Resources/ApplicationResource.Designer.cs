@@ -61,6 +61,24 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Over MatchMaker.
+        /// </summary>
+        internal static string AboutMatchMaker {
+            get {
+                return ResourceManager.GetString("AboutMatchMaker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Het bedrijf MatchMaker maakt zich sterk om innovatie bij het MKB in de regio Noord-Nederland te bevorderen. Het innoveren is geen doel op zich maar moet zorgen voor een vitale regio waarin het MKB meerwaarde kan blijven in de regio bieden via Business-to-Business en Business-to-Consumer..
+        /// </summary>
+        internal static string AboutMatchMakerDescription {
+            get {
+                return ResourceManager.GetString("AboutMatchMakerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reacties.
         /// </summary>
         internal static string ChallengeComments {
@@ -169,6 +187,24 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E-mailadres.
+        /// </summary>
+        internal static string E_mail {
+            get {
+                return ResourceManager.GetString("E-mail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wachtwoord vergeten?.
+        /// </summary>
+        internal static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Challenge deadline.
         /// </summary>
         internal static string FormChallengeDate {
@@ -241,11 +277,76 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inloggen.
+        /// </summary>
+        internal static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+        ///   Looks up a localized string similar to Het doel.
+        /// </summary>
+        internal static string GoalMatchMaker {
+            get {
+                return ResourceManager.GetString("GoalMatchMaker", resourceCulture);
+
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nog geen account? Klik hier om je aan te melden..
+        /// </summary>
+        internal static string NoAccount {
+            get {
+                return ResourceManager.GetString("NoAccount", resourceCulture);
+        ///   Looks up a localized string similar to MatchMaker zal zich richten op het actief identificeren van innovatiekansen binnen het MKB in Noord-Nederland en het faciliteren van samenwerkingen tussen ondernemers en experts om duurzame groei te stimuleren. Hiervoor zal dit online platform dienen als basis..
+        /// </summary>
+        internal static string GoalMatchMakerDescription {
+            get {
+                return ResourceManager.GetString("GoalMatchMakerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Innovatieplatform.
+        /// </summary>
+        internal static string Innovationplatform {
+            get {
+                return ResourceManager.GetString("Innovationplatform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Onze missie.
+        /// </summary>
+        internal static string MissionMatchMaker {
+            get {
+                return ResourceManager.GetString("MissionMatchMaker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wij zorgen dat elke ondernemer met een gerust hart de toekomst tegemoet kan zien!.
+        /// </summary>
+        internal static string MissionMatchMakerDescription {
+            get {
+                return ResourceManager.GetString("MissionMatchMakerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to andere tags.
         /// </summary>
         internal static string OtherTags {
             get {
                 return ResourceManager.GetString("OtherTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wachtwoord.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
             }
         }
         
@@ -324,6 +425,24 @@ namespace MMIP.Client.Resources {
         internal static string SnackbarInvalid {
             get {
                 return ResourceManager.GetString("SnackbarInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Onze visie.
+        /// </summary>
+        internal static string VisionMatchMaker {
+            get {
+                return ResourceManager.GetString("VisionMatchMaker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in innovatie..
+        /// </summary>
+        internal static string VisionMatchMakerDescripition {
+            get {
+                return ResourceManager.GetString("VisionMatchMakerDescripition", resourceCulture);
             }
         }
     }

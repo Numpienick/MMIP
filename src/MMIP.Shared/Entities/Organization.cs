@@ -1,20 +1,8 @@
 ﻿namespace MMIP.Shared.Entities
 {
-    public class Organization : BaseEntity, IProfile
+    public class Organization : BaseEntity
     {
         public string Name { get; set; }
-        private List<string> _tags;
-        public List<string> Tags
-        {
-            get => _tags;
-            set => _tags = value;
-        }
-        public string Description { get; set; }
-        public string AvatarPath { get; set; }
-
-        public string[] GetTags()
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<Challenge> Challenges { get; set; } = new List<Challenge>();
     }
 }

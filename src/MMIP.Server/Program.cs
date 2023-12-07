@@ -1,15 +1,19 @@
 using MMIP.Infrastructure.Services;
+using MMIP.Server.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //Cors
 builder.Services.AddCors(options =>
 {
-    options.AddDefaultPolicy(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+    options.AddDefaultPolicy(b => b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
 // Add services to the container.
 builder.Services.AddControllers();
+builder.Services.AddDatabase(false);
+
+// TODO: Move to a method in ServiceCollectionExtensions (and probably make transient)
 builder.Services.AddSingleton<ChallengeService>();
 builder.Services.AddSingleton<CommentService>();
 
@@ -24,6 +28,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+    app.UseMigrationsEndPoint();
 }
 
 app.UseHttpsRedirection();
@@ -34,5 +40,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+await app.Initialize(false);
 
 app.Run();

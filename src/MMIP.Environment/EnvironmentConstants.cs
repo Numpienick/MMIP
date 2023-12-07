@@ -32,5 +32,20 @@
                 };
             }
         }
+
+        public static string DatabaseConnectionString()
+        {
+            var connectionString =
+                System.Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING")
+                ?? "Host=localhost;Port=5432;Database=mmip_db;Username=mmip;Password=mmip123";
+
+            return Environment switch
+            {
+                Env.Development => $"{connectionString};Include Error Detail=true",
+                Env.Staging => $"{connectionString};Include Error Detail=true",
+                Env.Production => connectionString,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
     }
 }
