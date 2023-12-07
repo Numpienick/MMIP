@@ -153,6 +153,12 @@
   <data name="CreateCommentButton" xml:space="preserve">
     <value>Reactie plaatsen</value>
   </data>
+  <data name="E-mail" xml:space="preserve">
+    <value>E-mailadres</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Wachtwoord vergeten?</value>
+  </data>
   <data name="FormChallengeDate" xml:space="preserve">
     <value>Challenge deadline</value>
   </data>
@@ -177,8 +183,17 @@
   <data name="FormCommentType" xml:space="preserve">
     <value>Type reactie</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Inloggen</value>
+  </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value>Nog geen account? Klik hier om je aan te melden.</value>
+  </data>
   <data name="OtherTags" xml:space="preserve">
     <value>andere tags</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Wachtwoord</value>
   </data>
   <data name="PrivacyDeclaration" xml:space="preserve">
     <value>&lt;h1&gt;Privacyverklaring en Gegevensbeschermingsbeleid&lt;/h1&gt;
