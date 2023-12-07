@@ -280,4 +280,28 @@
   <data name="VisionMatchMakerDescription" xml:space="preserve">
     <value>MatchMaker contributes to a vital SME sector in Northern Netherlands by facilitating innovation.</value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="Prefix" xml:space="preserve">
+    <value>Prefix</value>
+  </data>
+  <data name="ProfileDescription" xml:space="preserve">
+    <value>Profile description</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="ProfilePicture" xml:space="preserve">
+    <value>Profile picture</value>
+  </data>
+  <data name="UploadProfilePicture" xml:space="preserve">
+    <value>Upload profile picture</value>
+  </data>
+  <data name="AgreementPrivacyStatement" xml:space="preserve">
+    <value>I agree with the &lt;a href="/privacyverklaring"&gt;privacy statement&lt;/a&gt; of MatchMaker.</value>
+  </data>
 </root>
