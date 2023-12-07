@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutMatchMaker" xml:space="preserve">
+    <value>Over MatchMaker</value>
+  </data>
+  <data name="AboutMatchMakerDescription" xml:space="preserve">
+    <value>Het bedrijf MatchMaker maakt zich sterk om innovatie bij het MKB in de regio Noord-Nederland te bevorderen. Het innoveren is geen doel op zich maar moet zorgen voor een vitale regio waarin het MKB meerwaarde kan blijven in de regio bieden via Business-to-Business en Business-to-Consumer.</value>
+  </data>
   <data name="ChallengeComments" xml:space="preserve">
     <value>Reacties</value>
   </data>
@@ -188,6 +194,20 @@
   </data>
   <data name="NoAccount" xml:space="preserve">
     <value>Nog geen account? Klik hier om je aan te melden.</value>
+  <data name="GoalMatchMaker" xml:space="preserve">
+    <value>Het doel</value>
+  </data>
+  <data name="GoalMatchMakerDescription" xml:space="preserve">
+    <value>MatchMaker zal zich richten op het actief identificeren van innovatiekansen binnen het MKB in Noord-Nederland en het faciliteren van samenwerkingen tussen ondernemers en experts om duurzame groei te stimuleren. Hiervoor zal dit online platform dienen als basis.</value>
+  </data>
+  <data name="Innovationplatform" xml:space="preserve">
+    <value>Innovatieplatform</value>
+  </data>
+  <data name="MissionMatchMaker" xml:space="preserve">
+    <value>Onze missie</value>
+  </data>
+  <data name="MissionMatchMakerDescription" xml:space="preserve">
+    <value>Wij zorgen dat elke ondernemer met een gerust hart de toekomst tegemoet kan zien!</value>
   </data>
   <data name="OtherTags" xml:space="preserve">
     <value>andere tags</value>
@@ -249,5 +269,11 @@
   </data>
   <data name="SnackbarInvalid" xml:space="preserve">
     <value>Er is iets fout gegaan.</value>
+  </data>
+  <data name="VisionMatchMaker" xml:space="preserve">
+    <value>Onze visie</value>
+  </data>
+  <data name="VisionMatchMakerDescripition" xml:space="preserve">
+    <value>MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in innovatie.</value>
   </data>
 </root>

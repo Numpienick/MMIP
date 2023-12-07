@@ -1,6 +1,7 @@
 ﻿@page "/"
+@inject IStringLocalizer<ApplicationResource> Localizer
 
-<PageTitle>MatchMaker innovatieplatform</PageTitle>
+<PageTitle>MatchMaker @Localizer["Innovationplatform"]</PageTitle>
 
 <h1>MatchMaker</h1>
 
@@ -17,6 +18,7 @@
                 </MudCarouselItem>
                 <MudCarouselItem Class="alignment-center">
                     <div class="alignment-center">
+                        @*TODO: Make translatable *@
                         <a href="/login">
                             <h2>Inloggen</h2>
                         </a>
@@ -29,32 +31,27 @@
         <MudCard>
             @* TODO: Add better text*@
             <MudCardContent>
-                <h2>Over MatchMaker</h2>
+                <h2>@Localizer["AboutMatchMaker"]</h2>
                 <p>
-                    Het bedrijf MatchMaker maakt zich sterk om innovatie bij het MKB in de regio Noord-Nederland te
-                    bevorderen. Het innoveren is geen doel op zich maar moet zorgen voor een vitale regio waarin het
-                    MKB meerwaarde kan blijven in de regio bieden via Business-to-Business en Business-to-Consumer.
+                    @Localizer["AboutMatchMakerDescription"]
                 </p>
             </MudCardContent>
             <MudCardContent>
-                <h3>Onze missie</h3>
+                <h3>@Localizer["MissionMatchMaker"]</h3>
                 <em>
-                    Wij zorgen dat elke ondernemer met een gerust hart de toekomst tegemoet kan zien!
+                    @Localizer["MissionMatchMakerDescription"]
                 </em>
             </MudCardContent>
             <MudCardContent>
-                <h3>Onze visie</h3>
+                <h3>@Localizer["VisionMatchMaker"]</h3>
                 <em>
-                    MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in
-                    innovatie.
+                    @Localizer["VisionMatchMakerDescription"]
                 </em>
             </MudCardContent>
             <MudCardContent>
-                <h3>Het doel</h3>
+                <h3>@Localizer["GoalMatchMaker"]</h3>
                 <em>
-                    MatchMaker zal zich richten op het actief identificeren van innovatiekansen binnen het MKB
-                    in Noord-Nederland en het faciliteren van samenwerkingen tussen ondernemers en experts
-                    om duurzame groei te stimuleren. Hiervoor zal dit online platform dienen als basis.
+                    @Localizer["GoalMatchMakerDescription"]
                 </em>
             </MudCardContent>
         </MudCard>

@@ -1,5 +1,4 @@
-﻿@using MMIP.Client.Components
-@using Microsoft.AspNetCore.Components.Forms;
+﻿@using Microsoft.AspNetCore.Components.Forms;
 @using MMIP.Client.Controllers;
 @using MMIP.Shared.Entities;
 @using MMIP.Shared.Enums;
@@ -39,23 +38,26 @@
                     <MudItem md="4">
                         <h2 class="card-centered-text mb-2">@_localizer["ChallengeStartDate"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
-                        <h3 class="card-centered-text">@Challenge.StartDate.DateTime.Date.ToString("dd/MM/yyyy")</h3>
+                        <h3 class="card-centered-text">@Challenge.StartDate.Date.ToString("dd/MM/yyyy")</h3>
                     </MudItem>
                     <MudItem md="4">
                         <h2 class="card-centered-text mb-2">@_localizer["ChallengeDeadline"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
-                        <h3 class="card-centered-text">@Challenge.Deadline.Value.Date.ToString("dd/MM/yyyy")</h3>
+                        <h3 class="card-centered-text">@Challenge.Deadline.Value.ToString("dd/MM/yyyy")</h3>
                     </MudItem>
                     <MudItem md="4">
                         <h2 class="card-centered-text mb-2">@_localizer["ChallengePhase"]</h2>
                         <MudDivider Class="mb-3"></MudDivider>
-                        <h3 class="card-centered-text">@Challenge.Phase.Name.Value</h3>
+                        @* TODO: Change phase id to phase name by using the ChallengeService. *@
+                        <h3 class="card-centered-text">@Challenge.CurrentPhaseId</h3>
                     </MudItem>
                 </MudGrid>
             </MudCardContent>
             @* TODO: Change progress max value according to maximum phase order. *@
             <MudCardContent>
-                <MudProgressLinear Color="Color.Success" Rounded="true" Size="Size.Large" Value="@Challenge.Phase.Order" Min="0" Max="7" />
+                @* TODO: Change phase id to phase by using the ChallengeService. *@
+                @* <MudProgressLinear Color="Color.Success" Rounded="true" Size="Size.Large" Value="@Challenge.CurrentPhase.Order" Min="0" Max="7"/> *@
+                <MudProgressLinear Color="Color.Success" Rounded="true" Size="Size.Large" Value="new Random().Next(0, 7)" Min="0" Max="7"/>
             </MudCardContent>
             <MudCardContent>
                 <h2 class="mt-4">@_localizer["ChallengeDescription"]</h2>
@@ -74,7 +76,9 @@
                         <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="150"></MudCardMedia>
                     </MudItem>
                     <MudItem md="5">
-                        <h2 class="card-organization-title">@Challenge.Organization.Name</h2>
+                        @* TODO: create a view *@
+                        @* <h2 class="card-organization-title">@Challenge.Organization.Name</h2> *@
+                        <h2 class="card-organization-title">FIX CHALLENGE NAME</h2>
                         <MudDivider Class="mt-2 mb-5"></MudDivider>
                         <h3 class="card-centered-text">Leander Jelgersma</h3>
                     </MudItem>
