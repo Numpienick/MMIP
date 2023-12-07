@@ -187,6 +187,24 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to E-mailadres.
+        /// </summary>
+        internal static string E_mail {
+            get {
+                return ResourceManager.GetString("E-mail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wachtwoord vergeten?.
+        /// </summary>
+        internal static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Challenge deadline.
         /// </summary>
         internal static string FormChallengeDate {
@@ -259,15 +277,26 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inloggen.
+        /// </summary>
+        internal static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
         ///   Looks up a localized string similar to Het doel.
         /// </summary>
         internal static string GoalMatchMaker {
             get {
                 return ResourceManager.GetString("GoalMatchMaker", resourceCulture);
+
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nog geen account? Klik hier om je aan te melden..
+        /// </summary>
+        internal static string NoAccount {
+            get {
+                return ResourceManager.GetString("NoAccount", resourceCulture);
         ///   Looks up a localized string similar to MatchMaker zal zich richten op het actief identificeren van innovatiekansen binnen het MKB in Noord-Nederland en het faciliteren van samenwerkingen tussen ondernemers en experts om duurzame groei te stimuleren. Hiervoor zal dit online platform dienen als basis..
         /// </summary>
         internal static string GoalMatchMakerDescription {
@@ -309,6 +338,15 @@ namespace MMIP.Client.Resources {
         internal static string OtherTags {
             get {
                 return ResourceManager.GetString("OtherTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wachtwoord.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
             }
         }
         

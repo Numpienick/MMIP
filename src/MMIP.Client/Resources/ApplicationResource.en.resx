@@ -159,6 +159,12 @@
   <data name="CreateCommentButton" xml:space="preserve">
     <value>Post comment</value>
   </data>
+  <data name="E-mail" xml:space="preserve">
+    <value>E-mail address</value>
+  </data>
+  <data name="ForgotPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
   <data name="FormChallengeDate" xml:space="preserve">
     <value>Challenge deadline</value>
   </data>
@@ -183,6 +189,11 @@
   <data name="FormCommentType" xml:space="preserve">
     <value>Comment type</value>
   </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="NoAccount" xml:space="preserve">
+    <value>No account yet? Click here to sign up.</value>
   <data name="GoalMatchMaker" xml:space="preserve">
     <value>Our goal</value>
   </data>
@@ -200,6 +211,9 @@
   </data>
   <data name="OtherTags" xml:space="preserve">
     <value>other tags</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
   </data>
   <data name="PrivacyDeclaration" xml:space="preserve">
     <value>&lt;h1&gt;Privacy Statement and Data Protection Policy&lt;/h1&gt;
