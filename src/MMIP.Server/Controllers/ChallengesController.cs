@@ -45,6 +45,16 @@ namespace MMIP.Server.Controllers
             return Ok(_challengeService.GetChallenges(criteria));
         }
 
+        [HttpGet("challengeCardView")]
+        public async Task<IActionResult> GetChallengeCardViews(int take, int skip)
+        {
+            var view = await _challengeService.GetCardViewsAsync(take, skip);
+            if (view.Any())
+                return Ok(view);
+
+            return Empty;
+        }
+
         [HttpPatch]
         public static IActionResult UpdateChallenge(Challenge challenge)
         {

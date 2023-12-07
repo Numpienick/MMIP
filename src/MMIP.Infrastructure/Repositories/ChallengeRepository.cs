@@ -1,5 +1,6 @@
 using MMIP.Shared.Entities;
 using MMIP.Shared.StateContainers;
+using MMIP.Shared.Views;
 
 namespace MMIP.Infrastructure.Repositories
 {
@@ -124,6 +125,32 @@ namespace MMIP.Infrastructure.Repositories
             allChallenges = _challenges.AsQueryable();
 
             return allChallenges;
+        }
+
+        public async Task<IEnumerable<ChallengeCardComponentView>> GetCardViewsAsync(
+            int take,
+            int skip
+        )
+        {
+            // TODO: replace with actual data when databse is implemented.
+            var data = new List<ChallengeCardComponentView>();
+            for (int i = 0; i < take; i++)
+            {
+                int index = i + skip;
+                data.Add(
+                    new()
+                    {
+                        ChallengeId = new Guid(),
+                        Title = $"CHALLENGE {index}",
+                        ShortDescription =
+                            $"NUMBER {index}. Voor deze challenge zoeken wij mensen die goede oplossingen hebben voor het plastic probleem.",
+                        BannerImagePath = $"https://picsum.photos/seed/{index}/556/200",
+                        OrganizationName = $"Company Name {index}"
+                    }
+                );
+            }
+
+            return data;
         }
 
         public override async Task<IQueryable<Challenge>> GetAllReadonly()

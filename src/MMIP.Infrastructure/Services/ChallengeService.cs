@@ -2,12 +2,13 @@
 using MMIP.Shared.Entities;
 using MMIP.Shared.Filters;
 using MMIP.Shared.StateContainers;
+using MMIP.Shared.Views;
 
 namespace MMIP.Infrastructure.Services
 {
     public class ChallengeService : BaseEntityService
     {
-        private ChallengeRepository _challengeRepository = new ChallengeRepository();
+        private ChallengeRepository _challengeRepository = new();
 
         public void CreateChallenge(Challenge challenge)
         {
@@ -45,6 +46,11 @@ namespace MMIP.Infrastructure.Services
             //return _challengeRepository.GetAll().Result;
 
             return TempStateContainer.Instance().Challenges;
+        }
+
+        public Task<IEnumerable<ChallengeCardComponentView>> GetCardViewsAsync(int take, int skip)
+        {
+            return _challengeRepository.GetCardViewsAsync(take, skip);
         }
 
         public void UpdateChallenge(Challenge challenge) { }

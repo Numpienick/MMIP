@@ -4,10 +4,10 @@ using MMIP.Shared.Views;
 
 namespace MMIP.Infrastructure.Context.Configuration.ViewConfiguration;
 
-internal class ChallengeCardComponentConfiguration
-    : IEntityTypeConfiguration<ChallengeCardComponent>
+internal class ChallengeCardComponentViewConfiguration
+    : IEntityTypeConfiguration<ChallengeCardComponentView>
 {
-    public void Configure(EntityTypeBuilder<ChallengeCardComponent> builder)
+    public void Configure(EntityTypeBuilder<ChallengeCardComponentView> builder)
     {
         builder.ToView("challenge_card_component_view").HasNoKey();
 
