@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutMatchMaker" xml:space="preserve">
+    <value>About MatchMaker</value>
+  </data>
+  <data name="AboutMatchMakerDescription" xml:space="preserve">
+    <value>MatchMaker is committed to promoting innovation among SME's in the Northern regions of the Netherlands. Innovation is not a goal in itself, but must ensure a vital region in which SME's can continue to offer added value in the region through Business-to-Business and Business-to-Consumer.</value>
+  </data>
   <data name="ChallengeComments" xml:space="preserve">
     <value>Comments</value>
   </data>
@@ -177,6 +183,21 @@
   <data name="FormCommentType" xml:space="preserve">
     <value>Comment type</value>
   </data>
+  <data name="GoalMatchMaker" xml:space="preserve">
+    <value>Our goal</value>
+  </data>
+  <data name="GoalMatchMakerDescription" xml:space="preserve">
+    <value>MatchMaker will focus on actively identifying innovation opportunities within the SME's in the Northern Netherlands and facilitating collaborations between entrepreneurs and experts to stimulate sustainable growth. For this, this online platform will serve as a basis.</value>
+  </data>
+  <data name="Innovationplatform" xml:space="preserve">
+    <value>Innovationplatform</value>
+  </data>
+  <data name="MissionMatchMaker" xml:space="preserve">
+    <value>Our mission</value>
+  </data>
+  <data name="MissionMatchMakerDescription" xml:space="preserve">
+    <value>We ensure that every entrepreneur can face the future with peace of mind</value>
+  </data>
   <data name="OtherTags" xml:space="preserve">
     <value>other tags</value>
   </data>
@@ -234,5 +255,11 @@
   </data>
   <data name="SnackbarInvalid" xml:space="preserve">
     <value>Something went wrong.</value>
+  </data>
+  <data name="VisionMatchMaker" xml:space="preserve">
+    <value>Our vision</value>
+  </data>
+  <data name="VisionMatchMakerDescription" xml:space="preserve">
+    <value>MatchMaker contributes to a vital SME sector in Northern Netherlands by facilitating innovation.</value>
   </data>
 </root>
