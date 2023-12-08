@@ -283,4 +283,7 @@
   <data name="VisionMatchMakerDescripition" xml:space="preserve">
     <value>MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in innovatie.</value>
   </data>
+  <data name="NoItemsFound" xml:space="preserve">
+    <value>Geen tags gevonden, voeg deze toe of zoek op iets anders.</value>
+  </data>
 </root>

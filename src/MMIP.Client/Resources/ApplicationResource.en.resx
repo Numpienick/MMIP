@@ -283,4 +283,7 @@
   <data name="VisionMatchMakerDescription" xml:space="preserve">
     <value>MatchMaker contributes to a vital SME sector in Northern Netherlands by facilitating innovation.</value>
   </data>
+  <data name="NoItemsFound" xml:space="preserve">
+    <value>No tags found, add this one or change your search term.</value>
+  </data>
 </root>
