@@ -446,9 +446,9 @@ namespace MMIP.Client.Resources {
         /// <summary>
         ///   Looks up a localized string similar to MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in innovatie..
         /// </summary>
-        internal static string VisionMatchMakerDescripition {
+        internal static string VisionMatchMakerDescription {
             get {
-                return ResourceManager.GetString("VisionMatchMakerDescripition", resourceCulture);
+                return ResourceManager.GetString("VisionMatchMakerDescription", resourceCulture);
             }
         }
     }
