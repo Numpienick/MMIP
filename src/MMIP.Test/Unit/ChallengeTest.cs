@@ -1,4 +1,5 @@
-﻿using MMIP.Infrastructure.Services;
+﻿using MMIP.Infrastructure.Repositories;
+using MMIP.Infrastructure.Services;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Enums;
 
@@ -9,7 +10,9 @@ namespace MMIP.Test.Unit
         [Fact]
         public void TooBigDescription_DoesntAddToDatabase()
         {
-            ChallengeService challengeService = new ChallengeService();
+            var challengeRepository = new ChallengeRepository();
+
+            ChallengeService challengeService = new ChallengeService(challengeRepository);
             Challenge challenge;
             Guid id = Guid.NewGuid();
             challenge = new Challenge
@@ -30,7 +33,9 @@ namespace MMIP.Test.Unit
         [Fact]
         public void Description_AddToDatabase()
         {
-            ChallengeService challengeService = new ChallengeService();
+            var challengeRepository = new ChallengeRepository();
+
+            ChallengeService challengeService = new ChallengeService(challengeRepository);
             Challenge challenge;
             Guid id = Guid.NewGuid();
             challenge = new Challenge

@@ -3,7 +3,7 @@ using MMIP.Shared.Enums;
 
 namespace MMIP.Infrastructure.Repositories
 {
-    internal class CommentRepository : BaseEntityRepository<Comment>
+    public class CommentRepository : BaseEntityRepository<Comment>
     {
         private List<Comment> _comments = new();
 

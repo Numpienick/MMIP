@@ -61,6 +61,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tag Toevoegen.
+        /// </summary>
+        internal static string Add_Tag {
+            get {
+                return ResourceManager.GetString("Add_Tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reacties.
         /// </summary>
         internal static string ChallengeComments {
@@ -237,6 +246,15 @@ namespace MMIP.Client.Resources {
         internal static string FormCommentType {
             get {
                 return ResourceManager.GetString("FormCommentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bezig met laden....
+        /// </summary>
+        internal static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
             }
         }
         

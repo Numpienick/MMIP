@@ -2,10 +2,10 @@
 
 namespace MMIP.Infrastructure.Repositories
 {
-    internal abstract class BaseEntityRepository<TEntity> : IRepository<TEntity>
+    public abstract class BaseEntityRepository<TEntity> : IRepository<TEntity>
         where TEntity : BaseEntity
     {
-        public abstract Task<TEntity> GetById(Guid id);
+        public abstract Task<TEntity?> GetById(Guid id);
 
         public abstract Task<TEntity> GetReadonlyById(Guid id);
 

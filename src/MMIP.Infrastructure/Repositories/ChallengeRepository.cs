@@ -3,7 +3,7 @@ using MMIP.Shared.StateContainers;
 
 namespace MMIP.Infrastructure.Repositories
 {
-    internal class ChallengeRepository : BaseEntityRepository<Challenge>
+    public class ChallengeRepository : BaseEntityRepository<Challenge>
     {
         private List<Challenge> _challenges = new();
 
@@ -52,16 +52,16 @@ namespace MMIP.Infrastructure.Repositories
             challenge1.Title = "Recyclen plastic bekertjes";
             challenge1.ShortDescription =
                 "Zit jij vol met innovatieve ideeën rond milieuverbetering? Dan zoeken we jou! 80";
-            challenge1.Tags = new string[]
+            challenge1.Tags = new List<Tag>
             {
-                "Voetbal",
-                "Mandje",
-                "Dit is een tag!",
-                "Plastic",
-                "Oceaan",
-                "Strand",
-                "Kaas",
-                "Recyclen"
+                new("Voetbal"),
+                new("Mandje"),
+                new("Dit is een tag!"),
+                new("Plastic"),
+                new("Oceaan"),
+                new("Strand"),
+                new("Kaas"),
+                new("Recyclen")
             };
             challenge1.StartDate = new DateTimeOffset(new DateTime(2023, 9, 3));
             challenge1.Organization = new Organization();
@@ -78,16 +78,16 @@ namespace MMIP.Infrastructure.Repositories
             challenge2.Title = "Jongere docenten voor de klas";
             challenge2.ShortDescription =
                 "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag! Dit is 150C.";
-            challenge2.Tags = new string[]
+            challenge2.Tags = new List<Tag>
             {
-                "Dit is tag 1",
-                "Dit is tag 2",
-                "Dit is tag 3",
-                "Dit is tag 4",
-                "Dit is tag 5",
-                "Dit is tag 6",
-                "Dit is tag 7",
-                "Dit is tag 8"
+                new("Dit is tag 1"),
+                new("Dit is tag 2"),
+                new("Dit is tag 3"),
+                new("Dit is tag 4"),
+                new("Dit is tag 5"),
+                new("Dit is tag 6"),
+                new("Dit is tag 7"),
+                new("Dit is tag 8")
             };
             challenge2.StartDate = new DateTimeOffset(new DateTime(2023, 10, 3));
             challenge2.Organization = new Organization();
@@ -112,7 +112,13 @@ namespace MMIP.Infrastructure.Repositories
             challenge4.Title = "Jongere docenten voor de klas";
             challenge4.ShortDescription =
                 "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
-            challenge4.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
+            challenge4.Tags = new List<Tag>
+            {
+                new("School"),
+                new("Onderwijs"),
+                new("Leraren"),
+                new("Lesgeven")
+            };
             challenge4.StartDate = new DateTimeOffset(new DateTime(2023, 10, 21));
             challenge4.Organization = new Organization();
             challenge4.Organization.Name = "Company Name";
@@ -124,7 +130,13 @@ namespace MMIP.Infrastructure.Repositories
             challenge5.Title = "Jongere docenten voor de klas";
             challenge5.ShortDescription =
                 "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
-            challenge5.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
+            challenge5.Tags = new List<Tag>
+            {
+                new("School"),
+                new("Onderwijs"),
+                new("Leraren"),
+                new("Lesgeven")
+            };
             challenge5.StartDate = new DateTimeOffset(new DateTime(2023, 10, 19));
             challenge5.Organization = new Organization();
             challenge5.Organization.Name = "Company Name";
@@ -136,7 +148,13 @@ namespace MMIP.Infrastructure.Repositories
             challenge6.Title = "Jongere docenten voor de klas";
             challenge6.ShortDescription =
                 "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
-            challenge6.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
+            challenge6.Tags = new List<Tag>
+            {
+                new("School"),
+                new("Onderwijs"),
+                new("Leraren"),
+                new("Lesgeven")
+            };
             challenge6.StartDate = new DateTimeOffset(new DateTime(2023, 11, 19));
             challenge6.Organization = new Organization();
             challenge6.Organization.Name = "Company Name";
@@ -148,7 +166,13 @@ namespace MMIP.Infrastructure.Repositories
             challenge7.Title = "Jongere docenten voor de klas";
             challenge7.ShortDescription =
                 "Scholen hebben meer jongere docenten nodig. Heb jij een idee om jongere docenten te lokken om voor de klas te staan? Wij horen het graag!";
-            challenge7.Tags = new string[] { "School", "Onderwijs", "Leraren", "Lesgeven" };
+            challenge7.Tags = new List<Tag>
+            {
+                new("School"),
+                new("Onderwijs"),
+                new("Leraren"),
+                new("Lesgeven")
+            };
             challenge7.StartDate = new DateTimeOffset(new DateTime(2023, 11, 25));
             challenge7.Organization = new Organization();
             challenge7.Organization.Name = "Company Name";

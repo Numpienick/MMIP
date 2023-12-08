@@ -22,7 +22,7 @@ namespace MMIP.Shared.Entities
         public DateTime? Deadline { get; set; }
         public DateTimeOffset StartDate { get; set; }
         public string? FinalReport { get; set; }
-        public string[]? Tags { get; set; } //TODO: add tags to creating challenges
+        public List<Tag> Tags { get; set; } = new();
         public Organization? Organization { get; set; } //TODO: add organization to creating challenges
 
         [Required(ErrorMessage = "Zichtbaarheid moet gedefinieerd worden.")]

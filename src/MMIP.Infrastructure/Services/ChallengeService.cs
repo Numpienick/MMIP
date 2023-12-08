@@ -5,9 +5,12 @@ using MMIP.Shared.StateContainers;
 
 namespace MMIP.Infrastructure.Services
 {
-    public class ChallengeService : BaseEntityService
+    public class ChallengeService : BaseEntityService<Challenge>
     {
-        private ChallengeRepository _challengeRepository = new ChallengeRepository();
+        private ChallengeRepository _challengeRepository = new();
+
+        public ChallengeService(IRepository<Challenge> repository)
+            : base(repository) { }
 
         public void CreateChallenge(Challenge challenge)
         {

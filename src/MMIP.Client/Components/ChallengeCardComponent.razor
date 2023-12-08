@@ -27,17 +27,17 @@
                 @{
                     int count = 0;
 
-                    foreach (string tag in Challenge.Tags)
+                    foreach (Tag tag in Challenge.Tags)
                     {
                         if (count < MaximumVisibleTags)
                         {
-                            <MudChip Size="Size.Small" Color="Color.Primary">@tag</MudChip>
+                            <MudChip Size="Size.Small" Color="Color.Primary">@tag.Value</MudChip>
                             count++;
                         }
 
                         else
                         {
-                            if (Challenge.Tags.Length > MaximumVisibleTags)
+                            if (Challenge.Tags.Count > MaximumVisibleTags)
                             {
                                 <MudTooltip Arrow="true" Placement="Placement.Bottom" Class="grey lighten-2 icon-tooltip">
                                     <ChildContent>
@@ -45,9 +45,9 @@
                                     </ChildContent>
                                     <TooltipContent>
                                         <h3>@_localizer["RemainingTags"]:</h3>
-                                        @for (int i = MaximumVisibleTags; i < Challenge.Tags.Length; i++)
+                                        @for (int i = MaximumVisibleTags; i < Challenge.Tags.Count; i++)
                                         {
-                                            <p>@Challenge.Tags[i]</p>
+                                            <p>@Challenge.Tags[i].Value</p>
                                         }
                                     </TooltipContent>
                                 </MudTooltip>
@@ -71,7 +71,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _additionalTags = Challenge.Tags.Length - MaximumVisibleTags;
+        _additionalTags = Challenge.Tags.Count - MaximumVisibleTags;
         base.OnInitialized();
     }
 

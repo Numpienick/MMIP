@@ -4,9 +4,12 @@ using MMIP.Shared.StateContainers;
 
 namespace MMIP.Infrastructure.Services
 {
-    public class CommentService : BaseEntityService
+    public class CommentService : BaseEntityService<Comment>
     {
         private readonly CommentRepository _commentRepository = new();
+
+        public CommentService(IRepository<Comment> repository)
+            : base(repository) { }
 
         public void CreateComment(Comment comment)
         {

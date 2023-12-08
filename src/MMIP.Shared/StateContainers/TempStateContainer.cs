@@ -8,6 +8,7 @@ namespace MMIP.Shared.StateContainers
 
         public IQueryable<Challenge> Challenges { get; set; }
         public IQueryable<Comment> Comments { get; set; }
+        public IQueryable<Tag> Tags { get; set; }
 
         public static TempStateContainer Instance()
         {
