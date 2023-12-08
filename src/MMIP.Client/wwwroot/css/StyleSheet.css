@@ -54,3 +54,9 @@ ul {
   position: absolute;
   right: 0;
 }
+
+.alignment-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
