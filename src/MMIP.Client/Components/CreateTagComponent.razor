@@ -41,7 +41,7 @@
 
     [Parameter]
     public List<Tag> SelectedTags { get; set; } = new();
-    private CustomValidation _validation = new();
+    private ValueValidator _validator = new();
     private List<ValidationResult> _validated = new();
 
 
@@ -58,7 +58,7 @@
     {
         if (!string.IsNullOrEmpty(_tag.Value))
         {
-            _validated = _validation.Validate(_tag.Value, "Value", typeof(Tag));
+            _validated = _validator.Validate(_tag.Value, "Value", typeof(Tag));
             if (_validated.Count == 0)
             {
                 SelectedTags.Add(_tag);
