@@ -17,9 +17,15 @@
   color: white;
 }
 
-.mud-appbar,
-.mud-toolbar,
 .mud-expand-panel {
+  background-color: var(--primary-color);
+}
+
+.footer-layout-color {
+  background-color: var(--footer-color) !important;
+}
+
+.navbar-layout-color {
   background-color: var(--primary-color);
 }
 

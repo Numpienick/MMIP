@@ -3,35 +3,35 @@
 
 <PageTitle>MatchMaker @Localizer["Innovationplatform"]</PageTitle>
 
-<h1>MatchMaker</h1>
+    <h1>MatchMaker</h1>
 
-<MudGrid Justify="Justify.Center" Class="grid-margin">
-    <MudItem md="6" xs="12" Class="carousel-alignment">
-        <MudCard Class="mudcard-background" Elevation="0">
-            <MudCarousel Class="carousel-height" TData="object" ShowBullets="false" AutoCycleTime="TimeSpan.FromSeconds(10)">
-                <MudCarouselItem>
-                    <div class="alignment-center">
-                        <a>
-                            <img class="carousel-image-style" src="Assets/Img/MatchmakerLogo.png" alt="MatchMaker logo" />
-                        </a>
-                    </div>
-                </MudCarouselItem>
-                <MudCarouselItem Class="alignment-center">
-                    <div class="alignment-center">
-                        @*TODO: Make translatable *@
-                        <a href="/login">
-                            <h2>Inloggen</h2>
-                        </a>
-                    </div> 
-                </MudCarouselItem>
-            </MudCarousel>
-        </MudCard>
-    </MudItem>
-    <MudItem md="6" xs="12">
-        <MudCard>
-            @* TODO: Add better text*@
-            <MudCardContent>
-                <h2>@Localizer["AboutMatchMaker"]</h2>
+    <MudGrid Justify="Justify.Center" Class="grid-margin">
+        <MudItem md="6" xs="12" Class="carousel-alignment">
+            <MudCard Class="mudcard-background" Elevation="0">
+                <MudCarousel Class="carousel-height" TData="object" ShowBullets="false" AutoCycleTime="TimeSpan.FromSeconds(10)">
+                    <MudCarouselItem>
+                        <div class="alignment-center">
+                            <a>
+                                <img class="carousel-image-style" src="Assets/Img/MatchmakerLogo.png" alt="MatchMaker logo" />
+                            </a>
+                        </div>
+                    </MudCarouselItem>
+                    <MudCarouselItem Class="alignment-center">
+                        <div class="alignment-center">
+                            @*TODO: Make translatable *@
+                            <a href="/login">
+                                <h2>Inloggen</h2>
+                            </a>
+                        </div>
+                    </MudCarouselItem>
+                </MudCarousel>
+            </MudCard>
+        </MudItem>
+        <MudItem md="6" xs="12">
+            <MudCard>
+                @* TODO: Add better text*@
+                <MudCardContent>
+                    <h2>@Localizer["AboutMatchMaker"]</h2>
                 <p>
                     @Localizer["AboutMatchMakerDescription"]
                 </p>
@@ -56,11 +56,15 @@
             </MudCardContent>
         </MudCard>
     </MudItem>
+    <MudAppBar Bottom="true" Fixed="true" Elevation="1" Class="footer-layout-color">
+        <a href="/privacyverklaring">
+            @Localizer["PrivacyPageTitle"] | 2023
+        </a>
+    </MudAppBar>
 </MudGrid>
 
 @* TODO: Add list with carousel items and randomize them *@
-
 @code
 {
- 
+
 }

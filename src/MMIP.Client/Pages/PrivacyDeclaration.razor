@@ -1,9 +1,18 @@
 ﻿@page "/privacyverklaring"
-@inject IStringLocalizer<ApplicationResource> _localizer
+@inject IStringLocalizer<ApplicationResource> Localizer
 
-<MudItem Class="ma-16">
-    @((MarkupString)_localizer["PrivacyDeclaration"].ToString())
-</MudItem>
+<h1>@Localizer["PrivacyPageTitle"]</h1>
+<MudGrid Justify="Justify.Center" Class="mb-15 mt-2">
+    <MudItem md="12">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <MudItem Class="ma-16">
+                    @((MarkupString)Localizer["PrivacyDeclaration"].ToString())
+                </MudItem>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
 
 @code {
 
