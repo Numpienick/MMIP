@@ -1,4 +1,7 @@
 ﻿namespace MMIP.Shared.Entities
 {
-    public enum Sector { }
+    public class Sector : BaseEntity
+    {
+        public string Name { get; set; }
+    }
 }

@@ -1,4 +1,4 @@
-﻿using MMIP.Shared.Entities;
+using MMIP.Shared.Entities;
 using MMIP.Shared.StateContainers;
 
 namespace MMIP.Infrastructure.Repositories
@@ -26,25 +26,11 @@ namespace MMIP.Infrastructure.Repositories
         {
             IQueryable<Challenge> allChallenges;
             Phase ongoing = new Phase();
-            ongoing.Name = new Text(
-                new DateTimeOffset(),
-                new Guid(),
-                null,
-                new Guid(),
-                new DateTimeOffset(),
-                "Challenge gaande"
-            );
+            ongoing.Name = "Challenge gaande";
             ongoing.Order = 3;
 
             Phase finished = new Phase();
-            finished.Name = new Text(
-                new DateTimeOffset(),
-                new Guid(),
-                null,
-                new Guid(),
-                new DateTimeOffset(),
-                "Challenge afgerond"
-            );
+            finished.Name = "Challenge afgerond";
             finished.Order = 7;
 
             Challenge challenge1 = new Challenge();
@@ -64,13 +50,13 @@ namespace MMIP.Infrastructure.Repositories
                 new("Recyclen")
             };
             challenge1.StartDate = new DateTimeOffset(new DateTime(2023, 9, 3));
-            challenge1.Organization = new Organization();
-            challenge1.Organization.Name = "Company Name";
+            // challenge1.Organization = new Organization();
+            // challenge1.Organization.Name = "Company Name";
             challenge1.BannerImagePath = "Assets/Img/1800x200.png";
             challenge1.Description =
                 "Plastic wordt steeds vaker gevonden in de oceaan. Er zijn vrijwilligers die graag plastic en vuil van het strand willen opruimen. Echter zijn er lang niet genoeg vrijwilligers, en blijft er genoeg plastic zweven in de oceaan. Wij zoeken naar innovatieve oplossingen die dit probleem tegen kunnen gaan. Mensen die expertise in robotica of milieukunde hebben, zijn ideale kandidaten voor deze challenge. Daarnaast zijn wij op zoek naar mensen die minimaal een HBO-diploma hebben. Zou jij graag mee willen helpen aan dit probleem, of heb jij een genieus idee dat je achter wil laten? Laat dan vooral een reactie achter!";
             challenge1.Deadline = new DateTime(2023, 10, 3);
-            challenge1.Phase = ongoing;
+            challenge1.CurrentPhaseId = ongoing.Id;
             _challenges.Add(challenge1);
 
             Challenge challenge2 = new Challenge();
@@ -90,15 +76,15 @@ namespace MMIP.Infrastructure.Repositories
                 new("Dit is tag 8")
             };
             challenge2.StartDate = new DateTimeOffset(new DateTime(2023, 10, 3));
-            challenge2.Organization = new Organization();
-            challenge2.Organization.Name = "Company Name";
+            // challenge2.Organization = new Organization();
+            // challenge2.Organization.Name = "Company Name";
             challenge2.BannerImagePath = "Assets/Img/1800x200.png";
             challenge2.Description =
                 "Tegenwoordig is er een groot tekort aan docenten op het primair onderwijs. Het is van belang dat kinderen goed basisonderwijs krijgen. Hier heeft iedereen recht op. Het aantal studenten op de PABO wordt steeds lager, en steeds vaker stoppen studenten halverwege met de opleiding. Wij zijn op zoek naar iedeëen om meer studenten te lokken om de PABO te gaan studeren. Ben jij 18+, en heb jij een idee of suggestie? Dan horen wij dat graag!";
             challenge2.Deadline = new DateTime(2023, 10, 19);
             challenge2.FinalReport =
                 "Een groepje studenten is met het idee gekomen om de kosten van de PABO opleidingen definitief te halveren. Daarnaast kwamen zij met het idee om werkloze jongeren in de klas te zetten als klassenhulp. Hierdoor verkrijgen zij werkervaring in de klas, en zouden zij na een aantal jaar zelfstandig voor een klas mogen staan.";
-            challenge2.Phase = finished;
+            challenge2.CurrentPhaseId = finished.Id;
             _challenges.Add(challenge2);
 
             _challenges.Add(challenge2);
@@ -120,8 +106,8 @@ namespace MMIP.Infrastructure.Repositories
                 new("Lesgeven")
             };
             challenge4.StartDate = new DateTimeOffset(new DateTime(2023, 10, 21));
-            challenge4.Organization = new Organization();
-            challenge4.Organization.Name = "Company Name";
+            // challenge4.Organization = new Organization();
+            // challenge4.Organization.Name = "Company Name";
             challenge4.BannerImagePath = "Assets/Img/556x200.jpg";
             _challenges.Add(challenge4);
 
@@ -138,8 +124,8 @@ namespace MMIP.Infrastructure.Repositories
                 new("Lesgeven")
             };
             challenge5.StartDate = new DateTimeOffset(new DateTime(2023, 10, 19));
-            challenge5.Organization = new Organization();
-            challenge5.Organization.Name = "Company Name";
+            // challenge5.Organization = new Organization();
+            // challenge5.Organization.Name = "Company Name";
             challenge5.BannerImagePath = "Assets/Img/556x200.jpg";
             _challenges.Add(challenge5);
 
@@ -156,8 +142,8 @@ namespace MMIP.Infrastructure.Repositories
                 new("Lesgeven")
             };
             challenge6.StartDate = new DateTimeOffset(new DateTime(2023, 11, 19));
-            challenge6.Organization = new Organization();
-            challenge6.Organization.Name = "Company Name";
+            // challenge6.Organization = new Organization();
+            // challenge6.Organization.Name = "Company Name";
             challenge6.BannerImagePath = "Assets/Img/556x200.jpg";
             _challenges.Add(challenge6);
 
@@ -174,8 +160,8 @@ namespace MMIP.Infrastructure.Repositories
                 new("Lesgeven")
             };
             challenge7.StartDate = new DateTimeOffset(new DateTime(2023, 11, 25));
-            challenge7.Organization = new Organization();
-            challenge7.Organization.Name = "Company Name";
+            // challenge7.Organization = new Organization();
+            // challenge7.Organization.Name = "Company Name";
             challenge7.BannerImagePath = "Assets/Img/556x200.jpg";
             _challenges.Add(challenge7);
 
