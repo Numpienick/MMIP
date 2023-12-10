@@ -1,9 +1,70 @@
 ﻿@page "/login"
+@using Microsoft.AspNetCore.Components.Forms
+@using MMIP.Infrastructure.Services
+@using MMIP.Shared.Entities
+@inject IStringLocalizer<ApplicationResource> Localizer
 
 <PageTitle>Inloggen</PageTitle>
 
-<h1>Inloggen</h1>
+<h1>@Localizer["Login"]</h1>
+<MudGrid Justify="Justify.Center" Class="mb-15 mt-2">
+    <MudItem md="6">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                @*TODO: add functionality to the form*@
+                @* <EditForm Model=@_user OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted> *@
+                    @* <DataAnnotationsValidator/> *@
+                    @*TODO: add bind value with the User class -> replace the T="string"*@
+                    <MudItem Class="mb-10 mt-4">
+                        <h2 class="alignment-center">@Localizer["E-mail"]</h2>
+                        <MudTextField T="string" Label="@Localizer["E-mail"]" Variant="Variant.Outlined" InputType="_emailInput"></MudTextField>
+                    </MudItem>
+                    @*TODO: add bind value with the User class -> replace the T="string"*@
+                    <MudItem Class="mb-2">
+                        <h2 class="alignment-center">@Localizer["Password"]</h2>
+                        <MudTextField T="string" Label="@Localizer["Password"]" Variant="Variant.Outlined" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="@showPasswordIconClick" AdornmentAriaLabel="Show password"></MudTextField>
+                    </MudItem>
+                    @*TODO: change the redirect*@
+                    <MudItem Class="mb-10">
+                        <a class="alignment-center" href="/register">
+                            @Localizer["ForgotPassword"]
+                        </a>
+                    </MudItem>
+                    @*TODO: add redirect when there is a successful login*@
+                    <MudItem md="7" Class="mb-10">
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer["Login"]</MudButton>
+                    </MudItem>
+                    <MudItem>
+                        <a class="alignment-center" href="/register">
+                            @Localizer["NoAccount"]
+                        </a>
+                    </MudItem>
+                @* </EditForm> *@
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
 
 @code {
+    private readonly InputType _emailInput = InputType.Email;
+    private InputType _passwordInput = InputType.Password;
 
+    private bool _isShown;
+    private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+
+    private void showPasswordIconClick()
+    {
+        if (_isShown)
+        {
+            _isShown = false;
+            _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+            _passwordInput = InputType.Password;
+        }
+        else
+        {
+            _isShown = true;
+            _passwordInputIcon = Icons.Material.Filled.Visibility;
+            _passwordInput = InputType.Text;
+        }
+    }
 }

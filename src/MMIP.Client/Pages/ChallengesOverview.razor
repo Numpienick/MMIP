@@ -61,7 +61,7 @@
     private async Task<IEnumerable<ChallengeCardComponentView>> _getChallengeCardViews(int take, int skip)
     {
     // TODO: replace with requestcontroller when Whim is done
-        var cards = (await Client.GetFromJsonAsync<IEnumerable<ChallengeCardComponentView>>($"challenges/challengeCardView?take={take}&&skip={skip}")
+        var cards = (await Client.GetFromJsonAsync<IEnumerable<ChallengeCardComponentView>>($"challenges/overview?take={take}&&skip={skip}")
                      ?? Enumerable.Empty<ChallengeCardComponentView>()).ToList();
 
         if (cards.Count() < take)

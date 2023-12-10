@@ -26,13 +26,16 @@
         <Link>.dockerignore</Link>
       </Content>
     </ItemGroup>
-
+    
     <ItemGroup>
-      <ProjectReference Include="..\MMIP.Infrastructure\MMIP.Infrastructure.csproj" />
-      <ProjectReference Include="..\MMIP.Shared\MMIP.Shared.csproj" />
+        <InternalsVisibleTo Include="MMIP.Test" />
+        <InternalsVisibleTo Include="MMIP.Test.Infrastructure" />
+        <InternalsVisibleTo Include="MMIP.Test.DependencyInjection" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+      <ProjectReference Include="..\MMIP.Environment\MMIP.Environment.csproj" />
+      <ProjectReference Include="..\MMIP.Infrastructure\MMIP.Infrastructure.csproj" />
+      <ProjectReference Include="..\MMIP.Shared\MMIP.Shared.csproj" />
     </ItemGroup>
 </Project>

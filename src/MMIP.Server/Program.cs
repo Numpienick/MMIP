@@ -1,4 +1,4 @@
-using MMIP.Infrastructure.Services;
+using MMIP.Infrastructure.Extensions;
 using MMIP.Server.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,10 +12,8 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddDatabase(false);
-
-// TODO: Move to a method in ServiceCollectionExtensions (and probably make transient)
-builder.Services.AddSingleton<ChallengeService>();
-builder.Services.AddSingleton<CommentService>();
+builder.Services.AddEntityServices();
+builder.Services.AddRepositories();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -40,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-await app.Initialize(false);
+await app.Initialize(true);
 
 app.Run();
