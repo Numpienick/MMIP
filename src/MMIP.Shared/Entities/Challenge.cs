@@ -5,11 +5,6 @@ namespace MMIP.Shared.Entities
 {
     public class Challenge : BaseEntity
     {
-        public Challenge()
-        {
-            Tags = new();
-        }
-
         //TODO: Make it work with Text instead of string
         [Required(ErrorMessage = "Challenge titel is vereist.")]
         public string Title { get; set; } = null!;
