@@ -1,4 +1,4 @@
 ﻿namespace MMIP.Infrastructure.Services
 {
-    public class UserService : BaseEntityService { }
+    public class UserService { }
 }
