@@ -25,14 +25,14 @@
     @_validated.FirstOrDefault()?.ErrorMessage
 </MudText>
 <br />
-<MudGrid Justify="Justify.Center">
+<MudItem Class="d-flex justify-center">
     <MudChipSet AllClosable=true>
         @foreach (Tag tag in SelectedTags)
         {
             <MudChip OnClose="@(() => RemoveTag(tag.Value))">@tag.Value</MudChip>
         }
     </MudChipSet>
-</MudGrid>
+</MudItem>
 
 @code {
     private Tag _tag = new();
@@ -41,7 +41,8 @@
 
     [Parameter]
     public List<Tag> SelectedTags { get; set; } = new();
-    private ValueValidator _validator = new();
+    [Inject]
+    private ValueValidator _validator { get; set; }
     private List<ValidationResult> _validated = new();
 
 
