@@ -3,13 +3,14 @@ using MMIP.Server.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddIdentity();
+
 //Cors
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(b => b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
-// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddDatabase(false);
 builder.Services.AddEntityServices();
@@ -34,7 +35,7 @@ app.UseHttpsRedirection();
 
 app.UseCors();
 
-app.UseAuthorization();
+app.UseIdentityServices();
 
 app.MapControllers();
 

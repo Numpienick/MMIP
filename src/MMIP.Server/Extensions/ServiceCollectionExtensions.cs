@@ -1,8 +1,10 @@
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.EntityFrameworkCore;
 using MMIP.Environment;
 using MMIP.Infrastructure.Context;
+using MMIP.Infrastructure.Models.Identity;
 using MMIP.Infrastructure.Seeders;
 using MMIP.Infrastructure.Seeders.EntitySeeders;
-using Microsoft.EntityFrameworkCore;
 using MMIP.Shared.Entities;
 
 namespace MMIP.Server.Extensions;
@@ -40,6 +42,19 @@ internal static class ServiceCollectionExtensions
         services.AddTransient<IDatabaseSeeder, RandomDataSeeder>();
         services.AddTransient<IEntitySeeder<Organization>, OrganizationSeeder>();
         services.AddTransient<IEntitySeeder<Challenge>, ChallengeSeeder>();
+        return services;
+    }
+
+    internal static IServiceCollection AddIdentity(this IServiceCollection services)
+    {
+        services
+            .AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            .AddEntityFrameworkStores<ApplicationContext>();
+
+        services.AddIdentityServer().AddApiAuthorization<AppUser, ApplicationContext>();
+
+        services.AddAuthentication().AddIdentityServerJwt();
+
         return services;
     }
 }
