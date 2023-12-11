@@ -12,10 +12,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.1" />
-        <PackageReference Include="Moq" Version="4.20.70" />
-        <PackageReference Include="xunit" Version="2.4.2" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.1"/>
+        <PackageReference Include="xunit" Version="2.4.2"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -27,12 +25,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MMIP.Client\MMIP.Client.csproj" />
-      <ProjectReference Include="..\MMIP.Environment\MMIP.Environment.csproj" />
-      <ProjectReference Include="..\MMIP.Infrastructure\MMIP.Infrastructure.csproj" />
-      <ProjectReference Include="..\MMIP.Server\MMIP.Server.csproj" />
-      <ProjectReference Include="..\MMIP.Shared\MMIP.Shared.csproj" />
-      <ProjectReference Include="..\MMIP.Test.Infrastructure\MMIP.Test.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\MMIP.Test.Infrastructure\MMIP.Test.Infrastructure.csproj"/>
+        <ProjectReference Include="..\..\MMIP.Server\MMIP.Server.csproj"/>
+        <ProjectReference Include="..\MMIP.Test.csproj"/>
     </ItemGroup>
 
 </Project>

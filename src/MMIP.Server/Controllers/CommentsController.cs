@@ -10,20 +10,18 @@ namespace MMIP.Server.Controllers
     public class CommentsController : Controller
     {
         private readonly CommentService _commentService;
-        private readonly ChallengeService _challengeService;
 
-        public CommentsController(CommentService commentService, ChallengeService challengeService)
+        public CommentsController(CommentService commentService)
         {
             _commentService = commentService;
-            _challengeService = challengeService;
         }
 
         [HttpPost]
-        public IActionResult CreateComment([FromBody] Comment comment)
+        public async Task<IActionResult> CreateComment([FromBody] Comment comment)
         {
             try
             {
-                _commentService.CreateComment(comment);
+                await _commentService.AddAsync(comment);
                 return Ok("Successfully created comment");
             }
             catch (ArgumentException e)
@@ -33,19 +31,23 @@ namespace MMIP.Server.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetComment(Guid id)
+        [HttpGet]
+        public async Task<IActionResult> GetComment(Guid id)
         {
-            return Ok(_commentService.GetComment(id));
+            var result = await _commentService.GetByIdAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
 
         // TODO: Get comments from specific challenge.
-        [HttpGet]
-        public IActionResult GetComments(Guid challengeId)
+        [HttpGet("byChallengeId")]
+        public async Task<IActionResult> GetCommentsByChallengeId(Guid challengeId)
         {
-            //Challenge challenge = _challengeService.GetChallenge(challengeId);
-            //return Ok(_commentService.GetComments().Where(r => r.Id == challengeId));
-            return Ok(_commentService.GetComments());
+            var result = await _commentService.GetCommentsByChallengeIdAsync(challengeId);
+            if (result.Any())
+                return Ok(result);
+            return Empty;
         }
     }
 }

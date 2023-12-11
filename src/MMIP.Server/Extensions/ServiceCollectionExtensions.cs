@@ -32,6 +32,8 @@ internal static class ServiceCollectionExtensions
             )
             .AddDatabaseDeveloperPageExceptionFilter();
 #endif
+        services.AddTransient<IDatabaseSeeder, DefaultsSeeder>();
+
         if (!addRandomDataSeeder)
             return services;
 

@@ -1,0 +1,17 @@
+name: mmip-database-temp
+services:
+  temp_postgres_db:
+    image: postgres:latest
+    container_name: MMIP_Postgres_TEMP
+    restart: no
+    environment:
+      - POSTGRES_DB=mmip_db_temp
+      - POSTGRES_USER=mmip
+      - POSTGRES_PASSWORD=mmip123
+    ports:
+      - "6543:5432"
+    volumes:
+      - temp_postgres_db:/var/lib/postgresql/data
+volumes:
+  temp_postgres_db:
+    driver: local
