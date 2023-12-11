@@ -14,41 +14,40 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\MMIP.Environment\MMIP.Environment.csproj" />
-      <ProjectReference Include="..\MMIP.Infrastructure\MMIP.Infrastructure.csproj" />
-      <ProjectReference Include="..\MMIP.Shared\MMIP.Shared.csproj" />
-    </ItemGroup>
-
-  <ItemGroup>
-    <InternalsVisibleTo Include="MMIP.Test" />
-  </ItemGroup>
-
-    <ItemGroup>
-      <None Include="wwwroot\Assets\Img\556x200.jpg" />
-    </ItemGroup>
-  
-    <ItemGroup>
-      <Compile Update="Resources\ApplicationResource.en.Designer.cs">
-        <DependentUpon>ApplicationResource.en.resx</DependentUpon>
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-      </Compile>
-      <Compile Update="Resources\ApplicationResource.Designer.cs">
-        <DependentUpon>ApplicationResource.resx</DependentUpon>
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-      </Compile>
+        <ProjectReference Include="..\MMIP.Environment\MMIP.Environment.csproj"/>
+        <ProjectReference Include="..\MMIP.Shared\MMIP.Shared.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Update="Resources\ApplicationResource.en.resx">
-        <LastGenOutput>ApplicationResource.en.Designer.cs</LastGenOutput>
-        <Generator>ResXFileCodeGenerator</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Resources\ApplicationResource.resx">
-        <LastGenOutput>ApplicationResource.Designer.cs</LastGenOutput>
-        <Generator>ResXFileCodeGenerator</Generator>
-      </EmbeddedResource>
+        <InternalsVisibleTo Include="MMIP.Test"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="wwwroot\Assets\Img\556x200.jpg"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Resources\ApplicationResource.en.Designer.cs">
+            <DependentUpon>ApplicationResource.en.resx</DependentUpon>
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+        </Compile>
+        <Compile Update="Resources\ApplicationResource.Designer.cs">
+            <DependentUpon>ApplicationResource.resx</DependentUpon>
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+        </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Resources\ApplicationResource.en.resx">
+            <LastGenOutput>ApplicationResource.en.Designer.cs</LastGenOutput>
+            <Generator>ResXFileCodeGenerator</Generator>
+        </EmbeddedResource>
+        <EmbeddedResource Update="Resources\ApplicationResource.resx">
+            <LastGenOutput>ApplicationResource.Designer.cs</LastGenOutput>
+            <Generator>ResXFileCodeGenerator</Generator>
+        </EmbeddedResource>
     </ItemGroup>
 
 </Project>
