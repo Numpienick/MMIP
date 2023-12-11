@@ -25,14 +25,14 @@
     @_validated.FirstOrDefault()?.ErrorMessage
 </MudText>
 <br />
-<MudItem Class="d-flex justify-center">
+<div class="d-flex justify-center">
     <MudChipSet AllClosable=true>
         @foreach (Tag tag in SelectedTags)
         {
             <MudChip OnClose="@(() => RemoveTag(tag.Value))">@tag.Value</MudChip>
         }
     </MudChipSet>
-</MudItem>
+</div>
 
 @code {
     private Tag _tag = new();
