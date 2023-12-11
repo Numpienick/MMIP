@@ -2,16 +2,12 @@
 @inject IStringLocalizer<ApplicationResource> Localizer
 
 <h1>@Localizer["PrivacyPageTitle"]</h1>
-<MudContainer Justify="Justify.Center" Class="mb-15 mt-2">
-    <MudItem md="12">
-        <MudCard Elevation="4" Class="rounded-lg">
-            <MudCardContent>
-                <MudItem Class="ma-16">
-                    @((MarkupString)Localizer["PrivacyDeclaration"].ToString())
-                </MudItem>
-            </MudCardContent>
-        </MudCard>
-    </MudItem>
+<MudContainer Class="mb-15 mt-2" MaxWidth="MaxWidth.ExtraLarge">
+    <MudCard Elevation="4" Class="rounded-lg">
+        <MudCardContent >
+            @((MarkupString)Localizer["PrivacyDeclaration"].ToString())
+        </MudCardContent>
+    </MudCard>
 </MudContainer>
 
 @code {
