@@ -1,0 +1,118 @@
+﻿@page "/profile/{Entity}/{Id}" 
+@using MMIP.Shared.Entities
+@using System.Text.Json
+@using MMIP.Shared.Filters
+
+@inject IStringLocalizer<ApplicationResource> _localizer
+@inject HttpClient Client;
+@inject NavigationManager navigationManager;
+
+<MudCard Elevation="4" Class="px-6">
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" Class="card-centered-text">
+            <h1>Naam</h1>
+        </MudItem>
+        <MudItem md="3" xs="12" Class="card-centered-text">
+            <MudAvatar Style="height:140px; width:140px;">
+                <MudImage Src="Assets/Img/ProfilePictureTest.jpg"></MudImage>
+            </MudAvatar>        
+        </MudItem>
+        <MudItem md="9" xs="12" Class="card-centered-text">
+            <h2>Beschrijving</h2>
+            Beschrijving
+        </MudItem>
+
+        <MudItem xs="12" Class="card-centered-text">
+            <MudDivider DividerType="DividerType.Middle" Class="my-6"/>
+            <h2>Challenges</h2>
+        </MudItem>
+        <div>
+            @Entity
+            @Id
+        </div>
+        @foreach (List<Challenge> batch in ChallengeBatches)
+        {
+            <MudItem justify-center>
+                @foreach (Challenge challenge in batch)
+                {
+                    <ChallengeCardComponent Challenge="@challenge"></ChallengeCardComponent>
+                }
+            </MudItem>
+        }
+    </MudGrid>
+</MudCard>
+
+@code {
+    private const int CardsPerRow = 3;
+    private const int RowsPerBatch = 2;
+    private bool _loadMoreChallenges = false;
+    private ICriteria? _filterCriteria = null;
+
+    public List<List<Challenge>> ChallengeBatches = new List<List<Challenge>>();
+    public List<Challenge> AllChallenges = new List<Challenge>();
+    [Parameter]
+    public string Entity { get; set; }
+    [Parameter]
+    public string Id { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(string.IsNullOrEmpty(Entity))
+            if(!Entity.ToLower().Equals("user"))
+                if(!Entity.ToLower().Equals("organization"))
+                    navigationManager.NavigateTo($"/Error/{Id}", forceLoad: true);
+
+        AllChallenges = await _getChallenges();
+        _sortChallengesByDateAscending(AllChallenges);
+        LoadBatch();
+        base.OnInitialized();
+    }
+
+    // TODO: Change this to only get 6 from the database each time.
+    public void LoadBatch()
+    {
+        for (int i = 0; i < RowsPerBatch; i++)
+        {
+            List<Challenge> rowBatch = new List<Challenge>();
+
+            for (int j = 0; j < CardsPerRow; j++)
+            {
+                Challenge firstChallenge = new Challenge();
+
+                if (AllChallenges.FirstOrDefault() == null)
+                {
+                    break;
+                }
+
+                firstChallenge = AllChallenges.First();
+                rowBatch.Add(firstChallenge);
+                AllChallenges.Remove(firstChallenge);
+            }
+
+            ChallengeBatches.Add(rowBatch);
+        }
+
+        if (AllChallenges.Count == 0)
+        {
+            _loadMoreChallenges = true;
+        }
+    }
+
+    private void _sortChallengesByDateAscending(List<Challenge> challenges)
+    {
+        challenges.Sort((x, y) => x.StartDate.CompareTo(y.StartDate));
+    }
+
+    private void _loadChallengeBatchOnClick(MouseEventArgs mouseEventArgs)
+    {
+        LoadBatch();
+    }
+
+    // TODO: Change to take only 6 challanges a time.
+    private async Task<List<Challenge>> _getChallenges()
+    {
+        string jsonObject = JsonSerializer.Serialize(_filterCriteria);
+        return await Client.GetFromJsonAsync<List<Challenge>>($"challenges?filterCriteria={jsonObject}");
+    }
+}

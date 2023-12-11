@@ -15,11 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMIP.Shared", "src\MMIP.Sha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMIP.Test", "src\MMIP.Test\MMIP.Test.csproj", "{5865AF14-BC74-452E-853C-DF0146D11F8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMIP.Test.Infrastructure", "src\MMIP.Test.Infrastructure\MMIP.Test.Infrastructure.csproj", "{81DC3DC5-6D51-4E4A-A173-0557E1008890}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMIP.Test.Infrastructure", "src\MMIP.Test.Infrastructure\MMIP.Test.Infrastructure.csproj", "{81DC3DC5-6D51-4E4A-A173-0557E1008890}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMIP.Application", "src\MMIP.Application\MMIP.Application.csproj", "{C1C33230-609E-4DC6-8E79-A6FF076DACD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMIP.Application", "src\MMIP.Application\MMIP.Application.csproj", "{C1C33230-609E-4DC6-8E79-A6FF076DACD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMIP.Test.Integration", "src\MMIP.Test\MMIP.Test.Integration\MMIP.Test.Integration.csproj", "{58208A27-7528-4F37-B0B5-CD6B24D22A5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MMIP.Test.Integration", "src\MMIP.Test\MMIP.Test.Integration\MMIP.Test.Integration.csproj", "{58208A27-7528-4F37-B0B5-CD6B24D22A5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
