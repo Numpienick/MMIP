@@ -7,6 +7,7 @@
 @inject RequestController RequestController
 @inject IStringLocalizer<ApplicationResource> _localizer
 @inject HttpClient Client;
+@inject NavigationManager navigationManager;
 
 @page "/challenge-view/{ChallengeId:guid}"
 
@@ -14,7 +15,14 @@
     <MudImage ObjectPosition="ObjectPosition.Center" ObjectFit="ObjectFit.Fill" Src="@Challenge.BannerImagePath" style="width: 100%; max-height: inherit;"></MudImage>
 </div>
 
-<h1 class="mb-15">@Challenge.Title</h1>
+<MudGrid>
+    <MudItem md="12">
+        <h1 class="mt-10 mb-15">@Challenge.Title</h1>
+        <MudAvatar Style="height:65px; width:65px;" @onclick="@_editPageOnClick">
+            <MudImage Src="Assets/Img/EditButton.png"></MudImage>
+        </MudAvatar>
+    </MudItem>
+</MudGrid>
 
 @if (Challenge.FinalReport != null)
 {
@@ -178,5 +186,10 @@
     {
         _snackbar.Add(_localizer["SnackbarInvalid"], Severity.Error);
         StateHasChanged();
+    }
+
+    private void _editPageOnClick(MouseEventArgs mouseEventArgs)
+    {
+        navigationManager.NavigateTo($"/challenge/edit/{ChallengeId}");
     }
 }

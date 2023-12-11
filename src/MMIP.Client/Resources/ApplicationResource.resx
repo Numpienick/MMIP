@@ -277,4 +277,10 @@
   <data name="VisionMatchMakerDescripition" xml:space="preserve">
     <value>MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in innovatie.</value>
   </data>
+  <data name="FromChallengeSaveEdit" xml:space="preserve">
+    <value>Challenge opslaan</value>
+  </data>
+  <data name="EditChallengeTitle" xml:space="preserve">
+    <value>Challenge aanpassen</value>
+  </data>
 </root>

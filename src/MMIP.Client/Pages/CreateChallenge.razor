@@ -1,4 +1,5 @@
 ﻿@page "/challenge/create"
+@page "/challenge/edit/{ChallengeId:guid}"
 @using Microsoft.AspNetCore.Components.Forms;
 @using Client.Controllers;
 @using MMIP.Shared.Entities;
@@ -6,8 +7,9 @@
 @using MMIP.Shared.Utilities;
 @inject RequestController RequestController
 @inject IStringLocalizer<ApplicationResource> Localizer
+@inject HttpClient Client;
 
-<h1>@Localizer["CreateChallengeTitle"]</h1>
+<h1>@Localizer[_localizedPageTitle]</h1>
 <EditForm Model=@_model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
 <DataAnnotationsValidator />
         <MudFileUpload T="IBrowserFile" Accept=".png, .jpg, .jpeg, .gif, .webp, svg" FilesChanged="UploadFiles" MaximumFileCount="1">
@@ -37,18 +39,55 @@
             <MudItem xs="12" md="4">
                 <MudDatePicker Variant="Variant.Outlined" Label=@Localizer["FormChallengeDate"] Editable="true" @bind-Date="_model.Deadline" Mask="@(new DateMask("dd-MM-yyyy"))" DateFormat="dd.MM.yyyy" Placeholder="dd-mm-yyyy" />
             </MudItem>
+            @if (ChallengeId != Guid.Empty)
+            {
+                <MudItem xs="12" md="4">
+                    <MudSelect Variant="Variant.Outlined" T="string">
+                        <MudSelectItem T="string">Test</MudSelectItem>
+                    </MudSelect>
+                </MudItem>
+            }
+
         </MudGrid>
-    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer["FormChallengeSave"]</MudButton>
+    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer[_buttonLocalizedText]</MudButton>
 </EditForm>
 
 @code {
+    [Parameter]
+    public Guid ChallengeId { get; set; }
     private Challenge _model = new();
     private IList<IBrowserFile> _files = new List<IBrowserFile>();
     [Inject] 
     private ISnackbar _snackbar { get; set; }
 
+    private const string ButtonSaveLocalization = "FormChallengeSave";
+    private const string ButtonEditLocalization = "FromChallengeSaveEdit";
+    private string _buttonLocalizedText = ButtonSaveLocalization;
+    private const string CreateChallengeTitleLocalization = "CreateChallengeTitle";
+    private const string EditChallengeTitleLocalization = "EditChallengeTitle";
+    private string _localizedPageTitle = CreateChallengeTitleLocalization;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ChallengeId != Guid.Empty)
+        {
+            _model = await _getChallenge();
+            _buttonLocalizedText = ButtonEditLocalization;
+            _localizedPageTitle = EditChallengeTitleLocalization;
+        }
+
+        base.OnInitialized();
+    }
+
     private async void _validFormSubmitted(EditContext context)
     {
+        if (ChallengeId != Guid.Empty)
+        {
+            await _updateChallenge();
+            StateHasChanged();
+            return;
+        }
+
         await RequestController.Post("challenges", _model);
         StateHasChanged();
     }
@@ -58,9 +97,21 @@
         _snackbar.Add("Er is iets fout gegaan", Severity.Error);
         StateHasChanged();
     }
+
     private void UploadFiles(IBrowserFile file)
     {
         _files.Add(file);
     //TODO upload the files to the server
+    }
+
+    private async Task<Challenge> _getChallenge()
+    {
+        return await Client.GetFromJsonAsync<Challenge>($"challenges/{ChallengeId}");
+    }
+
+    private async Task _updateChallenge()
+    {
+        //WERKEND KRIJGEN
+        await Client.PatchAsJsonAsync<Challenge>("challenges", _model);
     }
 }

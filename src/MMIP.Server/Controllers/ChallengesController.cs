@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using MMIP.Infrastructure.Services;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Filters;
@@ -21,6 +23,7 @@ namespace MMIP.Server.Controllers
         {
             try
             {
+                //Challenge.Phase = Concept;
                 Console.WriteLine("Successfully created challenge: " + challenge.Title);
                 _challengeService.CreateChallenge(challenge);
                 return Ok("Successfully created challenge: " + challenge.Title);
@@ -46,9 +49,10 @@ namespace MMIP.Server.Controllers
         }
 
         [HttpPatch]
-        public static IActionResult UpdateChallenge(Challenge challenge)
+        public IActionResult UpdateChallenge(Challenge challenge)
         {
-            return null;
+            _challengeService.UpdateChallenge(challenge);
+            return Ok("Successfully updated challenge: " + challenge.Title);
         }
 
         [HttpDelete]

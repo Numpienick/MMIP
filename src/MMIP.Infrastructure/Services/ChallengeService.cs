@@ -2,6 +2,7 @@
 using MMIP.Shared.Entities;
 using MMIP.Shared.Filters;
 using MMIP.Shared.StateContainers;
+using System.Linq;
 
 namespace MMIP.Infrastructure.Services
 {
@@ -47,7 +48,15 @@ namespace MMIP.Infrastructure.Services
             return TempStateContainer.Instance().Challenges;
         }
 
-        public void UpdateChallenge(Challenge challenge) { }
+        public void UpdateChallenge(Challenge challenge)
+        {
+            int index = TempStateContainer
+                .Instance()
+                .Challenges.ToList()
+                .FindIndex(s => s.Id == challenge.Id);
+            TempStateContainer.Instance().Challenges.ToList()[index] = challenge;
+            int t = 2;
+        }
 
         public void DeleteChallenge(Challenge challenge) { }
     }
