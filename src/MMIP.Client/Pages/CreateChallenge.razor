@@ -55,11 +55,6 @@
     [Inject] 
     private ISnackbar _snackbar { get; set; }
 
-    public CreateChallenge()
-    {
-        _model.Tags = new List<Tag>();
-    }
-
     private async void _validFormSubmitted(EditContext context)
     {
         await RequestController.Post("challenges", _model);
