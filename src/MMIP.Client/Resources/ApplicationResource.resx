@@ -277,4 +277,19 @@
   <data name="VisionMatchMakerDescripition" xml:space="preserve">
     <value>MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in innovatie.</value>
   </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Oh oh! Iets is verkeerd gegaan.</value>
+  </data>
+  <data name="ErrorDescription" xml:space="preserve">
+    <value>Je opgevraagde pagina is hier niet, miauw.</value>
+  </data>
+  <data name="ErrorJoke" xml:space="preserve">
+    <value>Misschien heb je hem opgegeten of is die weggelopen.</value>
+  </data>
+  <data name="ErrorRequestedItem" xml:space="preserve">
+    <value>Opgevraagd item:</value>
+  </data>
+  <data name="GoBackHome" xml:space="preserve">
+    <value>Ga terug naar de homepagina</value>
+  </data>
 </root>

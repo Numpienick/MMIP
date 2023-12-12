@@ -277,4 +277,19 @@
   <data name="VisionMatchMakerDescription" xml:space="preserve">
     <value>MatchMaker contributes to a vital SME sector in Northern Netherlands by facilitating innovation.</value>
   </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Uh-oh! Something went wrong.</value>
+  </data>
+  <data name="ErrorDescription" xml:space="preserve">
+    <value>Your requested page is not here, meow.</value>
+  </data>
+  <data name="ErrorJoke" xml:space="preserve">
+    <value>Maybe you ate it or it ran away.</value>
+  </data>
+  <data name="ErrorRequestedItem" xml:space="preserve">
+    <value>Requested item:</value>
+  </data>
+  <data name="GoBackHome" xml:space="preserve">
+    <value>Go back home</value>
+  </data>
 </root>

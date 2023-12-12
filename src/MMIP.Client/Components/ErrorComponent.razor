@@ -1,0 +1,16 @@
+﻿@inject IStringLocalizer<ApplicationResource> Localizer
+
+<MudContainer Class="d-block" MaxWidth="MaxWidth.ExtraLarge">
+    <div class="card-centered-text">
+        <h1>@Localizer["ErrorTitle"]</h1>
+        <img src="Assets/Img/404.jpg" alt="banner" width="30%" />
+        <p>@Localizer["ErrorDescription"]</p>
+        <p>@Localizer["ErrorJoke"]</p>
+        <p>@Localizer["ErrorRequestedItem"] @Subject</p>
+        <MudButton Href="~/">@Localizer["GoBackHome"]</MudButton>
+    </div>
+</MudContainer>
+@code {
+    [Parameter]
+    public string? Subject { get; set; }
+}

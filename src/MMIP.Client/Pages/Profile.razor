@@ -58,10 +58,9 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if(string.IsNullOrEmpty(Entity))
-            if(!Entity.ToLower().Equals("user"))
-                if(!Entity.ToLower().Equals("organization"))
-                    navigationManager.NavigateTo($"/Error/{Id}", forceLoad: true);
+            if (!Entity.ToLower().Equals("user") || string.IsNullOrEmpty(Entity))
+                if (!Entity.ToLower().Equals("organization") || string.IsNullOrEmpty(Entity))
+                    navigationManager.NavigateTo($"/Error/{Entity}", forceLoad: true);
 
         AllChallenges = await _getChallenges();
         _sortChallengesByDateAscending(AllChallenges);
