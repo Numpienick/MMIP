@@ -20,7 +20,7 @@
                 {
                     <MudChip Size="Size.Small" Color="Color.Primary">@tag</MudChip>
                 }
-                if (_totalAmountOfTags >= VisibleTagsLimit)
+                if (_totalAmountOfTags > VisibleTagsLimit)
                 {
                     <MudTooltip Arrow="true" Placement="Placement.Bottom" Class="grey lighten-2 icon-tooltip">
                         <ChildContent>

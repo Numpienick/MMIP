@@ -9,8 +9,10 @@ public class ChallengeCardView
     public string OrganizationName { get; set; } = null!;
 
     public string[] Tags =>
-        _tags?.Split(';', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
-        ?? Array.Empty<string>();
+        TagsString?.Split(
+            ';',
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
+        ) ?? Array.Empty<string>();
 
-    private string? _tags { get; }
+    public string? TagsString { get; set; }
 }

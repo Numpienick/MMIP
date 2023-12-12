@@ -372,6 +372,10 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("short_description");
 
+                    b.Property<string>("TagsString")
+                        .HasColumnType("text")
+                        .HasColumnName("tags");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text")
