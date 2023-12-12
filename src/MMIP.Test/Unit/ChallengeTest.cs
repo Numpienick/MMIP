@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MMIP.Test.Infrastructure.Stubs;
 
 namespace MMIP.Test.Unit;
 
@@ -7,7 +8,7 @@ public class ChallengeTest
 {
     private ContextFixture _fixture { get; }
     private readonly Guid _orgId;
-    private readonly IDbContextFactory<ApplicationContext> _contextFactory;
+    private readonly IDbContextFactory<StubApplicationContext> _contextFactory;
 
     public ChallengeTest(ContextFixture fixture)
     {
