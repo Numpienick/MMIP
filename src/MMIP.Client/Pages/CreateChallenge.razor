@@ -5,6 +5,7 @@
 @using MMIP.Shared.Entities;
 @using MMIP.Shared.Enums;
 @using MMIP.Shared.Utilities;
+@using MMIP.Shared.StateContainers;
 @inject RequestController RequestController
 @inject IStringLocalizer<ApplicationResource> Localizer
 @inject HttpClient Client;
@@ -41,24 +42,32 @@
             </MudItem>
             @if (ChallengeId != Guid.Empty)
             {
-                <MudItem xs="12" md="4">
-                    <MudSelect Variant="Variant.Outlined" T="string">
-                        <MudSelectItem T="string">Test</MudSelectItem>
-                    </MudSelect>
+                <MudItem xs="12" md="6">
+                    <MudTimeline>
+                    @foreach (var phase in _phases)
+                    {
+                        <MudTimelineItem Color="Color.Info" Size="Size.Small">
+                            <ItemContent>
+                                <h2>@phase.Name</h2>
+                                <h3>@phase.Description</h3>
+                            </ItemContent>
+                        </MudTimelineItem>
+                    }
+                    </MudTimeline>
                 </MudItem>
             }
-
         </MudGrid>
     <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer[_buttonLocalizedText]</MudButton>
 </EditForm>
 
-@code {
+    @code {
     [Parameter]
     public Guid ChallengeId { get; set; }
     private Challenge _model = new();
     private IList<IBrowserFile> _files = new List<IBrowserFile>();
     [Inject] 
     private ISnackbar _snackbar { get; set; }
+    private List<Phase> _phases = new List<Phase>();
 
     private const string ButtonSaveLocalization = "FormChallengeSave";
     private const string ButtonEditLocalization = "FromChallengeSaveEdit";
@@ -72,6 +81,7 @@
         if (ChallengeId != Guid.Empty)
         {
             _model = await _getChallenge();
+            _phases = TempStateContainer.Instance().Phases;
             _buttonLocalizedText = ButtonEditLocalization;
             _localizedPageTitle = EditChallengeTitleLocalization;
         }
@@ -101,7 +111,7 @@
     private void UploadFiles(IBrowserFile file)
     {
         _files.Add(file);
-    //TODO upload the files to the server
+        //TODO upload the files to the server
     }
 
     private async Task<Challenge> _getChallenge()
@@ -111,7 +121,6 @@
 
     private async Task _updateChallenge()
     {
-        //WERKEND KRIJGEN
         await Client.PatchAsJsonAsync<Challenge>("challenges", _model);
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using MMIP.Infrastructure.Services;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Filters;
+using MMIP.Shared.StateContainers;
 using System.Text.Json;
 using RouteAttribute = Microsoft.AspNetCore.Mvc.RouteAttribute;
 
@@ -23,7 +24,7 @@ namespace MMIP.Server.Controllers
         {
             try
             {
-                //Challenge.Phase = Concept;
+                challenge.CurrentPhaseId = TempStateContainer.Instance().Phases.FirstOrDefault().Id;
                 Console.WriteLine("Successfully created challenge: " + challenge.Title);
                 _challengeService.CreateChallenge(challenge);
                 return Ok("Successfully created challenge: " + challenge.Title);
@@ -44,6 +45,8 @@ namespace MMIP.Server.Controllers
         [HttpGet]
         public IActionResult GetChallenges([FromQuery] string filterCriteria)
         {
+            //TODO: Initialize phases for state container, remove this line later.
+            _challengeService.GetPhases();
             ICriteria criteria = JsonSerializer.Deserialize<ICriteria>(filterCriteria);
             return Ok(_challengeService.GetChallenges(criteria));
         }

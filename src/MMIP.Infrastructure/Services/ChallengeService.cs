@@ -1,8 +1,10 @@
-﻿using MMIP.Infrastructure.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using MMIP.Infrastructure.Repositories;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Filters;
 using MMIP.Shared.StateContainers;
 using System.Linq;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace MMIP.Infrastructure.Services
 {
@@ -33,6 +35,17 @@ namespace MMIP.Infrastructure.Services
             return _challengeRepository.GetById(id).Result;
         }
 
+        public IEnumerable<Phase> GetPhases()
+        {
+            if (TempStateContainer.Instance().Phases == null)
+            {
+                var phases = _challengeRepository.GetPhases();
+                TempStateContainer.Instance().Phases = phases.Result;
+            }
+
+            return TempStateContainer.Instance().Phases;
+        }
+
         // TODO: Filter challenges based on filter criteria.
         public IEnumerable<Challenge> GetChallenges(ICriteria filterCriteria)
         {
@@ -50,12 +63,13 @@ namespace MMIP.Infrastructure.Services
 
         public void UpdateChallenge(Challenge challenge)
         {
-            int index = TempStateContainer
-                .Instance()
-                .Challenges.ToList()
-                .FindIndex(s => s.Id == challenge.Id);
-            TempStateContainer.Instance().Challenges.ToList()[index] = challenge;
-            int t = 2;
+            foreach (Challenge existingChallenge in TempStateContainer.Instance().Challenges)
+            {
+                if (existingChallenge.Id == challenge.Id)
+                {
+                    existingChallenge.Title = challenge.Title;
+                }
+            }
         }
 
         public void DeleteChallenge(Challenge challenge) { }

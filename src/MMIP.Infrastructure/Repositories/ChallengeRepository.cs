@@ -6,6 +6,7 @@ namespace MMIP.Infrastructure.Repositories
     internal class ChallengeRepository : BaseEntityRepository<Challenge>
     {
         private List<Challenge> _challenges = new();
+        private List<Phase> _phases = new();
 
         public override async Task<Challenge> GetById(Guid id)
         {
@@ -20,6 +21,61 @@ namespace MMIP.Infrastructure.Repositories
         public override async Task<Challenge> GetReadonlyById(Guid id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<List<Phase>> GetPhases()
+        {
+            _phases.Add(
+                new Phase()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Concepting",
+                    Description = "Deze challenge wordt gemaakt en is nog niet gepubliceerd.",
+                    Order = 0
+                }
+            );
+
+            _phases.Add(
+                new Phase()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Open voor ideeën",
+                    Description = "Deze challenge accepteerd ideeën.",
+                    Order = 1
+                }
+            );
+
+            _phases.Add(
+                new Phase()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Aan de gang",
+                    Description = "Deze challenge is momenteel aan de gang.",
+                    Order = 2
+                }
+            );
+
+            _phases.Add(
+                new Phase()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Afgerond",
+                    Description = "Deze challenge is uitgevoerd en dus afgerond.",
+                    Order = 3
+                }
+            );
+
+            _phases.Add(
+                new Phase()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "Gearchiveerd",
+                    Description = "Deze challenge is niet meer zichtbaar voor gebruikers.",
+                    Order = 4
+                }
+            );
+
+            return _phases;
         }
 
         public override async Task<IQueryable<Challenge>> GetAll()
@@ -46,7 +102,7 @@ namespace MMIP.Infrastructure.Repositories
             challenge1.Description =
                 "Plastic wordt steeds vaker gevonden in de oceaan. Er zijn vrijwilligers die graag plastic en vuil van het strand willen opruimen. Echter zijn er lang niet genoeg vrijwilligers, en blijft er genoeg plastic zweven in de oceaan. Wij zoeken naar innovatieve oplossingen die dit probleem tegen kunnen gaan. Mensen die expertise in robotica of milieukunde hebben, zijn ideale kandidaten voor deze challenge. Daarnaast zijn wij op zoek naar mensen die minimaal een HBO-diploma hebben. Zou jij graag mee willen helpen aan dit probleem, of heb jij een genieus idee dat je achter wil laten? Laat dan vooral een reactie achter!";
             challenge1.Deadline = new DateTime(2023, 10, 3);
-            challenge1.CurrentPhaseId = ongoing.Id;
+            challenge1.CurrentPhaseId = TempStateContainer.Instance().Phases.FirstOrDefault().Id;
             _challenges.Add(challenge1);
 
             Challenge challenge2 = new Challenge();
@@ -64,7 +120,7 @@ namespace MMIP.Infrastructure.Repositories
             challenge2.Deadline = new DateTime(2023, 10, 19);
             challenge2.FinalReport =
                 "Een groepje studenten is met het idee gekomen om de kosten van de PABO opleidingen definitief te halveren. Daarnaast kwamen zij met het idee om werkloze jongeren in de klas te zetten als klassenhulp. Hierdoor verkrijgen zij werkervaring in de klas, en zouden zij na een aantal jaar zelfstandig voor een klas mogen staan.";
-            challenge2.CurrentPhaseId = finished.Id;
+            challenge2.CurrentPhaseId = TempStateContainer.Instance().Phases.FirstOrDefault().Id;
             _challenges.Add(challenge2);
 
             _challenges.Add(challenge2);

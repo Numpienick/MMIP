@@ -6,6 +6,7 @@ namespace MMIP.Shared.StateContainers
     {
         private static TempStateContainer _instance;
 
+        public List<Phase> Phases { get; set; }
         public IQueryable<Challenge> Challenges { get; set; }
         public IQueryable<Comment> Comments { get; set; }
 
