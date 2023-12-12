@@ -54,7 +54,7 @@
     private IList<IBrowserFile> _files = new List<IBrowserFile>();
     [Inject] 
     private ISnackbar _snackbar { get; set; }
-
+        
     private async void _validFormSubmitted(EditContext context)
     {
         await RequestController.Post("challenges", _model);

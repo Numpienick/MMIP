@@ -101,10 +101,6 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("organization_id");
 
-                    b.Property<Guid?>("OrganizationId1")
-                        .HasColumnType("uuid")
-                        .HasColumnName("organization_id1");
-
                     b.Property<string>("ShortDescription")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -134,10 +130,7 @@ namespace MMIP.Infrastructure.Migrations
 
                     b.HasIndex("OrganizationId")
                         .HasDatabaseName("ix_challenges_organization_id");
-
-                    b.HasIndex("OrganizationId1")
-                        .HasDatabaseName("ix_challenges_organization_id1");
-
+                    
                     b.ToTable("challenges", (string)null);
                 });
 
@@ -451,13 +444,6 @@ namespace MMIP.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_challenges_organizations_organization_id");
-
-                    b.HasOne("MMIP.Shared.Entities.Organization", "Organization")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId1")
-                        .HasConstraintName("fk_challenges_organizations_organization_id1");
-
-                    b.Navigation("Organization");
                 });
 
             modelBuilder.Entity("MMIP.Shared.Entities.UserGroup", b =>
