@@ -40,6 +40,7 @@ namespace MMIP.Client.Controllers
         public async Task Post<TEntity>(string uri, TEntity model)
             where TEntity : BaseEntity
         {
+            model.Id = Guid.NewGuid();
             var response = await _httpClient.PostAsJsonAsync(uri, model);
             try
             {
@@ -56,12 +57,13 @@ namespace MMIP.Client.Controllers
         {
             return statusCode switch
             {
+                HttpStatusCode.BadRequest => ApplicationResource.Request_BadRequest,
                 HttpStatusCode.NotFound => ApplicationResource.Request_NotFound,
                 HttpStatusCode.ServiceUnavailable => ApplicationResource.Request_ServiceUnavailable,
                 HttpStatusCode.NotAcceptable => ApplicationResource.Request_TooLarge,
                 HttpStatusCode.RequestEntityTooLarge => ApplicationResource.Request_TooLarge,
                 null => ApplicationResource.Request_ServiceUnavailable,
-                _ => "OK"
+                _ => ApplicationResource.Request_Unknown
             };
         }
     }
