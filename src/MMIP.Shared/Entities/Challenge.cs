@@ -19,16 +19,17 @@ namespace MMIP.Shared.Entities
 
         [Required(ErrorMessage = "Challenge heeft deadline nodig.")]
         public DateTime? Deadline { get; set; }
+        public DateTimeOffset StartDate { get; set; }
+        public string? FinalReport { get; set; }
+        public List<Tag> Tags { get; set; } = new();
+        public Organization? Organization { get; set; } //TODO: add organization to creating challenges
 
         [Required(ErrorMessage = "Zichtbaarheid moet gedefinieerd worden.")]
         public Visibility ChallengeVisibility { get; set; } = Visibility.VisibleToEmployees;
-        public DateTimeOffset StartDate { get; set; } = DateTimeOffset.MaxValue;
 
         public string? BannerImagePath { get; set; }
-        public string? FinalReport { get; set; }
         public Guid OrganizationId { get; set; } // TODO: add organization to creating challenges
         public Guid CurrentPhaseId { get; set; }
-        public List<Tag> Tags = new();
         public List<Phase> Phases { get; set; } = new();
     }
 }

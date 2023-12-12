@@ -1,4 +1,4 @@
-﻿using MMIP.Application.Interfaces.Repositories;
+using MMIP.Application.Interfaces.Repositories;
 using MMIP.Shared.Entities;
 
 namespace MMIP.Infrastructure.Services
