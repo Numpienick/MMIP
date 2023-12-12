@@ -4,7 +4,6 @@
 <PageTitle>MatchMaker @Localizer["Innovationplatform"]</PageTitle>
 
 <h1>MatchMaker</h1>
-
 <MudGrid Justify="Justify.Center" Class="grid-margin">
     <MudItem md="6" xs="12" Class="carousel-alignment">
         <MudCard Class="mudcard-background" Elevation="0">
@@ -22,7 +21,7 @@
                         <a href="/login">
                             <h2>Inloggen</h2>
                         </a>
-                    </div> 
+                    </div>
                 </MudCarouselItem>
             </MudCarousel>
         </MudCard>
@@ -57,10 +56,15 @@
         </MudCard>
     </MudItem>
 </MudGrid>
-
+<div class="footer-position">
+    <div class="footer-layout px-4">
+        <a href="/privacyverklaring">
+            @Localizer["PrivacyPageTitle"] | 2023
+        </a>
+    </div>
+</div>
 @* TODO: Add list with carousel items and randomize them *@
-
 @code
 {
- 
+
 }

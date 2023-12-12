@@ -8,6 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace MMIP.Client.Resources {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -35,7 +38,7 @@ namespace MMIP.Client.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Client.Resources.ApplicationResource.en", typeof(ApplicationResource_en).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MMIP.Client.Resources.ApplicationResource.en", typeof(ApplicationResource_en).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -53,6 +56,24 @@ namespace MMIP.Client.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About MatchMaker.
+        /// </summary>
+        internal static string AboutMatchMaker {
+            get {
+                return ResourceManager.GetString("AboutMatchMaker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MatchMaker is committed to promoting innovation among SME&apos;s in the Northern regions of the Netherlands. Innovation is not a goal in itself, but must ensure a vital region in which SME&apos;s can continue to offer added value in the region through Business-to-Business and Business-to-Consumer..
+        /// </summary>
+        internal static string AboutMatchMakerDescription {
+            get {
+                return ResourceManager.GetString("AboutMatchMakerDescription", resourceCulture);
             }
         }
         
@@ -120,6 +141,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Challenges.
+        /// </summary>
+        internal static string ChallengesPageTitle {
+            get {
+                return ResourceManager.GetString("ChallengesPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Startdate challenge.
         /// </summary>
         internal static string ChallengeStartDate {
@@ -152,6 +182,24 @@ namespace MMIP.Client.Resources {
         internal static string CreateCommentButton {
             get {
                 return ResourceManager.GetString("CreateCommentButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to E-mail address.
+        /// </summary>
+        internal static string E_mail {
+            get {
+                return ResourceManager.GetString("E-mail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forgot your password?.
+        /// </summary>
+        internal static string ForgotPassword {
+            get {
+                return ResourceManager.GetString("ForgotPassword", resourceCulture);
             }
         }
         
@@ -228,6 +276,87 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Our goal.
+        /// </summary>
+        internal static string GoalMatchMaker {
+            get {
+                return ResourceManager.GetString("GoalMatchMaker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MatchMaker will focus on actively identifying innovation opportunities within the SME&apos;s in the Northern Netherlands and facilitating collaborations between entrepreneurs and experts to stimulate sustainable growth. For this, this online platform will serve as a basis..
+        /// </summary>
+        internal static string GoalMatchMakerDescription {
+            get {
+                return ResourceManager.GetString("GoalMatchMakerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Innovationplatform.
+        /// </summary>
+        internal static string Innovationplatform {
+            get {
+                return ResourceManager.GetString("Innovationplatform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        internal static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Our mission.
+        /// </summary>
+        internal static string MissionMatchMaker {
+            get {
+                return ResourceManager.GetString("MissionMatchMaker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We ensure that every entrepreneur can face the future with peace of mind.
+        /// </summary>
+        internal static string MissionMatchMakerDescription {
+            get {
+                return ResourceManager.GetString("MissionMatchMakerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No account yet? Click here to sign up..
+        /// </summary>
+        internal static string NoAccount {
+            get {
+                return ResourceManager.GetString("NoAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to other tags.
+        /// </summary>
+        internal static string OtherTags {
+            get {
+                return ResourceManager.GetString("OtherTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string Password {
+            get {
+                return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;h1&gt;Privacy Statement and Data Protection Policy&lt;/h1&gt;
         ///
         ///&lt;h2&gt;1. Introduction&lt;/h2&gt;
@@ -239,6 +368,15 @@ namespace MMIP.Client.Resources {
         internal static string PrivacyDeclaration {
             get {
                 return ResourceManager.GetString("PrivacyDeclaration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remaining tags.
+        /// </summary>
+        internal static string RemainingTags {
+            get {
+                return ResourceManager.GetString("RemainingTags", resourceCulture);
             }
         }
         
@@ -270,11 +408,38 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search terms.
+        /// </summary>
+        internal static string SearchTerms {
+            get {
+                return ResourceManager.GetString("SearchTerms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Something went wrong..
         /// </summary>
         internal static string SnackbarInvalid {
             get {
                 return ResourceManager.GetString("SnackbarInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Our vision.
+        /// </summary>
+        internal static string VisionMatchMaker {
+            get {
+                return ResourceManager.GetString("VisionMatchMaker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MatchMaker contributes to a vital SME sector in Northern Netherlands by facilitating innovation..
+        /// </summary>
+        internal static string VisionMatchMakerDescription {
+            get {
+                return ResourceManager.GetString("VisionMatchMakerDescription", resourceCulture);
             }
         }
     }

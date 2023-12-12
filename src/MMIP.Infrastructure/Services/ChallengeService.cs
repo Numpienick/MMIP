@@ -1,54 +1,37 @@
-﻿using MMIP.Infrastructure.Repositories;
+using MMIP.Application.Interfaces.Repositories;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Filters;
-using MMIP.Shared.StateContainers;
+using MMIP.Shared.Views;
 
 namespace MMIP.Infrastructure.Services
 {
-    public class ChallengeService : BaseEntityService
+    public class ChallengeService : BaseEntityService<Challenge>
     {
-        private ChallengeRepository _challengeRepository = new ChallengeRepository();
+        private readonly IChallengeRepository _repository;
 
-        public void CreateChallenge(Challenge challenge)
+        public ChallengeService(IUnitOfWork unitOfWork, IChallengeRepository repository)
+            : base(unitOfWork)
         {
-            try
-            {
-                _challengeRepository.Create(challenge);
-                if (TempStateContainer.Instance().Challenges == null)
-                {
-                    var challenges = _challengeRepository.GetAll();
-                    TempStateContainer.Instance().Challenges = challenges.Result;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            _repository = repository;
         }
 
-        public Challenge GetChallenge(Guid id)
+        public override Task AddAsync(Challenge entity)
         {
-            return _challengeRepository.GetById(id).Result;
+            var random = new Random();
+            entity.BannerImagePath = $"https://picsum.photos/seed/{random.Next(1024)}/556/200";
+            return base.AddAsync(entity);
         }
 
         // TODO: Filter challenges based on filter criteria.
         public IEnumerable<Challenge> GetChallenges(ICriteria filterCriteria)
         {
-            if (TempStateContainer.Instance().Challenges == null)
-            {
-                var challenges = _challengeRepository.GetAll();
-                TempStateContainer.Instance().Challenges = challenges.Result;
-            }
-
-            // TODO: Return this when TempStateContainer can be removed.
-            //return _challengeRepository.GetAll().Result;
-
-            return TempStateContainer.Instance().Challenges;
+            throw new NotImplementedException();
         }
 
-        public void UpdateChallenge(Challenge challenge) { }
-
-        public void DeleteChallenge(Challenge challenge) { }
+        public Task<List<ChallengeCardView>> GetCardViewsAsync(int take, int skip)
+        {
+            int pageNumber = skip / take;
+            return _repository.GetChallengeCardsAsync(pageNumber, take);
+        }
     }
 }

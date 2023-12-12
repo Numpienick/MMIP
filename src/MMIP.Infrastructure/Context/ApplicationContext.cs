@@ -25,7 +25,7 @@ public class ApplicationContext : DbContext
 
     #region views
 
-    public DbSet<ChallengeCardComponent> ChallengeCardComponents { get; set; }
+    public DbSet<ChallengeCardView> ChallengeCardComponents { get; set; }
 
     #endregion
 
@@ -38,7 +38,7 @@ public class ApplicationContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new ChallengeConfiguration());
         modelBuilder.ApplyConfiguration(new TagConfiguration());
-        modelBuilder.ApplyConfiguration(new ChallengeCardComponentConfiguration());
+        modelBuilder.ApplyConfiguration(new ChallengeCardViewConfiguration());
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

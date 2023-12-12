@@ -217,13 +217,15 @@
     <value>Password</value>
   </data>
   <data name="PrivacyDeclaration" xml:space="preserve">
-    <value>&lt;h1&gt;Privacy Statement and Data Protection Policy&lt;/h1&gt;
+    <value>
 
 &lt;h2&gt;1. Introduction&lt;/h2&gt;
-&lt;p&gt;This Privacy Statement and Data Protection Policy (hereinafter referred to as the "Statement") describes how MatchMaker Innovation Platform ("we," "us," or "our") collects, uses, discloses, and protects personal data provided by visitors to our website &lt;a href="https://mm.innovation.io/"&gt;https://mm.innovation.io/&lt;/a&gt; ("the website").&lt;/p&gt;
+&lt;p&gt;This Privacy Statement and Data Protection Policy (hereinafter referred to as the "Statement") describes how MatchMaker Innovation Platform ("we," "us," or "our") collects, uses, discloses, and protects personal data provided by visitors to our website &lt;a href="https://mm.innovation.io/"&gt;https://mm.innovation.io/&lt;/a&gt; ("the website").&lt;/p&gt; 
+&lt;br/&gt;
 
 &lt;h2&gt;2. Collected Data&lt;/h2&gt;
 &lt;p&gt;We collect personal data voluntarily provided by you when filling out forms on our website, such as name, email address, etc. We also automatically collect certain information about your visit to our website, including your IP address, browser type, date and time of access, and the pages you visited.&lt;/p&gt;
+&lt;br/&gt;
 
 &lt;h2&gt;3. Purpose of Data Processing&lt;/h2&gt;
 &lt;p&gt;The collected data is used for the following purposes:&lt;/p&gt;
@@ -233,18 +235,23 @@
     &lt;li&gt;To improve the functionality and performance of the website.&lt;/li&gt;
     &lt;li&gt;To comply with legal obligations.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;br/&gt;
 
 &lt;h2&gt;4. Data Sharing&lt;/h2&gt;
 &lt;p&gt;We do not share your personal data with third parties unless necessary for the fulfillment of the purposes mentioned above or required by law.&lt;/p&gt;
+&lt;br/&gt;
 
 &lt;h2&gt;5. Data Security&lt;/h2&gt;
 &lt;p&gt;We take appropriate technical and organizational measures to protect personal data from unauthorized access, disclosure, alteration, and destruction.&lt;/p&gt;
+&lt;br/&gt;
 
 &lt;h2&gt;6. Cookies&lt;/h2&gt;
 &lt;p&gt;Our website uses cookies to enhance the user experience. You can disable cookies through your web browser settings.&lt;/p&gt;
+&lt;br/&gt;
 
 &lt;h2&gt;7. Your Rights&lt;/h2&gt;
 &lt;p&gt;You have the right to request access to, rectification of, or deletion of your personal data. Contact us at &lt;a href="mailto:contact@innovation.io"&gt;contact@innovation.io&lt;/a&gt; for requests regarding your rights.&lt;/p&gt;
+&lt;br/&gt;
 
 &lt;h2&gt;8. Policy Changes&lt;/h2&gt;
 &lt;p&gt;
@@ -276,6 +283,9 @@
   </data>
   <data name="VisionMatchMaker" xml:space="preserve">
     <value>Our vision</value>
+  </data>
+  <data name="PrivacyPageTitle" xml:space="preserve">
+    <value>Privacy Statement and Data Protection Policy</value>
   </data>
   <data name="VisionMatchMakerDescription" xml:space="preserve">
     <value>MatchMaker contributes to a vital SME sector in Northern Netherlands by facilitating innovation.</value>
