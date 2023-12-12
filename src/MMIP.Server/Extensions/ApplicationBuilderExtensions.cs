@@ -19,8 +19,7 @@ internal static class ApplicationBuilderExtensions
         using var scope = app.ApplicationServices.CreateScope();
 
         var services = scope.ServiceProvider;
-        var contextFactory = services.GetRequiredService<IDbContextFactory<ApplicationContext>>();
-        var context = await contextFactory.CreateDbContextAsync();
+        var context = services.GetRequiredService<ApplicationContext>();
 
         if (ensureDeleted)
             await context.Database.EnsureDeletedAsync();

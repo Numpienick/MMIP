@@ -2,6 +2,7 @@ using Duende.IdentityServer.EntityFramework.Options;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using MMIP.Environment;
 using MMIP.Shared.Entities;
 using MMIP.Infrastructure.Context.Configuration.Converters;
 using MMIP.Infrastructure.Context.Configuration.EntityConfiguration;
@@ -40,8 +41,19 @@ public class ApplicationContext : ApiAuthorizationDbContext<AppUser>
 
     #region required
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder
+            .UseNpgsql(EnvironmentConstants.DatabaseConnectionString())
+            .UseSnakeCaseNamingConvention();
+#if DEBUG
+        optionsBuilder.EnableSensitiveDataLogging();
+#endif
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new ChallengeConfiguration());
         modelBuilder.ApplyConfiguration(new TagConfiguration());
         modelBuilder.ApplyConfiguration(new ChallengeCardComponentViewConfiguration());
