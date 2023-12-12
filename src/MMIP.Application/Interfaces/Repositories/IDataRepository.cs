@@ -11,7 +11,8 @@ public interface IDataRepository<TEntity>
 
     public Task<List<TEntity>> GetAllAsync();
 
-    public Task<List<TEntity>> GetPagedResponseAsync(int pageNumber, int pageSize);
+    public Task<List<T>> GetPagedResponseAsync<T>(int pageNumber, int pageSize)
+        where T : class;
 
     public Task AddAsync(TEntity entity);
 

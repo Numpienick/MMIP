@@ -1,37 +1,37 @@
 ﻿@using System.Linq;
-@using System.Text.Json;
-@using MMIP.Shared.Entities;
-@using MMIP.Shared.Filters;
+@using MMIP.Shared.Views
 
-@inject IStringLocalizer<ApplicationResource> _localizer
+@inject IStringLocalizer<ApplicationResource> Localizer
 @inject HttpClient Client;
 
 @page "/challenges-overview"
 
-<h1 class="mb-10">@_localizer["ChallengesPageTitle"]</h1>
+<h1 class="mb-10">@Localizer["ChallengesPageTitle"]</h1>
 
+@* TODO: Remove grid *@
 <MudGrid Justify="Justify.Center" Class="mb-15">
     <MudItem md="12">
-        <MudCard Elevation="4" Class="rounded-lg">
+        <MudCard Elevation="4" Class="rounded-lg px-6">
+            @* TODO: Remove grid *@
             <MudGrid Justify="Justify.Center">
                 <MudItem md="8" Class="mb-10 mt-8">
-                    <MudTextField @bind-Value="SearchTerms" Label="@_localizer["SearchTerms"]" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" />
+                    <MudTextField @bind-Value="SearchTerms" Label="@Localizer["SearchTerms"]" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary"/>
                 </MudItem>
             </MudGrid>
 
-            @foreach (List<Challenge> batch in ChallengeBatches)
-            {
-                <MudGrid Justify="Justify.Center" Spacing="8">
-                    @foreach (Challenge challenge in batch)
-                    {
-                        <ChallengeCardComponent Challenge="@challenge"></ChallengeCardComponent>
-                    }
-                </MudGrid>
-            }
+            <MudGrid Justify="Justify.FlexStart" Spacing="4">
+                @foreach (var cardData in challenges)
+                {
+                    <MudItem xs="12" sm="6" md="4" lg="4" xl="3">
+                        <ChallengeCardComponent CardData="@cardData"></ChallengeCardComponent>
+                    </MudItem>
+                }
+            </MudGrid>
 
+            @* TODO: Remove grid *@
             <MudGrid Justify="Justify.Center" Class="mt-15">
                 <MudItem md="6">
-                    <MudButton @onclick="@_loadChallengeBatchOnClick" FullWidth="true" Variant="Variant.Filled" Color="Color.Inherit" Disabled="@_loadMoreChallenges">@_localizer["ChallengesLoadMore"]</MudButton>
+                    <MudButton @onclick="@_loadBatch" FullWidth="true" Variant="Variant.Filled" Color="Color.Inherit" Disabled="@_gotAllChallenges">@Localizer["ChallengesLoadMore"]</MudButton>
                 </MudItem>
             </MudGrid>
         </MudCard>
@@ -39,67 +39,35 @@
 </MudGrid>
 
 @code {
-    private const int CardsPerRow = 3;
-    private const int RowsPerBatch = 2;
-    private bool _loadMoreChallenges = false;
-    private ICriteria? _filterCriteria = null;
+        private const int BatchSize = 6;
 
     public string? SearchTerms { get; set; }
-    public List<List<Challenge>> ChallengeBatches = new List<List<Challenge>>();
-    public List<Challenge> AllChallenges = new List<Challenge>();
+
+    private List<ChallengeCardView> challenges = new();
+    private bool _gotAllChallenges;
 
     protected override async Task OnInitializedAsync()
     {
-        AllChallenges = await _getChallenges();
-        _sortChallengesByDateAscending(AllChallenges);
-        LoadBatch();
-        base.OnInitialized();
+        await _loadBatch();
+        await base.OnInitializedAsync();
     }
 
-    // TODO: Change this to only get 6 from the database each time.
-    public void LoadBatch()
+    private async Task _loadBatch()
     {
-        for (int i = 0; i < RowsPerBatch; i++)
-        {
-            List<Challenge> rowBatch = new List<Challenge>();
-
-            for (int j = 0; j < CardsPerRow; j++)
-            {
-                Challenge firstChallenge = new Challenge();
-
-                if (AllChallenges.FirstOrDefault() == null)
-                {
-                    break;
-                }
-
-                firstChallenge = AllChallenges.First();
-                rowBatch.Add(firstChallenge);
-                AllChallenges.Remove(firstChallenge);
-            }
-
-            ChallengeBatches.Add(rowBatch);
-        }
-
-        if (AllChallenges.Count == 0)
-        {
-            _loadMoreChallenges = true;
-        }
+        challenges.AddRange(await _getChallengeCardViews(BatchSize, challenges.Count));
+        StateHasChanged();
     }
 
-    private void _sortChallengesByDateAscending(List<Challenge> challenges)
+    private async Task<IEnumerable<ChallengeCardView>> _getChallengeCardViews(int take, int skip)
     {
-        challenges.Sort((x, y) => x.StartDate.CompareTo(y.StartDate));
+    // TODO: replace with requestcontroller when Whim is done
+        var cards = await Client.GetFromJsonAsync<List<ChallengeCardView>>($"challenges/overview?take={take}&&skip={skip}")
+                    ?? new List<ChallengeCardView>();
+
+        if (cards.Count() < take)
+            _gotAllChallenges = true;
+
+        return cards;
     }
 
-    private void _loadChallengeBatchOnClick(MouseEventArgs mouseEventArgs)
-    {
-        LoadBatch();
-    }
-
-    // TODO: Change to take only 6 challanges a time.
-    private async Task<List<Challenge>> _getChallenges()
-    {
-        string jsonObject = JsonSerializer.Serialize(_filterCriteria);
-        return await Client.GetFromJsonAsync<List<Challenge>>($"challenges?filterCriteria={jsonObject}");
-    }
 }
