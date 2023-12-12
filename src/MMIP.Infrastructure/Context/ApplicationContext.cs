@@ -15,6 +15,7 @@ public class ApplicationContext : DbContext
     public DbSet<Challenge> Challenges { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Organization> Organizations { get; set; }
+    public DbSet<Sector> Sectors { get; set; }
     public DbSet<Branche> Branches { get; set; }
     public DbSet<Phase> Phases { get; set; }
     public DbSet<User> Users { get; set; }
@@ -39,6 +40,7 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration(new ChallengeConfiguration());
         modelBuilder.ApplyConfiguration(new TagConfiguration());
         modelBuilder.ApplyConfiguration(new ChallengeCardComponentConfiguration());
+        modelBuilder.ApplyConfiguration(new SectorConfiguration());
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
