@@ -10,26 +10,22 @@
 <MudCard Elevation="4" Class="px-6">
     <MudGrid Justify="Justify.Center">
         <MudItem xs="12" Class="card-centered-text">
-            <h1>Naam</h1>
+            <h1>@(CurrentEntity is User ? User.Name : Organization.Name)</h1>
         </MudItem>
-        <MudItem md="3" xs="12" Class="card-centered-text">
+        <MudItem md="2" xs="12" Class="card-centered-text">
             <MudAvatar Style="height:140px; width:140px;">
                 <MudImage Src="Assets/Img/ProfilePictureTest.jpg"></MudImage>
             </MudAvatar>        
         </MudItem>
-        <MudItem md="9" xs="12" Class="card-centered-text">
+        <MudItem md="10" xs="12" Class="card-centered-text">
             <h2>Beschrijving</h2>
-            Beschrijving
+            <p>@(CurrentEntity is User ? User.Description : Organization.Description)</p>
         </MudItem>
 
         <MudItem xs="12" Class="card-centered-text">
             <MudDivider DividerType="DividerType.Middle" Class="my-6"/>
             <h2>Challenges</h2>
         </MudItem>
-        <div>
-            @Entity
-            @Id
-        </div>
         @foreach (List<Challenge> batch in ChallengeBatches)
         {
             <MudItem justify-center>
@@ -43,13 +39,17 @@
 </MudCard>
 
 @code {
+    //TODO: remove if database connected
+    public User User = new() { Id = new Guid(), CreatedDate = default, UpdatedDate = default, Name = "John Wick", Description = "Dit is een mooie beschrijving van mij, want ik ben heel capabel enzo." };
+    public Organization Organization = new() { Id = new Guid(), CreatedDate = default, UpdatedDate = default, Name = "Continental Hotel", Description = "Heel mooi hotel, super discreet, voor al uw verblijven geschikt.", Challenges = null };
+    public Object CurrentEntity;
     private const int CardsPerRow = 3;
     private const int RowsPerBatch = 2;
     private bool _loadMoreChallenges = false;
     private ICriteria? _filterCriteria = null;
 
-    public List<List<Challenge>> ChallengeBatches = new List<List<Challenge>>();
-    public List<Challenge> AllChallenges = new List<Challenge>();
+    public List<List<Challenge>> ChallengeBatches = new();
+    public List<Challenge> AllChallenges = new();
     [Parameter]
     public string Entity { get; set; }
     [Parameter]
@@ -58,11 +58,16 @@
 
     protected override async Task OnInitializedAsync()
     {
-            if (!Entity.ToLower().Equals("user") || string.IsNullOrEmpty(Entity))
-                if (!Entity.ToLower().Equals("organization") || string.IsNullOrEmpty(Entity))
-                    navigationManager.NavigateTo($"/Error/{Entity}", forceLoad: true);
+        if (!Entity.ToLower().Equals("user") || string.IsNullOrEmpty(Entity))
+            if (!Entity.ToLower().Equals("organization") || string.IsNullOrEmpty(Entity))
+                navigationManager.NavigateTo($"/Error/{Entity}", forceLoad: true);
 
-        AllChallenges = await _getChallenges();
+        if (Entity.ToLower().Equals("user"))
+            CurrentEntity = User;
+        else if (Entity.ToLower().Equals("organization"))
+            CurrentEntity = Organization;
+
+        AllChallenges = await _getChallengesById();
         _sortChallengesByDateAscending(AllChallenges);
         LoadBatch();
         base.OnInitialized();
@@ -109,7 +114,7 @@
     }
 
     // TODO: Change to take only 6 challanges a time.
-    private async Task<List<Challenge>> _getChallenges()
+    private async Task<List<Challenge>> _getChallengesById()
     {
         string jsonObject = JsonSerializer.Serialize(_filterCriteria);
         return await Client.GetFromJsonAsync<List<Challenge>>($"challenges?filterCriteria={jsonObject}");
