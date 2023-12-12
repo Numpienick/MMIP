@@ -21,10 +21,21 @@ public class DefaultsSeeder : IDatabaseSeeder
 
     private async Task _seedDefaultOrganization()
     {
+        var orgId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+        if (await _doesEntityExist<Organization>(orgId))
+            return;
+
+        var sectorId = (await _context.Sectors.FirstOrDefaultAsync())?.Id;
+        if (sectorId == default)
+            await _seedSectors();
+
+        sectorId = (await _context.Sectors.FirstOrDefaultAsync())!.Id;
+
         var org = new Organization
         {
-            Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+            Id = orgId,
             Name = "Default Organization",
+            SectorId = sectorId.Value
         };
         await _context.Organizations.AddAsync(org);
         await _context.SaveChangesAsync();
