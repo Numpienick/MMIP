@@ -27,6 +27,12 @@
         <Link>.dockerignore</Link>
       </Content>
     </ItemGroup>
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="MMIP.Test" />
+        <InternalsVisibleTo Include="MMIP.Test.Infrastructure" />
+        <InternalsVisibleTo Include="MMIP.Test.DependencyInjection" />
+    </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\MMIP.Environment\MMIP.Environment.csproj" />
