@@ -41,19 +41,51 @@
         </MudItem>
         @if (ChallengeId != Guid.Empty)
         {
-            <MudItem xs="12" md="6">
-                <MudTimeline>
-                @foreach (var phase in _phases)
-                {
-                    <MudTimelineItem Color="Color.Info" Size="Size.Small">
-                        <ItemContent>
-                            <h2>@phase.Name</h2>
-                            <h3>@phase.Description</h3>
-                        </ItemContent>
-                    </MudTimelineItem>
-                }
+            <MudItem xs="12" md="12">
+                <MudTimeline Class="mt-5 mb-5" TimelineOrientation="TimelineOrientation.Horizontal">
+                    @{
+                        bool skip = false;
+                        Color circleColor = Color.Success;
+                        Size circleSize = Size.Large;
+
+                        foreach (var phase in _phases)
+                        {
+                            string currentPhase = string.Empty;
+
+                            if (skip)
+                            {
+                                circleColor = Color.Error;
+                                circleSize = Size.Small;
+                            }
+
+                            else
+                            {
+                                circleColor = Color.Success;
+                                circleSize = Size.Small;
+                            }
+
+                            if (phase.Name == "Afgerond")
+                            {
+                                currentPhase = "Huidige fase";
+                                circleColor = Color.Info;
+                                circleSize = Size.Medium;
+                                skip = true;
+                            }
+
+                            <MudTimelineItem Color="circleColor" Size="circleSize">
+                                <ItemOpposite>
+                                    <h2>@currentPhase</h2>
+                                </ItemOpposite>
+                                <ItemContent>
+                                    <h3>@phase.Name</h3>
+                                    <p>@phase.Description</p>
+                                </ItemContent>
+                            </MudTimelineItem>
+                        }
+                    }
                 </MudTimeline>
-            </MudItem>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-16">Challenge naar volgende fase overzetten</MudButton>
+             </MudItem>
         }
     </MudGrid>
     <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer[_buttonLocalizedText]</MudButton>
@@ -81,6 +113,7 @@
         if (ChallengeId != Guid.Empty)
         {
             _model = await _getChallenge();
+            TempPhases();
             _buttonLocalizedText = ButtonEditLocalization;
             _localizedPageTitle = EditChallengeTitleLocalization;
         }
@@ -121,6 +154,39 @@
     private async Task _updateChallenge()
     {
         await Client.PatchAsJsonAsync<Challenge>("challenges", _model);
+    }
+
+    private void TempPhases()
+    {
+        _phases.Add(new Phase()
+        {
+            Name = "Concepting",
+            Description = "Een challenge in deze fase bevat nog niet alle concrete informatie, en is daarom nog niet zichtbaar voor gebruikers.",
+        });
+
+        _phases.Add(new Phase()
+        {
+            Name = "Open voor ideeën",
+            Description = "Een challenge in deze fase staat open om ideeën, vragen of andere reacties van gebruikers te ontvangen.",
+        });
+
+        _phases.Add(new Phase()
+        {
+            Name = "In uitvoering",
+            Description = "Een challenge in deze fase wordt momenteel uitgevoerd, en ontvangt geen nieuwe reacties van gebruikers meer.",
+        });
+
+        _phases.Add(new Phase()
+        {
+            Name = "Afgerond",
+            Description = "Een challenge in deze fase is afgerond, waarbij het eindverslag voor de challenge zichtbaar wordt.",
+        });
+
+        _phases.Add(new Phase()
+        {
+            Name = "Gearchiveerd",
+            Description = "Een challenge in deze fase is niet meer zichtbaar voor andere gebruikers op het platform.",
+        });
     }
 
     // private async Task<Phase> _getPhase()
