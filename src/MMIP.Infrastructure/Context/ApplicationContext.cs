@@ -43,6 +43,7 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration(new SectorConfiguration());
         modelBuilder.ApplyConfiguration(new OrganizationConfiguration());
         modelBuilder.ApplyConfiguration(new IndustryConfiguration());
+        modelBuilder.ApplyConfiguration(new PhaseConfiguration());
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
