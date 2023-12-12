@@ -358,7 +358,7 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Geen tags gevonden, voeg deze toe of zoek op iets anders..
         /// </summary>
         internal static string NoItemsFound {
             get {
@@ -417,6 +417,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Er is iets fout gegaan met het versturen van de data.
+        /// </summary>
+        internal static string Request_BadRequest {
+            get {
+                return ResourceManager.GetString("Request_BadRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Er is iets fout gegaan aan onze kant, probeer het later nog een keer.
         /// </summary>
         internal static string Request_NotFound {
@@ -440,6 +449,15 @@ namespace MMIP.Client.Resources {
         internal static string Request_TooLarge {
             get {
                 return ResourceManager.GetString("Request_TooLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Request_Unknown {
+            get {
+                return ResourceManager.GetString("Request_Unknown", resourceCulture);
             }
         }
         
