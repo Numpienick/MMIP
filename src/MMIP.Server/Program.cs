@@ -1,9 +1,14 @@
 using MMIP.Infrastructure.Extensions;
 using MMIP.Server.Extensions;
+using Duende.IdentityServer.Services;
+using MMIP.Infrastructure.Services;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddIdentity();
+builder.Services.AddTransient<IProfileService, UserService>();
 
 //Cors
 builder.Services.AddCors(options =>
@@ -19,6 +24,10 @@ builder.Services.AddRepositories();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.Configure<IdentityOptions>(
+    options => options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier
+);
 
 var app = builder.Build();
 
