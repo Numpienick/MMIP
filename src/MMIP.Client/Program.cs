@@ -4,7 +4,6 @@ using MMIP.Client;
 using MMIP.Client.Controllers;
 using MMIP.Client.Extensions;
 using MMIP.Environment;
-using MMIP.Shared.StateContainers;
 using MudBlazor;
 using MudBlazor.Services;
 
@@ -22,8 +21,6 @@ builder.Services.AddTransient<ValueValidator>();
 
 builder.Services.AddSingleton<Snackbar>();
 
-// TODO: Remove when database access is available.
-builder.Services.AddSingleton<TempStateContainer>();
 builder.Services.AddMudServices(config =>
 {
     config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomCenter;

@@ -4,6 +4,8 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
 
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
@@ -30,6 +32,7 @@
       <ProjectReference Include="..\MMIP.Infrastructure\MMIP.Infrastructure.csproj" />
       <ProjectReference Include="..\MMIP.Server\MMIP.Server.csproj" />
       <ProjectReference Include="..\MMIP.Shared\MMIP.Shared.csproj" />
+      <ProjectReference Include="..\MMIP.Test.Infrastructure\MMIP.Test.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

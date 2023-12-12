@@ -1,83 +1,63 @@
-@using MMIP.Shared.Entities
-@inject IStringLocalizer<ApplicationResource> _localizer
-@inject NavigationManager navigationManager;
+@using MMIP.Shared.Entities;
+@using MMIP.Shared.Views;
+@using MMIP.Client.Controllers
+@inject IStringLocalizer<ApplicationResource> Localizer;
+@inject NavigationManager NavigationManager;
 
-<MudItem md="3" xs="6">
-    <MudCard @onclick="() => NavigateToChallengeView(Challenge.Id)" Elevation="4" Class="rounded-lg custom-card">
-        <MudCardMedia Image=@Challenge.BannerImagePath Height="100"></MudCardMedia>
-        <MudCardContent>
-            <h2 class="card-centered-text">@Challenge.Title</h2>
-        </MudCardContent>
-        <MudCardContent>
-            <MudGrid>
-                <MudItem md="6">
-                    @* TODO: Make use of challenge view *@
-                    @* <h3 class="card-organization-title">@Challenge.Organization.Name</h3> *@
-                    <h3 class="card-organization-title">FIX CHALLENGE ORGANIZATION NAME</h3>
-                </MudItem>
-                <MudItem md="6">
-                    <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="80"></MudCardMedia>
-                </MudItem>
-            </MudGrid>
-        </MudCardContent>
-        <MudCardContent>
-            <p class="card-centered-text">@Challenge.ShortDescription</p>
-        </MudCardContent>
+<MudCard @onclick="() => NavigateToChallengeView(CardData.ChallengeId)" Elevation="4" Class="rounded-lg custom-card">
+    <MudCardMedia Image=@CardData.BannerImagePath Height="100"></MudCardMedia>
+    <MudCardContent>
+        <h2 class="card-centered-text">@CardData.Title</h2>
+        <div class="organization-section d-flex my-4 align-content-center align-center justify-space-between">
+            <h3 class="organization-title">@CardData.OrganizationName</h3>
+            <MudImage ObjectFit="ObjectFit.Cover" Src="Assets/Img/1600x888.jpg" Class="organization-logo"></MudImage>
+        </div>
+        <p class="mb-4 card-centered-text">@CardData.ShortDescription</p>
         <MudDivider></MudDivider>
-        <MudCardContent>
-            <MudGrid Justify="Justify.Center">
-                @{
-                    int count = 0;
-                    foreach (string tag in Challenge.Tags.Select(t => t.Value))
-                    {
-                        if (count < MaximumVisibleTags)
-                        {
-                            <MudChip Size="Size.Small" Color="Color.Primary">@tag</MudChip>
-                            count++;
-                        }
-
-                        else
-                        {
-                            if (Challenge.Tags.Count > MaximumVisibleTags)
-                            {
-                                <MudTooltip Arrow="true" Placement="Placement.Bottom" Class="grey lighten-2 icon-tooltip">
-                                    <ChildContent>
-                                        <MudChip Size="Size.Small" Color="Color.Primary">+@_additionalTags @_localizer["OtherTags"]</MudChip>
-                                    </ChildContent>
-                                    <TooltipContent>
-                                        <h3>@_localizer["RemainingTags"]:</h3>
-                                        @for (int i = MaximumVisibleTags; i < Challenge.Tags.Count; i++)
-                                        {
-                                            <p>@Challenge.Tags[i].Value</p>
-                                        }
-                                    </TooltipContent>
-                                </MudTooltip>
-                            }
-
-                            break;
-                        }
-                    }
+        <div class="d-flex justify-center flex-wrap my-4">
+            @{
+                foreach (var tag in CardData.Tags.Take(VisibleTagsLimit))
+                {
+                    <MudChip Size="Size.Small" Color="Color.Primary">@tag</MudChip>
                 }
-            </MudGrid>
-        </MudCardContent>
-    </MudCard>
-</MudItem>
+                if (_totalAmountOfTags > VisibleTagsLimit)
+                {
+                    <MudTooltip Arrow="true" Placement="Placement.Bottom" Class="grey lighten-2 icon-tooltip">
+                        <ChildContent>
+                            <MudChip Size="Size.Small" Color="Color.Primary">+@_amountOfAdditionalTags @Localizer["OtherTags"]</MudChip>
+                        </ChildContent>
+                        <TooltipContent>
+                            <h3>@Localizer["RemainingTags"]:</h3>
+                            @foreach (var tag in CardData.Tags.Skip(VisibleTagsLimit))
+                            {
+                                <p>@tag</p>
+                            }
+                        </TooltipContent>
+                    </MudTooltip>
+                }
+            }
+        </div>
+    </MudCardContent>
+</MudCard>
 
 @code {
-    [Parameter]
-    public Challenge Challenge { get; set; }
+        private const int VisibleTagsLimit = 5;
 
-    private const int MaximumVisibleTags = 5;
-    private int _additionalTags;
+    [Parameter]
+    public ChallengeCardView CardData { get; set; } = null!;
+
+    private int _totalAmountOfTags;
+    private int _amountOfAdditionalTags => _totalAmountOfTags - VisibleTagsLimit;
 
     protected override async Task OnInitializedAsync()
     {
-        _additionalTags = Challenge.Tags.Count - MaximumVisibleTags;
-        base.OnInitialized();
+        await base.OnInitializedAsync();
+        _totalAmountOfTags = CardData.Tags.Length;
     }
 
     public void NavigateToChallengeView(Guid challengeId)
     {
-        navigationManager.NavigateTo($"/challenge-view/{challengeId}");
+        NavigationManager.NavigateTo($"/challenge-view/{challengeId}");
     }
+
 }

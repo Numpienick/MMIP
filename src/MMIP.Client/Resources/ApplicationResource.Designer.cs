@@ -385,17 +385,25 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;h1&gt;Privacyverklaring en Gegevensbeschermingsbeleid&lt;/h1&gt;
-        ///
-        ///&lt;h2&gt;1. Inleiding&lt;/h2&gt;
+        ///   Looks up a localized string similar to &lt;h2&gt;1. Inleiding&lt;/h2&gt;
         ///&lt;p&gt;Dit Privacyverklaring en Gegevensbeschermingsbeleid (hierna &quot;Verklaring&quot;) beschrijft hoe MatchMaker Innovation Platform (&quot;wij,&quot; &quot;ons,&quot; of &quot;onze&quot;) persoonlijke gegevens die worden verstrekt door de bezoekers van onze website &lt;a href=&quot;https://mm.innovation.io/&quot;&gt;https://mm.innovation.io/&lt;/a&gt; (&quot;de website&quot;) worden verzamelt, gebruikt, openbaar maakt en beschermt.&lt;/p&gt;
+        ///&lt;br/&gt;
         ///
         ///&lt;h2&gt;2. Verzamelde Gegevens&lt;/h2&gt;
-        ///&lt;p&gt;Wij verzamelen persoo [rest of string was truncated]&quot;;.
+        ///&lt;p&gt;Wij verzamelen persoonlijke gegevens die vrijwillig door jou worden verstr [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PrivacyDeclaration {
             get {
                 return ResourceManager.GetString("PrivacyDeclaration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacyverklaring en Gegevensbeschermingsbeleid.
+        /// </summary>
+        internal static string PrivacyPageTitle {
+            get {
+                return ResourceManager.GetString("PrivacyPageTitle", resourceCulture);
             }
         }
         
@@ -465,9 +473,9 @@ namespace MMIP.Client.Resources {
         /// <summary>
         ///   Looks up a localized string similar to MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in innovatie..
         /// </summary>
-        internal static string VisionMatchMakerDescripition {
+        internal static string VisionMatchMakerDescription {
             get {
-                return ResourceManager.GetString("VisionMatchMakerDescripition", resourceCulture);
+                return ResourceManager.GetString("VisionMatchMakerDescription", resourceCulture);
             }
         }
     }

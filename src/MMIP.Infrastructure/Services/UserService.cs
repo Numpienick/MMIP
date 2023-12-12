@@ -1,11 +1,7 @@
-﻿using MMIP.Infrastructure.Repositories;
+using MMIP.Infrastructure.Repositories;
 using MMIP.Shared.Entities;
 
 namespace MMIP.Infrastructure.Services
 {
-    public class UserService : BaseEntityService<User>
-    {
-        internal UserService(IRepository<User> repository)
-            : base(repository) { }
-    }
+    public class UserService { }
 }

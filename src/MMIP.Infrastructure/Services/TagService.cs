@@ -1,21 +1,22 @@
-﻿using MMIP.Infrastructure.Repositories;
+﻿using MMIP.Application.Interfaces.Repositories;
+using MMIP.Infrastructure.Repositories;
 using MMIP.Shared.Entities;
 
 namespace MMIP.Infrastructure.Services
 {
     public class TagService : BaseEntityService<Tag>
     {
-        private readonly TagRepository _tagRepository;
+        private readonly ITagRepository _repository;
 
-        public TagService(TagRepository repository)
-            : base(repository)
+        public TagService(IUnitOfWork unitOfWork, ITagRepository repository)
+            : base(unitOfWork)
         {
-            _tagRepository = repository;
+            _repository = repository;
         }
 
         public List<Tag> GetTags(string value)
         {
-            return _tagRepository.Search(value).Result;
+            return _repository.Search(value).Result;
         }
     }
 }
