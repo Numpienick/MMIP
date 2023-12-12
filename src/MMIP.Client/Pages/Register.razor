@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using MMIP.Infrastructure.Services
 @using MMIP.Shared.Entities
+@using Microsoft.AspNetCore.Authentication
 @inject IStringLocalizer<ApplicationResource> Localizer
 
 <PageTitle>@Localizer["Register"]</PageTitle>
@@ -84,8 +85,6 @@
 
 @code {
     [Inject]
-    public IAuthenticationService AuthenticationService { get; set; }
-    [Inject]
     public NavigationManager NavigationManager { get; set; }
     [Inject]
     private ISnackbar _snackbar { get; set; }
@@ -119,7 +118,6 @@
 
     private async void _validFormSubmitted(EditContext editContext)
     {
-        RegisterUser();
         StateHasChanged();
     }
 
@@ -127,23 +125,6 @@
     {
         _snackbar.Add(@Localizer["SnackbarInvalid"], Severity.Error);
         StateHasChanged();
-    }
-
-    public async Task RegisterUser()
-    {
-        ShowRegistrationErrors = false;
-        //TODO: database implementation
-        //Doesn't give result :(
-        var result = await AuthenticationService.RegisterUser(_user);
-        if (!result.SuccesfulRegistration)
-        {
-            _snackbar.Add(@Localizer["SnackbarInvalid"], Severity.Error);
-            StateHasChanged();
-        }
-        else
-        {
-            NavigationManager.NavigateTo("/");
-        }
     }
 
     //TODO: Add functionality (make it work and uploading the files to the server)
