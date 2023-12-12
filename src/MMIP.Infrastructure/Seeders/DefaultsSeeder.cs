@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MMIP.Infrastructure.Context;
+using MMIP.Infrastructure.Helpers;
 using MMIP.Shared.Entities;
 
 namespace MMIP.Infrastructure.Seeders;
@@ -35,6 +36,7 @@ public class DefaultsSeeder : IDatabaseSeeder
         {
             Id = orgId,
             Name = "Default Organization",
+            EnrollmentCode = EnrollmentCodeGenerator.GenerateEnrollmentCode(),
             SectorId = sectorId.Value
         };
         await _context.Organizations.AddAsync(org);
