@@ -1,42 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Shared.DTO;
 using MMIP.Shared.Entities;
 
 namespace MMIP.Server.Controllers
 {
+    //[Authorize] // -> To specify that this class requires specific authorization
     [ApiController]
-    [Route("[controller]")]
-    public class UserController : Controller
+    public class UserController
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
 
-        public UserController(UserManager<IdentityUser> userManager)
+        public UserController(UserManager<User> userManager)
         {
-            _userManager = userManager;
-        }
-
-        [HttpPost("Registration")]
-        public async Task<IActionResult> RegisterUser([FromBody] User userForRegistration)
-        {
-            if (userForRegistration == null || !ModelState.IsValid)
-                return BadRequest();
-
-            var user = new IdentityUser
-            {
-                UserName = userForRegistration.Email,
-                Email = userForRegistration.Email
-            };
-
-            var result = await _userManager.CreateAsync(user, userForRegistration.Password);
-            if (!result.Succeeded)
-            {
-                var errors = result.Errors.Select(e => e.Description);
-
-                return BadRequest(new RegistrationResponse() { Errors = errors });
-            }
-
-            return StatusCode(201);
+            this._userManager = userManager;
         }
     }
 }

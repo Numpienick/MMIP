@@ -7,14 +7,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="EFCore.NamingConventions" Version="7.0.2" />
+        <PackageReference Include="EFCore.NamingConventions" Version="7.0.2"/>
+        <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="7.0.14"/>
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.14"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11"/>
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.14" />
     </ItemGroup>
 
     <ItemGroup>
@@ -23,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\MMIP.Application\MMIP.Application.csproj" />
+        <ProjectReference Include="..\MMIP.Application\MMIP.Application.csproj"/>
         <ProjectReference Include="..\MMIP.Shared\MMIP.Shared.csproj"/>
     </ItemGroup>
 </Project>

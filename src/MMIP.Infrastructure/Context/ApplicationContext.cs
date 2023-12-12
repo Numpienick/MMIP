@@ -1,14 +1,18 @@
+using Duende.IdentityServer.EntityFramework.Options;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MMIP.Shared.Entities;
 using MMIP.Infrastructure.Context.Configuration.Converters;
 using MMIP.Infrastructure.Context.Configuration.EntityConfiguration;
 using MMIP.Infrastructure.Context.Configuration.ViewConfiguration;
+using MMIP.Infrastructure.Models.Identity;
 using MMIP.Shared.Enums;
 using MMIP.Shared.Views;
 
 namespace MMIP.Infrastructure.Context;
 
-public class ApplicationContext : DbContext
+public class ApplicationContext : ApiAuthorizationDbContext<AppUser>
 {
     # region entities
 
@@ -17,7 +21,6 @@ public class ApplicationContext : DbContext
     public DbSet<Organization> Organizations { get; set; }
     public DbSet<Branche> Branches { get; set; }
     public DbSet<Phase> Phases { get; set; }
-    public DbSet<User> Users { get; set; }
     public DbSet<UserGroup> UserGroups { get; set; }
     public DbSet<Tag> Tags { get; set; }
 
@@ -29,8 +32,11 @@ public class ApplicationContext : DbContext
 
     #endregion
 
-    public ApplicationContext(DbContextOptions<ApplicationContext> options)
-        : base(options) { }
+    public ApplicationContext(
+        DbContextOptions<ApplicationContext> options,
+        IOptions<OperationalStoreOptions> operationalStoreOptions
+    )
+        : base(options, operationalStoreOptions) { }
 
     #region required
 
