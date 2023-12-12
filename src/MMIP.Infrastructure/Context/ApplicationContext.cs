@@ -42,6 +42,7 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration(new ChallengeCardViewConfiguration());
         modelBuilder.ApplyConfiguration(new SectorConfiguration());
         modelBuilder.ApplyConfiguration(new OrganizationConfiguration());
+        modelBuilder.ApplyConfiguration(new PhaseConfiguration());
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
