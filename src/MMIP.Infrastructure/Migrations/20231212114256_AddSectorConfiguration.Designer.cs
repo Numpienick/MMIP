@@ -3,6 +3,7 @@ using System;
 using MMIP.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MMIP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20231212114256_AddSectorConfiguration")]
+    partial class AddSectorConfiguration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,10 +104,6 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("organization_id");
 
-                    b.Property<Guid?>("OrganizationId1")
-                        .HasColumnType("uuid")
-                        .HasColumnName("organization_id1");
-
                     b.Property<string>("ShortDescription")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -134,9 +133,6 @@ namespace MMIP.Infrastructure.Migrations
 
                     b.HasIndex("OrganizationId")
                         .HasDatabaseName("ix_challenges_organization_id");
-
-                    b.HasIndex("OrganizationId1")
-                        .HasDatabaseName("ix_challenges_organization_id1");
 
                     b.ToTable("challenges", (string)null);
                 });
@@ -185,40 +181,20 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTimeOffset>("CreatedDate")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date")
-                        .HasDefaultValueSql("NOW()");
-
-                    b.Property<string>("EnrollmentCode")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(8)
-                        .HasColumnType("character varying(8)")
-                        .HasDefaultValue("GUH6K87D")
-                        .HasColumnName("enrollment_code");
+                        .HasColumnName("created_date");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<Guid>("SectorId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sector_id");
-
                     b.Property<DateTimeOffset>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date")
-                        .HasDefaultValueSql("NOW()");
+                        .HasColumnName("updated_date");
 
                     b.HasKey("Id")
                         .HasName("pk_organizations");
-
-                    b.HasIndex("SectorId")
-                        .HasDatabaseName("ix_organizations_sector_id");
 
                     b.ToTable("organizations", (string)null);
                 });
@@ -383,7 +359,7 @@ namespace MMIP.Infrastructure.Migrations
                     b.ToTable("user_groups", (string)null);
                 });
 
-            modelBuilder.Entity("MMIP.Shared.Views.ChallengeCardView", b =>
+            modelBuilder.Entity("MMIP.Shared.Views.ChallengeCardComponent", b =>
                 {
                     b.Property<string>("BannerImagePath")
                         .IsRequired()
@@ -404,18 +380,19 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("short_description");
 
-                    b.Property<string>("TagsString")
-                        .HasColumnType("text")
-                        .HasColumnName("tags");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("title");
 
+                    b.Property<string>("_tags")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("tags");
+
                     b.ToTable((string)null);
 
-                    b.ToView("challenge_card_view", (string)null);
+                    b.ToView("challenge_card_component_view", (string)null);
                 });
 
             modelBuilder.Entity("challenge_phases", b =>
@@ -476,23 +453,6 @@ namespace MMIP.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_challenges_organizations_organization_id");
-
-                    b.HasOne("MMIP.Shared.Entities.Organization", "Organization")
-                        .WithMany()
-                        .HasForeignKey("OrganizationId1")
-                        .HasConstraintName("fk_challenges_organizations_organization_id1");
-
-                    b.Navigation("Organization");
-                });
-
-            modelBuilder.Entity("MMIP.Shared.Entities.Organization", b =>
-                {
-                    b.HasOne("MMIP.Shared.Entities.Sector", null)
-                        .WithMany()
-                        .HasForeignKey("SectorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_organizations_sectors_sector_id");
                 });
 
             modelBuilder.Entity("MMIP.Shared.Entities.UserGroup", b =>
