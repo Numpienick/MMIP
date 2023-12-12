@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MMIP.Application.Interfaces.Repositories;
 using MMIP.Application.Interfaces.Services;
 using MMIP.Shared.Entities;
