@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MMIP.Application.Interfaces.Repositories;
 using MMIP.Application.Interfaces.Services;
 using MMIP.Shared.Entities;
@@ -37,7 +37,7 @@ namespace MMIP.Infrastructure.Services
             return _repository.Entities.AsNoTracking().ToListAsync();
         }
 
-        public async Task AddAsync(TEntity entity)
+        public virtual async Task AddAsync(TEntity entity)
         {
             await _repository.AddAsync(entity);
             await _unitOfWork.Commit();
