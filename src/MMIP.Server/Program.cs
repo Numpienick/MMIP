@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddIdentity();
-builder.Services.AddTransient<IProfileService, UserService>();
 
 //Cors
 builder.Services.AddCors(options =>
@@ -44,9 +43,9 @@ app.UseHttpsRedirection();
 
 app.UseCors();
 
-//app.UseAuthentication();
-//app.UseAuthorization();
-//app.UseIdentityServices();
+app.UseAuthentication();
+app.UseAuthorization();
+app.UseIdentityServices();
 
 app.MapControllers();
 
