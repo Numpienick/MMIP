@@ -294,4 +294,10 @@
   <data name="PrivacyPageTitle" xml:space="preserve">
     <value>Privacyverklaring en Gegevensbeschermingsbeleid</value>
   </data>
+  <data name="Request_BadRequest" xml:space="preserve">
+    <value>Er is iets fout gegaan met het versturen van de data</value>
+  </data>
+  <data name="Request_Unknown" xml:space="preserve">
+    <value>Onbekende fout</value>
+  </data>
 </root>

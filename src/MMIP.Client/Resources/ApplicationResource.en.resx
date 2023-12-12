@@ -296,4 +296,10 @@
   <data name="NoItemsFound" xml:space="preserve">
     <value>No tags found, add this one or change your search term.</value>
   </data>
+  <data name="Request_BadRequest" xml:space="preserve">
+    <value>Something went wrong with sending of the data</value>
+  </data>
+  <data name="Request_Unknown" xml:space="preserve">
+    <value>Unknown error</value>
+  </data>
 </root>

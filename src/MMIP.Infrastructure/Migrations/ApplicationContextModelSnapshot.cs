@@ -130,7 +130,7 @@ namespace MMIP.Infrastructure.Migrations
 
                     b.HasIndex("OrganizationId")
                         .HasDatabaseName("ix_challenges_organization_id");
-
+                    
                     b.ToTable("challenges", (string)null);
                 });
 
