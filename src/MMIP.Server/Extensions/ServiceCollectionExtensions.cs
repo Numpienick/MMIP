@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.EntityFrameworkCore;
-using MMIP.Environment;
 using MMIP.Infrastructure.Context;
 using MMIP.Infrastructure.Models.Identity;
 using MMIP.Infrastructure.Seeders;
@@ -16,24 +14,8 @@ internal static class ServiceCollectionExtensions
         bool addRandomDataSeeder = false
     )
     {
-#if DEBUG
-        services
-            .AddDbContextFactory<ApplicationContext>(
-                opt =>
-                    opt.UseNpgsql(EnvironmentConstants.DatabaseConnectionString())
-                        .UseSnakeCaseNamingConvention()
-                        .EnableSensitiveDataLogging()
-            )
-            .AddDatabaseDeveloperPageExceptionFilter();
-#else
-        services
-            .AddDbContextFactory<ApplicationContext>(
-                opt =>
-                    opt.UseNpgsql(EnvironmentConstants.DatabaseConnectionString())
-                        .UseSnakeCaseNamingConvention()
-            )
-            .AddDatabaseDeveloperPageExceptionFilter();
-#endif
+        services.AddDbContext<ApplicationContext>().AddDatabaseDeveloperPageExceptionFilter();
+
         services.AddTransient<IDatabaseSeeder, DefaultsSeeder>();
 
         if (!addRandomDataSeeder)

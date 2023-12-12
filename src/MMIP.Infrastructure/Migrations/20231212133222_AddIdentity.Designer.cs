@@ -3,6 +3,7 @@ using System;
 using MMIP.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MMIP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20231212133222_AddIdentity")]
+    partial class AddIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -587,7 +590,7 @@ namespace MMIP.Infrastructure.Migrations
                     b.ToTable("user_groups", (string)null);
                 });
 
-            modelBuilder.Entity("MMIP.Shared.Views.ChallengeCardView", b =>
+            modelBuilder.Entity("MMIP.Shared.Views.ChallengeCardComponentView", b =>
                 {
                     b.Property<string>("BannerImagePath")
                         .IsRequired()
@@ -608,18 +611,18 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("short_description");
 
-                    b.Property<string>("TagsString")
-                        .HasColumnType("text")
-                        .HasColumnName("tags");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("title");
 
+                    b.Property<string>("_tags")
+                        .HasColumnType("text")
+                        .HasColumnName("tags");
+
                     b.ToTable((string)null);
 
-                    b.ToView("challenge_card_view", (string)null);
+                    b.ToView("challenge_card_component_view", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
