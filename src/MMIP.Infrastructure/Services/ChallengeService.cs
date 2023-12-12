@@ -28,7 +28,7 @@ namespace MMIP.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public Task<List<ChallengeCardComponentView>> GetCardViewsAsync(int take, int skip)
+        public Task<List<ChallengeCardView>> GetCardViewsAsync(int take, int skip)
         {
             int pageNumber = skip / take;
             return _repository.GetChallengeCardsAsync(pageNumber, take);

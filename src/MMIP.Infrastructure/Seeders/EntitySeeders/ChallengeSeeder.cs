@@ -81,7 +81,7 @@ public class ChallengeSeeder : IEntitySeeder<Challenge>
             return tags;
         for (int i = 0; i < amount - tags.Count; i++)
         {
-            tags.Add(new Tag { Value = "Tag " + i });
+            tags.Add(new Tag { Value = "Tag12345681234 " + i });
         }
 
         return tags;

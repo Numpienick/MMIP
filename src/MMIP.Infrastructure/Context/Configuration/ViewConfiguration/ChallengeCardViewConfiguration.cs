@@ -4,12 +4,12 @@ using MMIP.Shared.Views;
 
 namespace MMIP.Infrastructure.Context.Configuration.ViewConfiguration;
 
-internal class ChallengeCardComponentViewConfiguration
-    : IEntityTypeConfiguration<ChallengeCardComponentView>
+internal class ChallengeCardViewConfiguration
+    : IEntityTypeConfiguration<ChallengeCardView>
 {
-    public void Configure(EntityTypeBuilder<ChallengeCardComponentView> builder)
+    public void Configure(EntityTypeBuilder<ChallengeCardView> builder)
     {
-        builder.ToView("challenge_card_component_view").HasNoKey();
+        builder.ToView("challenge_card_view").HasNoKey();
 
         builder.Ignore(c => c.Tags);
         builder.Property("_tags").HasColumnName("tags");

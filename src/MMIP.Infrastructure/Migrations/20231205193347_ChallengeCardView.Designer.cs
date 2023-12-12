@@ -13,7 +13,7 @@ namespace MMIP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
     [Migration("20231205193347_ChallengeCardComponentView")]
-    partial class ChallengeCardComponentView
+    partial class ChallengeCardView
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

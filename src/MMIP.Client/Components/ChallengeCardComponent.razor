@@ -44,7 +44,7 @@
         private const int VisibleTagsLimit = 5;
 
     [Parameter]
-    public ChallengeCardComponentView CardData { get; set; } = null!;
+    public ChallengeCardView CardData { get; set; } = null!;
 
     private int _totalAmountOfTags;
     private int _amountOfAdditionalTags => _totalAmountOfTags - VisibleTagsLimit;

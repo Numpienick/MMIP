@@ -5,14 +5,14 @@
 namespace MMIP.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class ChallengeCardComponentView : Migration
+    public partial class ChallengeCardView : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(
-                @"drop view if exists challenge_card_component_view;
-CREATE OR REPLACE VIEW challenge_card_component_view
+                @"drop view if exists challenge_card_view;
+CREATE OR REPLACE VIEW challenge_card_view
 AS SELECT 
 	c.id AS challenge_id,
     c.title,
@@ -32,7 +32,7 @@ GROUP BY
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"drop view if exists public.challenge_card_component_view;");
+            migrationBuilder.Sql(@"drop view if exists public.challenge_card_view;");
         }
     }
 }

@@ -1,6 +1,6 @@
 namespace MMIP.Shared.Views;
 
-public class ChallengeCardComponentView
+public class ChallengeCardView
 {
     public Guid ChallengeId { get; set; }
     public string Title { get; set; } = null!;

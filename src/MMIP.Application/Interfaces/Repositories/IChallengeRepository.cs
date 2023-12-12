@@ -4,5 +4,5 @@ namespace MMIP.Application.Interfaces.Repositories;
 
 public interface IChallengeRepository
 {
-    Task<List<ChallengeCardComponentView>> GetChallengeCardsAsync(int pageNumber, int pageSize);
+    Task<List<ChallengeCardView>> GetChallengeCardsAsync(int pageNumber, int pageSize);
 }

@@ -351,7 +351,7 @@ namespace MMIP.Infrastructure.Migrations
                     b.ToTable("user_groups", (string)null);
                 });
 
-            modelBuilder.Entity("MMIP.Shared.Views.ChallengeCardComponentView", b =>
+            modelBuilder.Entity("MMIP.Shared.Views.ChallengeCardView", b =>
                 {
                     b.Property<string>("BannerImagePath")
                         .IsRequired()
@@ -377,13 +377,9 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("title");
 
-                    b.Property<string>("_tags")
-                        .HasColumnType("text")
-                        .HasColumnName("tags");
-
                     b.ToTable((string)null);
 
-                    b.ToView("challenge_card_component_view", (string)null);
+                    b.ToView("challenge_card_view", (string)null);
                 });
 
             modelBuilder.Entity("challenge_phases", b =>
