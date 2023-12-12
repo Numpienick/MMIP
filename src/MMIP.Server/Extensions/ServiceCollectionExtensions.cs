@@ -3,6 +3,7 @@ using MMIP.Infrastructure.Context;
 using MMIP.Infrastructure.Seeders;
 using MMIP.Infrastructure.Seeders.EntitySeeders;
 using Microsoft.EntityFrameworkCore;
+using MMIP.Application.Interfaces;
 using MMIP.Shared.Entities;
 
 namespace MMIP.Server.Extensions;
@@ -38,8 +39,9 @@ internal static class ServiceCollectionExtensions
             return services;
 
         services.AddTransient<IDatabaseSeeder, RandomDataSeeder>();
-        services.AddTransient<IEntitySeeder<Organization>, OrganizationSeeder>();
-        services.AddTransient<IEntitySeeder<Challenge>, ChallengeSeeder>();
+        services.AddTransient<IEntitySeeder<Organization>, RandomOrganizationSeeder>();
+        services.AddTransient<IEntitySeeder<Challenge>, RandomChallengeSeeder>();
+        services.AddTransient<IEntitySeeder<Sector>, RandomSectorSeeder>();
         return services;
     }
 }
