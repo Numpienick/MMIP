@@ -1,51 +1,21 @@
-﻿using MMIP.Infrastructure.Repositories;
+﻿using MMIP.Application.Interfaces.Repositories;
 using MMIP.Shared.Entities;
-using MMIP.Shared.StateContainers;
 
 namespace MMIP.Infrastructure.Services
 {
     public class CommentService : BaseEntityService<Comment>
     {
-        private readonly CommentRepository _commentRepository = new();
+        private readonly IDataRepository<Comment> _repository;
 
-        public CommentService(IRepository<Comment> repository)
-            : base(repository) { }
-
-        public void CreateComment(Comment comment)
+        public CommentService(IUnitOfWork unitOfWork)
+            : base(unitOfWork)
         {
-            try
-            {
-                _commentRepository.Create(comment);
-                if (TempStateContainer.Instance().Comments == null)
-                {
-                    var comments = _commentRepository.GetAll();
-                    TempStateContainer.Instance().Comments = comments.Result;
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            _repository = unitOfWork.Repository<Comment>();
         }
 
-        public Comment GetComment(Guid id)
+        public async Task<List<Comment>> GetCommentsByChallengeIdAsync(Guid challengeId)
         {
-            return _commentRepository.GetById(id).Result;
-        }
-
-        public IEnumerable<Comment> GetComments()
-        {
-            // TODO: Remove later when state container is not needed anymore.
-            if (TempStateContainer.Instance().Comments == null)
-            {
-                var comments = _commentRepository.GetAll();
-                TempStateContainer.Instance().Comments = comments.Result;
-            }
-
-            return TempStateContainer.Instance().Comments;
-
-            //return _commentRepository.GetAll().Result;
+            throw new NotImplementedException();
         }
     }
 }

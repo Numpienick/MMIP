@@ -11,18 +11,21 @@ namespace MMIP.Server.Controllers
     [Route("[controller]")]
     public class ChallengesController : Controller
     {
-        private ChallengeService _challengeService { get; set; }
+        private readonly ChallengeService _challengeService;
 
         public ChallengesController(ChallengeService challengeService) =>
             _challengeService = challengeService;
 
         [HttpPost]
-        public IActionResult CreateChallenge([FromBody] Challenge challenge)
+        public async Task<IActionResult> CreateChallenge([FromBody] Challenge challenge)
         {
+            // TODO: Remove this line when organizations are implemented
+            // A hardcoded default organization is used for now
+            challenge.OrganizationId = Guid.Parse("00000000-0000-0000-0000-000000000001");
             try
             {
                 Console.WriteLine("Successfully created challenge: " + challenge.Title);
-                _challengeService.CreateChallenge(challenge);
+                await _challengeService.AddAsync(challenge);
                 return Ok("Successfully created challenge: " + challenge.Title);
             }
             catch (ArgumentException e)
@@ -32,14 +35,17 @@ namespace MMIP.Server.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetChallenge(Guid id)
+        [HttpGet("{id:guid}")]
+        public async Task<IActionResult> GetChallenge(Guid id)
         {
-            return Ok(_challengeService.GetChallenge(id));
+            var result = await _challengeService.GetByIdAsync(id);
+            if (result == null)
+                return NotFound();
+            return Ok(result);
         }
 
         [HttpGet]
-        public IActionResult GetChallenges([FromQuery] string filterCriteria)
+        public IActionResult GetChallenges(string filterCriteria)
         {
             ICriteria criteria = JsonSerializer.Deserialize<ICriteria>(filterCriteria);
             return Ok(_challengeService.GetChallenges(criteria));
