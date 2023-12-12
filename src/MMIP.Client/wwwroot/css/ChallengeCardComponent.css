@@ -1,0 +1,14 @@
+.organization-section {
+  height: 100%;
+  width: 100%;
+}
+
+.organization-title {
+  overflow: hidden;
+  width: 47%;
+}
+
+.organization-logo {
+  max-height: inherit;
+  width: 47%;
+}
