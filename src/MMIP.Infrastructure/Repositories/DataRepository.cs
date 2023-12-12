@@ -27,11 +27,12 @@ internal class DataRepository<TEntity> : IDataRepository<TEntity>
         return _context.Set<TEntity>().ToListAsync();
     }
 
-    public Task<List<TEntity>> GetPagedResponseAsync(int pageNumber, int pageSize)
+    public Task<List<T>> GetPagedResponseAsync<T>(int pageNumber, int pageSize)
+        where T : class
     {
         return _context
-            .Set<TEntity>()
-            .Skip((pageNumber - 1) * pageSize)
+            .Set<T>()
+            .Skip((pageNumber) * pageSize)
             .Take(pageSize)
             .AsNoTracking()
             .ToListAsync();
