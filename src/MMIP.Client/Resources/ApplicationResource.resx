@@ -291,4 +291,10 @@
   <data name="EditChallengeTitle" xml:space="preserve">
     <value>Challenge aanpassen</value>
   </data>
+  <data name="CurrentChallengePhase" xml:space="preserve">
+    <value>Huidige fase</value>
+  </data>
+  <data name="ChallengeNextPhase" xml:space="preserve">
+    <value>Challenge naar volgende fase overzetten</value>
+  </data>
 </root>

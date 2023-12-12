@@ -293,4 +293,10 @@
   <data name="EditChallengeTitle" xml:space="preserve">
     <value>Edit challenge</value>
   </data>
+  <data name="CurrentChallengePhase" xml:space="preserve">
+    <value>Current phase</value>
+  </data>
+  <data name="ChallengeNextPhase" xml:space="preserve">
+    <value>Transfer challenge to next phase</value>
+  </data>
 </root>

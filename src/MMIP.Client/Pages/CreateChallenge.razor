@@ -66,13 +66,13 @@
 
                             if (phase.Name == "Afgerond")
                             {
-                                currentPhase = "Huidige fase";
+                                currentPhase = Localizer["CurrentChallengePhase"];
                                 circleColor = Color.Info;
                                 circleSize = Size.Medium;
                                 skip = true;
                             }
 
-                            <MudTimelineItem Color="circleColor" Size="circleSize">
+                            <MudTimelineItem Elevation="4" Variant="Variant.Filled" Color="circleColor" Size="circleSize">
                                 <ItemOpposite>
                                     <h2>@currentPhase</h2>
                                 </ItemOpposite>
@@ -84,7 +84,7 @@
                         }
                     }
                 </MudTimeline>
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-16">Challenge naar volgende fase overzetten</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-16">@Localizer["ChallengeNextPhase"]</MudButton>
              </MudItem>
         }
     </MudGrid>

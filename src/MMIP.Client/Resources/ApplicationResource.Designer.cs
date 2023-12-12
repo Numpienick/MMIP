@@ -115,6 +115,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Challenge naar volgende fase overzetten.
+        /// </summary>
+        internal static string ChallengeNextPhase {
+            get {
+                return ResourceManager.GetString("ChallengeNextPhase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Er zijn nog geen reacties aanwezig!.
         /// </summary>
         internal static string ChallengeNoComments {
@@ -183,6 +192,15 @@ namespace MMIP.Client.Resources {
         internal static string CreateCommentButton {
             get {
                 return ResourceManager.GetString("CreateCommentButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Huidige fase.
+        /// </summary>
+        internal static string CurrentChallengePhase {
+            get {
+                return ResourceManager.GetString("CurrentChallengePhase", resourceCulture);
             }
         }
         
