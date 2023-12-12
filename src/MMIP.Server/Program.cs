@@ -38,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-await app.Initialize(true);
+await app.Initialize(false);
 
 app.Run();
