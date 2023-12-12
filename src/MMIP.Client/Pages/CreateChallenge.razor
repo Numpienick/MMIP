@@ -5,7 +5,6 @@
 @using MMIP.Shared.Entities;
 @using MMIP.Shared.Enums;
 @using MMIP.Shared.Utilities;
-@using MMIP.Shared.StateContainers;
 @inject RequestController RequestController
 @inject IStringLocalizer<ApplicationResource> Localizer
 @inject HttpClient Client;
@@ -13,50 +12,50 @@
 <h1>@Localizer[_localizedPageTitle]</h1>
 <EditForm Model=@_model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
 <DataAnnotationsValidator />
-        <MudFileUpload T="IBrowserFile" Accept=".png, .jpg, .jpeg, .gif, .webp, svg" FilesChanged="UploadFiles" MaximumFileCount="1">
-            <MudButton HtmlTag="label"
-                       Variant="Variant.Filled"
-                       Color="Color.Primary"
-                       StartIcon="@Icons.Material.Filled.CloudUpload"
-                       Class="d-flex" 
-                       for="@context">
-                @Localizer["FormChallengeUpload"]
-            </MudButton>
-        </MudFileUpload>
-        <MudTextField Variant="Variant.Outlined" Label=@Localizer["FormChallengeTitle"] @bind-Value="_model.Title" For="@(() => _model.Title)" />
-        <MudTextField Variant="Variant.Outlined" Lines="10" Label=@Localizer["FormChallengeDescription"] @bind-Value="_model.Description" For="@(() => _model.Description)" />
-        <MudGrid>
-            <MudItem xs="12" md="4">
-                <MudTextField Variant="Variant.Outlined" Lines="5" Label=@Localizer["FormChallengeShortDescription"] @bind-Value="_model.ShortDescription" For="@(() => _model.ShortDescription)" />
+    <MudFileUpload T="IBrowserFile" Accept=".png, .jpg, .jpeg, .gif, .webp, svg" FilesChanged="UploadFiles" MaximumFileCount="1">
+        <MudButton HtmlTag="label"
+                    Variant="Variant.Filled"
+                    Color="Color.Primary"
+                    StartIcon="@Icons.Material.Filled.CloudUpload"
+                    Class="d-flex" 
+                    for="@context">
+            @Localizer["FormChallengeUpload"]
+        </MudButton>
+    </MudFileUpload>
+    <MudTextField Variant="Variant.Outlined" Label=@Localizer["FormChallengeTitle"] @bind-Value="_model.Title" For="@(() => _model.Title)" />
+    <MudTextField Variant="Variant.Outlined" Lines="10" Label=@Localizer["FormChallengeDescription"] @bind-Value="_model.Description" For="@(() => _model.Description)" />
+    <MudGrid>
+        <MudItem xs="12" md="4">
+            <MudTextField Variant="Variant.Outlined" Lines="5" Label=@Localizer["FormChallengeShortDescription"] @bind-Value="_model.ShortDescription" For="@(() => _model.ShortDescription)" />
+        </MudItem>
+        <MudItem xs="12" md="4">
+            <MudSelect Variant="Variant.Outlined" Label=@Localizer["FormChallengeVisibility"] @bind-Value="_model.ChallengeVisibility" T="Visibility">
+                @foreach (Visibility visibility in Enum.GetValues(typeof(Visibility)))
+                {
+                    <MudSelectItem Value="@_model.ChallengeVisibility" T="Visibility">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="12" md="4">
+            <MudDatePicker Variant="Variant.Outlined" Label=@Localizer["FormChallengeDate"] Editable="true" @bind-Date="_model.Deadline" Mask="@(new DateMask("dd-MM-yyyy"))" DateFormat="dd.MM.yyyy" Placeholder="dd-mm-yyyy" />
+        </MudItem>
+        @if (ChallengeId != Guid.Empty)
+        {
+            <MudItem xs="12" md="6">
+                <MudTimeline>
+                @foreach (var phase in _phases)
+                {
+                    <MudTimelineItem Color="Color.Info" Size="Size.Small">
+                        <ItemContent>
+                            <h2>@phase.Name</h2>
+                            <h3>@phase.Description</h3>
+                        </ItemContent>
+                    </MudTimelineItem>
+                }
+                </MudTimeline>
             </MudItem>
-            <MudItem xs="12" md="4">
-                <MudSelect Variant="Variant.Outlined" Label=@Localizer["FormChallengeVisibility"] @bind-Value="_model.ChallengeVisibility" T="Visibility">
-                    @foreach (Visibility visibility in Enum.GetValues(typeof(Visibility)))
-                    {
-                        <MudSelectItem Value="@_model.ChallengeVisibility" T="Visibility">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
-                    }
-                </MudSelect>
-            </MudItem>
-            <MudItem xs="12" md="4">
-                <MudDatePicker Variant="Variant.Outlined" Label=@Localizer["FormChallengeDate"] Editable="true" @bind-Date="_model.Deadline" Mask="@(new DateMask("dd-MM-yyyy"))" DateFormat="dd.MM.yyyy" Placeholder="dd-mm-yyyy" />
-            </MudItem>
-            @if (ChallengeId != Guid.Empty)
-            {
-                <MudItem xs="12" md="6">
-                    <MudTimeline>
-                    @foreach (var phase in _phases)
-                    {
-                        <MudTimelineItem Color="Color.Info" Size="Size.Small">
-                            <ItemContent>
-                                <h2>@phase.Name</h2>
-                                <h3>@phase.Description</h3>
-                            </ItemContent>
-                        </MudTimelineItem>
-                    }
-                    </MudTimeline>
-                </MudItem>
-            }
-        </MudGrid>
+        }
+    </MudGrid>
     <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer[_buttonLocalizedText]</MudButton>
 </EditForm>
 
@@ -68,6 +67,7 @@
     [Inject] 
     private ISnackbar _snackbar { get; set; }
     private List<Phase> _phases = new List<Phase>();
+    private Phase _currentPhase { get; set; }
 
     private const string ButtonSaveLocalization = "FormChallengeSave";
     private const string ButtonEditLocalization = "FromChallengeSaveEdit";
@@ -81,7 +81,6 @@
         if (ChallengeId != Guid.Empty)
         {
             _model = await _getChallenge();
-            _phases = TempStateContainer.Instance().Phases;
             _buttonLocalizedText = ButtonEditLocalization;
             _localizedPageTitle = EditChallengeTitleLocalization;
         }
@@ -123,4 +122,9 @@
     {
         await Client.PatchAsJsonAsync<Challenge>("challenges", _model);
     }
+
+    // private async Task<Phase> _getPhase()
+    // {
+    //     return await NotImplementedException;
+    // }
 }
