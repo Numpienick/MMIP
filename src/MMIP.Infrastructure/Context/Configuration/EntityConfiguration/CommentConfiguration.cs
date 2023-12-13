@@ -11,6 +11,12 @@ internal class CommentConfiguration : BaseEntityConfiguration<Comment>
         base.Configure(builder);
         builder.Property(c => c.Text).HasMaxLength(1000).IsRequired();
         builder.HasOne<CommentType>().WithMany().HasForeignKey(c => c.CommentTypeId).IsRequired();
+        builder
+            .HasOne<Challenge>()
+            .WithMany()
+            .HasForeignKey(c => c.ChallengeId)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Cascade);
         // TODO: add CreatorId reference when Identity is implemented
     }
 }
