@@ -1,9 +1,8 @@
 ﻿#upload_profile_picture_button_styling {
   border-radius: 50%;
   height: 170px;
-  background-color: white;
 }
 
-.mud-file-upload > .mud-input-control-input-container {
-  display: flex;
+.upload_button-alignment {
+  text-align: -webkit-center;
 }

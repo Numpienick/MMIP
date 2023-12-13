@@ -24,15 +24,15 @@
                             </MudItem>
                             <MudItem md="8" xs="12">
                                 <MudGrid>
-                                    <MudItem md="4" xs="12" Class="mb-5">
+                                    <MudItem md="4" xs="12">
                                         <h2>@Localizer["FirstName"]</h2>
                                         <MudTextField @bind-Value=@_user.FirstName For="@(() => _user.FirstName)" Variant="Variant.Outlined" Label=@Localizer["FirstName"] InputType="@_textInput"></MudTextField>
                                     </MudItem>
-                                    <MudItem md="4" xs="12" Class="mb-5">
+                                    <MudItem md="4" xs="12">
                                         <h2>@Localizer["Prefix"]</h2>
                                         <MudTextField @bind-Value=@_user.Prefixes For="@(() => _user.Prefixes)" Variant="Variant.Outlined" Label=@Localizer["Prefix"] InputType="@_textInput"></MudTextField>
                                     </MudItem>
-                                    <MudItem md="4" xs="12" Class="mb-5">
+                                    <MudItem md="4" xs="12">
                                         <h2>@Localizer["LastName"]</h2>
                                         <MudTextField @bind-Value=@_user.LastName For="@(() => _user.LastName)" Variant="Variant.Outlined" Label=@Localizer["LastName"] InputType="@_textInput"></MudTextField>
                                     </MudItem>
@@ -53,15 +53,13 @@
                         </MudGrid>
                         @* TODO: Add functionaliteit for uploading pictures *@
                         <MudGrid>
-                            <MudItem md="4" xs="12">
+                            <MudItem md="4" xs="12" Class="upload_button-alignment">
                                 <h2 Class="alignment-center">@Localizer["UploadProfilePicture"]</h2>
-                                @*TODO: Fix, broken. It doens't show*@
-                                <MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles" Class="alignment-center">
-                                    <MudFab Id="upload_profile_picture_button_styling"
-                                            HtmlTag="label"
-                                            Icon="@Icons.Material.Filled.Image"
-                                            Label=@Localizer["ProfilePicture"] />
-                                </MudFileUpload>
+                                <MudButton Id="upload_profile_picture_button_styling"
+                                           Variant="Variant.Filled"
+                                           StartIcon="@Icons.Material.Filled.Save">
+                                    @Localizer["ProfilePicture"]
+                                </MudButton>
                             </MudItem>
                         </MudGrid>
                         @* TODO: Add privacy page and redirect to it *@
@@ -93,13 +91,12 @@
     public bool ShowRegistrationErrors { get; set; }
     public IEnumerable<string> Errors { get; set; }
 
-    private User _user = new User();
+    private User _user = new();
     private bool _isShown;
     private readonly InputType _textInput = InputType.Text;
     private readonly InputType _emailInput = InputType.Email;
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
-    private IList<IBrowserFile> _profilePictures = new List<IBrowserFile>();
 
     private void showPasswordIconClick()
     {
@@ -127,11 +124,5 @@
     {
         _snackbar.Add(@Localizer["SnackbarInvalid"], Severity.Error);
         StateHasChanged();
-    }
-
-    //TODO: Add functionality (make it work and uploading the files to the server)
-    private void UploadFiles(IBrowserFile profilePicture)
-    {
-        _profilePictures.Add(profilePicture);
     }
 }
