@@ -15,8 +15,10 @@ namespace MMIP.Server.Controllers
     {
         private readonly ChallengeService _challengeService;
 
-        public ChallengesController(ChallengeService challengeService) =>
+        public ChallengesController(ChallengeService challengeService)
+        {
             _challengeService = challengeService;
+        }
 
         [HttpPost]
         public async Task<IActionResult> CreateChallenge([FromBody] Challenge challenge)
@@ -49,7 +51,6 @@ namespace MMIP.Server.Controllers
         [HttpGet]
         public IActionResult GetChallenges(string filterCriteria)
         {
-            //TODO: Initialize phases for state container, remove this line later.
             ICriteria criteria = JsonSerializer.Deserialize<ICriteria>(filterCriteria);
             return Ok(_challengeService.GetChallenges(criteria));
         }
@@ -63,6 +64,15 @@ namespace MMIP.Server.Controllers
 
             return Empty;
         }
+
+        //[HttpGet("phases/{id:guid}")]
+        //public async Task<IActionResult> GetChallengePhases(Guid id)
+        //{
+        //    var result = await _phaseSerivce.GetByIdAsync(id);
+        //    if (result == null)
+        //        return NotFound();
+        //    return Ok(result);
+        //}
 
         [HttpPatch]
         public IActionResult UpdateChallenge(Challenge challenge)

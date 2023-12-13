@@ -1,4 +1,5 @@
 using MMIP.Shared.Views;
+using MMIP.Shared.Entities;
 
 namespace MMIP.Application.Interfaces.Repositories;
 
