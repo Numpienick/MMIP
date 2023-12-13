@@ -79,6 +79,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tag Toevoegen.
+        /// </summary>
+        internal static string Add_Tag {
+            get {
+                return ResourceManager.GetString("Add_Tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ik ga akkoord met de &lt;a href=&quot;/privacyverklaring&quot;&gt;privacyverklaring&lt;/a&gt; van MatchMaker..
         /// </summary>
         internal static string AgreementPrivacyStatement {
@@ -322,6 +331,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bezig met laden....
+        /// </summary>
+        internal static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Achternaam.
         /// </summary>
         internal static string LastName {
@@ -363,6 +381,15 @@ namespace MMIP.Client.Resources {
         internal static string NoAccount {
             get {
                 return ResourceManager.GetString("NoAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Geen tags gevonden, voeg deze toe of zoek op iets anders..
+        /// </summary>
+        internal static string NoItemsFound {
+            get {
+                return ResourceManager.GetString("NoItemsFound", resourceCulture);
             }
         }
         
@@ -453,6 +480,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Er is iets fout gegaan met het versturen van de data.
+        /// </summary>
+        internal static string Request_BadRequest {
+            get {
+                return ResourceManager.GetString("Request_BadRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wachtwoord herhalen.
         /// </summary>
         internal static string RepeatPassword {
@@ -485,6 +521,15 @@ namespace MMIP.Client.Resources {
         internal static string Request_TooLarge {
             get {
                 return ResourceManager.GetString("Request_TooLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string Request_Unknown {
+            get {
+                return ResourceManager.GetString("Request_Unknown", resourceCulture);
             }
         }
         

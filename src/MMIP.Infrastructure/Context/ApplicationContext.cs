@@ -20,7 +20,8 @@ public class ApplicationContext : ApiAuthorizationDbContext<AppUser>
     public DbSet<Challenge> Challenges { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Organization> Organizations { get; set; }
-    public DbSet<Branche> Branches { get; set; }
+    public DbSet<Sector> Sectors { get; set; }
+    public DbSet<Industry> Industries { get; set; }
     public DbSet<Phase> Phases { get; set; }
     public DbSet<UserGroup> UserGroups { get; set; }
     public DbSet<Tag> Tags { get; set; }
@@ -57,6 +58,10 @@ public class ApplicationContext : ApiAuthorizationDbContext<AppUser>
         modelBuilder.ApplyConfiguration(new ChallengeConfiguration());
         modelBuilder.ApplyConfiguration(new TagConfiguration());
         modelBuilder.ApplyConfiguration(new ChallengeCardViewConfiguration());
+        modelBuilder.ApplyConfiguration(new SectorConfiguration());
+        modelBuilder.ApplyConfiguration(new OrganizationConfiguration());
+        modelBuilder.ApplyConfiguration(new IndustryConfiguration());
+        modelBuilder.ApplyConfiguration(new PhaseConfiguration());
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

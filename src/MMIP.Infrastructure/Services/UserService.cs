@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using IdentityModel;

@@ -1,6 +1,6 @@
 using MMIP.Shared.Entities;
 
-namespace MMIP.Infrastructure.Seeders.EntitySeeders;
+namespace MMIP.Application.Interfaces;
 
 public interface IEntitySeeder<TEntity>
     where TEntity : BaseEntity
