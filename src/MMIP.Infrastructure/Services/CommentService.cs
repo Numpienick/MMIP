@@ -1,5 +1,6 @@
 using MMIP.Application.Interfaces.Repositories;
 using MMIP.Shared.Entities;
+using MMIP.Shared.Views;
 
 namespace MMIP.Infrastructure.Services
 {
@@ -13,9 +14,10 @@ namespace MMIP.Infrastructure.Services
             _repository = unitOfWork.Repository<Comment>();
         }
 
-        public async Task<List<Comment>> GetCommentsByChallengeIdAsync(Guid challengeId)
+        public Task<List<CommentView>> GetCommentViewAsync(int take, int skip)
         {
-            throw new NotImplementedException();
+            int pageNumber = skip / take;
+            return _repository.GetPagedResponseAsync<CommentView>(pageNumber, take);
         }
     }
 }

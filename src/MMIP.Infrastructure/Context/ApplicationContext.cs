@@ -28,6 +28,7 @@ public class ApplicationContext : DbContext
     #region views
 
     public DbSet<ChallengeCardView> ChallengeCardComponents { get; set; }
+    public DbSet<CommentView> CommentViews { get; set; }
 
     #endregion
 
@@ -41,6 +42,7 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration(new ChallengeConfiguration());
         modelBuilder.ApplyConfiguration(new TagConfiguration());
         modelBuilder.ApplyConfiguration(new ChallengeCardViewConfiguration());
+        modelBuilder.ApplyConfiguration(new CommentViewConfiguration());
         modelBuilder.ApplyConfiguration(new SectorConfiguration());
         modelBuilder.ApplyConfiguration(new OrganizationConfiguration());
         modelBuilder.ApplyConfiguration(new IndustryConfiguration());

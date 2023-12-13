@@ -3,6 +3,7 @@
 @using MMIP.Shared.Entities;
 @using MMIP.Shared.Enums;
 @using MMIP.Shared.Utilities;
+@using MMIP.Shared.Views;
 
 @inject RequestController RequestController
 @inject IStringLocalizer<ApplicationResource> _localizer
@@ -100,12 +101,12 @@
                             <MudTextField Lines="9" Variant="Variant.Outlined" Label=@_localizer["CreateComment"] @bind-Value="_model.Text" For="@(() => _model.Text)" />
                         </MudItem>
                         <MudItem md="5">
-                            <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormCommentType"] @bind-Value="_model.CommentType" T="CommentType">
+@*                             <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormCommentType"] @bind-Value="_model.CommentType" T="CommentType">
                                 @foreach (CommentType commentType in Enum.GetValues(typeof(CommentType)))
                                 {
                                     <MudSelectItem Value="@commentType" T="CommentType">@commentType.GetCommentTypePropertyValue("Name")</MudSelectItem>
                                 }
-                            </MudSelect>
+                            </MudSelect> *@
                         </MudItem>
                         <MudItem md="6">
                             <MudButton ButtonType="ButtonType.Submit" FullWidth Variant="Variant.Filled" Color="Color.Primary">@_localizer["CreateCommentButton"]</MudButton>
@@ -126,7 +127,7 @@
                         foreach (var comment in Comments)
                         {
                             <MudGrid Justify="Justify.Center" Class="mb-10">
-                                <UserCommentComponent Comment="comment"></UserCommentComponent>
+                                <UserCommentComponent CommentData="comment"></UserCommentComponent>
                             </MudGrid>
                         }
                     }
@@ -142,7 +143,7 @@
 
     public Challenge? Challenge { get; set; }
 
-    public List<Comment> Comments { get; set; }
+    public List<CommentView> Comments { get; set; }
 
     private Comment _model = new();
 
@@ -152,7 +153,7 @@
     protected override async Task OnInitializedAsync()
     {
         Challenge = await _getChallenge();
-        Comments = await _getComments();
+        Comments.AddRange(await _getCommentsByChallengeId(6, 6));
         base.OnInitialized();
     }
 
@@ -167,10 +168,16 @@
         return await Client.GetFromJsonAsync<List<Comment>>($"comments?=challengeId={ChallengeId}");
     }
 
+    private async Task<IEnumerable<CommentView>> _getCommentsByChallengeId(int take, int skip)
+    {
+        return await Client.GetFromJsonAsync<List<CommentView>>($"comments/byChallengeId?challengeId={ChallengeId}&&take={take}&&skip={skip}") 
+               ?? new List<CommentView>();
+    }
+
     private async void _validFormSubmitted(EditContext context)
     {
         await RequestController.Post("comments", _model);
-        Comments = await _getComments();
+        //Comments = await _getComments();
         StateHasChanged();
     }
 

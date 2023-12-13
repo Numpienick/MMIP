@@ -1,5 +1,6 @@
 ﻿@using MMIP.Shared.Entities;
 @using MMIP.Shared.Utilities;
+@using MMIP.Shared.Views;
 @inject IStringLocalizer<ApplicationResource> _localizer
 @inject NavigationManager navigationManager;
 
@@ -17,17 +18,17 @@
 *@                   <h2 class="mb-2">Naam van de gebruiker</h2>
                     <h3 class="mb-2">Naam van het bedrijf</h3>
                     <MudDivider Class="mt-3 mb-6"></MudDivider>
-                    <p>@Comment.Text</p>
+                    <p>@CommentData.Text</p>
                 </MudCardContent>
             </MudItem>
             <MudItem md="2">
                 <MudTooltip Arrow="true" Placement="Placement.Right" Class="grey lighten-2 icon-tooltip">
                     <ChildContent>
-                        <MudImage Src="@Comment.CommentType.GetCommentTypePropertyValue("IconPath")" Height="80"></MudImage>
+                        <MudImage Src="@CommentData.CommentTypeIconPath" Height="80"></MudImage>
                     </ChildContent>
                     <TooltipContent>
-                        <h3>@Comment.CommentType.GetCommentTypePropertyValue("Name")</h3>
-                        <p>@Comment.CommentType.GetCommentTypePropertyValue("Description")</p>
+                        <h3>@CommentData.CommentTypeName</h3>
+                        <p>@CommentData.CommentTypeDescription</p>
                     </TooltipContent>
                 </MudTooltip>
             </MudItem>
@@ -37,9 +38,12 @@
 
 @code {
     [Parameter]
-    public Comment Comment { get; set; }
+    public CommentView CommentData { get; set; } = null!;
+
+    // [Parameter]
+    // public Comment Comment { get; set; }
 
     public bool IsConcluded { get; set; }
 
-    private string _isCommentConcluded() => Comment.Concluded ? "concluded-comment rounded-lg" : "rounded-lg";
+    private string _isCommentConcluded() => CommentData.Concluded ? "concluded-comment rounded-lg" : "rounded-lg";
 }

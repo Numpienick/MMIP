@@ -33,6 +33,8 @@ internal static class ApplicationBuilderExtensions
             await seeder.Initialize();
         }
 
+        // TODO: Remove this line later.
+        var views = await context.CommentViews.ToListAsync();
         return app;
     }
 }
