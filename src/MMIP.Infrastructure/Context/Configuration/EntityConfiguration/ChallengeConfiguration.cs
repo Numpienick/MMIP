@@ -20,7 +20,14 @@ internal class ChallengeConfiguration : BaseEntityConfiguration<Challenge>
         builder
             .HasMany(c => c.Phases)
             .WithMany()
-            .UsingEntity("challenge_phases", j => j.Property("PhasesId").HasColumnName("phase_id"));
+            .UsingEntity(
+                "challenge_phases",
+                j =>
+                {
+                    j.Property("PhasesId").HasColumnName("phase_id");
+                    j.Property<DateTimeOffset>("EnteredAt").HasDefaultValueSql("NOW()");
+                }
+            );
 
         builder.Property(c => c.Title).IsRequired().HasMaxLength(128);
 

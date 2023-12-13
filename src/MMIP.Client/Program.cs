@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MMIP.Client;
 using MMIP.Client.Controllers;
+using MMIP.Client.Extensions;
 using MMIP.Environment;
 using MudBlazor;
 using MudBlazor.Services;
@@ -16,6 +17,7 @@ builder.Services.AddScoped(
     _ => new HttpClient { BaseAddress = new Uri(EnvironmentConstants.ApiUrl) }
 );
 builder.Services.AddScoped<RequestController>();
+builder.Services.AddTransient<ValueValidator>();
 
 builder.Services.AddSingleton<Snackbar>();
 

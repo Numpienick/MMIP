@@ -15,7 +15,8 @@ public class ApplicationContext : DbContext
     public DbSet<Challenge> Challenges { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Organization> Organizations { get; set; }
-    public DbSet<Branche> Branches { get; set; }
+    public DbSet<Sector> Sectors { get; set; }
+    public DbSet<Industry> Industries { get; set; }
     public DbSet<Phase> Phases { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserGroup> UserGroups { get; set; }
@@ -25,7 +26,7 @@ public class ApplicationContext : DbContext
 
     #region views
 
-    public DbSet<ChallengeCardComponent> ChallengeCardComponents { get; set; }
+    public DbSet<ChallengeCardView> ChallengeCardComponents { get; set; }
 
     #endregion
 
@@ -38,7 +39,11 @@ public class ApplicationContext : DbContext
     {
         modelBuilder.ApplyConfiguration(new ChallengeConfiguration());
         modelBuilder.ApplyConfiguration(new TagConfiguration());
-        modelBuilder.ApplyConfiguration(new ChallengeCardComponentConfiguration());
+        modelBuilder.ApplyConfiguration(new ChallengeCardViewConfiguration());
+        modelBuilder.ApplyConfiguration(new SectorConfiguration());
+        modelBuilder.ApplyConfiguration(new OrganizationConfiguration());
+        modelBuilder.ApplyConfiguration(new IndustryConfiguration());
+        modelBuilder.ApplyConfiguration(new PhaseConfiguration());
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

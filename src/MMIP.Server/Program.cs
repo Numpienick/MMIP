@@ -11,7 +11,7 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddDatabase();
+builder.Services.AddDatabase(false);
 builder.Services.AddEntityServices();
 builder.Services.AddRepositories();
 
@@ -38,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-await app.Initialize();
+await app.Initialize(false);
 
 app.Run();

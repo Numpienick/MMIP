@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace MMIP.Test.Unit;
 
@@ -64,6 +64,30 @@ public class ChallengeTest
         var result = await context.Challenges.FindAsync(id);
 
         Assert.Equivalent(challenge, result);
+    }
+
+    [Fact]
+    public async Task Tag_TooLong_DontAddToDatabase()
+    {
+        await using var context = await _contextFactory.CreateDbContextAsync();
+        Guid id = Guid.NewGuid();
+        var challenge = new Challenge
+        {
+            Id = id,
+            Title = "Test",
+            FinalReport = "Final Report",
+            ShortDescription = "Short Description",
+            Description = "Description",
+            Tags = new List<Tag> { new() { Value = new string('a', 51) } },
+            ChallengeVisibility = Visibility.VisibleToAll,
+            Deadline = DateTime.Now
+        };
+
+        await context.Challenges.AddAsync(challenge);
+        await context.SaveChangesAsync();
+        var result = await context.Challenges.FindAsync(id);
+
+        Assert.Null(result);
     }
 
     private void InitializeOrganization()

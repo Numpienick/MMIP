@@ -1,16 +1,17 @@
 using Microsoft.EntityFrameworkCore;
+using MMIP.Application.Interfaces;
 using MMIP.Infrastructure.Context;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Enums;
 
 namespace MMIP.Infrastructure.Seeders.EntitySeeders;
 
-public class ChallengeSeeder : IEntitySeeder<Challenge>
+public class RandomChallengeSeeder : IEntitySeeder<Challenge>
 {
     private readonly ApplicationContext _context;
     private readonly IEntitySeeder<Organization> _organizationSeeder;
 
-    public ChallengeSeeder(
+    public RandomChallengeSeeder(
         ApplicationContext context,
         IEntitySeeder<Organization> organizationSeeder
     )
@@ -81,7 +82,7 @@ public class ChallengeSeeder : IEntitySeeder<Challenge>
             return tags;
         for (int i = 0; i < amount - tags.Count; i++)
         {
-            tags.Add(new Tag { Value = "Tag " + i });
+            tags.Add(new Tag { Value = "Tag12345681234 " + i });
         }
 
         return tags;
