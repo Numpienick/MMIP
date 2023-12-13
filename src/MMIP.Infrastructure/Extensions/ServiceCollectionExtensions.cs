@@ -12,6 +12,7 @@ public static class ServiceCollectionExtensions
         return services
             .AddTransient<ChallengeService>()
             .AddTransient<CommentService>()
+            .AddTransient<UserService>()
             .AddTransient<OrganizationService>();
     }
 

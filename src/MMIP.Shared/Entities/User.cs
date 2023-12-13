@@ -5,6 +5,7 @@ namespace MMIP.Shared.Entities
 {
     public class User : IdentityUser
     {
+        //TODO: ATTRIBUTES TOEVOEGEN
         public string Description { get; set; }
 
         public string? AvatarPath { get; set; }

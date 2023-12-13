@@ -38,8 +38,7 @@ namespace MMIP.Client.Controllers
             return new List<TEntity>();
         }
 
-        public async Task Post<TEntity>(string uri, TEntity model)
-            where TEntity : BaseEntity
+        public async Task Post<T>(string uri, T model)
         {
             var response = await _httpClient.PostAsJsonAsync(uri, model);
             try

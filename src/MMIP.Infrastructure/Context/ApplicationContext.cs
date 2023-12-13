@@ -25,6 +25,7 @@ public class ApplicationContext : ApiAuthorizationDbContext<AppUser>
     public DbSet<Phase> Phases { get; set; }
     public DbSet<UserGroup> UserGroups { get; set; }
     public DbSet<Tag> Tags { get; set; }
+    public DbSet<User> Users { get; set; }
 
     #endregion
 
