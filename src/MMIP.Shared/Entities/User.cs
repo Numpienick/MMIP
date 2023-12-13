@@ -18,15 +18,18 @@ namespace MMIP.Shared.Entities
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Required")]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Required")]
+        [DataType(DataType.Password)] //? maybe
         public string Password { get; set; }
 
         [Compare(
             "Password",
             ErrorMessage = "The comfirmation password does not match with the password"
         )]
+        [DataType(DataType.Password)]
         public string RepeatPassword { get; set; }
     }
 }

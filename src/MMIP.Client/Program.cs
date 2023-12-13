@@ -15,7 +15,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddLocalization();
 
 builder.Services.AddMudServices();
-builder.Services.AddScoped<ProtectedSessionStorage>(); //Dependency injection
 builder.Services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<ChallengeContext>();
 
 builder.Services.AddScoped(

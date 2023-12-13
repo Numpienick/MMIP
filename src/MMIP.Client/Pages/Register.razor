@@ -1,6 +1,8 @@
 ﻿@page "/register"
 @using Microsoft.AspNetCore.Components.Forms
+@using MMIP.Client.Controllers
 @using MMIP.Shared.Entities
+@inject RequestController RequestController
 @inject IStringLocalizer<ApplicationResource> Localizer
 
 <PageTitle>@Localizer["Register"]</PageTitle>
@@ -66,6 +68,7 @@
                         <MudGrid>
                             <MudItem md="6"></MudItem> @* For the alignment of the rest of the items in this grid*@
                             <MudItem md="4" xs="12">
+                                @*TODO: check if checkbox is checked*@
                                 <MudCheckBox @bind-Checked="@IsChecked">
                                     @((MarkupString)Localizer["AgreementPrivacyStatement"].ToString())
                                 </MudCheckBox>
@@ -116,6 +119,7 @@
 
     private async void _validFormSubmitted(EditContext editContext)
     {
+        //await RequestController.Post("user", _user);
         StateHasChanged();
     }
 

@@ -24,10 +24,6 @@ builder.Services.AddRepositories();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.Configure<IdentityOptions>(
-    options => options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier
-);
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
