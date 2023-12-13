@@ -6,7 +6,7 @@ using MMIP.Shared.Entities;
 namespace MMIP.Infrastructure.Repositories;
 
 internal class DataRepository<TEntity> : IDataRepository<TEntity>
-    where TEntity : BaseEntity
+    where TEntity : class // TODO: revert back to BaseEntity and make a view repository
 {
     private readonly ApplicationContext _context;
 

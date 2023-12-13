@@ -18,8 +18,8 @@ namespace MMIP.Client.Controllers
             _snackbar = snackbar;
         }
 
-        public async Task<List<TEntity>> Get<TEntity>(string uri)
-            where TEntity : BaseEntity
+        public virtual async Task<List<TEntity>> GetRange<TEntity>(string uri)
+            where TEntity : class
         {
             try
             {
@@ -34,7 +34,27 @@ namespace MMIP.Client.Controllers
             {
                 _snackbar.Add(GetStringStatusCode(ex.StatusCode), Severity.Error);
             }
+
             return new List<TEntity>();
+        }
+
+        public virtual async Task<TEntity?> Get<TEntity>(string uri)
+            where TEntity : class
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadFromJsonAsync<TEntity>().Result;
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                _snackbar.Add(GetStringStatusCode(ex.StatusCode), Severity.Error);
+            }
+
+            return null;
         }
 
         public async Task Post<TEntity>(string uri, TEntity model)

@@ -16,7 +16,7 @@ internal class UnitOfWork : IUnitOfWork
     }
 
     public IDataRepository<TEntity> Repository<TEntity>()
-        where TEntity : BaseEntity
+        where TEntity : class // TODO: revert back to BaseEntity and make a view repository
     {
         if (_repositories.ContainsKey(typeof(TEntity)))
         {

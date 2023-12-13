@@ -13,8 +13,8 @@
         <MudGrid>
             <MudItem md="10">
                 <MudCardContent>
-@*                     TODO: Change according to the User and Organization linked to the comment.
-*@                   <h2 class="mb-2">Naam van de gebruiker</h2>
+                    @* TODO: Change according to the User and Organization linked to the comment. *@
+                  <h2 class="mb-2">Naam van de gebruiker</h2>
                     <h3 class="mb-2">Naam van het bedrijf</h3>
                     <MudDivider Class="mt-3 mb-6"></MudDivider>
                     <p>@Comment.Text</p>
@@ -23,11 +23,11 @@
             <MudItem md="2">
                 <MudTooltip Arrow="true" Placement="Placement.Right" Class="grey lighten-2 icon-tooltip">
                     <ChildContent>
-                        <MudImage Src="@Comment.CommentType.GetCommentTypePropertyValue("IconPath")" Height="80"></MudImage>
+                        @* <MudImage Src="@Comment.CommentType.GetCommentTypePropertyValue("IconPath")" Height="80"></MudImage> *@
                     </ChildContent>
                     <TooltipContent>
-                        <h3>@Comment.CommentType.GetCommentTypePropertyValue("Name")</h3>
-                        <p>@Comment.CommentType.GetCommentTypePropertyValue("Description")</p>
+                        @* <h3>@Comment.CommentType.GetCommentTypePropertyValue("Name")</h3> *@
+                        @* <p>@Comment.CommentType.GetCommentTypePropertyValue("Description")</p> *@
                     </TooltipContent>
                 </MudTooltip>
             </MudItem>
