@@ -1,5 +1,4 @@
-﻿using MMIP.Shared.Enums;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MMIP.Shared.Entities
 {
@@ -7,8 +6,10 @@ namespace MMIP.Shared.Entities
     {
         [Required(ErrorMessage = "Een tekstuele reactie is vereist.")]
         [StringLength(1000, ErrorMessage = "Maximale omschrijving is 1000 karakters.")]
-        public string Text { get; set; }
+        public string Text { get; set; } = null!;
+
         public bool Concluded { get; set; }
-        public CommentType CommentType { get; set; }
+        public Guid CreatorId { get; set; }
+        public Guid CommentTypeId { get; set; }
     }
 }

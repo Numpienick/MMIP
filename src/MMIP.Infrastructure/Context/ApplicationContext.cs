@@ -13,6 +13,7 @@ public class ApplicationContext : DbContext
     # region entities
 
     public DbSet<Challenge> Challenges { get; set; }
+    public DbSet<CommentType> CommentTypes { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Organization> Organizations { get; set; }
     public DbSet<Sector> Sectors { get; set; }
@@ -44,6 +45,8 @@ public class ApplicationContext : DbContext
         modelBuilder.ApplyConfiguration(new OrganizationConfiguration());
         modelBuilder.ApplyConfiguration(new IndustryConfiguration());
         modelBuilder.ApplyConfiguration(new PhaseConfiguration());
+        modelBuilder.ApplyConfiguration(new CommentTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new CommentConfiguration());
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
@@ -51,7 +54,6 @@ public class ApplicationContext : DbContext
         configurationBuilder.Properties<DateTimeOffset>().HaveConversion<DateTimeOffsetConverter>();
         configurationBuilder.Properties<DateTime>().HaveConversion<DateTimeConverter>();
         configurationBuilder.Properties<Visibility>().HaveConversion<EnumConverter<Visibility>>();
-        configurationBuilder.Properties<CommentType>().HaveConversion<EnumConverter<CommentType>>();
     }
 
     #endregion
