@@ -98,6 +98,7 @@ public class RandomChallengeSeeder : IEntitySeeder<Challenge>
             phases.Add(
                 new Phase
                 {
+                    Id = Guid.NewGuid(),
                     Name = "Phase " + i,
                     Order = i + 1,
                     Description = "Description " + i,
