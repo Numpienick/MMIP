@@ -278,6 +278,12 @@
   <data name="SnackbarInvalid" xml:space="preserve">
     <value>Something went wrong.</value>
   </data>
+  <data name="Add_Tag" xml:space="preserve">
+    <value>Add Tag</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
   <data name="VisionMatchMaker" xml:space="preserve">
     <value>Our vision</value>
   </data>
@@ -298,5 +304,14 @@
   </data>
   <data name="ChallengeNextPhase" xml:space="preserve">
     <value>Transfer challenge to next phase</value>
+  </data>
+  <data name="NoItemsFound" xml:space="preserve">
+    <value>No tags found, add this one or change your search term.</value>
+  </data>
+  <data name="Request_BadRequest" xml:space="preserve">
+    <value>Something went wrong with sending of the data</value>
+  </data>
+  <data name="Request_Unknown" xml:space="preserve">
+    <value>Unknown error</value>
   </data>
 </root>

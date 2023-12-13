@@ -9,91 +9,49 @@
 @inject IStringLocalizer<ApplicationResource> Localizer
 @inject HttpClient Client;
 
-<h1>@Localizer[_localizedPageTitle]</h1>
-<EditForm Model=@_model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
-<DataAnnotationsValidator />
-    <MudFileUpload T="IBrowserFile" Accept=".png, .jpg, .jpeg, .gif, .webp, svg" FilesChanged="UploadFiles" MaximumFileCount="1">
-        <MudButton HtmlTag="label"
-                    Variant="Variant.Filled"
-                    Color="Color.Primary"
-                    StartIcon="@Icons.Material.Filled.CloudUpload"
-                    Class="d-flex" 
-                    for="@context">
-            @Localizer["FormChallengeUpload"]
-        </MudButton>
-    </MudFileUpload>
-    <MudTextField Variant="Variant.Outlined" Label=@Localizer["FormChallengeTitle"] @bind-Value="_model.Title" For="@(() => _model.Title)" />
-    <MudTextField Variant="Variant.Outlined" Lines="10" Label=@Localizer["FormChallengeDescription"] @bind-Value="_model.Description" For="@(() => _model.Description)" />
-    <MudGrid>
-        <MudItem xs="12" md="4">
-            <MudTextField Variant="Variant.Outlined" Lines="5" Label=@Localizer["FormChallengeShortDescription"] @bind-Value="_model.ShortDescription" For="@(() => _model.ShortDescription)" />
-        </MudItem>
-        <MudItem xs="12" md="4">
-            <MudSelect Variant="Variant.Outlined" Label=@Localizer["FormChallengeVisibility"] @bind-Value="_model.ChallengeVisibility" T="Visibility">
-                @foreach (Visibility visibility in Enum.GetValues(typeof(Visibility)))
-                {
-                    <MudSelectItem Value="@_model.ChallengeVisibility" T="Visibility">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
-                }
-            </MudSelect>
-        </MudItem>
-        <MudItem xs="12" md="4">
-            <MudDatePicker Variant="Variant.Outlined" Label=@Localizer["FormChallengeDate"] Editable="true" @bind-Date="_model.Deadline" Mask="@(new DateMask("dd-MM-yyyy"))" DateFormat="dd.MM.yyyy" Placeholder="dd-mm-yyyy" />
-        </MudItem>
-        @if (ChallengeId != Guid.Empty)
-        {
-            <MudItem xs="12" md="12">
-                <MudTimeline Class="mt-5 mb-5" TimelineOrientation="TimelineOrientation.Horizontal">
-                    @{
-                        bool skip = false;
-                        Color circleColor = Color.Success;
-                        Size circleSize = Size.Large;
-
-                        foreach (var phase in _phases)
-                        {
-                            string currentPhase = string.Empty;
-
-                            if (skip)
+<h1>@Localizer["CreateChallengeTitle"]</h1>
+<MudContainer MaxWidth="MaxWidth.ExtraLarge">
+    <MudCard Class="rounded-lg" Elevation="4">
+        <MudCardContent>
+            <EditForm Model=@_model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
+                <DataAnnotationsValidator/>
+                @* <MudFileUpload T="IBrowserFile" Accept=".png, .jpg, .jpeg, .gif, .webp, svg" FilesChanged="UploadFiles" MaximumFileCount="1"> *@
+                <MudButton HtmlTag="label"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           StartIcon="@Icons.Material.Filled.CloudUpload"
+                           Class="d-flex"
+                           for="@context">
+                    @Localizer["FormChallengeUpload"]
+                </MudButton>
+                @* </MudFileUpload> *@
+                <MudTextField Variant="Variant.Outlined" Label=@Localizer["FormChallengeTitle"] @bind-Value="_model.Title" For="@(() => _model.Title)"/>
+                <MudTextField Variant="Variant.Outlined" Lines="10" Label=@Localizer["FormChallengeDescription"] @bind-Value="_model.Description" For="@(() => _model.Description)"/>
+                <MudGrid>
+                    <MudItem xs="12" md="4">
+                        <MudTextField Variant="Variant.Outlined" Lines="5" Label=@Localizer["FormChallengeShortDescription"] @bind-Value="_model.ShortDescription" For="@(() => _model.ShortDescription)"/>
+                    </MudItem>
+                    <MudItem xs="12" md="4">
+                        <MudSelect Variant="Variant.Outlined" Label=@Localizer["FormChallengeVisibility"] @bind-Value="_model.ChallengeVisibility" T="Visibility">
+                            @foreach (Visibility visibility in Enum.GetValues(typeof(Visibility)))
                             {
-                                circleColor = Color.Error;
-                                circleSize = Size.Small;
+                                <MudSelectItem Value="@_model.ChallengeVisibility" T="Visibility">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
                             }
-
-                            else
-                            {
-                                circleColor = Color.Success;
-                                circleSize = Size.Small;
-                            }
-
-                            if (phase.Name == "Afgerond")
-                            {
-                                currentPhase = Localizer["CurrentChallengePhase"];
-                                circleColor = Color.Info;
-                                circleSize = Size.Medium;
-                                skip = true;
-                            }
-
-                            <MudTimelineItem Elevation="4" Variant="Variant.Filled" Color="circleColor" Size="circleSize">
-                                <ItemOpposite>
-                                    <h2>@currentPhase</h2>
-                                </ItemOpposite>
-                                <ItemContent>
-                                    <h3>@phase.Name</h3>
-                                    <p>@phase.Description</p>
-                                </ItemContent>
-                            </MudTimelineItem>
-                        }
-                    }
-                </MudTimeline>
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-16">@Localizer["ChallengeNextPhase"]</MudButton>
-             </MudItem>
-        }
-    </MudGrid>
-    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer[_buttonLocalizedText]</MudButton>
-</EditForm>
-
-    @code {
-    [Parameter]
-    public Guid ChallengeId { get; set; }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="12" md="4">
+                        <MudDatePicker Variant="Variant.Outlined" Label=@Localizer["FormChallengeDate"] Editable="true" @bind-Date="_model.Deadline" Mask="@(new DateMask("dd-MM-yyyy"))" DateFormat="dd.MM.yyyy" Placeholder="dd-mm-yyyy"/>
+                    </MudItem>
+                    <MudItem xs="12" md="4">
+                        <CreateTagComponent SelectedTags="@_model.Tags"></CreateTagComponent>
+                    </MudItem>
+                </MudGrid>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer["FormChallengeSave"]</MudButton>
+            </EditForm>
+        </MudCardContent>
+    </MudCard>
+</MudContainer>
+@code {
     private Challenge _model = new();
     private IList<IBrowserFile> _files = new List<IBrowserFile>();
     [Inject] 
@@ -136,7 +94,7 @@
 
     private void _invalidFormSubmitted(EditContext context)
     {
-        _snackbar.Add("Er is iets fout gegaan", Severity.Error);
+        _snackbar.Add(Localizer["SnackbarInvalid"], Severity.Error);
         StateHasChanged();
     }
 
