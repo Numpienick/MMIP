@@ -27,7 +27,8 @@ public class ApplicationContext : DbContext
 
     #region views
 
-    public DbSet<ChallengeCardView> ChallengeCardComponents { get; set; }
+    public DbSet<ChallengeCardView> ChallengeCardView { get; set; }
+    public DbSet<ChallengeView> ChallengeView { get; set; }
 
     #endregion
 
@@ -38,15 +39,25 @@ public class ApplicationContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        # region entities configuration
+
         modelBuilder.ApplyConfiguration(new ChallengeConfiguration());
         modelBuilder.ApplyConfiguration(new TagConfiguration());
-        modelBuilder.ApplyConfiguration(new ChallengeCardViewConfiguration());
         modelBuilder.ApplyConfiguration(new SectorConfiguration());
         modelBuilder.ApplyConfiguration(new OrganizationConfiguration());
         modelBuilder.ApplyConfiguration(new IndustryConfiguration());
         modelBuilder.ApplyConfiguration(new PhaseConfiguration());
         modelBuilder.ApplyConfiguration(new CommentTypeConfiguration());
         modelBuilder.ApplyConfiguration(new CommentConfiguration());
+
+        #endregion
+
+        # region views configuration
+
+        modelBuilder.ApplyConfiguration(new ChallengeCardViewConfiguration());
+        modelBuilder.ApplyConfiguration(new ChallengeViewConfiguration());
+
+        # endregion
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
