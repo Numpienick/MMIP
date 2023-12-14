@@ -453,6 +453,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ProfileDescription {
+            get {
+                return ResourceManager.GetString("ProfileDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overige tags.
         /// </summary>
         internal static string RemainingTags {
@@ -498,7 +507,7 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Onbekende fout.
         /// </summary>
         internal static string Request_Unknown {
             get {

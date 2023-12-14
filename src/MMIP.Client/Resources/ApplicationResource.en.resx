@@ -317,4 +317,7 @@
   <data name="Request_Unknown" xml:space="preserve">
     <value>Unknown error</value>
   </data>
+  <data name="ProfileDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
 </root>

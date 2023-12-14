@@ -3,23 +3,24 @@
 @using MMIP.Client.Controllers
 @using MMIP.Shared.Views
 
-@inject IStringLocalizer<ApplicationResource> _localizer
+@inject IStringLocalizer<ApplicationResource> Localizer
 @inject RequestController RequestController;
 @inject NavigationManager navigationManager;
 
 <MudCard Elevation="4" Class="px-6">
     <MudGrid Justify="Justify.Center">
-        <MudItem xs="12" Class="card-centered-text">
-            <h1>@(CurrentEntity is User ? User.Name : Organization.Name)</h1>
-        </MudItem>
         <MudItem md="2" xs="12" Class="card-centered-text">
             <MudAvatar Style="height:140px; width:140px;">
                 <MudImage Src="Assets/Img/ProfilePictureTest.jpg"></MudImage>
             </MudAvatar>
         </MudItem>
         <MudItem md="10" xs="12" Class="card-centered-text">
-            <h2>Beschrijving</h2>
-            @* <p>@(CurrentEntity is User ? User.Description : Organization.Description)</p> *@
+            <h1>@(CurrentEntity is User ? User.Name : Organization.Name)</h1>
+        </MudItem>
+        <MudItem md="10" xs="12" Class="card-centered-text">
+            <h2>@Localizer["ProfileDescription"]</h2>
+            @* <p>@(CurrentEntity is User ? User.Description : Organization.Description)</p>  *@
+            <p>Ik ben de eigenaar van het Continental Hotel, een luxe hotel dat bekend staat om zijn discretie en service voor de elite. Ik wil graag deelnemen aan het Matchmaker Innovatieplatform om meer innovatie te brengen in mijn bedrijf. Ik ben geïnteresseerd in het ontwikkelen van nieuwe producten en diensten die de veiligheid, het comfort en de beleving van mijn gasten kunnen verbeteren. Ik zoek naar personen die gespecialiseerd zijn in zaken als beveiliging, domotica, kunstmatige intelligentie, biometrie, blockchain en virtual reality. Ik sta open voor samenwerkingen, pilots en investeringen. Als je denkt dat jij een goede match bent voor mijn hotel, neem dan contact met me op via het Matchmaker Innovatieplatform. Ik kijk ernaar uit om van je te horen.</p>
         </MudItem>
 
         <MudItem xs="12" Class="card-centered-text">
