@@ -1,0 +1,11 @@
+﻿@page "/Error"
+@page "/Error/{Subject}"
+@inject IStringLocalizer<ApplicationResource> Localizer
+
+<PageTitle>MMIP - @Localizer["ErrorTitle"]</PageTitle>
+<ErrorComponent Subject="@Subject"></ErrorComponent>
+
+@code {
+    [Parameter]
+    public string? Subject { get; set; }
+}

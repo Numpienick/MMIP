@@ -294,6 +294,21 @@
   <data name="VisionMatchMakerDescription" xml:space="preserve">
     <value>MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in innovatie.</value>
   </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Oh oh! Er is iets verkeerd gegaan.</value>
+  </data>
+  <data name="ErrorDescription" xml:space="preserve">
+    <value>Je opgevraagde pagina is hier niet, miauw.</value>
+  </data>
+  <data name="ErrorJoke" xml:space="preserve">
+    <value>Misschien heb je hem opgegeten of is hij weggelopen.</value>
+  </data>
+  <data name="ErrorRequestedItem" xml:space="preserve">
+    <value>Opgevraagd item:</value>
+  </data>
+  <data name="GoBackHome" xml:space="preserve">
+    <value>Ga terug naar de homepagina</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>Voornaam</value>
   </data>
@@ -326,5 +341,11 @@
   </data>
   <data name="Request_Unknown" xml:space="preserve">
     <value>Onbekende fout</value>
+  </data>
+  <data name="ProfileDescription" xml:space="preserve">
+    <value>Beschrijving</value>
+  </data>
+  <data name="ProfileTitle" xml:space="preserve">
+    <value>Profiel</value>
   </data>
 </root>
