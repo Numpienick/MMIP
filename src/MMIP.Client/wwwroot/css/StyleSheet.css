@@ -62,3 +62,7 @@ ul {
   justify-content: center;
   align-items: center;
 }
+#user-avatar {
+  width: 140px;
+  height: 140px;
+}
