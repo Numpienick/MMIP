@@ -23,546 +23,546 @@ namespace MMIP.Infrastructure.Migrations
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("MMIP.Shared.Entities.Challenge", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid")
+                    .HasColumnName("id");
 
-                    b.Property<string>("BannerImagePath")
-                        .HasMaxLength(254)
-                        .HasColumnType("character varying(254)")
-                        .HasColumnName("banner_image_path");
+                b.Property<string>("BannerImagePath")
+                    .HasMaxLength(254)
+                    .HasColumnType("character varying(254)")
+                    .HasColumnName("banner_image_path");
 
-                    b.Property<string>("ChallengeVisibility")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("challenge_visibility");
+                b.Property<string>("ChallengeVisibility")
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("challenge_visibility");
 
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("CreatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("created_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.Property<Guid>("CurrentPhaseId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("current_phase_id");
+                b.Property<Guid>("CurrentPhaseId")
+                    .HasColumnType("uuid")
+                    .HasColumnName("current_phase_id");
 
-                    b.Property<DateTimeOffset>("Deadline")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("deadline");
+                b.Property<DateTimeOffset>("Deadline")
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("deadline");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(100000)
-                        .HasColumnType("character varying(100000)")
-                        .HasColumnName("description");
+                b.Property<string>("Description")
+                    .IsRequired()
+                    .HasMaxLength(100000)
+                    .HasColumnType("character varying(100000)")
+                    .HasColumnName("description");
 
-                    b.Property<string>("FinalReport")
-                        .HasMaxLength(100000)
-                        .HasColumnType("character varying(100000)")
-                        .HasColumnName("final_report");
+                b.Property<string>("FinalReport")
+                    .HasMaxLength(100000)
+                    .HasColumnType("character varying(100000)")
+                    .HasColumnName("final_report");
 
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("organization_id");
+                b.Property<Guid>("OrganizationId")
+                    .HasColumnType("uuid")
+                    .HasColumnName("organization_id");
 
-                    b.Property<string>("ShortDescription")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("character varying(150)")
-                        .HasColumnName("short_description");
+                b.Property<string>("ShortDescription")
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .HasColumnType("character varying(150)")
+                    .HasColumnName("short_description");
 
-                    b.Property<DateTimeOffset>("StartDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("start_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("StartDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("start_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
-                        .HasColumnName("title");
+                b.Property<string>("Title")
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnType("character varying(128)")
+                    .HasColumnName("title");
 
-                    b.Property<DateTimeOffset>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("UpdatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("updated_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.HasKey("Id")
-                        .HasName("pk_challenges");
+                b.HasKey("Id")
+                    .HasName("pk_challenges");
 
-                    b.HasIndex("OrganizationId")
-                        .HasDatabaseName("ix_challenges_organization_id");
+                b.HasIndex("OrganizationId")
+                    .HasDatabaseName("ix_challenges_organization_id");
 
-                    b.ToTable("challenges", (string)null);
-                });
+                b.ToTable("challenges", (string)null);
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Comment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid")
+                    .HasColumnName("id");
 
-                    b.Property<string>("CommentType")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("comment_type");
+                b.Property<string>("CommentType")
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("comment_type");
 
-                    b.Property<bool>("Concluded")
-                        .HasColumnType("boolean")
-                        .HasColumnName("concluded");
+                b.Property<bool>("Concluded")
+                    .HasColumnType("boolean")
+                    .HasColumnName("concluded");
 
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date");
+                b.Property<DateTimeOffset>("CreatedDate")
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("created_date");
 
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)")
-                        .HasColumnName("text");
+                b.Property<string>("Text")
+                    .IsRequired()
+                    .HasMaxLength(1000)
+                    .HasColumnType("character varying(1000)")
+                    .HasColumnName("text");
 
-                    b.Property<DateTimeOffset>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date");
+                b.Property<DateTimeOffset>("UpdatedDate")
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("updated_date");
 
-                    b.HasKey("Id")
-                        .HasName("pk_comments");
+                b.HasKey("Id")
+                    .HasName("pk_comments");
 
-                    b.ToTable("comments", (string)null);
-                });
+                b.ToTable("comments", (string)null);
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Industry", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid")
+                    .HasColumnName("id");
 
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("CreatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("created_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(254)
-                        .HasColumnType("character varying(254)")
-                        .HasColumnName("name");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(254)
+                    .HasColumnType("character varying(254)")
+                    .HasColumnName("name");
 
-                    b.Property<Guid>("SectorId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sector_id");
+                b.Property<Guid>("SectorId")
+                    .HasColumnType("uuid")
+                    .HasColumnName("sector_id");
 
-                    b.Property<DateTimeOffset>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("UpdatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("updated_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.HasKey("Id")
-                        .HasName("pk_industries");
+                b.HasKey("Id")
+                    .HasName("pk_industries");
 
-                    b.HasIndex("SectorId")
-                        .HasDatabaseName("ix_industries_sector_id");
+                b.HasIndex("SectorId")
+                    .HasDatabaseName("ix_industries_sector_id");
 
-                    b.ToTable("industries", (string)null);
-                });
+                b.ToTable("industries", (string)null);
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Organization", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid")
+                    .HasColumnName("id");
 
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("CreatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("created_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.Property<string>("EnrollmentCode")
-                        .IsRequired()
-                        .HasMaxLength(8)
-                        .HasColumnType("character varying(8)")
-                        .HasColumnName("enrollment_code");
+                b.Property<string>("EnrollmentCode")
+                    .IsRequired()
+                    .HasMaxLength(8)
+                    .HasColumnType("character varying(8)")
+                    .HasColumnName("enrollment_code");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
-                        .HasColumnName("name");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnType("character varying(128)")
+                    .HasColumnName("name");
 
-                    b.Property<Guid>("SectorId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sector_id");
+                b.Property<Guid>("SectorId")
+                    .HasColumnType("uuid")
+                    .HasColumnName("sector_id");
 
-                    b.Property<DateTimeOffset>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("UpdatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("updated_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.HasKey("Id")
-                        .HasName("pk_organizations");
+                b.HasKey("Id")
+                    .HasName("pk_organizations");
 
-                    b.HasIndex("SectorId")
-                        .HasDatabaseName("ix_organizations_sector_id");
+                b.HasIndex("SectorId")
+                    .HasDatabaseName("ix_organizations_sector_id");
 
-                    b.ToTable("organizations", (string)null);
-                });
+                b.ToTable("organizations", (string)null);
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Phase", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid")
+                    .HasColumnName("id");
 
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("CreatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("created_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(254)
-                        .HasColumnType("character varying(254)")
-                        .HasColumnName("description");
+                b.Property<string>("Description")
+                    .IsRequired()
+                    .HasMaxLength(254)
+                    .HasColumnType("character varying(254)")
+                    .HasColumnName("description");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(24)
-                        .HasColumnType("character varying(24)")
-                        .HasColumnName("name");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(24)
+                    .HasColumnType("character varying(24)")
+                    .HasColumnName("name");
 
-                    b.Property<int>("Order")
-                        .HasColumnType("integer")
-                        .HasColumnName("order");
+                b.Property<int>("Order")
+                    .HasColumnType("integer")
+                    .HasColumnName("order");
 
-                    b.Property<DateTimeOffset>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("UpdatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("updated_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.HasKey("Id")
-                        .HasName("pk_phases");
+                b.HasKey("Id")
+                    .HasName("pk_phases");
 
-                    b.ToTable("phases", (string)null);
-                });
+                b.ToTable("phases", (string)null);
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Sector", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid")
+                    .HasColumnName("id");
 
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("CreatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("created_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(254)
-                        .HasColumnType("character varying(254)")
-                        .HasColumnName("name");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasMaxLength(254)
+                    .HasColumnType("character varying(254)")
+                    .HasColumnName("name");
 
-                    b.Property<DateTimeOffset>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("UpdatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("updated_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.HasKey("Id")
-                        .HasName("pk_sectors");
+                b.HasKey("Id")
+                    .HasName("pk_sectors");
 
-                    b.ToTable("sectors", (string)null);
-                });
+                b.ToTable("sectors", (string)null);
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Tag", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid")
+                    .HasColumnName("id");
 
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("CreatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("created_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.Property<DateTimeOffset>("UpdatedDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("UpdatedDate")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("updated_date")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("character varying(16)")
-                        .HasColumnName("value");
+                b.Property<string>("Value")
+                    .IsRequired()
+                    .HasMaxLength(16)
+                    .HasColumnType("character varying(16)")
+                    .HasColumnName("value");
 
-                    b.HasKey("Id")
-                        .HasName("pk_tags");
+                b.HasKey("Id")
+                    .HasName("pk_tags");
 
-                    b.HasIndex("Value")
-                        .IsUnique()
-                        .HasDatabaseName("ix_tags_value");
+                b.HasIndex("Value")
+                    .IsUnique()
+                    .HasDatabaseName("ix_tags_value");
 
-                    b.ToTable("tags", (string)null);
-                });
+                b.ToTable("tags", (string)null);
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid")
+                    .HasColumnName("id");
 
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date");
+                b.Property<DateTimeOffset>("CreatedDate")
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("created_date");
 
-                    b.Property<DateTimeOffset>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date");
+                b.Property<DateTimeOffset>("UpdatedDate")
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("updated_date");
 
-                    b.HasKey("Id")
-                        .HasName("pk_users");
+                b.HasKey("Id")
+                    .HasName("pk_users");
 
-                    b.ToTable("users", (string)null);
-                });
+                b.ToTable("users", (string)null);
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.UserGroup", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
+            {
+                b.Property<Guid>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("uuid")
+                    .HasColumnName("id");
 
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date");
+                b.Property<DateTimeOffset>("CreatedDate")
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("created_date");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("description");
+                b.Property<string>("Description")
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("description");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("name");
 
-                    b.Property<DateTimeOffset>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date");
+                b.Property<DateTimeOffset>("UpdatedDate")
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("updated_date");
 
-                    b.HasKey("Id")
-                        .HasName("pk_user_groups");
+                b.HasKey("Id")
+                    .HasName("pk_user_groups");
 
-                    b.ToTable("user_groups", (string)null);
-                });
+                b.ToTable("user_groups", (string)null);
+            });
 
             modelBuilder.Entity("MMIP.Shared.Views.ChallengeCardView", b =>
-                {
-                    b.Property<string>("BannerImagePath")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("banner_image_path");
+            {
+                b.Property<string>("BannerImagePath")
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("banner_image_path");
 
-                    b.Property<Guid>("ChallengeId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("challenge_id");
+                b.Property<Guid>("ChallengeId")
+                    .HasColumnType("uuid")
+                    .HasColumnName("challenge_id");
 
-                    b.Property<string>("OrganizationName")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("organization_name");
+                b.Property<string>("OrganizationName")
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("organization_name");
 
-                    b.Property<string>("ShortDescription")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("short_description");
+                b.Property<string>("ShortDescription")
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("short_description");
 
-                    b.Property<string>("TagsString")
-                        .HasColumnType("text")
-                        .HasColumnName("tags");
+                b.Property<string>("TagsString")
+                    .HasColumnType("text")
+                    .HasColumnName("tags");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("title");
+                b.Property<string>("Title")
+                    .IsRequired()
+                    .HasColumnType("text")
+                    .HasColumnName("title");
 
-                    b.ToTable((string)null);
+                b.ToTable((string)null);
 
-                    b.ToView("challenge_card_view", (string)null);
-                });
+                b.ToView("challenge_card_view", (string)null);
+            });
 
             modelBuilder.Entity("challenge_phases", b =>
-                {
-                    b.Property<Guid>("ChallengeId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("challenge_id");
+            {
+                b.Property<Guid>("ChallengeId")
+                    .HasColumnType("uuid")
+                    .HasColumnName("challenge_id");
 
-                    b.Property<Guid>("PhasesId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("phase_id");
+                b.Property<Guid>("PhasesId")
+                    .HasColumnType("uuid")
+                    .HasColumnName("phase_id");
 
-                    b.Property<DateTimeOffset>("EnteredAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("entered_at")
-                        .HasDefaultValueSql("NOW()");
+                b.Property<DateTimeOffset>("EnteredAt")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("timestamp with time zone")
+                    .HasColumnName("entered_at")
+                    .HasDefaultValueSql("NOW()");
 
-                    b.HasKey("ChallengeId", "PhasesId")
-                        .HasName("pk_challenge_phases");
+                b.HasKey("ChallengeId", "PhasesId")
+                    .HasName("pk_challenge_phases");
 
-                    b.HasIndex("PhasesId")
-                        .HasDatabaseName("ix_challenge_phases_phases_id");
+                b.HasIndex("PhasesId")
+                    .HasDatabaseName("ix_challenge_phases_phases_id");
 
-                    b.ToTable("challenge_phases", (string)null);
-                });
+                b.ToTable("challenge_phases", (string)null);
+            });
 
             modelBuilder.Entity("challenge_tags", b =>
-                {
-                    b.Property<Guid>("ChallengeId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("challenge_id");
+            {
+                b.Property<Guid>("ChallengeId")
+                    .HasColumnType("uuid")
+                    .HasColumnName("challenge_id");
 
-                    b.Property<Guid>("TagsId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("tag_id");
+                b.Property<Guid>("TagsId")
+                    .HasColumnType("uuid")
+                    .HasColumnName("tag_id");
 
-                    b.HasKey("ChallengeId", "TagsId")
-                        .HasName("pk_challenge_tags");
+                b.HasKey("ChallengeId", "TagsId")
+                    .HasName("pk_challenge_tags");
 
-                    b.HasIndex("TagsId")
-                        .HasDatabaseName("ix_challenge_tags_tags_id");
+                b.HasIndex("TagsId")
+                    .HasDatabaseName("ix_challenge_tags_tags_id");
 
-                    b.ToTable("challenge_tags", (string)null);
-                });
+                b.ToTable("challenge_tags", (string)null);
+            });
 
             modelBuilder.Entity("phase_visible_to_user_groups", b =>
-                {
-                    b.Property<Guid>("PhaseId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("phase_id");
+            {
+                b.Property<Guid>("PhaseId")
+                    .HasColumnType("uuid")
+                    .HasColumnName("phase_id");
 
-                    b.Property<Guid>("VisibleToId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("user_group_id");
+                b.Property<Guid>("VisibleToId")
+                    .HasColumnType("uuid")
+                    .HasColumnName("user_group_id");
 
-                    b.HasKey("PhaseId", "VisibleToId")
-                        .HasName("pk_phase_visible_to_user_groups");
+                b.HasKey("PhaseId", "VisibleToId")
+                    .HasName("pk_phase_visible_to_user_groups");
 
-                    b.HasIndex("VisibleToId")
-                        .HasDatabaseName("ix_phase_visible_to_user_groups_visible_to_id");
+                b.HasIndex("VisibleToId")
+                    .HasDatabaseName("ix_phase_visible_to_user_groups_visible_to_id");
 
-                    b.ToTable("phase_visible_to_user_groups", (string)null);
-                });
+                b.ToTable("phase_visible_to_user_groups", (string)null);
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Challenge", b =>
-                {
-                    b.HasOne("MMIP.Shared.Entities.Organization", null)
-                        .WithMany("Challenges")
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_challenges_organizations_organization_id");
-                });
+            {
+                b.HasOne("MMIP.Shared.Entities.Organization", null)
+                    .WithMany("Challenges")
+                    .HasForeignKey("OrganizationId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired()
+                    .HasConstraintName("fk_challenges_organizations_organization_id");
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Industry", b =>
-                {
-                    b.HasOne("MMIP.Shared.Entities.Sector", "Sector")
-                        .WithMany()
-                        .HasForeignKey("SectorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_industries_sectors_sector_id");
+            {
+                b.HasOne("MMIP.Shared.Entities.Sector", "Sector")
+                    .WithMany()
+                    .HasForeignKey("SectorId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired()
+                    .HasConstraintName("fk_industries_sectors_sector_id");
 
-                    b.Navigation("Sector");
-                });
+                b.Navigation("Sector");
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Organization", b =>
-                {
-                    b.HasOne("MMIP.Shared.Entities.Sector", null)
-                        .WithMany()
-                        .HasForeignKey("SectorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_organizations_sectors_sector_id");
-                });
+            {
+                b.HasOne("MMIP.Shared.Entities.Sector", null)
+                    .WithMany()
+                    .HasForeignKey("SectorId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired()
+                    .HasConstraintName("fk_organizations_sectors_sector_id");
+            });
 
             modelBuilder.Entity("challenge_phases", b =>
-                {
-                    b.HasOne("MMIP.Shared.Entities.Challenge", null)
-                        .WithMany()
-                        .HasForeignKey("ChallengeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_challenge_phases_challenges_challenge_id");
+            {
+                b.HasOne("MMIP.Shared.Entities.Challenge", null)
+                    .WithMany()
+                    .HasForeignKey("ChallengeId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired()
+                    .HasConstraintName("fk_challenge_phases_challenges_challenge_id");
 
-                    b.HasOne("MMIP.Shared.Entities.Phase", null)
-                        .WithMany()
-                        .HasForeignKey("PhasesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_challenge_phases_phases_phases_id");
-                });
+                b.HasOne("MMIP.Shared.Entities.Phase", null)
+                    .WithMany()
+                    .HasForeignKey("PhasesId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired()
+                    .HasConstraintName("fk_challenge_phases_phases_phases_id");
+            });
 
             modelBuilder.Entity("challenge_tags", b =>
-                {
-                    b.HasOne("MMIP.Shared.Entities.Challenge", null)
-                        .WithMany()
-                        .HasForeignKey("ChallengeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_challenge_tags_challenges_challenge_id");
+            {
+                b.HasOne("MMIP.Shared.Entities.Challenge", null)
+                    .WithMany()
+                    .HasForeignKey("ChallengeId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired()
+                    .HasConstraintName("fk_challenge_tags_challenges_challenge_id");
 
-                    b.HasOne("MMIP.Shared.Entities.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_challenge_tags_tags_tags_id");
-                });
+                b.HasOne("MMIP.Shared.Entities.Tag", null)
+                    .WithMany()
+                    .HasForeignKey("TagsId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired()
+                    .HasConstraintName("fk_challenge_tags_tags_tags_id");
+            });
 
             modelBuilder.Entity("phase_visible_to_user_groups", b =>
-                {
-                    b.HasOne("MMIP.Shared.Entities.Phase", null)
-                        .WithMany()
-                        .HasForeignKey("PhaseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_phase_visible_to_user_groups_phases_phase_id");
+            {
+                b.HasOne("MMIP.Shared.Entities.Phase", null)
+                    .WithMany()
+                    .HasForeignKey("PhaseId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired()
+                    .HasConstraintName("fk_phase_visible_to_user_groups_phases_phase_id");
 
-                    b.HasOne("MMIP.Shared.Entities.UserGroup", null)
-                        .WithMany()
-                        .HasForeignKey("VisibleToId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_phase_visible_to_user_groups_user_groups_visible_to_id");
-                });
+                b.HasOne("MMIP.Shared.Entities.UserGroup", null)
+                    .WithMany()
+                    .HasForeignKey("VisibleToId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired()
+                    .HasConstraintName("fk_phase_visible_to_user_groups_user_groups_visible_to_id");
+            });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Organization", b =>
-                {
-                    b.Navigation("Challenges");
-                });
+            {
+                b.Navigation("Challenges");
+            });
 #pragma warning restore 612, 618
         }
     }

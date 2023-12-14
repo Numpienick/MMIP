@@ -88,6 +88,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ik ga akkoord met de &lt;a href=&quot;/privacyverklaring&quot;&gt;privacyverklaring&lt;/a&gt; van MatchMaker..
+        /// </summary>
+        internal static string AgreementPrivacyStatement {
+            get {
+                return ResourceManager.GetString("AgreementPrivacyStatement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reacties.
         /// </summary>
         internal static string ChallengeComments {
@@ -241,6 +250,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Voornaam.
+        /// </summary>
+        internal static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wachtwoord vergeten?.
         /// </summary>
         internal static string ForgotPassword {
@@ -358,6 +376,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Achternaam.
+        /// </summary>
+        internal static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bezig met laden....
         /// </summary>
         internal static string Loading {
@@ -430,6 +457,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tussenvoegsel.
+        /// </summary>
+        internal static string Preposition {
+            get {
+                return ResourceManager.GetString("Preposition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;h2&gt;1. Inleiding&lt;/h2&gt;
         ///&lt;p&gt;Dit Privacyverklaring en Gegevensbeschermingsbeleid (hierna &quot;Verklaring&quot;) beschrijft hoe MatchMaker Innovation Platform (&quot;wij,&quot; &quot;ons,&quot; of &quot;onze&quot;) persoonlijke gegevens die worden verstrekt door de bezoekers van onze website &lt;a href=&quot;https://mm.innovation.io/&quot;&gt;https://mm.innovation.io/&lt;/a&gt; (&quot;de website&quot;) worden verzamelt, gebruikt, openbaar maakt en beschermt.&lt;/p&gt;
         ///&lt;br/&gt;
@@ -462,11 +498,47 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profielbeschrijving.
+        /// </summary>
+        internal static string ProfileDescription {
+            get {
+                return ResourceManager.GetString("ProfileDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profielfoto.
+        /// </summary>
+        internal static string ProfilePicture {
+            get {
+                return ResourceManager.GetString("ProfilePicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Registreren.
+        /// </summary>
+        internal static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Overige tags.
         /// </summary>
         internal static string RemainingTags {
             get {
                 return ResourceManager.GetString("RemainingTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wachtwoord herhalen.
+        /// </summary>
+        internal static string RepeatPassword {
+            get {
+                return ResourceManager.GetString("RepeatPassword", resourceCulture);
             }
         }
         
@@ -530,6 +602,15 @@ namespace MMIP.Client.Resources {
         internal static string SnackbarInvalid {
             get {
                 return ResourceManager.GetString("SnackbarInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profielfoto uploaden.
+        /// </summary>
+        internal static string UploadProfilePicture {
+            get {
+                return ResourceManager.GetString("UploadProfilePicture", resourceCulture);
             }
         }
         

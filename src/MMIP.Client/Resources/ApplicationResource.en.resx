@@ -263,6 +263,9 @@
   <data name="RemainingTags" xml:space="preserve">
     <value>Remaining tags</value>
   </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
   <data name="Request_NotFound" xml:space="preserve">
     <value>Something happened on our side, try again later</value>
   </data>
@@ -307,6 +310,30 @@
   </data>
   <data name="GoBackHome" xml:space="preserve">
     <value>Go back home</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="Preposition" xml:space="preserve">
+	  <value>Preposition</value>
+  </data>
+  <data name="ProfileDescription" xml:space="preserve">
+    <value>Profile description</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="ProfilePicture" xml:space="preserve">
+    <value>Profile picture</value>
+  </data>
+  <data name="UploadProfilePicture" xml:space="preserve">
+    <value>Upload profile picture</value>
+  </data>
+  <data name="AgreementPrivacyStatement" xml:space="preserve">
+    <value>I agree with the &lt;a href="/privacyverklaring"&gt;privacy statement&lt;/a&gt; of MatchMaker.</value>
   </data>
   <data name="NoItemsFound" xml:space="preserve">
     <value>No tags found, add this one or change your search term.</value>

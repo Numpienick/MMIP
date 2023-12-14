@@ -23,14 +23,15 @@ h3 {
   font-size: 14px;
 }
 
-p {
+p,
+em {
   color: black;
   font-size: 12px;
 }
 
-em {
-  color: black;
-  font-size: 12px;
+a {
+  text-decoration: underline;
+  color: blue;
 }
 
 body {
