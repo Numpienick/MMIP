@@ -15,7 +15,7 @@
             </MudAvatar>
         </MudItem>
         <MudItem md="10" xs="12" Class="card-centered-text">
-            <h1>@(CurrentEntity is User ? User.Name : Organization.Name)</h1>
+            <h1>@(CurrentEntity is User ? $"{User.FirstName}  {User.LastName}"  : Organization.Name)</h1>
         </MudItem>
         <MudItem md="10" xs="12" Class="card-centered-text">
             <h2>@Localizer["ProfileDescription"]</h2>
@@ -40,7 +40,7 @@
 
 @code {
     //TODO: remove if database connected
-    public User User = new() { Id = new Guid(), CreatedDate = default, UpdatedDate = default, Name = "John Wick", Description = "Dit is een mooie beschrijving van mij, want ik ben heel capabel enzo." };
+    public User User = new() { Id = default, FirstName = "John", LastName = "Wick", Description = "Dit is een mooie beschrijving van mij, want ik ben heel capabel enzo." };
     public Organization Organization = new() { Id = new Guid(), CreatedDate = default, UpdatedDate = default, Name = "Continental Hotel", /* Description = "Heel mooi hotel, super discreet, voor al uw verblijven geschikt.", */ Challenges = null };
     public Object CurrentEntity;
     private const int PageSize = 6;
