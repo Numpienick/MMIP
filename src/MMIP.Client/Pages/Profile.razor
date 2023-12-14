@@ -1,8 +1,6 @@
 ﻿@page "/profile/{Entity}/{Id}"
 @using MMIP.Shared.Entities
-@using System.Text.Json
 @using MMIP.Client.Controllers
-@using MMIP.Shared.Filters
 @using MMIP.Shared.Views
 
 @inject IStringLocalizer<ApplicationResource> _localizer
@@ -28,12 +26,14 @@
             <MudDivider DividerType="DividerType.Middle" Class="my-6" />
             <h2>Challenges</h2>
         </MudItem>
-        <MudItem justify-center>
-            @foreach (Challenge challenge in Challenges)
+        <MudGrid Justify="Justify.FlexStart" Spacing="4">
+            @foreach (var cardData in Challenges)
             {
-                <ChallengeCardComponent CardData="@challenge"></ChallengeCardComponent>
+                <MudItem xs="12" sm="6" md="4" lg="4" xl="3">
+                    <ChallengeCardComponent CardData="@cardData"></ChallengeCardComponent>
+                </MudItem>
             }
-        </MudItem>
+        </MudGrid>
     </MudGrid>
 </MudCard>
 
@@ -45,7 +45,7 @@
     private const int PageSize = 6;
     private bool _loadMoreChallenges = false;
 
-    public List<Challenge> Challenges = new();
+    public List<ChallengeCardView> Challenges = new();
     [Parameter]
     public string Entity { get; set; }
     [Parameter]
