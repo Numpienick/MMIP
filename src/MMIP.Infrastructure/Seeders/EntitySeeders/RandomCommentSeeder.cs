@@ -20,12 +20,21 @@ public class RandomCommentSeeder : IEntitySeeder<Comment>
         var random = new Random();
         var challengeIds = await _context.Challenges.Select(c => c.Id).ToArrayAsync();
         var commentTypeIds = await _context.CommentTypes.Select(c => c.Id).ToArrayAsync();
+        var testComments = new List<string>
+        {
+            "Ziet er goed uit, goed bezig!",
+            "Ik ben benieuwd naar het resultaat :D",
+            "Misschien weet @Piet_Pot een leuke oplossing",
+            "Gaaf probleem, zou dolgraag helpen, maar helaas heb ik de goede kennis niet",
+            "Ik wil graag helpen, heb wel ervaring in deze hoek",
+            "Er staat nog een klein foutje in de tekst, het is namelijk 'deze' in plaats van 'deez'"
+        };
         for (int i = 0; i < amount; i++)
         {
             comments.Add(
                 new Comment
                 {
-                    Text = $"Comment {i}",
+                    Text = testComments[random.Next(0, testComments.Count)],
                     ChallengeId = challengeIds[random.Next(challengeIds.Length)],
                     CommentTypeId = commentTypeIds[random.Next(commentTypeIds.Length)],
                     Concluded = random.Next(0, 2) == 1,
