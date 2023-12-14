@@ -51,6 +51,16 @@ namespace MMIP.Server.Controllers
             return Ok(_challengeService.GetChallenges(criteria));
         }
 
+        [HttpGet("view")]
+        public async Task<IActionResult> GetChallengesView(Guid id)
+        {
+            var view = await _challengeService.GetChallengeViewAsync(id);
+            if (view != null)
+                return Ok(view);
+
+            return NotFound("Challenge not found");
+        }
+
         [HttpGet("overview")]
         public async Task<IActionResult> GetChallengesOverview(int take, int skip)
         {
