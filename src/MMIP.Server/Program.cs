@@ -1,7 +1,13 @@
 using MMIP.Infrastructure.Extensions;
 using MMIP.Server.Extensions;
+using Duende.IdentityServer.Services;
+using MMIP.Infrastructure.Services;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddIdentity();
 
 //Cors
 builder.Services.AddCors(options =>
@@ -9,7 +15,6 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(b => b.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 });
 
-// Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddDatabase(false);
 builder.Services.AddEntityServices();
@@ -34,7 +39,9 @@ app.UseHttpsRedirection();
 
 app.UseCors();
 
+app.UseAuthentication();
 app.UseAuthorization();
+app.UseIdentityServices();
 
 app.MapControllers();
 
