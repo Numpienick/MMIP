@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddControllers();
-builder.Services.AddDatabase(false);
+builder.Services.AddDatabase(true);
 builder.Services.AddEntityServices();
 builder.Services.AddRepositories();
 
@@ -45,6 +45,6 @@ app.UseIdentityServices();
 
 app.MapControllers();
 
-await app.Initialize(false);
+await app.Initialize(true);
 
 app.Run();
