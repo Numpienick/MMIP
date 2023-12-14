@@ -258,6 +258,9 @@
     Voor vragen of opmerkingen over dit beleid, neem contact met ons op via &lt;a href="mailto:contact@innovation.io"&gt;contact@innovation.io&lt;/a&gt;.
 &lt;/p&gt;</value>
   </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registreren</value>
+  </data>
   <data name="RemainingTags" xml:space="preserve">
     <value>Overige tags</value>
   </data>
@@ -285,8 +288,32 @@
   <data name="VisionMatchMaker" xml:space="preserve">
     <value>Onze visie</value>
   </data>
+  <data name="ProfileDescription" xml:space="preserve">
+    <value>Profielbeschrijving</value>
+  </data>
   <data name="VisionMatchMakerDescription" xml:space="preserve">
     <value>MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in innovatie.</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Voornaam</value>
+  </data>
+  <data name="Preposition" xml:space="preserve">
+    <value>Tussenvoegsel</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Achternaam</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>Wachtwoord herhalen</value>
+  </data>
+  <data name="ProfilePicture" xml:space="preserve">
+    <value>Profielfoto</value>
+  </data>
+  <data name="UploadProfilePicture" xml:space="preserve">
+    <value>Profielfoto uploaden</value>
+  </data>
+  <data name="AgreementPrivacyStatement" xml:space="preserve">
+    <value>Ik ga akkoord met de &lt;a href="/privacyverklaring"&gt;privacyverklaring&lt;/a&gt; van MatchMaker.</value>
   </data>
   <data name="NoItemsFound" xml:space="preserve">
     <value>Geen tags gevonden, voeg deze toe of zoek op iets anders.</value>

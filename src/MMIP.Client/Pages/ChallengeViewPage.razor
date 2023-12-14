@@ -159,16 +159,16 @@
     }
 
     // TODO: Add posting comment functionality
-    // private async void _validFormSubmitted()
-    // {
-    //     //await RequestController.Post("comments", _model);
-    //     //Comments = await _getComments();
-    //     StateHasChanged();
-    // }
+    private async void _validFormSubmitted()
+    {
+        //await RequestController.Post("comments", _model);
+        //Comments = await _getComments();
+        StateHasChanged();
+    }
 
-    // private void _invalidFormSubmitted()
-    // {
-    //     //_snackbar.Add(_localizer["SnackbarInvalid"], Severity.Error);
-    //     StateHasChanged();
-    // }
+    private void _invalidFormSubmitted()
+    {
+        //_snackbar.Add(_localizer["SnackbarInvalid"], Severity.Error);
+        StateHasChanged();
+    }
 }

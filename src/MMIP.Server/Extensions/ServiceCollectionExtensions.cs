@@ -1,10 +1,10 @@
-using MMIP.Environment;
 using MMIP.Infrastructure.Context;
 using MMIP.Infrastructure.Seeders;
 using MMIP.Infrastructure.Seeders.EntitySeeders;
-using Microsoft.EntityFrameworkCore;
 using MMIP.Application.Interfaces;
 using MMIP.Shared.Entities;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Identity;
 
 namespace MMIP.Server.Extensions;
 
@@ -15,24 +15,8 @@ internal static class ServiceCollectionExtensions
         bool addRandomDataSeeder = false
     )
     {
-#if DEBUG
-        services
-            .AddDbContextFactory<ApplicationContext>(
-                opt =>
-                    opt.UseNpgsql(EnvironmentConstants.DatabaseConnectionString())
-                        .UseSnakeCaseNamingConvention()
-                        .EnableSensitiveDataLogging()
-            )
-            .AddDatabaseDeveloperPageExceptionFilter();
-#else
-        services
-            .AddDbContextFactory<ApplicationContext>(
-                opt =>
-                    opt.UseNpgsql(EnvironmentConstants.DatabaseConnectionString())
-                        .UseSnakeCaseNamingConvention()
-            )
-            .AddDatabaseDeveloperPageExceptionFilter();
-#endif
+        services.AddDbContext<ApplicationContext>().AddDatabaseDeveloperPageExceptionFilter();
+
         services.AddTransient<IDatabaseSeeder, DefaultsSeeder>();
 
         if (!addRandomDataSeeder)
@@ -43,6 +27,23 @@ internal static class ServiceCollectionExtensions
         services.AddTransient<IEntitySeeder<Challenge>, RandomChallengeSeeder>();
         services.AddTransient<IEntitySeeder<Sector>, RandomSectorSeeder>();
         services.AddTransient<IEntitySeeder<Comment>, RandomCommentSeeder>();
+        return services;
+    }
+
+    internal static IServiceCollection AddIdentity(this IServiceCollection services)
+    {
+        services
+            .AddIdentity<User, IdentityRole>(
+                options => options.SignIn.RequireConfirmedAccount = true
+            )
+            .AddEntityFrameworkStores<ApplicationContext>();
+
+        services
+            .AddIdentityServer()
+            .AddApiAuthorization<User, ApplicationContext>()
+            .AddDeveloperSigningCredential();
+
+        JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
         return services;
     }
 }

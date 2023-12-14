@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Components.ProtectedBrowserStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MMIP.Client;
@@ -5,13 +6,17 @@ using MMIP.Client.Controllers;
 using MMIP.Client.Extensions;
 using MMIP.Environment;
 using MudBlazor;
+using Microsoft.AspNetCore.Identity;
 using MudBlazor.Services;
+using MMIP.Shared.Contexts;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
-builder.Services.AddMudServices();
 builder.Services.AddLocalization();
+
+builder.Services.AddMudServices();
+builder.Services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<ChallengeContext>();
 
 builder.Services.AddScoped(
     _ => new HttpClient { BaseAddress = new Uri(EnvironmentConstants.ApiUrl) }
