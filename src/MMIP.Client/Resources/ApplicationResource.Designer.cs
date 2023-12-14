@@ -489,7 +489,7 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Beschrijving.
         /// </summary>
         internal static string ProfileDescription {
             get {
@@ -503,6 +503,15 @@ namespace MMIP.Client.Resources {
         internal static string ProfilePicture {
             get {
                 return ResourceManager.GetString("ProfilePicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ProfileTitle {
+            get {
+                return ResourceManager.GetString("ProfileTitle", resourceCulture);
             }
         }
         

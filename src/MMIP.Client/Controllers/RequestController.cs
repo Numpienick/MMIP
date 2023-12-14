@@ -20,6 +20,7 @@ namespace MMIP.Client.Controllers
         }
 
         public async Task<List<TEntity>> Get<TEntity>(string uri)
+            where TEntity : class
         {
             try
             {

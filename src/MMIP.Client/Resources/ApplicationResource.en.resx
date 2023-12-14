@@ -327,7 +327,7 @@
     <value>Repeat password</value>
   </data>
   <data name="ProfilePicture" xml:space="preserve">
-    <value>Profile picture</value>
+    <value>Profile photo</value>
   </data>
   <data name="UploadProfilePicture" xml:space="preserve">
     <value>Upload profile picture</value>
@@ -346,5 +346,8 @@
   </data>
   <data name="ProfileDescription" xml:space="preserve">
     <value>Description</value>
+  </data>
+  <data name="ProfileTitle" xml:space="preserve">
+    <value>Profile</value>
   </data>
 </root>

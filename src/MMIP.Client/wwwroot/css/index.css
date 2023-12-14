@@ -84,3 +84,7 @@
 .grid-margin {
   margin-top: 10px;
 }
+#user-avatar {
+  width: 140px;
+  height: 140px;
+}
