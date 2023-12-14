@@ -39,33 +39,33 @@ public class RandomChallengeSeeder : IEntitySeeder<Challenge>
             "Hoe kunnen we de internetsnelheid en verbindingen op afstand verbeteren?",
             "Hoe kunnen we phishing en gegevensprivacy problemen voorkomen?",
             "Hoe kunnen we een uitdagende en leuke coderingsuitdaging website maken?",
-            "Hoe kunnen we een gepersonaliseerde en adaptieve leerplatform cre�ren?",
+            "Hoe kunnen we een gepersonaliseerde en adaptieve leerplatform creëren?",
             "Hoe kunnen we een innovatieve en creatieve muziekapp maken?",
             "Hoe kunnen we een slimme en handige reisapp maken?"
         };
         var testDescriptions = new List<string>
         {
-            "We willen weten wat onze klanten echt willen en nodig hebben, en hoe we hun verwachtingen kunnen overtreffen. We zoeken naar idee�n om onze klantenservice, ons productaanbod, onze prijsstrategie en onze communicatie te verbeteren.",
-            "We willen onze impact op het milieu verminderen en bijdragen aan een duurzamere wereld. We zoeken naar idee�n om ons energieverbruik, onze afvalproductie, onze CO2-uitstoot en onze grondstoffen te verminderen of te compenseren.",
-            "We willen dat onze medewerkers zich gewaardeerd, gerespecteerd en gehoord voelen. We zoeken naar idee�n om onze bedrijfscultuur, ons leiderschap, ons feedbacksysteem, onze beloningsstructuur en onze leer- en ontwikkelingsmogelijkheden te verbeteren.",
-            "We willen een web- of mobiele app ontwikkelen die mensen in staat stelt om online vergaderingen, webinars, workshops en evenementen te organiseren en bij te wonen. We zoeken naar idee�n om onze app gebruiksvriendelijk, interactief, veilig en schaalbaar te maken.",
-            "We willen een web- of mobiele app ontwikkelen die mensen helpt om hun internetsnelheid en verbindingen te optimaliseren, vooral als ze op afstand werken of leren. We zoeken naar idee�n om onze app slim, betrouwbaar, eenvoudig en nuttig te maken.",
-            "We willen een web- of mobiele app ontwikkelen die mensen beschermt tegen phishing en gegevensprivacy problemen. We zoeken naar idee�n om onze app veilig, betrouwbaar, gebruiksvriendelijk en effectief te maken.",
-            "We willen een website maken waar programmeurs coderingsuitdagingen kunnen oplossen in verschillende programmeertalen en niveaus. We zoeken naar idee�n om onze website aantrekkelijk, leerzaam, competitief en leuk te maken.",
-            "We willen een web- of mobiele app ontwikkelen die mensen helpt om nieuwe vaardigheden te leren of bestaande vaardigheden te verbeteren. We zoeken naar idee�n om onze app gepersonaliseerd, adaptief, motiverend en effectief te maken.",
-            "We willen een web- of mobiele app ontwikkelen die mensen in staat stelt om muziek te maken, te delen en te ontdekken. We zoeken naar idee�n om onze app innovatief, creatief, sociaal en leuk te maken.",
-            "We willen een web- of mobiele app ontwikkelen die mensen helpt om hun reizen te plannen, te boeken en te beleven. We zoeken naar idee�n om onze app slim, handig, betrouwbaar en aantrekkelijk te maken."
+            "We willen weten wat onze klanten echt willen en nodig hebben, en hoe we hun verwachtingen kunnen overtreffen. We zoeken naar ideeën om onze klantenservice, ons productaanbod, onze prijsstrategie en onze communicatie te verbeteren.",
+            "We willen onze impact op het milieu verminderen en bijdragen aan een duurzamere wereld. We zoeken naar ideeën om ons energieverbruik, onze afvalproductie, onze CO2-uitstoot en onze grondstoffen te verminderen of te compenseren.",
+            "We willen dat onze medewerkers zich gewaardeerd, gerespecteerd en gehoord voelen. We zoeken naar ideeën om onze bedrijfscultuur, ons leiderschap, ons feedbacksysteem, onze beloningsstructuur en onze leer- en ontwikkelingsmogelijkheden te verbeteren.",
+            "We willen een web- of mobiele app ontwikkelen die mensen in staat stelt om online vergaderingen, webinars, workshops en evenementen te organiseren en bij te wonen. We zoeken naar ideeën om onze app gebruiksvriendelijk, interactief, veilig en schaalbaar te maken.",
+            "We willen een web- of mobiele app ontwikkelen die mensen helpt om hun internetsnelheid en verbindingen te optimaliseren, vooral als ze op afstand werken of leren. We zoeken naar ideeën om onze app slim, betrouwbaar, eenvoudig en nuttig te maken.",
+            "We willen een web- of mobiele app ontwikkelen die mensen beschermt tegen phishing en gegevensprivacy problemen. We zoeken naar ideeën om onze app veilig, betrouwbaar, gebruiksvriendelijk en effectief te maken.",
+            "We willen een website maken waar programmeurs coderingsuitdagingen kunnen oplossen in verschillende programmeertalen en niveaus. We zoeken naar ideeën om onze website aantrekkelijk, leerzaam, competitief en leuk te maken.",
+            "We willen een web- of mobiele app ontwikkelen die mensen helpt om nieuwe vaardigheden te leren of bestaande vaardigheden te verbeteren. We zoeken naar ideeën om onze app gepersonaliseerd, adaptief, motiverend en effectief te maken.",
+            "We willen een web- of mobiele app ontwikkelen die mensen in staat stelt om muziek te maken, te delen en te ontdekken. We zoeken naar ideeën om onze app innovatief, creatief, sociaal en leuk te maken.",
+            "We willen een web- of mobiele app ontwikkelen die mensen helpt om hun reizen te plannen, te boeken en te beleven. We zoeken naar ideeën om onze app slim, handig, betrouwbaar en aantrekkelijk te maken."
         };
         var testShortDescriptions = new List<string>
         {
             "Verbeter de klanttevredenheid door beter te begrijpen wat de klant wil en nodig heeft.",
-            "Verminder de ecologische voetafdruk door effici�nter en groener te werken.",
-            "Verhoog de betrokkenheid en motivatie van de medewerkers door een positieve en ondersteunende werkomgeving te cre�ren.",
+            "Verminder de ecologische voetafdruk door efficiënter en groener te werken.",
+            "Verhoog de betrokkenheid en motivatie van de medewerkers door een positieve en ondersteunende werkomgeving te creëren.",
             "Bouw een digitale conferentieplatform die online samenwerking en communicatie mogelijk maakt.",
             "Verbeter de internetsnelheid en verbindingen op afstand met een slimme app.",
             "Voorkom phishing en gegevensprivacy problemen met een veilige app.",
             "Maak een coderingsuitdaging website die programmeurs uitdaagt en vermaakt.",
-            "Cre�er een leerplatform die mensen helpt om hun leerdoelen te bereiken.",
+            "Creëer een leerplatform die mensen helpt om hun leerdoelen te bereiken.",
             "Maak een muziekapp die mensen helpt om muziek te maken, te delen en te ontdekken.",
             "Maak een reisapp die mensen helpt om de wereld te verkennen."
         };
