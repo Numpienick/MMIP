@@ -29,8 +29,8 @@
                                         <MudTextField @bind-Value=@_user.FirstName For="@(() => _user.FirstName)" Variant="Variant.Outlined" Label=@Localizer["FirstName"] InputType="@_textInput"></MudTextField>
                                     </MudItem>
                                     <MudItem md="4" xs="12">
-                                        <h2>@Localizer["Prefix"]</h2>
-                                        <MudTextField @bind-Value=@_user.Prefixes For="@(() => _user.Prefixes)" Variant="Variant.Outlined" Label=@Localizer["Prefix"] InputType="@_textInput"></MudTextField>
+                                        <h2>@Localizer["Preposition"]</h2>
+                                        <MudTextField @bind-Value=@_user.Preposition For="@(() => _user.Preposition)" Variant="Variant.Outlined" Label=@Localizer["Preposition"] InputType="@_textInput"></MudTextField>
                                     </MudItem>
                                     <MudItem md="4" xs="12">
                                         <h2>@Localizer["LastName"]</h2>
@@ -62,7 +62,6 @@
                                 </MudButton>
                             </MudItem>
                         </MudGrid>
-                        @* TODO: Add privacy page and redirect to it *@
                         <MudGrid>
                             <MudItem md="6"></MudItem> @* For the alignment of the rest of the items in this grid*@
                             <MudItem md="4" xs="12">

@@ -297,7 +297,7 @@
   <data name="FirstName" xml:space="preserve">
     <value>Voornaam</value>
   </data>
-  <data name="Prefix" xml:space="preserve">
+  <data name="Preposition" xml:space="preserve">
     <value>Tussenvoegsel</value>
   </data>
   <data name="LastName" xml:space="preserve">

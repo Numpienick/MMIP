@@ -331,20 +331,20 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bezig met laden....
-        /// </summary>
-        internal static string Loading {
-            get {
-                return ResourceManager.GetString("Loading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Achternaam.
         /// </summary>
         internal static string LastName {
             get {
                 return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bezig met laden....
+        /// </summary>
+        internal static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
             }
         }
         
@@ -414,9 +414,9 @@ namespace MMIP.Client.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Tussenvoegsel.
         /// </summary>
-        internal static string Prefix {
+        internal static string Preposition {
             get {
-                return ResourceManager.GetString("Prefix", resourceCulture);
+                return ResourceManager.GetString("Preposition", resourceCulture);
             }
         }
         
@@ -480,20 +480,20 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Er is iets fout gegaan met het versturen van de data.
-        /// </summary>
-        internal static string Request_BadRequest {
-            get {
-                return ResourceManager.GetString("Request_BadRequest", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Wachtwoord herhalen.
         /// </summary>
         internal static string RepeatPassword {
             get {
                 return ResourceManager.GetString("RepeatPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Er is iets fout gegaan met het versturen van de data.
+        /// </summary>
+        internal static string Request_BadRequest {
+            get {
+                return ResourceManager.GetString("Request_BadRequest", resourceCulture);
             }
         }
         
@@ -525,7 +525,7 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Onbekende fout.
         /// </summary>
         internal static string Request_Unknown {
             get {
