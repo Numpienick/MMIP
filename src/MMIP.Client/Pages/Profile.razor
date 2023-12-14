@@ -5,7 +5,7 @@
 
 @inject IStringLocalizer<ApplicationResource> Localizer
 @inject RequestController RequestController;
-@inject NavigationManager navigationManager;
+@inject NavigationManager NavigationManager;
 
 <MudCard Elevation="4" Class="px-6">
     <MudGrid Justify="Justify.Center">
@@ -57,7 +57,7 @@
     {
         if (!Entity.ToLower().Equals("user") || string.IsNullOrEmpty(Entity))
             if (!Entity.ToLower().Equals("organization") || string.IsNullOrEmpty(Entity))
-                navigationManager.NavigateTo($"/Error/{Entity}", forceLoad: true);
+                NavigationManager.NavigateTo($"/Error/{Entity}", forceLoad: true);
 
         if (Entity.ToLower().Equals("user"))
             CurrentEntity = User;
