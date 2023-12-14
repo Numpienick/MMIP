@@ -1,4 +1,5 @@
 ﻿@page "/challenge/create"
+@page "/challenge/edit/{ChallengeId:guid}"
 @using Microsoft.AspNetCore.Components.Forms;
 @using Client.Controllers;
 @using MMIP.Shared.Entities;
@@ -6,56 +7,131 @@
 @using MMIP.Shared.Utilities;
 @inject RequestController RequestController
 @inject IStringLocalizer<ApplicationResource> Localizer
+@inject HttpClient Client
 
 <PageTitle>MMIP - @Localizer["CreateChallengeTitle"]</PageTitle>
 
-<h1>@Localizer["CreateChallengeTitle"]</h1>
+    <h1>@Localizer[_localizedPageTitle]</h1>
 <MudContainer MaxWidth="MaxWidth.ExtraLarge">
     <MudCard Class="rounded-lg" Elevation="4">
         <MudCardContent>
             <EditForm Model=@_model OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
-                <DataAnnotationsValidator/>
+                <DataAnnotationsValidator />
                 @* <MudFileUpload T="IBrowserFile" Accept=".png, .jpg, .jpeg, .gif, .webp, svg" FilesChanged="UploadFiles" MaximumFileCount="1"> *@
                 <MudButton HtmlTag="label"
                            Variant="Variant.Filled"
                            Color="Color.Primary"
                            StartIcon="@Icons.Material.Filled.CloudUpload"
-                           Class="d-flex"
+                           Class="d-flex mt-5 mb-5"
                            for="@context">
                     @Localizer["FormChallengeUpload"]
                 </MudButton>
                 @* </MudFileUpload> *@
-                <MudTextField Variant="Variant.Outlined" Label=@Localizer["FormChallengeTitle"] @bind-Value="_model.Title" For="@(() => _model.Title)"/>
-                <MudTextField Variant="Variant.Outlined" Lines="10" Label=@Localizer["FormChallengeDescription"] @bind-Value="_model.Description" For="@(() => _model.Description)"/>
+                <MudTextField Class="mb-5" Variant="Variant.Outlined" Label=@Localizer["FormChallengeTitle"] @bind-Value="_model.Title" For="@(() => _model.Title)" />
+                <MudTextField Class="mb-5" Variant="Variant.Outlined" Lines="10" Label=@Localizer["FormChallengeDescription"] @bind-Value="_model.Description" For="@(() => _model.Description)" />
                 <MudGrid>
                     <MudItem xs="12" md="4">
-                        <MudTextField Variant="Variant.Outlined" Lines="5" Label=@Localizer["FormChallengeShortDescription"] @bind-Value="_model.ShortDescription" For="@(() => _model.ShortDescription)"/>
+                        <MudTextField Class="mb-5" Variant="Variant.Outlined" Lines="5" Label=@Localizer["FormChallengeShortDescription"] @bind-Value="_model.ShortDescription" For="@(() => _model.ShortDescription)" />
                     </MudItem>
                     <MudItem xs="12" md="4">
-                        <MudSelect Variant="Variant.Outlined" Label=@Localizer["FormChallengeVisibility"] @bind-Value="_model.ChallengeVisibility" T="Visibility">
+                        <MudSelect Class="mb-5" Variant="Variant.Outlined" Label=@Localizer["FormChallengeVisibility"] @bind-Value="_model.ChallengeVisibility" T="Visibility">
                             @foreach (Visibility visibility in Enum.GetValues(typeof(Visibility)))
                             {
-                                <MudSelectItem Value="@_model.ChallengeVisibility" T="Visibility">@visibility.GetDescriptionAttribute()</MudSelectItem>
+                                <MudSelectItem Value="@_model.ChallengeVisibility" T="Visibility">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
                             }
                         </MudSelect>
                     </MudItem>
                     <MudItem xs="12" md="4">
-                        <MudDatePicker Variant="Variant.Outlined" Label=@Localizer["FormChallengeDate"] Editable="true" @bind-Date="_model.Deadline" Mask="@(new DateMask("dd-MM-yyyy"))" DateFormat="dd.MM.yyyy" Placeholder="dd-mm-yyyy"/>
+                        <MudDatePicker Class="mb-5" Variant="Variant.Outlined" Label=@Localizer["FormChallengeDate"] Editable="true" @bind-Date="_model.Deadline" Mask="@(new DateMask("dd-MM-yyyy"))" DateFormat="dd.MM.yyyy" Placeholder="dd-mm-yyyy" />
                     </MudItem>
-                    <MudItem xs="12" md="4">
+                    <MudItem xs="12" md="4" class="mb-5">
                         <CreateTagComponent SelectedTags="@_model.Tags"></CreateTagComponent>
                     </MudItem>
+                    @if (ChallengeId != Guid.Empty)
+                    {
+                        <MudItem xs="12" md="12">
+                            <MudTimeline Class="mt-5 mb-5" TimelineOrientation="TimelineOrientation.Horizontal">
+                                @{
+                                    bool skip = false;
+                                    Color circleColor = Color.Success;
+                                    Size circleSize = Size.Large;
+
+                                    foreach (var phase in _phases)
+                                    {
+                                        string currentPhase = string.Empty;
+
+                                        if (skip)
+                                        {
+                                            circleColor = Color.Error;
+                                            circleSize = Size.Small;
+                                        }
+
+                                        else
+                                        {
+                                            circleColor = Color.Success;
+                                            circleSize = Size.Small;
+                                        }
+
+                                        if (phase.Name == "Afgerond")
+                                        {
+                                            currentPhase = "Huidige fase";
+                                            circleColor = Color.Info;
+                                            circleSize = Size.Medium;
+                                            skip = true;
+                                        }
+
+                                        <MudTimelineItem Elevation="4" Variant="Variant.Filled" Color="circleColor" Size="circleSize">
+                                            <ItemOpposite>
+                                                <h2>@currentPhase</h2>
+                                            </ItemOpposite>
+                                            <ItemContent>
+                                                <h3>@phase.Name</h3>
+                                                <p>@phase.Description</p>
+                                            </ItemContent>
+                                        </MudTimelineItem>
+                                    }
+                                }
+                            </MudTimeline>
+                            <MudButton @onclick=@_updatePhaseOnClick Variant="Variant.Filled" Color="Color.Primary" Class="mt-16">@Localizer["ChallengeNextPhase"]</MudButton>
+                            </MudItem>
+                    }
                 </MudGrid>
-                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer["FormChallengeSave"]</MudButton>
-            </EditForm>
-        </MudCardContent>
-    </MudCard>
-</MudContainer>
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer[_buttonLocalizedText]</MudButton>
+                </EditForm>
+            </MudCardContent>
+        </MudCard>
+    </MudContainer>
+
 @code {
+    [Parameter]
+    public Guid ChallengeId { get; set; }
     private Challenge _model = new();
     private IList<IBrowserFile> _files = new List<IBrowserFile>();
-    [Inject] 
+    [Inject]
     private ISnackbar _snackbar { get; set; }
+    private List<Phase> _phases = new List<Phase>();
+    private Phase _currentPhase { get; set; }
+
+    private const string ButtonSaveLocalization = "FormChallengeSave";
+    private const string ButtonEditLocalization = "FromChallengeSaveEdit";
+    private string _buttonLocalizedText = ButtonSaveLocalization;
+    private const string CreateChallengeTitleLocalization = "CreateChallengeTitle";
+    private const string EditChallengeTitleLocalization = "EditChallengeTitle";
+    private string _localizedPageTitle = CreateChallengeTitleLocalization;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (ChallengeId != Guid.Empty)
+        {
+            _model = await _getChallenge();
+            TempPhases();
+            //_phases = await _getPhases();
+            _buttonLocalizedText = ButtonEditLocalization;
+            _localizedPageTitle = EditChallengeTitleLocalization;
+        }
+
+        base.OnInitialized();
+    }
         
     private async void _validFormSubmitted(EditContext context)
     {
@@ -72,5 +148,53 @@
     {
         _files.Add(file);
     //TODO upload the files to the server
+    }
+
+    private async Task<Challenge> _getChallenge()
+    {
+        return await Client.GetFromJsonAsync<Challenge>($"challenges/{ChallengeId}");
+    }
+
+    private async Task _updateChallenge()
+    {
+        await Client.PatchAsJsonAsync<Challenge>("challenges", _model);
+    }
+
+    private void _updatePhaseOnClick()
+    {
+        var nextPhaseId = _model.Phases.Select(p => p.Id);
+    }
+
+    private void TempPhases()
+    {
+        _phases.Add(new Phase()
+            {
+                Name = "Concepting",
+                Description = "Een challenge in deze fase bevat nog niet alle concrete informatie, en is daarom nog niet zichtbaar voor gebruikers.",
+            });
+
+        _phases.Add(new Phase()
+            {
+                Name = "Open voor ideeën",
+                Description = "Een challenge in deze fase staat open om ideeën, vragen of andere reacties van gebruikers te ontvangen.",
+            });
+
+        _phases.Add(new Phase()
+            {
+                Name = "In uitvoering",
+                Description = "Een challenge in deze fase wordt momenteel uitgevoerd, en ontvangt geen nieuwe reacties van gebruikers meer.",
+            });
+
+        _phases.Add(new Phase()
+            {
+                Name = "Afgerond",
+                Description = "Een challenge in deze fase is afgerond, waarbij het eindverslag voor de challenge zichtbaar wordt.",
+            });
+
+        _phases.Add(new Phase()
+            {
+                Name = "Gearchiveerd",
+                Description = "Een challenge in deze fase is niet meer zichtbaar voor andere gebruikers op het platform.",
+            });
     }
 }

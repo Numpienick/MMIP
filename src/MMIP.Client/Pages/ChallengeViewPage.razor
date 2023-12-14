@@ -2,6 +2,7 @@
 @using MMIP.Shared.Views
 
 @inject IStringLocalizer<ApplicationResource> Localizer
+@inject NavigationManager navigationManager
 
 @page "/challenge-view/{ChallengeId:guid}"
 
@@ -9,7 +10,19 @@
     <MudImage ObjectPosition="ObjectPosition.Center" ObjectFit="ObjectFit.Fill" Src="@View.BannerImagePath" style="width: 100%; max-height: inherit;"></MudImage>
 </div>
 
-<h1 class="mb-15">@View.Title</h1>
+<MudGrid>
+    <MudItem md="12">
+        <h1 class="mt-10 mb-15">@View.Title</h1>
+    </MudItem>
+</MudGrid>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem md="12">
+        <MudAvatar Style="height:65px; width:65px;" @onclick="@_editPageOnClick">
+            <MudImage Src="Assets/Img/EditButton.png"></MudImage>
+        </MudAvatar>
+    </MudItem>
+</MudGrid>
 
 @if (!string.IsNullOrEmpty(View.FinalReport))
 {
@@ -94,12 +107,12 @@
                         </MudItem>
                         <MudItem md="5">
 @*                             TODO: write logic to get all comment types
- *@@*                             <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormCommentType"] @bind-Value="_model.CommentType" T="CommentType">
-                                @foreach (CommentType commentType in Enum.GetValues(typeof(CommentType)))
-                                {
-                                    <MudSelectItem Value="@commentType" T="CommentType">@commentType.GetCommentTypePropertyValue("Name")</MudSelectItem>
-                                }
-                            </MudSelect> *@
+ *@                            <MudSelect Variant="Variant.Outlined" Label=@Localizer["FormCommentType"] T="string">
+                                    <MudSelectItem T="string">Ik heb een vraag!</MudSelectItem>
+                                    <MudSelectItem T="string">Ik heb feedback!</MudSelectItem>
+                                    <MudSelectItem T="string">Ik heb een idee!</MudSelectItem>
+                                    <MudSelectItem T="string">Ik zou de challenge uit willen voeren!</MudSelectItem>
+                            </MudSelect>
                         </MudItem>
                         <MudItem md="6">
                             <MudButton ButtonType="ButtonType.Submit" FullWidth Variant="Variant.Filled" Color="Color.Primary">@Localizer["CreateCommentButton"]</MudButton>
@@ -171,5 +184,10 @@
     {
         //_snackbar.Add(_localizer["SnackbarInvalid"], Severity.Error);
         StateHasChanged();
+    }
+
+    private void _editPageOnClick(MouseEventArgs mouseEventArgs)
+    {
+        navigationManager.NavigateTo($"/challenge/edit/{ChallengeId}");
     }
 }
