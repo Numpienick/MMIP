@@ -39,10 +39,6 @@
 @code {
     [Parameter]
     public CommentView CommentData { get; set; } = null!;
-
-    // [Parameter]
-    // public Comment Comment { get; set; }
-
     public bool IsConcluded { get; set; }
 
     private string _isCommentConcluded() => CommentData.Concluded ? "concluded-comment rounded-lg" : "rounded-lg";
