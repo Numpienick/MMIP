@@ -1,21 +1,22 @@
 using MMIP.Application.Interfaces.Repositories;
 using MMIP.Shared.Entities;
+using MMIP.Shared.Views;
 
 namespace MMIP.Infrastructure.Services
 {
     public class CommentService : BaseEntityService<Comment>
     {
-        private readonly IDataRepository<Comment> _repository;
+        private readonly ICommentRepository _repository;
 
-        public CommentService(IUnitOfWork unitOfWork)
+        public CommentService(IUnitOfWork unitOfWork, ICommentRepository repository)
             : base(unitOfWork)
         {
-            _repository = unitOfWork.Repository<Comment>();
+            _repository = repository;
         }
 
-        public async Task<List<Comment>> GetCommentsByChallengeIdAsync(Guid challengeId)
+        public Task<List<CommentView?>> GetCommentViewAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return _repository.GetCommentViewAsync(id);
         }
     }
 }

@@ -79,6 +79,6 @@
     // TODO: Change to take only 6 challanges a time.
     private async Task<List<ChallengeCardView>> _getChallengesById()
     {
-        return await RequestController.Get<ChallengeCardView>($"organizations/challenges?id={Id}&&take={PageSize}&&skip={Challenges.Count}");
+        return await RequestController.Get<List<ChallengeCardView>>($"organizations/challenges?id={Id}&&take={PageSize}&&skip={Challenges.Count}");
     }
 }

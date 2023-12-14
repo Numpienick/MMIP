@@ -26,6 +26,7 @@ internal static class ServiceCollectionExtensions
         services.AddTransient<IEntitySeeder<Organization>, RandomOrganizationSeeder>();
         services.AddTransient<IEntitySeeder<Challenge>, RandomChallengeSeeder>();
         services.AddTransient<IEntitySeeder<Sector>, RandomSectorSeeder>();
+        services.AddTransient<IEntitySeeder<Comment>, RandomCommentSeeder>();
         return services;
     }
 
