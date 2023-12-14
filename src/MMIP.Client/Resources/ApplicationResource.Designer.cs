@@ -214,6 +214,42 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Je opgevraagde pagina is hier niet, miauw..
+        /// </summary>
+        internal static string ErrorDescription {
+            get {
+                return ResourceManager.GetString("ErrorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Misschien heb je hem opgegeten of is die weggelopen..
+        /// </summary>
+        internal static string ErrorJoke {
+            get {
+                return ResourceManager.GetString("ErrorJoke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opgevraagd item:.
+        /// </summary>
+        internal static string ErrorRequestedItem {
+            get {
+                return ResourceManager.GetString("ErrorRequestedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Oh oh! Iets is verkeerd gegaan..
+        /// </summary>
+        internal static string ErrorTitle {
+            get {
+                return ResourceManager.GetString("ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Voornaam.
         /// </summary>
         internal static string FirstName {
@@ -318,6 +354,15 @@ namespace MMIP.Client.Resources {
         internal static string GoalMatchMakerDescription {
             get {
                 return ResourceManager.GetString("GoalMatchMakerDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ga terug naar de homepagina.
+        /// </summary>
+        internal static string GoBackHome {
+            get {
+                return ResourceManager.GetString("GoBackHome", resourceCulture);
             }
         }
         
@@ -444,7 +489,7 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Profielbeschrijving.
+        ///   Looks up a localized string similar to Beschrijving.
         /// </summary>
         internal static string ProfileDescription {
             get {
@@ -458,6 +503,15 @@ namespace MMIP.Client.Resources {
         internal static string ProfilePicture {
             get {
                 return ResourceManager.GetString("ProfilePicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        internal static string ProfileTitle {
+            get {
+                return ResourceManager.GetString("ProfileTitle", resourceCulture);
             }
         }
         
