@@ -2,6 +2,7 @@
 @using MMIP.Shared.Views
 
 @inject IStringLocalizer<ApplicationResource> Localizer
+@inject NavigationManager NavigationManager;
 
 @page "/challenge-view/{ChallengeId:guid}"
 
@@ -66,13 +67,15 @@
                 <MudCardContent>
                     <MudGrid>
                         <MudItem md="7">
+                            <a href="/profile/organization/00000000-0000-0000-0000-000000000001">
                             <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="150"></MudCardMedia>
+                            </a>
                         </MudItem>
                         <MudItem md="5">
                             @* TODO: create a view *@
-                            <h2 class="card-organization-title">@View.OrganizationName</h2>
+                            <a href="/profile/organization/00000000-0000-0000-0000-000000000001"><h2 class="card-organization-title">@View.OrganizationName</h2></a>
                             <MudDivider Class="mt-2 mb-5"></MudDivider>
-                            <h3 class="card-centered-text">Leander Jelgersma</h3>
+                            <a href="/profile/user/00000000-0000-0000-0000-000000000001"><h3 class="card-centered-text">Leander Jelgersma</h3></a>
                         </MudItem>
                     </MudGrid>
                 </MudCardContent>
