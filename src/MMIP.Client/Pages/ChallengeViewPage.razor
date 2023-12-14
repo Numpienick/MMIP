@@ -81,51 +81,53 @@
     </MudGrid>
 }
 
-<MudContainer MaxWidth="MaxWidth.ExtraLarge" Class="justify-center">
-    <MudCard Elevation="4" Class="rounded-lg">
-        <MudCardContent>
-            <h2 class="mb-5">@Localizer["ChallengeComments"]</h2>
-        @*     <EditForm Model="_model" OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted> *@
-        @*         <DataAnnotationsValidator/> *@
-        @*         <MudGrid Justify="Justify.Center"> *@
-        @*             <MudItem md="7"> *@
-        @*                 <MudTextField Lines="9" Variant="Variant.Outlined" Label=@Localizer["CreateComment"] @bind-Value="_model.Text" For="@(() => _model.Text)"/> *@
-        @*             </MudItem> *@
-        @*             <MudItem md="5"> *@
-        @*                 <MudSelect Variant="Variant.Outlined" Label=@Localizer["FormCommentType"] @bind-Value="_model.CommentType" T="CommentType"> *@
-        @*                     @foreach (CommentType commentType in Enum.GetValues(typeof(CommentType))) *@
-        @*                     { *@
-        @*                         <MudSelectItem Value="@commentType" T="CommentType">@commentType.GetCommentTypePropertyValue("Name")</MudSelectItem> *@
-        @*                     } *@
-        @*                 </MudSelect> *@
-        @*             </MudItem> *@
-        @*             <MudItem md="6"> *@
-        @*                 <MudButton ButtonType="ButtonType.Submit" FullWidth Variant="Variant.Filled" Color="Color.Primary">@Localizer["CreateCommentButton"]</MudButton> *@
-        @*             </MudItem> *@
-        @*         </MudGrid> *@
-        @*     </EditForm> *@
-        @* </MudCardContent> *@
-        @* <MudDivider Class="mt-6 mb-6" DividerType="DividerType.FullWidth"></MudDivider> *@
-        @* <MudCardContent> *@
-        @*     @{ *@
-        @*         if (Comments.Count == 0) *@
-        @*         { *@
-        @*             <h2 class="card-centered-text">@Localizer["ChallengeNoComments"]</h2> *@
-        @*         } *@
-        @* *@
-        @*         else *@
-        @*         { *@
-        @*             foreach (var comment in Comments) *@
-        @*             { *@
-        @*                 <MudGrid Justify="Justify.Center" Class="mb-10"> *@
-        @*                     <UserCommentComponent Comment="comment"></UserCommentComponent> *@
-        @*                 </MudGrid> *@
-        @*             } *@
-        @*         } *@
-        @*     } *@
-        </MudCardContent>
-    </MudCard>
-</MudContainer>
+<MudGrid Justify="Justify.Center">
+    <MudItem md="8">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <h2 class="mb-5">@Localizer["ChallengeComments"]</h2>
+                <EditForm Model="_model" OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
+                    <DataAnnotationsValidator />
+                    <MudGrid Justify="Justify.Center">
+                        <MudItem md="7">
+                            <MudTextField Lines="9" Variant="Variant.Outlined" Label=@Localizer["CreateComment"] @bind-Value="_model.Text" For="@(() => _model.Text)" />
+                        </MudItem>
+                        <MudItem md="5">
+@*                             <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormCommentType"] @bind-Value="_model.CommentType" T="CommentType">
+                                @foreach (CommentType commentType in Enum.GetValues(typeof(CommentType)))
+                                {
+                                    <MudSelectItem Value="@commentType" T="CommentType">@commentType.GetCommentTypePropertyValue("Name")</MudSelectItem>
+                                }
+                            </MudSelect> *@
+                        </MudItem>
+                        <MudItem md="6">
+                            <MudButton ButtonType="ButtonType.Submit" FullWidth Variant="Variant.Filled" Color="Color.Primary">@Localizer["CreateCommentButton"]</MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </EditForm>
+            </MudCardContent>
+            <MudDivider Class="mt-6 mb-6" DividerType="DividerType.FullWidth"></MudDivider>
+            <MudCardContent>
+                @{
+                    if (Comments.Count == 0)
+                    {
+                        <h2 class="card-centered-text">@Localizer["ChallengeNoComments"]</h2>
+                    }
+
+                    else
+                    {
+                        foreach (var comment in Comments)
+                        {
+                            <MudGrid Justify="Justify.Center" Class="mb-10">
+                                <UserCommentComponent CommentData="comment"></UserCommentComponent>
+                            </MudGrid>
+                        }
+                    }
+                }
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
 
 @code {
 
@@ -136,9 +138,12 @@
     internal RequestController RequestController { get; set; }
 
     public ChallengeView? View { get; set; }
+    public List<CommentView> Comments { get; set; }
+    private CommentView _model = new();
 
     protected override async Task OnInitializedAsync()
     {
+        Comments = await _getComments();
         View = await _getView();
         await base.OnInitializedAsync();
     }
@@ -148,4 +153,22 @@
         return RequestController.Get<ChallengeView>($"challenges/view?id={ChallengeId}");
     }
 
+    private Task<List<CommentView?>> _getComments()
+    {
+        return RequestController.Get<List<CommentView>>($"comments/view?id={ChallengeId}");
+    }
+
+    // TODO: Add posting comment functionality
+    // private async void _validFormSubmitted()
+    // {
+    //     //await RequestController.Post("comments", _model);
+    //     //Comments = await _getComments();
+    //     StateHasChanged();
+    // }
+
+    // private void _invalidFormSubmitted()
+    // {
+    //     //_snackbar.Add(_localizer["SnackbarInvalid"], Severity.Error);
+    //     StateHasChanged();
+    // }
 }

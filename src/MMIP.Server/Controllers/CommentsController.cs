@@ -40,23 +40,14 @@ namespace MMIP.Server.Controllers
             return Ok(result);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetCommentType(Guid id)
+        [HttpGet("view")]
+        public async Task<IActionResult> GetCommentsView(Guid id)
         {
-            var result = await _commentService.GetByIdAsync(id);
-            if (result == null)
-                return NotFound();
-            return Ok(result);
-        }
+            var view = await _commentService.GetCommentViewAsync(id);
+            if (view != null)
+                return Ok(view);
 
-        // TODO: Get comments from specific challenge.
-        [HttpGet("byChallengeId")]
-        public async Task<IActionResult> GetCommentsByChallengeId(int take, int skip)
-        {
-            var result = await _commentService.GetCommentViewAsync(take, skip);
-            if (result.Any())
-                return Ok(result);
-            return Empty;
+            return NotFound("Comments not found");
         }
     }
 }

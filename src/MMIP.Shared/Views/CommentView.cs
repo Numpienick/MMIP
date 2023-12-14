@@ -15,5 +15,6 @@ namespace MMIP.Shared.Views
         public string CommentTypeName { get; set; } = null!;
         public string CommentTypeDescription { get; set; } = null!;
         public string CommentTypeIconPath { get; set; } = null!;
+        public Guid ChallengeId { get; set; }
     }
 }

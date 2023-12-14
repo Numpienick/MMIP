@@ -6,18 +6,17 @@ namespace MMIP.Infrastructure.Services
 {
     public class CommentService : BaseEntityService<Comment>
     {
-        private readonly IDataRepository<Comment> _repository;
+        private readonly ICommentRepository _repository;
 
-        public CommentService(IUnitOfWork unitOfWork)
+        public CommentService(IUnitOfWork unitOfWork, ICommentRepository repository)
             : base(unitOfWork)
         {
-            _repository = unitOfWork.Repository<Comment>();
+            _repository = repository;
         }
 
-        public Task<List<CommentView>> GetCommentViewAsync(int take, int skip)
+        public Task<List<CommentView?>> GetCommentViewAsync(Guid id)
         {
-            int pageNumber = skip / take;
-            return _repository.GetPagedResponseAsync<CommentView>(pageNumber, take);
+            return _repository.GetCommentViewAsync(id);
         }
     }
 }
