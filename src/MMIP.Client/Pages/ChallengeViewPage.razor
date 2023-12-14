@@ -93,7 +93,8 @@
                             <MudTextField Lines="9" Variant="Variant.Outlined" Label=@Localizer["CreateComment"] @bind-Value="_model.Text" For="@(() => _model.Text)" />
                         </MudItem>
                         <MudItem md="5">
-@*                             <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormCommentType"] @bind-Value="_model.CommentType" T="CommentType">
+@*                             TODO: write logic to get all comment types
+ *@@*                             <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormCommentType"] @bind-Value="_model.CommentType" T="CommentType">
                                 @foreach (CommentType commentType in Enum.GetValues(typeof(CommentType)))
                                 {
                                     <MudSelectItem Value="@commentType" T="CommentType">@commentType.GetCommentTypePropertyValue("Name")</MudSelectItem>
