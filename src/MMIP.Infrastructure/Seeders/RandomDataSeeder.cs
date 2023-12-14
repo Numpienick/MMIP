@@ -27,7 +27,7 @@ public class RandomDataSeeder : IDatabaseSeeder
     {
         await _sectorSeeder.Seed(4);
         await _organizationSeeder.Seed(1);
-        await _challengeSeeder.Seed(9);
+        await _challengeSeeder.Seed(12);
         await _commentSeeder.Seed(40);
     }
 }

@@ -20,6 +20,30 @@ public class RandomOrganizationSeeder : IEntitySeeder<Organization>
     public async Task Seed(int amount = 1)
     {
         var organizations = new List<Organization>();
+        var testOrganizations = new List<string>()
+        {
+            "InnoMatch",
+            "Sparky",
+            "Greenify",
+            "Zappo",
+            "Flexi",
+            "Lingo",
+            "Vibe",
+            "Bloom",
+            "Solve",
+            "Fynd",
+            "Pluto",
+            "Nura",
+            "Coco",
+            "Rise",
+            "Milo",
+            "Zeno",
+            "Lumi",
+            "Nova",
+            "Yolo",
+            "Breezy",
+        };
+
         var sectorId = await _context.Sectors.Select(s => s.Id).FirstOrDefaultAsync();
         if (sectorId == default)
         {
@@ -32,7 +56,7 @@ public class RandomOrganizationSeeder : IEntitySeeder<Organization>
             organizations.Add(
                 new Organization
                 {
-                    Name = $"Organization {i}",
+                    Name = testOrganizations[i],
                     EnrollmentCode = EnrollmentCodeGenerator.GenerateEnrollmentCode(),
                     SectorId = sectorId
                 }
