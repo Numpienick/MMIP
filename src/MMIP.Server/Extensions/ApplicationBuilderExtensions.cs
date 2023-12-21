@@ -37,6 +37,6 @@ internal static class ApplicationBuilderExtensions
 
     internal static IApplicationBuilder UseIdentityServices(this IApplicationBuilder app)
     {
-        return app.UseIdentityServer().UseAuthorization();
+        return app.UseIdentityServer().UseAuthentication().UseAuthorization();
     }
 }
