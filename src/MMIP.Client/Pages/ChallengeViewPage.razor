@@ -67,15 +67,15 @@
                 <MudCardContent>
                     <MudGrid>
                         <MudItem md="7">
-                            <a href="/profile/organization/00000000-0000-0000-0000-000000000001">
+                            <a href="/profile/organization/@organizationId">
                             <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="150"></MudCardMedia>
                             </a>
                         </MudItem>
                         <MudItem md="5">
                             @* TODO: create a view *@
-                            <a href="/profile/organization/00000000-0000-0000-0000-000000000001"><h2 class="card-organization-title">@View.OrganizationName</h2></a>
+                            <a href="/profile/organization/@organizationId"><h2 class="card-organization-title">@View.OrganizationName</h2></a>
                             <MudDivider Class="mt-2 mb-5"></MudDivider>
-                            <a href="/profile/user/00000000-0000-0000-0000-000000000001"><h3 class="card-centered-text">Leander Jelgersma</h3></a>
+                            <a href="/profile/user/@userId"><h3 class="card-centered-text">Leander Jelgersma</h3></a>
                         </MudItem>
                     </MudGrid>
                 </MudCardContent>
@@ -140,6 +140,9 @@
 
     [Inject]
     internal RequestController RequestController { get; set; }
+
+    private Guid organizationId = Guid.Parse("00000000-0000-0000-0000-000000000001");
+    private Guid userId = Guid.Parse("00000000-0000-0000-0000-000000000001");
 
     public ChallengeView? View { get; set; }
     public List<CommentView> Comments { get; set; }
