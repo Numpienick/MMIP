@@ -7,12 +7,159 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MMIP.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIdentity : Migration
+    public partial class AddIdentityConfiguration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(name: "users");
+            migrationBuilder.DropColumn(name: "created_date", table: "users");
+
+            migrationBuilder.DropColumn(name: "updated_date", table: "users");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "id",
+                table: "users",
+                type: "text",
+                nullable: false,
+                oldClrType: typeof(Guid),
+                oldType: "uuid"
+            );
+
+            migrationBuilder.AddColumn<int>(
+                name: "access_failed_count",
+                table: "users",
+                type: "integer",
+                nullable: false,
+                defaultValue: 0
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "avatar_path",
+                table: "users",
+                type: "character varying(254)",
+                maxLength: 254,
+                nullable: true
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "concurrency_stamp",
+                table: "users",
+                type: "text",
+                nullable: true
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "description",
+                table: "users",
+                type: "character varying(100000)",
+                maxLength: 100000,
+                nullable: false,
+                defaultValue: ""
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "email",
+                table: "users",
+                type: "character varying(256)",
+                maxLength: 256,
+                nullable: false,
+                defaultValue: ""
+            );
+
+            migrationBuilder.AddColumn<bool>(
+                name: "email_confirmed",
+                table: "users",
+                type: "boolean",
+                nullable: false,
+                defaultValue: false
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "first_name",
+                table: "users",
+                type: "character varying(60)",
+                maxLength: 60,
+                nullable: false,
+                defaultValue: ""
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "last_name",
+                table: "users",
+                type: "character varying(60)",
+                maxLength: 60,
+                nullable: false,
+                defaultValue: ""
+            );
+
+            migrationBuilder.AddColumn<bool>(
+                name: "lockout_enabled",
+                table: "users",
+                type: "boolean",
+                nullable: false,
+                defaultValue: false
+            );
+
+            migrationBuilder.AddColumn<DateTimeOffset>(
+                name: "lockout_end",
+                table: "users",
+                type: "timestamp with time zone",
+                nullable: true
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "normalized_email",
+                table: "users",
+                type: "character varying(256)",
+                maxLength: 256,
+                nullable: true
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "normalized_user_name",
+                table: "users",
+                type: "character varying(256)",
+                maxLength: 256,
+                nullable: true
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "password_hash",
+                table: "users",
+                type: "text",
+                nullable: true
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "preposition",
+                table: "users",
+                type: "character varying(50)",
+                maxLength: 50,
+                nullable: true
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "security_stamp",
+                table: "users",
+                type: "text",
+                nullable: true
+            );
+
+            migrationBuilder.AddColumn<bool>(
+                name: "two_factor_enabled",
+                table: "users",
+                type: "boolean",
+                nullable: false,
+                defaultValue: false
+            );
+
+            migrationBuilder.AddColumn<string>(
+                name: "user_name",
+                table: "users",
+                type: "character varying(256)",
+                maxLength: 256,
+                nullable: true
+            );
 
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
@@ -39,51 +186,88 @@ namespace MMIP.Infrastructure.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
+                name: "AspNetUserClaims",
                 columns: table =>
                     new
                     {
-                        id = table.Column<string>(type: "text", nullable: false),
-                        user_name = table.Column<string>(
-                            type: "character varying(256)",
-                            maxLength: 256,
-                            nullable: true
-                        ),
-                        normalized_user_name = table.Column<string>(
-                            type: "character varying(256)",
-                            maxLength: 256,
-                            nullable: true
-                        ),
-                        email = table.Column<string>(
-                            type: "character varying(256)",
-                            maxLength: 256,
-                            nullable: true
-                        ),
-                        normalized_email = table.Column<string>(
-                            type: "character varying(256)",
-                            maxLength: 256,
-                            nullable: true
-                        ),
-                        email_confirmed = table.Column<bool>(type: "boolean", nullable: false),
-                        password_hash = table.Column<string>(type: "text", nullable: true),
-                        security_stamp = table.Column<string>(type: "text", nullable: true),
-                        concurrency_stamp = table.Column<string>(type: "text", nullable: true),
-                        phone_number = table.Column<string>(type: "text", nullable: true),
-                        phone_number_confirmed = table.Column<bool>(
-                            type: "boolean",
-                            nullable: false
-                        ),
-                        two_factor_enabled = table.Column<bool>(type: "boolean", nullable: false),
-                        lockout_end = table.Column<DateTimeOffset>(
-                            type: "timestamp with time zone",
-                            nullable: true
-                        ),
-                        lockout_enabled = table.Column<bool>(type: "boolean", nullable: false),
-                        access_failed_count = table.Column<int>(type: "integer", nullable: false)
+                        id = table
+                            .Column<int>(type: "integer", nullable: false)
+                            .Annotation(
+                                "Npgsql:ValueGenerationStrategy",
+                                NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
+                            ),
+                        user_id = table.Column<string>(type: "text", nullable: false),
+                        claim_type = table.Column<string>(type: "text", nullable: true),
+                        claim_value = table.Column<string>(type: "text", nullable: true)
                     },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_asp_net_users", x => x.id);
+                    table.PrimaryKey("pk_asp_net_user_claims", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_asp_net_user_claims_asp_net_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserLogins",
+                columns: table =>
+                    new
+                    {
+                        login_provider = table.Column<string>(type: "text", nullable: false),
+                        provider_key = table.Column<string>(type: "text", nullable: false),
+                        provider_display_name = table.Column<string>(type: "text", nullable: true),
+                        user_id = table.Column<string>(type: "text", nullable: false)
+                    },
+                constraints: table =>
+                {
+                    table.PrimaryKey(
+                        "pk_asp_net_user_logins",
+                        x => new { x.login_provider, x.provider_key }
+                    );
+                    table.ForeignKey(
+                        name: "fk_asp_net_user_logins_asp_net_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade
+                    );
+                }
+            );
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table =>
+                    new
+                    {
+                        user_id = table.Column<string>(type: "text", nullable: false),
+                        login_provider = table.Column<string>(type: "text", nullable: false),
+                        name = table.Column<string>(type: "text", nullable: false),
+                        value = table.Column<string>(type: "text", nullable: true)
+                    },
+                constraints: table =>
+                {
+                    table.PrimaryKey(
+                        "pk_asp_net_user_tokens",
+                        x =>
+                            new
+                            {
+                                x.user_id,
+                                x.login_provider,
+                                x.name
+                            }
+                    );
+                    table.ForeignKey(
+                        name: "fk_asp_net_user_tokens_asp_net_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade
+                    );
                 }
             );
 
@@ -257,68 +441,6 @@ namespace MMIP.Infrastructure.Migrations
             );
 
             migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
-                columns: table =>
-                    new
-                    {
-                        id = table
-                            .Column<int>(type: "integer", nullable: false)
-                            .Annotation(
-                                "Npgsql:ValueGenerationStrategy",
-                                NpgsqlValueGenerationStrategy.IdentityByDefaultColumn
-                            ),
-                        user_id = table.Column<string>(type: "text", nullable: false),
-                        claim_type = table.Column<string>(type: "text", nullable: true),
-                        claim_value = table.Column<string>(type: "text", nullable: true)
-                    },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_asp_net_user_claims", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_asp_net_user_claims_asp_net_users_user_id",
-                        column: x => x.user_id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade
-                    );
-                }
-            );
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
-                columns: table =>
-                    new
-                    {
-                        login_provider = table.Column<string>(
-                            type: "character varying(128)",
-                            maxLength: 128,
-                            nullable: false
-                        ),
-                        provider_key = table.Column<string>(
-                            type: "character varying(128)",
-                            maxLength: 128,
-                            nullable: false
-                        ),
-                        provider_display_name = table.Column<string>(type: "text", nullable: true),
-                        user_id = table.Column<string>(type: "text", nullable: false)
-                    },
-                constraints: table =>
-                {
-                    table.PrimaryKey(
-                        "pk_asp_net_user_logins",
-                        x => new { x.login_provider, x.provider_key }
-                    );
-                    table.ForeignKey(
-                        name: "fk_asp_net_user_logins_asp_net_users_user_id",
-                        column: x => x.user_id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade
-                    );
-                }
-            );
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
                 columns: table =>
                     new
@@ -339,51 +461,24 @@ namespace MMIP.Infrastructure.Migrations
                     table.ForeignKey(
                         name: "fk_asp_net_user_roles_asp_net_users_user_id",
                         column: x => x.user_id,
-                        principalTable: "AspNetUsers",
+                        principalTable: "users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade
                     );
                 }
             );
 
-            migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table =>
-                    new
-                    {
-                        user_id = table.Column<string>(type: "text", nullable: false),
-                        login_provider = table.Column<string>(
-                            type: "character varying(128)",
-                            maxLength: 128,
-                            nullable: false
-                        ),
-                        name = table.Column<string>(
-                            type: "character varying(128)",
-                            maxLength: 128,
-                            nullable: false
-                        ),
-                        value = table.Column<string>(type: "text", nullable: true)
-                    },
-                constraints: table =>
-                {
-                    table.PrimaryKey(
-                        "pk_asp_net_user_tokens",
-                        x =>
-                            new
-                            {
-                                x.user_id,
-                                x.login_provider,
-                                x.name
-                            }
-                    );
-                    table.ForeignKey(
-                        name: "fk_asp_net_user_tokens_asp_net_users_user_id",
-                        column: x => x.user_id,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade
-                    );
-                }
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "users",
+                column: "normalized_email"
+            );
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "users",
+                column: "normalized_user_name",
+                unique: true
             );
 
             migrationBuilder.CreateIndex(
@@ -415,19 +510,6 @@ namespace MMIP.Infrastructure.Migrations
                 name: "ix_asp_net_user_roles_role_id",
                 table: "AspNetUserRoles",
                 column: "role_id"
-            );
-
-            migrationBuilder.CreateIndex(
-                name: "EmailIndex",
-                table: "AspNetUsers",
-                column: "normalized_email"
-            );
-
-            migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "normalized_user_name",
-                unique: true
             );
 
             migrationBuilder.CreateIndex(
@@ -491,27 +573,73 @@ namespace MMIP.Infrastructure.Migrations
 
             migrationBuilder.DropTable(name: "AspNetRoles");
 
-            migrationBuilder.DropTable(name: "AspNetUsers");
+            migrationBuilder.DropIndex(name: "EmailIndex", table: "users");
 
-            migrationBuilder.CreateTable(
-                name: "users",
-                columns: table =>
-                    new
-                    {
-                        id = table.Column<Guid>(type: "uuid", nullable: false),
-                        created_date = table.Column<DateTimeOffset>(
-                            type: "timestamp with time zone",
-                            nullable: false
-                        ),
-                        updated_date = table.Column<DateTimeOffset>(
-                            type: "timestamp with time zone",
-                            nullable: false
-                        )
-                    },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_users", x => x.id);
-                }
+            migrationBuilder.DropIndex(name: "UserNameIndex", table: "users");
+
+            migrationBuilder.DropColumn(name: "access_failed_count", table: "users");
+
+            migrationBuilder.DropColumn(name: "avatar_path", table: "users");
+
+            migrationBuilder.DropColumn(name: "concurrency_stamp", table: "users");
+
+            migrationBuilder.DropColumn(name: "description", table: "users");
+
+            migrationBuilder.DropColumn(name: "email", table: "users");
+
+            migrationBuilder.DropColumn(name: "email_confirmed", table: "users");
+
+            migrationBuilder.DropColumn(name: "first_name", table: "users");
+
+            migrationBuilder.DropColumn(name: "last_name", table: "users");
+
+            migrationBuilder.DropColumn(name: "lockout_enabled", table: "users");
+
+            migrationBuilder.DropColumn(name: "lockout_end", table: "users");
+
+            migrationBuilder.DropColumn(name: "normalized_email", table: "users");
+
+            migrationBuilder.DropColumn(name: "normalized_user_name", table: "users");
+
+            migrationBuilder.DropColumn(name: "password_hash", table: "users");
+
+            migrationBuilder.DropColumn(name: "preposition", table: "users");
+
+            migrationBuilder.DropColumn(name: "security_stamp", table: "users");
+
+            migrationBuilder.DropColumn(name: "two_factor_enabled", table: "users");
+
+            migrationBuilder.DropColumn(name: "user_name", table: "users");
+
+            migrationBuilder.AlterColumn<Guid>(
+                name: "id",
+                table: "users",
+                type: "uuid",
+                nullable: false,
+                oldClrType: typeof(string),
+                oldType: "text"
+            );
+
+            migrationBuilder.AddColumn<DateTimeOffset>(
+                name: "created_date",
+                table: "users",
+                type: "timestamp with time zone",
+                nullable: false,
+                defaultValue: new DateTimeOffset(
+                    new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                    new TimeSpan(0, 0, 0, 0, 0)
+                )
+            );
+
+            migrationBuilder.AddColumn<DateTimeOffset>(
+                name: "updated_date",
+                table: "users",
+                type: "timestamp with time zone",
+                nullable: false,
+                defaultValue: new DateTimeOffset(
+                    new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                    new TimeSpan(0, 0, 0, 0, 0)
+                )
             );
         }
     }
