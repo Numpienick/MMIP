@@ -13,15 +13,9 @@ namespace MMIP.Infrastructure.Repositories
             _repository = repository;
         }
 
-        public Task<List<ChallengeCardComponentView>> GetChallengeCardsAsync(
-            int pageNumber,
-            int pageSize
-        )
+        public Task<List<ChallengeCardView>> GetChallengeCardsAsync(int pageNumber, int pageSize)
         {
-            return _repository.GetPagedResponseAsync<ChallengeCardComponentView>(
-                pageNumber,
-                pageSize
-            );
+            return _repository.GetPagedResponseAsync<ChallengeCardView>(pageNumber, pageSize);
         }
     }
 }

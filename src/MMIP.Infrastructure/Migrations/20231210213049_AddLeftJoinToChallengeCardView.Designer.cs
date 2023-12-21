@@ -386,7 +386,7 @@ namespace MMIP.Infrastructure.Migrations
 
                     b.ToTable((string)null);
 
-                    b.ToView("challenge_card_component_view", (string)null);
+                    b.ToView("challenge_card_view", (string)null);
                 });
 
             modelBuilder.Entity("challenge_phases", b =>

@@ -20,7 +20,7 @@
             </MudGrid>
 
             <MudGrid Justify="Justify.FlexStart" Spacing="4">
-                @foreach (var cardData in _allChallenges)
+                @foreach (var cardData in challenges)
                 {
                     <MudItem xs="12" sm="6" md="4" lg="4" xl="3">
                         <ChallengeCardComponent CardData="@cardData"></ChallengeCardComponent>
@@ -43,7 +43,7 @@
 
     public string? SearchTerms { get; set; }
 
-    private List<ChallengeCardComponentView> _allChallenges = new();
+    private List<ChallengeCardView> challenges = new();
     private bool _gotAllChallenges;
 
     protected override async Task OnInitializedAsync()
@@ -54,15 +54,15 @@
 
     private async Task _loadBatch()
     {
-        _allChallenges.AddRange(await _getChallengeCardViews(BatchSize, _allChallenges.Count));
+        challenges.AddRange(await _getChallengeCardViews(BatchSize, challenges.Count));
         StateHasChanged();
     }
 
-    private async Task<IEnumerable<ChallengeCardComponentView>> _getChallengeCardViews(int take, int skip)
+    private async Task<IEnumerable<ChallengeCardView>> _getChallengeCardViews(int take, int skip)
     {
     // TODO: replace with requestcontroller when Whim is done
-        var cards = (await Client.GetFromJsonAsync<IEnumerable<ChallengeCardComponentView>>($"challenges/overview?take={take}&&skip={skip}")
-                     ?? Enumerable.Empty<ChallengeCardComponentView>()).ToList();
+        var cards = await Client.GetFromJsonAsync<List<ChallengeCardView>>($"challenges/overview?take={take}&&skip={skip}")
+                    ?? new List<ChallengeCardView>();
 
         if (cards.Count() < take)
             _gotAllChallenges = true;

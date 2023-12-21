@@ -1,16 +1,17 @@
 using Microsoft.EntityFrameworkCore;
+using MMIP.Application.Interfaces;
 using MMIP.Infrastructure.Context;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Enums;
 
 namespace MMIP.Infrastructure.Seeders.EntitySeeders;
 
-public class ChallengeSeeder : IEntitySeeder<Challenge>
+public class RandomChallengeSeeder : IEntitySeeder<Challenge>
 {
     private readonly ApplicationContext _context;
     private readonly IEntitySeeder<Organization> _organizationSeeder;
 
-    public ChallengeSeeder(
+    public RandomChallengeSeeder(
         ApplicationContext context,
         IEntitySeeder<Organization> organizationSeeder
     )
@@ -22,22 +23,22 @@ public class ChallengeSeeder : IEntitySeeder<Challenge>
     public async Task Seed(int amount = 1)
     {
         var challenges = new List<Challenge>();
-        var rnd = new Random();
+        var random = new Random();
         var visibilityValues = Enum.GetValues<Visibility>();
-        var allOrganizations = (await _getOrganizations(rnd.Next(1, 5))).ToList();
-        var allTags = (await _getTags(rnd.Next(1, 20))).ToArray();
+        var allOrganizations = (await _getOrganizations(random.Next(1, 5))).ToList();
+        var allTags = (await _getTags(random.Next(1, 20))).ToArray();
         var allPhases = (await _getPhases(4)).ToArray();
 
         for (int i = 0; i < amount; i++)
         {
-            var phases = allPhases.Take(rnd.Next(1, allPhases.Length)).ToList();
+            var phases = allPhases.Take(random.Next(1, allPhases.Length)).ToList();
             var visibility = (Visibility)(
-                visibilityValues.GetValue(rnd.Next(visibilityValues.Length))
+                visibilityValues.GetValue(random.Next(visibilityValues.Length))
                 ?? Visibility.VisibleToAll
             );
-            var organizationId = allOrganizations[rnd.Next(allOrganizations.Count)].Id;
-            var currentPhaseId = phases[rnd.Next(phases.Count)].Id;
-            var tags = allTags.Take(rnd.Next(allTags.Length)).ToList();
+            var organizationId = allOrganizations[random.Next(allOrganizations.Count)].Id;
+            var currentPhaseId = phases[random.Next(phases.Count)].Id;
+            var tags = allTags.Take(random.Next(allTags.Length)).ToList();
 
             challenges.Add(
                 new Challenge
@@ -81,7 +82,7 @@ public class ChallengeSeeder : IEntitySeeder<Challenge>
             return tags;
         for (int i = 0; i < amount - tags.Count; i++)
         {
-            tags.Add(new Tag { Value = "Tag " + i });
+            tags.Add(new Tag { Value = "Tag12345681234 " + i });
         }
 
         return tags;

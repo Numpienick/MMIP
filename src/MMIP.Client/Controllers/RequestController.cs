@@ -1,6 +1,7 @@
 ﻿using MMIP.Client.Resources;
 using MMIP.Shared.Entities;
 using MudBlazor;
+using System;
 using System.Net;
 using System.Net.Http.Json;
 
@@ -18,8 +19,26 @@ namespace MMIP.Client.Controllers
             _snackbar = snackbar;
         }
 
-        public async Task Post<TEntity>(string uri, TEntity model)
+        public async Task<List<TEntity>> Get<TEntity>(string uri)
             where TEntity : BaseEntity
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    return response.Content.ReadFromJsonAsync<List<TEntity>>().Result
+                        ?? new List<TEntity>();
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                _snackbar.Add(GetStringStatusCode(ex.StatusCode), Severity.Error);
+            }
+            return new List<TEntity>();
+        }
+
+        public async Task Post<T>(string uri, T model)
         {
             var response = await _httpClient.PostAsJsonAsync(uri, model);
             try
@@ -29,23 +48,22 @@ namespace MMIP.Client.Controllers
             }
             catch (HttpRequestException ex)
             {
-                _snackbar.Add(GetStringStatusCode((HttpStatusCode)ex.StatusCode), Severity.Error);
+                _snackbar.Add(GetStringStatusCode(ex.StatusCode), Severity.Error);
             }
         }
 
-        public string GetStringStatusCode(HttpStatusCode statusCode)
+        public string GetStringStatusCode(HttpStatusCode? statusCode)
         {
-            switch (statusCode)
+            return statusCode switch
             {
-                case HttpStatusCode.NotFound:
-                    return ApplicationResource.Request_NotFound;
-                case HttpStatusCode.ServiceUnavailable:
-                    return ApplicationResource.Request_ServiceUnavailable;
-                case HttpStatusCode.NotAcceptable:
-                case HttpStatusCode.RequestEntityTooLarge:
-                    return ApplicationResource.Request_TooLarge;
-            }
-            return "OK";
+                HttpStatusCode.BadRequest => ApplicationResource.Request_BadRequest,
+                HttpStatusCode.NotFound => ApplicationResource.Request_NotFound,
+                HttpStatusCode.ServiceUnavailable => ApplicationResource.Request_ServiceUnavailable,
+                HttpStatusCode.NotAcceptable => ApplicationResource.Request_TooLarge,
+                HttpStatusCode.RequestEntityTooLarge => ApplicationResource.Request_TooLarge,
+                null => ApplicationResource.Request_ServiceUnavailable,
+                _ => ApplicationResource.Request_Unknown
+            };
         }
     }
 }

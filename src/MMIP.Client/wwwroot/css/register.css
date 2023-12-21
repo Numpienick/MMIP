@@ -1,0 +1,8 @@
+﻿#upload_profile_picture_button_styling {
+  border-radius: 50%;
+  height: 170px;
+}
+
+.upload_button-alignment {
+  text-align: -webkit-center;
+}

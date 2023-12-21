@@ -12,6 +12,7 @@ public static class ServiceCollectionExtensions
         return services
             .AddTransient<ChallengeService>()
             .AddTransient<CommentService>()
+            .AddTransient<UserService>()
             .AddTransient<OrganizationService>();
     }
 
@@ -20,6 +21,7 @@ public static class ServiceCollectionExtensions
         return services
             .AddTransient(typeof(IDataRepository<>), typeof(DataRepository<>))
             .AddTransient<IUnitOfWork, UnitOfWork>()
-            .AddTransient<IChallengeRepository, ChallengeRepository>();
+            .AddTransient<IChallengeRepository, ChallengeRepository>()
+            .AddTransient<ITagRepository, TagRepository>();
     }
 }

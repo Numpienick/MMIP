@@ -10,9 +10,9 @@ namespace MMIP.Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"DROP VIEW public.challenge_card_component_view;");
+            migrationBuilder.Sql(@"DROP VIEW public.challenge_card_view;");
             migrationBuilder.Sql(
-                @"CREATE OR REPLACE VIEW public.challenge_card_component_view
+                @"CREATE OR REPLACE VIEW public.challenge_card_view
 AS SELECT c.id AS challenge_id,
     c.title,
     c.short_description,
@@ -31,9 +31,9 @@ AS SELECT c.id AS challenge_id,
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(@"DROP VIEW public.challenge_card_component_view;");
+            migrationBuilder.Sql(@"DROP VIEW public.challenge_card_view;");
             migrationBuilder.Sql(
-                @"CREATE OR REPLACE VIEW public.challenge_card_component_view
+                @"CREATE OR REPLACE VIEW public.challenge_card_view
 AS SELECT c.id AS challenge_id,
     c.title,
     c.short_description,

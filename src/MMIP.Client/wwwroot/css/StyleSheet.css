@@ -4,6 +4,7 @@
   --secondary-color: #088395;
   --tertiary-color: #35a29f;
   --concluded-color: #eaffe1;
+  --footer-color: #e6e4e3;
 }
 
 h1 {
@@ -22,14 +23,15 @@ h3 {
   font-size: 14px;
 }
 
-p {
+p,
+em {
   color: black;
   font-size: 12px;
 }
 
-em {
-  color: black;
-  font-size: 12px;
+a {
+  text-decoration: underline;
+  color: blue;
 }
 
 body {

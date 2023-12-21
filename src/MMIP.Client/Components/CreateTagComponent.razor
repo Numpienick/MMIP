@@ -1,0 +1,77 @@
+﻿@using MMIP.Shared.Entities
+@using Client.Controllers
+@using System.ComponentModel.DataAnnotations
+@using MMIP.Client.Extensions
+
+@inject RequestController RequestController
+@inject IStringLocalizer<ApplicationResource> Localizer
+
+<MudAutocomplete T="Tag" Label=@Localizer["Add_Tag"] @bind-Value="_tag" Error="_validated.Count > 0" AdornmentIcon="@Icons.Material.Filled.Add" AdornmentColor="Color.Primary" 
+                 SearchFunc="@Search" ToStringFunc="e => e.Value" Variant="Variant.Outlined" ShowProgressIndicator="true" SelectOnClick="true" OnAdornmentClick="AddTag">
+    <NoItemsTemplate>
+        <MudText Align="Align.Center" Class="px-4 py-1">
+            @Localizer["NoItemsFound"]
+        </MudText>
+    </NoItemsTemplate>
+    <ProgressIndicatorInPopoverTemplate>
+        <MudList Clickable="false">
+            <MudListItem>
+                @Localizer["Loading"]
+            </MudListItem>
+        </MudList>
+    </ProgressIndicatorInPopoverTemplate>
+</MudAutocomplete>
+<MudText Typo="Typo.caption" Color="Color.Error">
+    @_validated.FirstOrDefault()?.ErrorMessage
+</MudText>
+<br />
+<div class="d-flex justify-center">
+    <MudChipSet AllClosable=true>
+        @foreach (Tag tag in SelectedTags)
+        {
+            <MudChip OnClose="@(() => RemoveTag(tag.Value))">@tag.Value</MudChip>
+        }
+    </MudChipSet>
+</div>
+
+@code {
+    private Tag _tag = new();
+    [Inject] 
+    private ISnackbar _snackbar { get; set; }
+
+    [Parameter]
+    public List<Tag> SelectedTags { get; set; } = new();
+    [Inject]
+    private ValueValidator _validator { get; set; }
+    private List<ValidationResult> _validated = new();
+
+
+    private async Task<IEnumerable<Tag>> Search(string value)
+    {
+        _validated = new();
+        _tag.Value = value;
+        if (string.IsNullOrEmpty(value))
+            return await RequestController.Get<Tag>("tags"); //TODO: search on all tags
+        return await RequestController.Get<Tag>($"tags/value?value={value}");
+    }
+
+    private void AddTag()
+    {
+        if (!string.IsNullOrEmpty(_tag.Value))
+        {
+            _validated = _validator.Validate(_tag.Value, "Value", typeof(Tag));
+            if (_validated.Count == 0)
+            {
+                SelectedTags.Add(_tag);
+                _tag = new();
+                StateHasChanged();
+            }
+        }
+    }
+
+    private void RemoveTag(string chip)
+    {
+        if (SelectedTags.RemoveAll(tag => tag.Value == chip) > 0)
+            StateHasChanged();
+    }
+}

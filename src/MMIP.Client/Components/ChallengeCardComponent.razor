@@ -8,9 +8,9 @@
     <MudCardMedia Image=@CardData.BannerImagePath Height="100"></MudCardMedia>
     <MudCardContent>
         <h2 class="card-centered-text">@CardData.Title</h2>
-        <div class="d-flex my-4 align-content-center align-center justify-space-between" style="height: 100%; width: 100%;">
-            <h3 class="" style="overflow: hidden; width: 47%">@CardData.OrganizationName</h3>
-            <MudImage ObjectFit="ObjectFit.Cover" Class="" Src="Assets/Img/1600x888.jpg" Style="max-height: 100px; width: 47%"></MudImage>
+        <div class="organization-section d-flex my-4 align-content-center align-center justify-space-between">
+            <h3 class="organization-title">@CardData.OrganizationName</h3>
+            <MudImage ObjectFit="ObjectFit.Cover" Src="Assets/Img/1600x888.jpg" Class="organization-logo"></MudImage>
         </div>
         <p class="mb-4 card-centered-text">@CardData.ShortDescription</p>
         <MudDivider></MudDivider>
@@ -20,7 +20,7 @@
                 {
                     <MudChip Size="Size.Small" Color="Color.Primary">@tag</MudChip>
                 }
-                if (_totalAmountOfTags >= VisibleTagsLimit)
+                if (_totalAmountOfTags > VisibleTagsLimit)
                 {
                     <MudTooltip Arrow="true" Placement="Placement.Bottom" Class="grey lighten-2 icon-tooltip">
                         <ChildContent>
@@ -44,7 +44,7 @@
         private const int VisibleTagsLimit = 5;
 
     [Parameter]
-    public ChallengeCardComponentView CardData { get; set; } = null!;
+    public ChallengeCardView CardData { get; set; } = null!;
 
     private int _totalAmountOfTags;
     private int _amountOfAdditionalTags => _totalAmountOfTags - VisibleTagsLimit;
