@@ -317,9 +317,6 @@
   <data name="Preposition" xml:space="preserve">
 	  <value>Preposition</value>
   </data>
-  <data name="ProfileDescription" xml:space="preserve">
-    <value>Profile description</value>
-  </data>
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>
   </data>
