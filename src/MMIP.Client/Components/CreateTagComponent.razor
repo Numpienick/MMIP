@@ -51,8 +51,8 @@
         _validated = new();
         _tag.Value = value;
         if (string.IsNullOrEmpty(value))
-            return await RequestController.Get<Tag>("tags"); //TODO: search on all tags
-        return await RequestController.Get<Tag>($"tags/value?value={value}");
+            return await RequestController.GetRange<Tag>("tags"); //TODO: search on all tags
+        return await RequestController.GetRange<Tag>($"tags/value?value={value}");
     }
 
     private void AddTag()

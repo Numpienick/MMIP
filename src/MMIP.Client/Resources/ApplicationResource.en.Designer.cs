@@ -78,6 +78,24 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Tag.
+        /// </summary>
+        internal static string Add_Tag {
+            get {
+                return ResourceManager.GetString("Add_Tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I agree with the &lt;a href=&quot;/privacyverklaring&quot;&gt;privacy statement&lt;/a&gt; of MatchMaker..
+        /// </summary>
+        internal static string AgreementPrivacyStatement {
+            get {
+                return ResourceManager.GetString("AgreementPrivacyStatement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comments.
         /// </summary>
         internal static string ChallengeComments {
@@ -195,6 +213,51 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your requested page is not here, meow..
+        /// </summary>
+        internal static string ErrorDescription {
+            get {
+                return ResourceManager.GetString("ErrorDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maybe you ate it or it ran away..
+        /// </summary>
+        internal static string ErrorJoke {
+            get {
+                return ResourceManager.GetString("ErrorJoke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requested item:.
+        /// </summary>
+        internal static string ErrorRequestedItem {
+            get {
+                return ResourceManager.GetString("ErrorRequestedItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uh-oh! Something went wrong..
+        /// </summary>
+        internal static string ErrorTitle {
+            get {
+                return ResourceManager.GetString("ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First name.
+        /// </summary>
+        internal static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot your password?.
         /// </summary>
         internal static string ForgotPassword {
@@ -294,11 +357,38 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go back home.
+        /// </summary>
+        internal static string GoBackHome {
+            get {
+                return ResourceManager.GetString("GoBackHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Innovationplatform.
         /// </summary>
         internal static string Innovationplatform {
             get {
                 return ResourceManager.GetString("Innovationplatform", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name.
+        /// </summary>
+        internal static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        internal static string Loading {
+            get {
+                return ResourceManager.GetString("Loading", resourceCulture);
             }
         }
         
@@ -339,6 +429,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No tags found, add this one or change your search term..
+        /// </summary>
+        internal static string NoItemsFound {
+            get {
+                return ResourceManager.GetString("NoItemsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to other tags.
         /// </summary>
         internal static string OtherTags {
@@ -357,17 +456,72 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;h1&gt;Privacy Statement and Data Protection Policy&lt;/h1&gt;
+        ///   Looks up a localized string similar to Preposition.
+        /// </summary>
+        internal static string Preposition {
+            get {
+                return ResourceManager.GetString("Preposition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
         ///
         ///&lt;h2&gt;1. Introduction&lt;/h2&gt;
-        ///&lt;p&gt;This Privacy Statement and Data Protection Policy (hereinafter referred to as the &quot;Statement&quot;) describes how MatchMaker Innovation Platform (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) collects, uses, discloses, and protects personal data provided by visitors to our website &lt;a href=&quot;https://mm.innovation.io/&quot;&gt;https://mm.innovation.io/&lt;/a&gt; (&quot;the website&quot;).&lt;/p&gt;
+        ///&lt;p&gt;This Privacy Statement and Data Protection Policy (hereinafter referred to as the &quot;Statement&quot;) describes how MatchMaker Innovation Platform (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) collects, uses, discloses, and protects personal data provided by visitors to our website &lt;a href=&quot;https://mm.innovation.io/&quot;&gt;https://mm.innovation.io/&lt;/a&gt; (&quot;the website&quot;).&lt;/p&gt; 
+        ///&lt;br/&gt;
         ///
         ///&lt;h2&gt;2. Collected Data&lt;/h2&gt;
-        ///&lt;p&gt;We collect personal data voluntarily provided by you [rest of string was truncated]&quot;;.
+        ///&lt;p&gt;We collect personal data voluntarily provided by you when filling out forms on our website, such  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string PrivacyDeclaration {
             get {
                 return ResourceManager.GetString("PrivacyDeclaration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacy Statement and Data Protection Policy.
+        /// </summary>
+        internal static string PrivacyPageTitle {
+            get {
+                return ResourceManager.GetString("PrivacyPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string ProfileDescription {
+            get {
+                return ResourceManager.GetString("ProfileDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile photo.
+        /// </summary>
+        internal static string ProfilePicture {
+            get {
+                return ResourceManager.GetString("ProfilePicture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        internal static string ProfileTitle {
+            get {
+                return ResourceManager.GetString("ProfileTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        internal static string Register {
+            get {
+                return ResourceManager.GetString("Register", resourceCulture);
             }
         }
         
@@ -377,6 +531,24 @@ namespace MMIP.Client.Resources {
         internal static string RemainingTags {
             get {
                 return ResourceManager.GetString("RemainingTags", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat password.
+        /// </summary>
+        internal static string RepeatPassword {
+            get {
+                return ResourceManager.GetString("RepeatPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Something went wrong with sending of the data.
+        /// </summary>
+        internal static string Request_BadRequest {
+            get {
+                return ResourceManager.GetString("Request_BadRequest", resourceCulture);
             }
         }
         
@@ -408,6 +580,15 @@ namespace MMIP.Client.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown error.
+        /// </summary>
+        internal static string Request_Unknown {
+            get {
+                return ResourceManager.GetString("Request_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search terms.
         /// </summary>
         internal static string SearchTerms {
@@ -422,6 +603,15 @@ namespace MMIP.Client.Resources {
         internal static string SnackbarInvalid {
             get {
                 return ResourceManager.GetString("SnackbarInvalid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload profile picture.
+        /// </summary>
+        internal static string UploadProfilePicture {
+            get {
+                return ResourceManager.GetString("UploadProfilePicture", resourceCulture);
             }
         }
         

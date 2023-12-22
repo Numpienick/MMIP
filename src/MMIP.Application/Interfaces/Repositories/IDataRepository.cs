@@ -1,9 +1,7 @@
-using MMIP.Shared.Entities;
-
 namespace MMIP.Application.Interfaces.Repositories;
 
 public interface IDataRepository<TEntity>
-    where TEntity : BaseEntity
+    where TEntity : class // TODO: reset back to base entity and make a view repository
 {
     public IQueryable<TEntity> Entities { get; }
 

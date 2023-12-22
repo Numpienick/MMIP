@@ -44,10 +44,6 @@ ul {
   font-size: 12px;
 }
 
-.content {
-  margin: 2%;
-}
-
 .logo-style {
   height: 64px;
 }
@@ -61,4 +57,8 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+#user-avatar {
+  width: 140px;
+  height: 140px;
 }

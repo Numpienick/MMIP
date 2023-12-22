@@ -20,6 +20,7 @@ namespace MMIP.Shared.Entities
         [Required(ErrorMessage = "Een omschrijving is vereist")]
         public string Description { get; set; } = null!;
 
+        public string? FullName { get; set; }
         public string? AvatarPath { get; set; }
         public string? Preposition { get; set; }
     }

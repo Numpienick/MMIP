@@ -17,6 +17,7 @@ public class ApplicationContext : ApiAuthorizationDbContext<User>
     # region entities
 
     public DbSet<Challenge> Challenges { get; set; }
+    public DbSet<CommentType> CommentTypes { get; set; }
     public DbSet<Comment> Comments { get; set; }
     public DbSet<Organization> Organizations { get; set; }
     public DbSet<Sector> Sectors { get; set; }
@@ -29,7 +30,9 @@ public class ApplicationContext : ApiAuthorizationDbContext<User>
 
     #region views
 
-    public DbSet<ChallengeCardView> ChallengeCardComponents { get; set; }
+    public DbSet<ChallengeCardView> ChallengeCardView { get; set; }
+    public DbSet<ChallengeView> ChallengeView { get; set; }
+    public DbSet<CommentView> CommentViews { get; set; }
 
     #endregion
 
@@ -54,6 +57,8 @@ public class ApplicationContext : ApiAuthorizationDbContext<User>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+        # region entities configuration
+
         modelBuilder.ApplyConfiguration(new ChallengeConfiguration());
         modelBuilder.ApplyConfiguration(new TagConfiguration());
         modelBuilder.ApplyConfiguration(new ChallengeCardViewConfiguration());
@@ -61,7 +66,19 @@ public class ApplicationContext : ApiAuthorizationDbContext<User>
         modelBuilder.ApplyConfiguration(new OrganizationConfiguration());
         modelBuilder.ApplyConfiguration(new IndustryConfiguration());
         modelBuilder.ApplyConfiguration(new PhaseConfiguration());
+        modelBuilder.ApplyConfiguration(new CommentTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new CommentConfiguration());
         modelBuilder.ApplyConfiguration(new UserConfiguration());
+
+        #endregion
+
+        # region views configuration
+
+        modelBuilder.ApplyConfiguration(new ChallengeCardViewConfiguration());
+        modelBuilder.ApplyConfiguration(new ChallengeViewConfiguration());
+        modelBuilder.ApplyConfiguration(new CommentViewConfiguration());
+
+        # endregion
     }
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
@@ -69,7 +86,6 @@ public class ApplicationContext : ApiAuthorizationDbContext<User>
         configurationBuilder.Properties<DateTimeOffset>().HaveConversion<DateTimeOffsetConverter>();
         configurationBuilder.Properties<DateTime>().HaveConversion<DateTimeConverter>();
         configurationBuilder.Properties<Visibility>().HaveConversion<EnumConverter<Visibility>>();
-        configurationBuilder.Properties<CommentType>().HaveConversion<EnumConverter<CommentType>>();
     }
 
     #endregion

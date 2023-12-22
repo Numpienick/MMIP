@@ -7,6 +7,8 @@
 @inject RequestController RequestController
 @inject IStringLocalizer<ApplicationResource> Localizer
 
+<PageTitle>MMIP - @Localizer["CreateChallengeTitle"]</PageTitle>
+
 <h1>@Localizer["CreateChallengeTitle"]</h1>
 <MudContainer MaxWidth="MaxWidth.ExtraLarge">
     <MudCard Class="rounded-lg" Elevation="4">
@@ -33,7 +35,7 @@
                         <MudSelect Variant="Variant.Outlined" Label=@Localizer["FormChallengeVisibility"] @bind-Value="_model.ChallengeVisibility" T="Visibility">
                             @foreach (Visibility visibility in Enum.GetValues(typeof(Visibility)))
                             {
-                                <MudSelectItem Value="@_model.ChallengeVisibility" T="Visibility">@EnumExtensions.GetDescriptionAttribute(visibility)</MudSelectItem>
+                                <MudSelectItem Value="@_model.ChallengeVisibility" T="Visibility">@visibility.GetDescriptionAttribute()</MudSelectItem>
                             }
                         </MudSelect>
                     </MudItem>

@@ -18,6 +18,50 @@ public class DefaultsSeeder : IDatabaseSeeder
     {
         await _seedSectors();
         await _seedDefaultOrganization();
+        await _seedDefaultCommentTypes();
+    }
+
+    private async Task _seedDefaultCommentTypes()
+    {
+        var commentTypes = new List<CommentType>()
+        {
+            new()
+            {
+                Name = "Ik heb een vraag!",
+                Description =
+                    "Deze type reactie houdt in dat de gebruiker een vraag heeft over de challenge. De maker van de challenge kan hierbij de gebruiker een mailtje sturen om de vraag te beantwoorden.",
+                IconPath = "Assets/Img/CommentQuestion.png"
+            },
+            new()
+            {
+                Name = "Ik heb feedback!",
+                Description =
+                    "Deze type reactie houdt in dat de gebruiker feedback heeft over de challenge. Feedback kan variëren van typefouten tot missende informatie.",
+                IconPath = "Assets/Img/CommentFeedback.png"
+            },
+            new()
+            {
+                Name = "Ik zou de challenge willen uitvoeren!",
+                Description =
+                    "Deze type reactie houdt in dat de gebruiker zich openstelt om de challenge uit te voeren. De maker van de challenge kan de reactie afvinken en de gebruiker laten weten dat hij of zij is uitgekozen om de challenge uit te voeren.",
+                IconPath = "Assets/Img/CommentParticipation.png"
+            },
+            new()
+            {
+                Name = "Ik heb een idee!",
+                Description =
+                    "Deze type reactie houdt in dat de gebruiker een idee heeft dat bij de challenge past. De maker van de challenge kan goede ideeën afvinken en toevoegen aan de challenge.",
+                IconPath = "Assets/Img/CommentIdea.png"
+            }
+        };
+
+        var duplicates = _context
+            .Set<CommentType>()
+            .Select(ct => ct.Name)
+            .Where(ctName => commentTypes.Select(ct => ct.Name).Contains(ctName));
+
+        await _context.AddRangeAsync(commentTypes.Where(ct => !duplicates.Contains(ct.Name)));
+        await _context.SaveChangesAsync();
     }
 
     private async Task _seedDefaultOrganization()
