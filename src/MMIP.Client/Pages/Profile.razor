@@ -22,7 +22,7 @@
             <h2>@Localizer["ProfileDescription"]</h2>
             @*TODO: implement OrganizationProfile and UserProfile*@
             @* <p>@(CurrentEntity is User ? User.Description : Organization.Description)</p>  *@
-            <p>Ik ben de eigenaar van het Continental Hotel, een luxe hotel dat bekend staat om zijn discretie en service voor de elite. Ik wil graag deelnemen aan het Matchmaker Innovatieplatform om meer innovatie te brengen in mijn bedrijf. Ik ben geïnteresseerd in het ontwikkelen van nieuwe producten en diensten die de veiligheid, het comfort en de beleving van mijn gasten kunnen verbeteren. Ik zoek naar personen die gespecialiseerd zijn in zaken als beveiliging, domotica, kunstmatige intelligentie, biometrie, blockchain en virtual reality. Ik sta open voor samenwerkingen, pilots en investeringen. Als je denkt dat jij een goede match bent voor mijn hotel, neem dan contact met me op via het Matchmaker Innovatieplatform. Ik kijk ernaar uit om van je te horen.</p>
+            <p>@Description</p>
         </MudItem>
 
         <MudItem xs="10" Class="card-centered-text">
@@ -50,6 +50,7 @@
     //TODO: remove if database connected
     public User User = new() { Id = default, FirstName = "John", LastName = "Wick", Description = "Ik bezit interessante vaardigheden die waardevol kunnen zijn voor elk bedrijf." };
     public Organization Organization = new() { Id = new Guid(), CreatedDate = default, UpdatedDate = default, Name = "Continental Hotel", /* Description = "Heel mooi hotel, super discreet, voor al uw verblijven geschikt.", */ Challenges = null };
+    public string Description = "Ik ben de eigenaar van het Continental Hotel, een luxe hotel dat bekend staat om zijn discretie en service voor de elite. Ik wil graag deelnemen aan het Matchmaker Innovatieplatform om meer innovatie te brengen in mijn bedrijf. Ik ben geïnteresseerd in het ontwikkelen van nieuwe producten en diensten die de veiligheid, het comfort en de beleving van mijn gasten kunnen verbeteren. Ik zoek naar personen die gespecialiseerd zijn in zaken als beveiliging, domotica, kunstmatige intelligentie, biometrie, blockchain en virtual reality. Ik sta open voor samenwerkingen, pilots en investeringen. Als je denkt dat jij een goede match bent voor mijn hotel, neem dan contact met me op via het Matchmaker Innovatieplatform. Ik kijk ernaar uit om van je te horen.";
     public Object CurrentEntity;
     private const int PageSize = 6;
     private bool _loadMoreChallenges = false;
