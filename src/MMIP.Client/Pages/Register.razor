@@ -42,11 +42,13 @@
                                     </MudItem>
                                     <MudItem md="4" xs="12">
                                         <h2>@Localizer["Password"]</h2>
-                                        <MudTextField @bind-Value=@_user.Password For="@(() => _user.Password)" Variant="Variant.Outlined" Label=@Localizer["Password"] InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="@showPasswordIconClick" AdornmentAriaLabel="Show password"></MudTextField>
+                                        @* TODO: Use an input model to validate the data https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/security/authentication/identity/sample/WebApp1/Areas/Identity/Pages/Account/Register.cshtml.cs *@
+                                        @* <MudTextField @bind-Value=@_user.Password For="@(() => _user.Password)" Variant="Variant.Outlined" Label=@Localizer["Password"] InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="@showPasswordIconClick" AdornmentAriaLabel="Show password"></MudTextField> *@
                                     </MudItem>
                                     <MudItem md="4" xs="12">
                                         <h2>@Localizer["RepeatPassword"]</h2>
-                                        <MudTextField @bind-Value=@_user.RepeatPassword For="@(() => _user.RepeatPassword)" Variant="Variant.Outlined" Label=@Localizer["RepeatPassword"] InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="@showPasswordIconClick" AdornmentAriaLabel="Show password"></MudTextField>
+                                        @* TODO: Use an input model to validate the data https://github.com/dotnet/AspNetCore.Docs/blob/main/aspnetcore/security/authentication/identity/sample/WebApp1/Areas/Identity/Pages/Account/Register.cshtml.cs *@
+                                        @* <MudTextField @bind-Value=@_user.RepeatPassword For="@(() => _user.RepeatPassword)" Variant="Variant.Outlined" Label=@Localizer["RepeatPassword"] InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="@showPasswordIconClick" AdornmentAriaLabel="Show password"></MudTextField> *@
                                     </MudItem>
                                 </MudGrid>
                             </MudItem>
@@ -115,6 +117,7 @@
 
     private async void _validFormSubmitted(EditContext editContext)
     {
+        // TODO: Use UserManager.CreateAsync("user", "password") to create a user
         await RequestController.Post("users", _user);
         StateHasChanged();
     }

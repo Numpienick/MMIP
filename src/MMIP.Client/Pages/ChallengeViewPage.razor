@@ -2,6 +2,7 @@
 @using MMIP.Shared.Views
 
 @inject IStringLocalizer<ApplicationResource> Localizer
+@inject NavigationManager NavigationManager;
 
 @page "/challenge-view/{ChallengeId:guid}"
 
@@ -67,7 +68,7 @@
                         <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="150"></MudCardMedia>
                     </MudItem>
                     <MudItem md="5">
-                        <h2 class="card-organization-title">@_view?.OrganizationName</h2>
+                        <a href="/profile/organization/@_view?.OrganizationId"><h2 class="card-organization-title">@_view?.OrganizationName</h2></a>
                         <MudDivider Class="mt-2 mb-5"></MudDivider>
                         <h3 class="card-centered-text">@_view?.CreatorName</h3>
                     </MudItem>

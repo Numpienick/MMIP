@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MMIP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20231212133222_AddIdentity")]
-    partial class AddIdentity
+    [Migration("20231222113403_AddFullNameToUser")]
+    partial class AddFullNameToUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -202,119 +202,6 @@ namespace MMIP.Infrastructure.Migrations
                     b.ToTable("PersistedGrants", (string)null);
                 });
 
-            modelBuilder.Entity("MMIP.Infrastructure.Models.Identity.AppUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
-                        .HasColumnName("id");
-
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer")
-                        .HasColumnName("access_failed_count");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("text")
-                        .HasColumnName("concurrency_stamp");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("email");
-
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("email_confirmed");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("lockout_enabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("lockout_end");
-
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("normalized_email");
-
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("normalized_user_name");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("text")
-                        .HasColumnName("password_hash");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("text")
-                        .HasColumnName("phone_number");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean")
-                        .HasColumnName("phone_number_confirmed");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("text")
-                        .HasColumnName("security_stamp");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("two_factor_enabled");
-
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("user_name");
-
-                    b.HasKey("Id")
-                        .HasName("pk_asp_net_users");
-
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
-
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
-
-                    b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("MMIP.Shared.Entities.Branche", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<DateTimeOffset>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<Guid>("SectorId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sector_id");
-
-                    b.Property<DateTimeOffset>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date");
-
-                    b.HasKey("Id")
-                        .HasName("pk_branches");
-
-                    b.HasIndex("SectorId")
-                        .HasDatabaseName("ix_branches_sector_id");
-
-                    b.ToTable("branches", (string)null);
-                });
-
             modelBuilder.Entity("MMIP.Shared.Entities.Challenge", b =>
                 {
                     b.Property<Guid>("Id")
@@ -401,18 +288,27 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<string>("CommentType")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("comment_type");
+                    b.Property<Guid>("ChallengeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("challenge_id");
+
+                    b.Property<Guid>("CommentTypeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("comment_type_id");
 
                     b.Property<bool>("Concluded")
                         .HasColumnType("boolean")
                         .HasColumnName("concluded");
 
                     b.Property<DateTimeOffset>("CreatedDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date");
+                        .HasColumnName("created_date")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<Guid>("CreatorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("creator_id");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -421,13 +317,106 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnName("text");
 
                     b.Property<DateTimeOffset>("UpdatedDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date");
+                        .HasColumnName("updated_date")
+                        .HasDefaultValueSql("NOW()");
 
                     b.HasKey("Id")
                         .HasName("pk_comments");
 
+                    b.HasIndex("ChallengeId")
+                        .HasDatabaseName("ix_comments_challenge_id");
+
+                    b.HasIndex("CommentTypeId")
+                        .HasDatabaseName("ix_comments_comment_type_id");
+
                     b.ToTable("comments", (string)null);
+                });
+
+            modelBuilder.Entity("MMIP.Shared.Entities.CommentType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(254)
+                        .HasColumnType("character varying(254)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("IconPath")
+                        .IsRequired()
+                        .HasMaxLength(254)
+                        .HasColumnType("character varying(254)")
+                        .HasColumnName("icon_path");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)")
+                        .HasColumnName("name");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_date")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.HasKey("Id")
+                        .HasName("pk_comment_types");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("ix_comment_types_name");
+
+                    b.ToTable("comment_types", (string)null);
+                });
+
+            modelBuilder.Entity("MMIP.Shared.Entities.Industry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(254)
+                        .HasColumnType("character varying(254)")
+                        .HasColumnName("name");
+
+                    b.Property<Guid>("SectorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sector_id");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_date")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.HasKey("Id")
+                        .HasName("pk_industries");
+
+                    b.HasIndex("SectorId")
+                        .HasDatabaseName("ix_industries_sector_id");
+
+                    b.ToTable("industries", (string)null);
                 });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Organization", b =>
@@ -438,20 +427,38 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTimeOffset>("CreatedDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date");
+                        .HasColumnName("created_date")
+                        .HasDefaultValueSql("NOW()");
+
+                    b.Property<string>("EnrollmentCode")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .HasColumnType("character varying(8)")
+                        .HasColumnName("enrollment_code");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(128)
+                        .HasColumnType("character varying(128)")
                         .HasColumnName("name");
 
+                    b.Property<Guid>("SectorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sector_id");
+
                     b.Property<DateTimeOffset>("UpdatedDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date");
+                        .HasColumnName("updated_date")
+                        .HasDefaultValueSql("NOW()");
 
                     b.HasKey("Id")
                         .HasName("pk_organizations");
+
+                    b.HasIndex("SectorId")
+                        .HasDatabaseName("ix_organizations_sector_id");
 
                     b.ToTable("organizations", (string)null);
                 });
@@ -464,17 +471,21 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTimeOffset>("CreatedDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date");
+                        .HasColumnName("created_date")
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(254)
+                        .HasColumnType("character varying(254)")
                         .HasColumnName("description");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(24)
+                        .HasColumnType("character varying(24)")
                         .HasColumnName("name");
 
                     b.Property<int>("Order")
@@ -482,8 +493,10 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnName("order");
 
                     b.Property<DateTimeOffset>("UpdatedDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date");
+                        .HasColumnName("updated_date")
+                        .HasDefaultValueSql("NOW()");
 
                     b.HasKey("Id")
                         .HasName("pk_phases");
@@ -499,22 +512,27 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTimeOffset>("CreatedDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date");
+                        .HasColumnName("created_date")
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(254)
+                        .HasColumnType("character varying(254)")
                         .HasColumnName("name");
 
                     b.Property<DateTimeOffset>("UpdatedDate")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date");
+                        .HasColumnName("updated_date")
+                        .HasDefaultValueSql("NOW()");
 
                     b.HasKey("Id")
-                        .HasName("pk_sector");
+                        .HasName("pk_sectors");
 
-                    b.ToTable("sector", (string)null);
+                    b.ToTable("sectors", (string)null);
                 });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Tag", b =>
@@ -552,6 +570,113 @@ namespace MMIP.Infrastructure.Migrations
                     b.ToTable("tags", (string)null);
                 });
 
+            modelBuilder.Entity("MMIP.Shared.Entities.User", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text")
+                        .HasColumnName("id");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("access_failed_count");
+
+                    b.Property<string>("AvatarPath")
+                        .HasMaxLength(254)
+                        .HasColumnType("character varying(254)")
+                        .HasColumnName("avatar_path");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("text")
+                        .HasColumnName("concurrency_stamp");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(100000)
+                        .HasColumnType("character varying(100000)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("email");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("boolean")
+                        .HasColumnName("email_confirmed");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)")
+                        .HasColumnName("first_name");
+
+                    b.Property<string>("FullName")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("text")
+                        .HasColumnName("full_name")
+                        .HasComputedColumnSql("\r\n        CASE\r\n            WHEN preposition IS NOT NULL THEN first_name || ' ' || preposition || ' ' || last_name\r\n            ELSE first_name || ' ' || last_name\r\n        END\r\n    ", true);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)")
+                        .HasColumnName("last_name");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("lockout_enabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("lockout_end");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("normalized_email");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("normalized_user_name");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("text")
+                        .HasColumnName("password_hash");
+
+                    b.Property<string>("Preposition")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("preposition");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("text")
+                        .HasColumnName("security_stamp");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("two_factor_enabled");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("character varying(256)")
+                        .HasColumnName("user_name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_users");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex");
+
+                    b.ToTable("users", (string)null);
+                });
+
             modelBuilder.Entity("MMIP.Shared.Entities.UserGroup", b =>
                 {
                     b.Property<Guid>("Id")
@@ -573,10 +698,6 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<Guid?>("PhaseId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("phase_id");
-
                     b.Property<DateTimeOffset>("UpdatedDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date");
@@ -584,13 +705,10 @@ namespace MMIP.Infrastructure.Migrations
                     b.HasKey("Id")
                         .HasName("pk_user_groups");
 
-                    b.HasIndex("PhaseId")
-                        .HasDatabaseName("ix_user_groups_phase_id");
-
                     b.ToTable("user_groups", (string)null);
                 });
 
-            modelBuilder.Entity("MMIP.Shared.Views.ChallengeCardComponentView", b =>
+            modelBuilder.Entity("MMIP.Shared.Views.ChallengeCardView", b =>
                 {
                     b.Property<string>("BannerImagePath")
                         .IsRequired()
@@ -611,18 +729,113 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("short_description");
 
+                    b.Property<string>("TagsString")
+                        .HasColumnType("text")
+                        .HasColumnName("tags");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("title");
 
-                    b.Property<string>("_tags")
+                    b.ToTable((string)null);
+
+                    b.ToView("challenge_card_view", (string)null);
+                });
+
+            modelBuilder.Entity("MMIP.Shared.Views.ChallengeView", b =>
+                {
+                    b.Property<string>("BannerImagePath")
+                        .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("tags");
+                        .HasColumnName("banner_image_path");
+
+                    b.Property<Guid>("ChallengeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("challenge_id");
+
+                    b.Property<DateTimeOffset>("Deadline")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("deadline");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("FinalReport")
+                        .HasColumnType("text")
+                        .HasColumnName("final_report");
+
+                    b.Property<string>("OrganizationName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("organization_name");
+
+                    b.Property<string>("PhaseName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("phase_name");
+
+                    b.Property<int>("Progress")
+                        .HasColumnType("integer")
+                        .HasColumnName("progress");
+
+                    b.Property<DateTimeOffset>("StartDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("start_date");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("title");
 
                     b.ToTable((string)null);
 
-                    b.ToView("challenge_card_component_view", (string)null);
+                    b.ToView("challenge_view", (string)null);
+                });
+
+            modelBuilder.Entity("MMIP.Shared.Views.CommentView", b =>
+                {
+                    b.Property<Guid>("ChallengeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("challenge_id");
+
+                    b.Property<Guid>("CommentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("comment_id");
+
+                    b.Property<string>("CommentTypeDescription")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("comment_type_description");
+
+                    b.Property<string>("CommentTypeIconPath")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("comment_type_icon_path");
+
+                    b.Property<string>("CommentTypeName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("comment_type_name");
+
+                    b.Property<bool>("Concluded")
+                        .HasColumnType("boolean")
+                        .HasColumnName("concluded");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("text");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("comment_view", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -721,13 +934,11 @@ namespace MMIP.Infrastructure.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasColumnType("text")
                         .HasColumnName("login_provider");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasColumnType("text")
                         .HasColumnName("provider_key");
 
                     b.Property<string>("ProviderDisplayName")
@@ -774,13 +985,11 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnName("user_id");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasColumnType("text")
                         .HasColumnName("login_provider");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("character varying(128)")
+                        .HasColumnType("text")
                         .HasColumnName("name");
 
                     b.Property<string>("Value")
@@ -802,6 +1011,12 @@ namespace MMIP.Infrastructure.Migrations
                     b.Property<Guid>("PhasesId")
                         .HasColumnType("uuid")
                         .HasColumnName("phase_id");
+
+                    b.Property<DateTimeOffset>("EnteredAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("entered_at")
+                        .HasDefaultValueSql("NOW()");
 
                     b.HasKey("ChallengeId", "PhasesId")
                         .HasName("pk_challenge_phases");
@@ -831,16 +1046,23 @@ namespace MMIP.Infrastructure.Migrations
                     b.ToTable("challenge_tags", (string)null);
                 });
 
-            modelBuilder.Entity("MMIP.Shared.Entities.Branche", b =>
+            modelBuilder.Entity("phase_visible_to_user_groups", b =>
                 {
-                    b.HasOne("MMIP.Shared.Entities.Sector", "Sector")
-                        .WithMany()
-                        .HasForeignKey("SectorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_branches_sector_sector_id");
+                    b.Property<Guid>("PhaseId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("phase_id");
 
-                    b.Navigation("Sector");
+                    b.Property<Guid>("VisibleToId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("user_group_id");
+
+                    b.HasKey("PhaseId", "VisibleToId")
+                        .HasName("pk_phase_visible_to_user_groups");
+
+                    b.HasIndex("VisibleToId")
+                        .HasDatabaseName("ix_phase_visible_to_user_groups_visible_to_id");
+
+                    b.ToTable("phase_visible_to_user_groups", (string)null);
                 });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Challenge", b =>
@@ -853,12 +1075,43 @@ namespace MMIP.Infrastructure.Migrations
                         .HasConstraintName("fk_challenges_organizations_organization_id");
                 });
 
-            modelBuilder.Entity("MMIP.Shared.Entities.UserGroup", b =>
+            modelBuilder.Entity("MMIP.Shared.Entities.Comment", b =>
                 {
-                    b.HasOne("MMIP.Shared.Entities.Phase", null)
-                        .WithMany("VisibleTo")
-                        .HasForeignKey("PhaseId")
-                        .HasConstraintName("fk_user_groups_phases_phase_id");
+                    b.HasOne("MMIP.Shared.Entities.Challenge", null)
+                        .WithMany()
+                        .HasForeignKey("ChallengeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_comments_challenges_challenge_id");
+
+                    b.HasOne("MMIP.Shared.Entities.CommentType", null)
+                        .WithMany()
+                        .HasForeignKey("CommentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_comments_comment_types_comment_type_id");
+                });
+
+            modelBuilder.Entity("MMIP.Shared.Entities.Industry", b =>
+                {
+                    b.HasOne("MMIP.Shared.Entities.Sector", "Sector")
+                        .WithMany()
+                        .HasForeignKey("SectorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_industries_sectors_sector_id");
+
+                    b.Navigation("Sector");
+                });
+
+            modelBuilder.Entity("MMIP.Shared.Entities.Organization", b =>
+                {
+                    b.HasOne("MMIP.Shared.Entities.Sector", null)
+                        .WithMany()
+                        .HasForeignKey("SectorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_organizations_sectors_sector_id");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -873,7 +1126,7 @@ namespace MMIP.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("MMIP.Infrastructure.Models.Identity.AppUser", null)
+                    b.HasOne("MMIP.Shared.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -883,7 +1136,7 @@ namespace MMIP.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("MMIP.Infrastructure.Models.Identity.AppUser", null)
+                    b.HasOne("MMIP.Shared.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -900,7 +1153,7 @@ namespace MMIP.Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_asp_net_user_roles_asp_net_roles_role_id");
 
-                    b.HasOne("MMIP.Infrastructure.Models.Identity.AppUser", null)
+                    b.HasOne("MMIP.Shared.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -910,7 +1163,7 @@ namespace MMIP.Infrastructure.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("MMIP.Infrastructure.Models.Identity.AppUser", null)
+                    b.HasOne("MMIP.Shared.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -952,14 +1205,26 @@ namespace MMIP.Infrastructure.Migrations
                         .HasConstraintName("fk_challenge_tags_tags_tags_id");
                 });
 
+            modelBuilder.Entity("phase_visible_to_user_groups", b =>
+                {
+                    b.HasOne("MMIP.Shared.Entities.Phase", null)
+                        .WithMany()
+                        .HasForeignKey("PhaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_phase_visible_to_user_groups_phases_phase_id");
+
+                    b.HasOne("MMIP.Shared.Entities.UserGroup", null)
+                        .WithMany()
+                        .HasForeignKey("VisibleToId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_phase_visible_to_user_groups_user_groups_visible_to_id");
+                });
+
             modelBuilder.Entity("MMIP.Shared.Entities.Organization", b =>
                 {
                     b.Navigation("Challenges");
-                });
-
-            modelBuilder.Entity("MMIP.Shared.Entities.Phase", b =>
-                {
-                    b.Navigation("VisibleTo");
                 });
 #pragma warning restore 612, 618
         }
