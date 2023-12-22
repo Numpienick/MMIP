@@ -1,0 +1,27 @@
+﻿.navmenu-logo {
+  height: inherit;
+}
+
+.mud-appbar {
+  background: var(--primary-color);
+}
+
+#hamburger {
+  height: inherit;
+}
+
+#hamburger > button {
+  color: inherit;
+}
+
+.navmenu-button {
+  text-transform: none;
+}
+
+.nav-link p {
+  color: white;
+}
+
+.mud-popover {
+  background: var(--tertiary-color);
+}

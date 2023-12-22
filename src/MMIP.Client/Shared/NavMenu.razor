@@ -1,40 +1,23 @@
 ﻿@inject IStringLocalizer<ApplicationResource> Localizer
 
-<MudAppBar Fixed="false" Elevation="0" DisableGutters="true" Class="mudblazor-navbar navbar-layout-color">
-    <div class="d-none d-md-flex align-center">
-        <a href="/">
-            <img class="logo-style" src="Assets/Img/MatchmakerLogo.png" alt="MatchMaker logo"/>
-        </a>
-        <div class="align-right">
-            <MudButton Color="Color.Inherit" Href="/challenges-overview">@Localizer["ChallengesPageTitle"]</MudButton>
-            <MudButton Color="Color.Inherit" Href="/login">@Localizer["Login"]</MudButton>
-            <MudButton Color="Color.Inherit" Href="/register">@Localizer["Register"]</MudButton>
-        </div>
+<MudAppBar Fixed="false" Elevation="0" DisableGutters="true" Class="d-flex">
+    <a class="navmenu-logo" href="/">
+        <MudImage Class="navmenu-logo" Src="Assets/Img/MatchmakerLogo.png" Alt="MatchMaker logo"></MudImage>
+    </a>
+    
+    <MudSpacer/>
+    
+    <div class="d-none d-md-flex mr-2">
+        <MudStack Row="true" Spacing="2">
+            <MudButton Class="navmenu-button" Href="/challenges-overview">@Localizer["ChallengesPageTitle"]</MudButton>
+            <MudButton Class="navmenu-button" Href="/login">@Localizer["Login"]</MudButton>
+            <MudButton Class="navmenu-button" Href="/register">@Localizer["Register"]</MudButton>
+        </MudStack>
     </div>
-    @* Makes sure that there is a navbar when it is a smaller screen *@
-    <div class="d-flex d-md-none fixed">
-        <MudExpansionPanels Square="true" Elevation="0" Class="mud-height-full mud-expand-panel-styling">
-            <MudExpansionPanel HideIcon="true" Class="mud-width-full" >
-                <TitleContent>
-                    <div class="d-flex justify-space-between mud-width-full align-center">
-                        <div class="d-flex align-center">
-                            <a href="/">
-                                <img class="logo-style" src="Assets/Img/MatchmakerLogo.png" alt="MatchMaker logo"/>
-                            </a>
-                        </div>
-                        <MudIcon class="nav-hamburger" Icon="@Icons.Material.Filled.Menu" />
-                    </div>
-                </TitleContent>
-                <ChildContent>
-                    <div class=" mx-n6 mudblazor-navbar-expand">
-                        <MudNavMenu>
-                            <MudNavLink Href="/challenges-overview">@Localizer["ChallengesPageTitle"]</MudNavLink>
-                            <MudNavLink Href="/login">@Localizer["Login"]</MudNavLink>
-                            <MudNavLink Href="/register">@Localizer["Register"]</MudNavLink>
-                        </MudNavMenu>
-                    </div>
-                </ChildContent>
-            </MudExpansionPanel>
-        </MudExpansionPanels>
-    </div>
+    
+    <MudMenu id="hamburger" Class="d-md-none" Icon="@Icons.Material.Filled.Menu" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" DisableElevation="false" Size="Size.Medium">
+        <MudMenuItem Class="nav-link" Href="/challenges-overview">@Localizer["ChallengesPageTitle"]</MudMenuItem>
+        <MudMenuItem Class="nav-link" Href="/login">@Localizer["Login"]</MudMenuItem>
+        <MudMenuItem Class="nav-link" Href="/register">@Localizer["Register"]</MudMenuItem>
+    </MudMenu>
 </MudAppBar>
