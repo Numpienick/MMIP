@@ -12,6 +12,7 @@ public class ChallengeView
     public string PhaseName { get; set; } = null!;
     public int Progress { get; set; }
     public string CreatorName { get; set; } = "";
+    public Guid OrganizationId { get; set; }
     public string OrganizationProfilePicturePath { get; set; } = "";
     public string OrganizationName { get; set; } = null!;
 }

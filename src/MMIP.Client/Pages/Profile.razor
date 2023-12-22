@@ -16,7 +16,7 @@
             </MudAvatar>
         </MudItem>
         <MudItem md="10" xs="12" Class="card-centered-text">
-            <h1>@(CurrentEntity is User ? $"{User.FirstName}  {User.LastName}"  : Organization.Name)</h1>
+            <h1>@(CurrentEntity is User ? $"{User.FullName}"  : Organization.Name)</h1>
         </MudItem>
         <MudItem md="10" xs="12" Class="card-centered-text">
             <h2>@Localizer["ProfileDescription"]</h2>

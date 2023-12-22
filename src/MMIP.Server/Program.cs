@@ -1,9 +1,5 @@
 using MMIP.Infrastructure.Extensions;
 using MMIP.Server.Extensions;
-using Duende.IdentityServer.Services;
-using MMIP.Infrastructure.Services;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
