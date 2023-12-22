@@ -6,80 +6,76 @@
 @page "/challenge-view/{ChallengeId:guid}"
 
 <div Width="100%" class="banner-image">
-    <MudImage ObjectPosition="ObjectPosition.Center" ObjectFit="ObjectFit.Fill" Src="@View.BannerImagePath" style="width: 100%; max-height: inherit;"></MudImage>
+    <MudImage ObjectPosition="ObjectPosition.Center" ObjectFit="ObjectFit.Fill" Src="@_view?.BannerImagePath" style="width: 100%; max-height: inherit;"></MudImage>
 </div>
 
-<h1 class="mb-15">@View.Title</h1>
+<h1 class="mb-15">@_view?.Title</h1>
 
-@if (!string.IsNullOrEmpty(View.FinalReport))
+@if (!string.IsNullOrEmpty(_view?.FinalReport))
 {
     <MudGrid Class="mb-8" Justify="Justify.Center">
         <MudItem md="10">
             <MudCard Elevation="4" Class="rounded-lg">
                 <MudCardContent>
                     <h2>@Localizer["ChallengeFinalReport"]</h2>
-                    <p>@View.FinalReport</p>
+                    <p>@_view?.FinalReport</p>
                 </MudCardContent>
             </MudCard>
         </MudItem>
     </MudGrid>
 }
 
-@if (View != null)
-{
-    <MudGrid Class="mb-8" Justify="Justify.Center">
-        <MudItem md="10" Class="justify-center">
-            <MudCard Elevation="4" Class="rounded-lg">
-                <MudCardContent>
-                    <MudGrid Justify="Justify.SpaceBetween">
-                        <MudItem md="4">
-                            <h2 class="card-centered-text mb-2">@Localizer["ChallengeStartDate"]</h2>
-                            <MudDivider Class="mb-3"></MudDivider>
-                            <h3 class="card-centered-text">@View.StartDate.Date.ToString("dd/MM/yyyy")</h3>
-                        </MudItem>
-                        <MudItem md="4">
-                            <h2 class="card-centered-text mb-2">@Localizer["ChallengeDeadline"]</h2>
-                            <MudDivider Class="mb-3"></MudDivider>
-                            <h3 class="card-centered-text">@View.Deadline.ToString("dd/MM/yyyy")</h3>
-                        </MudItem>
-                        <MudItem md="4">
-                            <h2 class="card-centered-text mb-2">@Localizer["ChallengePhase"]</h2>
-                            <MudDivider Class="mb-3"></MudDivider>
-                            <h3 class="card-centered-text">@View.PhaseName</h3>
-                        </MudItem>
-                    </MudGrid>
-                </MudCardContent>
-                <MudCardContent>
-                    <MudProgressLinear Color="Color.Success" Rounded="true" Size="Size.Large" Value="View.Progress" Min="0" Max="100"/>
-                </MudCardContent>
-                <MudCardContent>
-                    <h2 class="mt-4">@Localizer["ChallengeDescription"]</h2>
-                    <p>@View.Description</p>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>
-    </MudGrid>
+<MudGrid Class="mb-8" Justify="Justify.Center">
+    <MudItem md="10" Class="justify-center">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <MudGrid Justify="Justify.SpaceBetween">
+                    <MudItem md="4">
+                        <h2 class="card-centered-text mb-2">@Localizer["ChallengeStartDate"]</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@_view?.StartDate.Date.ToString("dd/MM/yyyy")</h3>
+                    </MudItem>
+                    <MudItem md="4">
+                        <h2 class="card-centered-text mb-2">@Localizer["ChallengeDeadline"]</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@_view?.Deadline.ToString("dd/MM/yyyy")</h3>
+                    </MudItem>
+                    <MudItem md="4">
+                        <h2 class="card-centered-text mb-2">@Localizer["ChallengePhase"]</h2>
+                        <MudDivider Class="mb-3"></MudDivider>
+                        <h3 class="card-centered-text">@_view?.PhaseName</h3>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+            <MudCardContent>
+                <MudProgressLinear Color="Color.Success" Rounded="true" Size="Size.Large" Value="_view?.Progress ?? 0" Min="0" Max="100"/>
+            </MudCardContent>
+            <MudCardContent>
+                <h2 class="mt-4">@Localizer["ChallengeDescription"]</h2>
+                <p>@_view?.Description</p>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
 
-    <MudGrid Class="mb-8" Justify="Justify.Center">
-        <MudItem md="5">
-            <MudCard Elevation="4" Class="rounded-lg">
-                <MudCardContent>
-                    <MudGrid>
-                        <MudItem md="7">
-                            <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="150"></MudCardMedia>
-                        </MudItem>
-                        <MudItem md="5">
-                            @* TODO: create a view *@
-                            <h2 class="card-organization-title">@View.OrganizationName</h2>
-                            <MudDivider Class="mt-2 mb-5"></MudDivider>
-                            <h3 class="card-centered-text">Leander Jelgersma</h3>
-                        </MudItem>
-                    </MudGrid>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>
-    </MudGrid>
-}
+<MudGrid Class="mb-8" Justify="Justify.Center">
+    <MudItem md="5">
+        <MudCard Elevation="4" Class="rounded-lg">
+            <MudCardContent>
+                <MudGrid>
+                    <MudItem md="7">
+                        <MudCardMedia Image="Assets/Img/1600x888.jpg" Height="150"></MudCardMedia>
+                    </MudItem>
+                    <MudItem md="5">
+                        <h2 class="card-organization-title">@_view?.OrganizationName</h2>
+                        <MudDivider Class="mt-2 mb-5"></MudDivider>
+                        <h3 class="card-centered-text">@_view?.CreatorName</h3>
+                    </MudItem>
+                </MudGrid>
+            </MudCardContent>
+        </MudCard>
+    </MudItem>
+</MudGrid>
 
 <MudGrid Justify="Justify.Center">
     <MudItem md="8">
@@ -87,19 +83,19 @@
             <MudCardContent>
                 <h2 class="mb-5">@Localizer["ChallengeComments"]</h2>
                 <EditForm Model="_model" OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted>
-                    <DataAnnotationsValidator />
+                    <DataAnnotationsValidator/>
                     <MudGrid Justify="Justify.Center">
                         <MudItem md="7">
-                            <MudTextField Lines="9" Variant="Variant.Outlined" Label=@Localizer["CreateComment"] @bind-Value="_model.Text" For="@(() => _model.Text)" />
+                            <MudTextField Lines="9" Variant="Variant.Outlined" Label=@Localizer["CreateComment"] @bind-Value="_model.Text" For="@(() => _model.Text)"/>
                         </MudItem>
                         <MudItem md="5">
-@*                             TODO: write logic to get all comment types
- *@@*                             <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormCommentType"] @bind-Value="_model.CommentType" T="CommentType">
-                                @foreach (CommentType commentType in Enum.GetValues(typeof(CommentType)))
-                                {
-                                    <MudSelectItem Value="@commentType" T="CommentType">@commentType.GetCommentTypePropertyValue("Name")</MudSelectItem>
-                                }
-                            </MudSelect> *@
+                            @* TODO: write logic to get all comment types *@
+                            @* <MudSelect Variant="Variant.Outlined" Label=@_localizer["FormCommentType"] @bind-Value="_model.CommentType" T="CommentType"> *@
+                            @*     @foreach (CommentType commentType in Enum.GetValues(typeof(CommentType))) *@
+                            @*     { *@
+                            @*         <MudSelectItem Value="@commentType" T="CommentType">@commentType.GetCommentTypePropertyValue("Name")</MudSelectItem> *@
+                            @*     } *@
+                            @* </MudSelect> *@
                         </MudItem>
                         <MudItem md="6">
                             <MudButton ButtonType="ButtonType.Submit" FullWidth Variant="Variant.Filled" Color="Color.Primary">@Localizer["CreateCommentButton"]</MudButton>
@@ -110,14 +106,14 @@
             <MudDivider Class="mt-6 mb-6" DividerType="DividerType.FullWidth"></MudDivider>
             <MudCardContent>
                 @{
-                    if (Comments.Count == 0)
+                    if (_comments.Count == 0)
                     {
                         <h2 class="card-centered-text">@Localizer["ChallengeNoComments"]</h2>
                     }
 
                     else
                     {
-                        foreach (var comment in Comments)
+                        foreach (var comment in _comments)
                         {
                             <MudGrid Justify="Justify.Center" Class="mb-10">
                                 <UserCommentComponent CommentData="comment"></UserCommentComponent>
@@ -135,17 +131,17 @@
     [Parameter]
     public Guid ChallengeId { get; set; }
 
-    [Inject]
+    [Inject] 
     internal RequestController RequestController { get; set; }
 
-    public ChallengeView? View { get; set; }
-    public List<CommentView> Comments { get; set; }
+    private ChallengeView? _view { get; set; }
+    private List<CommentView> _comments { get; set; } = new();
     private CommentView _model = new();
 
     protected override async Task OnInitializedAsync()
     {
-        Comments = await _getComments();
-        View = await _getView();
+        _comments = await _getComments();
+        _view = await _getView();
         await base.OnInitializedAsync();
     }
 
@@ -154,9 +150,9 @@
         return RequestController.Get<ChallengeView>($"challenges/view?id={ChallengeId}");
     }
 
-    private Task<List<CommentView?>> _getComments()
+    private Task<List<CommentView>> _getComments()
     {
-        return RequestController.Get<List<CommentView>>($"comments/view?id={ChallengeId}");
+        return RequestController.GetRange<CommentView>($"comments/view?id={ChallengeId}");
     }
 
     // TODO: Add posting comment functionality
@@ -172,4 +168,5 @@
         //_snackbar.Add(_localizer["SnackbarInvalid"], Severity.Error);
         StateHasChanged();
     }
+
 }
