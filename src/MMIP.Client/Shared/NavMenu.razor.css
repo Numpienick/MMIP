@@ -1,0 +1,19 @@
+﻿::deep .logo {
+  height: inherit;
+}
+
+::deep .mud-appbar {
+  background: var(--primary-color);
+}
+
+::deep .mud-menu {
+  height: inherit;
+}
+
+::deep .mud-menu > button {
+  color: inherit;
+}
+
+::deep span {
+  text-transform: none;
+}

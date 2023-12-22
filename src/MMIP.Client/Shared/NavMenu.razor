@@ -1,23 +1,25 @@
 ﻿@inject IStringLocalizer<ApplicationResource> Localizer
 
-<MudAppBar Fixed="false" Elevation="0" DisableGutters="true" Class="d-flex">
-    <a class="navmenu-logo" href="/">
-        <MudImage Class="navmenu-logo" Src="Assets/Img/MatchmakerLogo.png" Alt="MatchMaker logo"></MudImage>
-    </a>
-    
-    <MudSpacer/>
-    
-    <div class="d-none d-md-flex mr-2">
-        <MudStack Row="true" Spacing="2">
-            <MudButton Class="navmenu-button" Href="/challenges-overview">@Localizer["ChallengesPageTitle"]</MudButton>
-            <MudButton Class="navmenu-button" Href="/login">@Localizer["Login"]</MudButton>
-            <MudButton Class="navmenu-button" Href="/register">@Localizer["Register"]</MudButton>
-        </MudStack>
-    </div>
-    
-    <MudMenu id="hamburger" Class="d-md-none" Icon="@Icons.Material.Filled.Menu" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" DisableElevation="false" Size="Size.Medium">
-        <MudMenuItem Class="nav-link" Href="/challenges-overview">@Localizer["ChallengesPageTitle"]</MudMenuItem>
-        <MudMenuItem Class="nav-link" Href="/login">@Localizer["Login"]</MudMenuItem>
-        <MudMenuItem Class="nav-link" Href="/register">@Localizer["Register"]</MudMenuItem>
-    </MudMenu>
-</MudAppBar>
+<div>
+    <MudAppBar Fixed="false" Elevation="0" DisableGutters="true" Class="d-flex">
+        <a class="logo" href="/">
+            <MudImage Class="logo" Src="Assets/Img/MatchmakerLogo.png" Alt="MatchMaker logo"></MudImage>
+        </a>
+
+        <MudSpacer/>
+
+        <div class="d-none d-md-flex mr-2">
+            <MudStack Row="true" Spacing="2">
+                <MudButton Href="/challenges-overview">@Localizer["ChallengesPageTitle"]</MudButton>
+                <MudButton Href="/login">@Localizer["Login"]</MudButton>
+                <MudButton Href="/register">@Localizer["Register"]</MudButton>
+            </MudStack>
+        </div>
+
+        <MudMenu Class="d-md-none" Icon="@Icons.Material.Filled.Menu" AnchorOrigin="Origin.BottomRight" TransformOrigin="Origin.TopRight" DisableElevation="false" Size="Size.Medium">
+            <MudMenuItem Href="/challenges-overview">@Localizer["ChallengesPageTitle"]</MudMenuItem>
+            <MudMenuItem Href="/login">@Localizer["Login"]</MudMenuItem>
+            <MudMenuItem Href="/register">@Localizer["Register"]</MudMenuItem>
+        </MudMenu>
+    </MudAppBar>
+</div>
