@@ -3,6 +3,7 @@ using System;
 using MMIP.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MMIP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240104160157_AddChallengeVisibilityToCardView")]
+    partial class AddChallengeVisibilityToCardView
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -716,11 +719,6 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("challenge_id");
 
-                    b.Property<string>("ChallengeVisibility")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("challenge_visibility");
-
                     b.Property<string>("OrganizationName")
                         .IsRequired()
                         .HasColumnType("text")
@@ -768,10 +766,6 @@ namespace MMIP.Infrastructure.Migrations
                     b.Property<string>("FinalReport")
                         .HasColumnType("text")
                         .HasColumnName("final_report");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("organization_id");
 
                     b.Property<string>("OrganizationName")
                         .IsRequired()
