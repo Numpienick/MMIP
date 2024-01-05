@@ -71,6 +71,16 @@ namespace MMIP.Server.Controllers
             return Empty;
         }
 
+        [HttpGet("carousel")]
+        public async Task<IActionResult> GetChallengesCarousel()
+        {
+            var challenges = await _challengeService.GetCarouselAsync();
+            if (challenges.Any())
+                return Ok(challenges);
+
+            return Empty;
+        }
+
         [HttpPatch]
         public static IActionResult UpdateChallenge(Challenge challenge)
         {
