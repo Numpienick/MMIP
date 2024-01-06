@@ -77,12 +77,22 @@ public class DefaultsSeeder : IDatabaseSeeder
             sectorId = await _context.Sectors.Select(s => s.Id).FirstAsync();
         }
 
+        var orgName = "Default Organization";
+        var orgProfile = new OrganizationProfile
+        {
+            OrganizationName = orgName,
+            ProfilePicturePath = $"https://picsum.photos/seed/{new Random().Next(999999)}/400/400",
+            Description = "Default Organization Description",
+            BannerImagePath = "Assets/Img/1600x888.png"
+        };
+
         var org = new Organization
         {
             Id = orgId,
-            Name = "Default Organization",
+            Name = orgName,
             EnrollmentCode = EnrollmentCodeGenerator.GenerateEnrollmentCode(),
-            SectorId = sectorId
+            SectorId = sectorId,
+            Profile = orgProfile,
         };
         await _context.Organizations.AddAsync(org);
         await _context.SaveChangesAsync();
