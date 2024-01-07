@@ -1,7 +1,5 @@
 ﻿using MMIP.Client.Resources;
-using MMIP.Shared.Entities;
 using MudBlazor;
-using System;
 using System.Net;
 using System.Net.Http.Json;
 
@@ -27,8 +25,7 @@ namespace MMIP.Client.Controllers
                 var response = await _httpClient.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
-                    return response.Content.ReadFromJsonAsync<List<TEntity>>().Result
-                        ?? new List<TEntity>();
+                    return await response.Content.ReadFromJsonAsync<List<TEntity>>() ?? new();
                 }
             }
             catch (HttpRequestException ex)
@@ -40,14 +37,13 @@ namespace MMIP.Client.Controllers
         }
 
         public virtual async Task<TEntity?> Get<TEntity>(string uri)
-            where TEntity : class
         {
             try
             {
                 var response = await _httpClient.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
-                    return response.Content.ReadFromJsonAsync<TEntity>().Result;
+                    return await response.Content.ReadFromJsonAsync<TEntity>();
                 }
             }
             catch (HttpRequestException ex)
@@ -55,7 +51,7 @@ namespace MMIP.Client.Controllers
                 _snackbar.Add(GetStringStatusCode(ex.StatusCode), Severity.Error);
             }
 
-            return null;
+            return default;
         }
 
         public async Task Post<T>(string uri, T model)

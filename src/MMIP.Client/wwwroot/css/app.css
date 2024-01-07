@@ -2,6 +2,10 @@ h1:focus {
   outline: none;
 }
 
+.centered-text {
+  text-align: center;
+}
+
 .mud-popover {
   background: var(--tertiary-color);
 }
