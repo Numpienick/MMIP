@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MMIP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240106201835_OrganizationProfileConfiguration")]
+    [Migration("20240107161328_OrganizationProfileConfiguration")]
     partial class OrganizationProfileConfiguration
     {
         /// <inheritdoc />
@@ -1124,7 +1124,7 @@ namespace MMIP.Infrastructure.Migrations
 
             modelBuilder.Entity("MMIP.Shared.Entities.Organization", b =>
                 {
-                    b.HasOne("MMIP.Shared.Entities.Sector", null)
+                    b.HasOne("MMIP.Shared.Entities.Sector", "Sector")
                         .WithMany()
                         .HasForeignKey("SectorId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1137,6 +1137,12 @@ namespace MMIP.Infrastructure.Migrations
                                 .HasColumnType("uuid")
                                 .HasColumnName("id");
 
+                            b1.Property<string>("AvatarPath")
+                                .IsRequired()
+                                .HasMaxLength(254)
+                                .HasColumnType("character varying(254)")
+                                .HasColumnName("profile_avatar_path");
+
                             b1.Property<string>("BannerImagePath")
                                 .IsRequired()
                                 .HasMaxLength(254)
@@ -1144,20 +1150,29 @@ namespace MMIP.Infrastructure.Migrations
                                 .HasColumnName("profile_banner_image_path");
 
                             b1.Property<string>("Description")
+                                .IsRequired()
                                 .HasMaxLength(10000)
                                 .HasColumnType("character varying(10000)")
                                 .HasColumnName("profile_description");
 
-                            b1.Property<string>("OrganizationName")
-                                .IsRequired()
-                                .HasMaxLength(128)
-                                .HasColumnType("character varying(128)")
-                                .HasColumnName("profile_organization_name");
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uuid")
+                                .HasColumnName("profile_id");
 
-                            b1.Property<string>("ProfilePicturePath")
-                                .HasMaxLength(254)
-                                .HasColumnType("character varying(254)")
-                                .HasColumnName("profile_profile_picture_path");
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("profile_name");
+
+                            b1.Property<string>("Sector")
+                                .IsRequired()
+                                .HasColumnType("text")
+                                .HasColumnName("profile_sector");
+
+                            b1.Property<string[]>("Tags")
+                                .IsRequired()
+                                .HasColumnType("text[]")
+                                .HasColumnName("profile_tags");
 
                             b1.HasKey("OrganizationId");
 
@@ -1170,6 +1185,8 @@ namespace MMIP.Infrastructure.Migrations
 
                     b.Navigation("Profile")
                         .IsRequired();
+
+                    b.Navigation("Sector");
                 });
 
             modelBuilder.Entity("MMIP.Shared.Entities.Tag", b =>

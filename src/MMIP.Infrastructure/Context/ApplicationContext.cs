@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using MMIP.Environment;
 using MMIP.Shared.Entities;
 using MMIP.Infrastructure.Context.Configuration.Converters;
-using MMIP.Infrastructure.Context.Configuration.EntityConfiguration;
+using MMIP.Infrastructure.Context.Configuration.EntityConfigurations;
 using MMIP.Infrastructure.Context.Configuration.ViewConfiguration;
 using MMIP.Shared.Enums;
 using MMIP.Shared.Views;

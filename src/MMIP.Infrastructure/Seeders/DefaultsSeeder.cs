@@ -70,28 +70,27 @@ public class DefaultsSeeder : IDatabaseSeeder
         if (await _doesEntityExist<Organization>(orgId))
             return;
 
-        var sectorId = await _context.Sectors.Select(s => s.Id).FirstOrDefaultAsync();
-        if (sectorId == default)
+        var sector = await _context.Sectors.FirstOrDefaultAsync();
+        if (sector == default)
         {
             await _seedSectors();
-            sectorId = await _context.Sectors.Select(s => s.Id).FirstAsync();
+            sector = await _context.Sectors.FirstAsync();
         }
 
-        var orgName = "Default Organization";
         var orgProfile = new OrganizationProfile
         {
-            OrganizationName = orgName,
-            ProfilePicturePath = $"https://picsum.photos/seed/{new Random().Next(999999)}/400/400",
-            Description = "Default Organization Description",
-            BannerImagePath = "Assets/Img/1600x888.png"
+            AvatarPath = $"https://picsum.photos/seed/{new Random().Next(999999)}/400/400",
+            Description =
+                "Default Organization Description Default Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization DescriptionDefault Organization Description",
+            BannerImagePath = $"https://picsum.photos/seed/{new Random().Next(999999)}/1600/888"
         };
 
         var org = new Organization
         {
             Id = orgId,
-            Name = orgName,
+            Name = "Default Organization",
             EnrollmentCode = EnrollmentCodeGenerator.GenerateEnrollmentCode(),
-            SectorId = sectorId,
+            Sector = sector,
             Profile = orgProfile,
         };
         await _context.Organizations.AddAsync(org);
