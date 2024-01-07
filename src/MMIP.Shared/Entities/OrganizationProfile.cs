@@ -1,7 +1,12 @@
 ﻿namespace MMIP.Shared.Entities;
 
-public class OrganizationProfile : BaseProfile
+public class OrganizationProfile : IProfile
 {
-    public string OrganizationName { get; init; } = null!;
-    public string BannerImagePath { get; init; } = null!;
+    public Guid Id { get; init; }
+    public string Name { get; set; } = "";
+    public string BannerImagePath { get; set; } = "";
+    public string Description { get; set; } = "";
+    public string AvatarPath { get; set; } = "";
+    public string Sector { get; set; } = "";
+    public string[] Tags { get; set; } = Array.Empty<string>();
 }

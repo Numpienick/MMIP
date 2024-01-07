@@ -4,7 +4,7 @@
     {
         public string Name { get; set; } = null!;
         public string EnrollmentCode { get; set; } = null!;
-        public Guid SectorId { get; set; }
+        public Sector Sector { get; set; } = null!;
         public OrganizationProfile Profile { get; set; } = null!;
         public List<Challenge> Challenges { get; set; } = new();
         public List<User> Employees { get; set; } = new();

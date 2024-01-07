@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MMIP.Shared.Entities;
 
-namespace MMIP.Infrastructure.Context.Configuration.EntityConfiguration;
+namespace MMIP.Infrastructure.Context.Configuration.EntityConfigurations;
 
 internal class OrganizationConfiguration : BaseEntityConfiguration<Organization>
 {
@@ -14,9 +14,8 @@ internal class OrganizationConfiguration : BaseEntityConfiguration<Organization>
         builder.Property(o => o.Name).IsRequired().HasMaxLength(NameLength);
         builder.Property(o => o.EnrollmentCode).HasMaxLength(8).IsRequired();
         builder
-            .HasOne<Sector>()
+            .HasOne(o => o.Sector)
             .WithMany()
-            .HasForeignKey(o => o.SectorId)
             .IsRequired()
             .OnDelete(DeleteBehavior.Restrict);
 
@@ -24,9 +23,8 @@ internal class OrganizationConfiguration : BaseEntityConfiguration<Organization>
             o => o.Profile,
             profile =>
             {
-                profile.Property(p => p.Description).HasMaxLength(10000);
-                profile.Property(p => p.ProfilePicturePath).HasMaxLength(254);
-                profile.Property(p => p.OrganizationName).HasMaxLength(NameLength);
+                profile.Property(p => p.Description).HasMaxLength(10000).IsRequired();
+                profile.Property(p => p.AvatarPath).HasMaxLength(254);
                 profile.Property(p => p.BannerImagePath).HasMaxLength(254);
             }
         );
