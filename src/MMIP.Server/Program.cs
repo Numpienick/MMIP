@@ -15,6 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddDatabase(false);
 builder.Services.AddEntityServices();
 builder.Services.AddRepositories();
+builder.Services.AddAutoMapperProfiles();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
