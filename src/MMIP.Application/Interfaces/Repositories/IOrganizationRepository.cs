@@ -4,5 +4,5 @@ namespace MMIP.Application.Interfaces.Repositories;
 
 public interface IOrganizationRepository
 {
-    public Task<List<Challenge>> GetChallengesAsync(Guid id);
+    public Task<OrganizationProfile?> GetProfileAsync(Guid id);
 }

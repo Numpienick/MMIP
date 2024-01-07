@@ -25,12 +25,12 @@ namespace MMIP.Infrastructure.Repositories
             int pageSize
         )
         {
-            return _repository.GetPagedResponseAsync<CommentView>(pageNumber, pageSize);
+            return _viewRepository.GetPagedResponseAsync(pageNumber, pageSize);
         }
 
-        public async Task<List<CommentView?>> GetCommentViewAsync(Guid id)
+        public Task<List<CommentView>> GetCommentViewAsync(Guid id)
         {
-            return _viewRepository.Entities.Where(cv => cv.ChallengeId == id).ToList();
+            return _viewRepository.Entities.Where(cv => cv.ChallengeId == id).ToListAsync();
         }
     }
 }

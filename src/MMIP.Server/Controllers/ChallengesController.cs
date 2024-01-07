@@ -65,10 +65,7 @@ namespace MMIP.Server.Controllers
         public async Task<IActionResult> GetChallengesOverview(int take, int skip)
         {
             var view = await _challengeService.GetCardViewsAsync(take, skip);
-            if (view.Any())
-                return Ok(view);
-
-            return Empty;
+            return Ok(view);
         }
 
         [HttpPatch]
