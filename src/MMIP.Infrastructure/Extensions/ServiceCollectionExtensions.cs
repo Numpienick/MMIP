@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MMIP.Application.Interfaces.Repositories;
+using MMIP.Infrastructure.Context.Configuration.EntityConfigurations;
 using MMIP.Infrastructure.Repositories;
 using MMIP.Infrastructure.Services;
 
@@ -26,5 +27,10 @@ public static class ServiceCollectionExtensions
             .AddTransient<ITagRepository, TagRepository>()
             .AddTransient<ICommentRepository, CommentRepository>()
             .AddTransient<IOrganizationRepository, OrganizationRepository>();
+    }
+
+    public static IServiceCollection AddAutoMapperProfiles(this IServiceCollection services)
+    {
+        return services.AddAutoMapper(typeof(OrganizationProfileProfile));
     }
 }
