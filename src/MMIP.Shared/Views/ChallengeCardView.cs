@@ -9,6 +9,7 @@ public class ChallengeCardView
     public string ShortDescription { get; set; } = null!;
     public Visibility ChallengeVisibility { get; set; }
     public string BannerImagePath { get; set; } = null!;
+    public Guid OrganizationId { get; set; }
     public string OrganizationName { get; set; } = null!;
 
     public string[] Tags =>
