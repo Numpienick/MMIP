@@ -114,7 +114,7 @@
 
     private async void _validFormSubmitted(EditContext editContext)
     {
-        await RequestController.Post("users", _user);
+        await RequestController.Post("users/register", _user);
         StateHasChanged();
     }
 

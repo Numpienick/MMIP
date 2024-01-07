@@ -315,7 +315,7 @@
     <value>First name</value>
   </data>
   <data name="Preposition" xml:space="preserve">
-	  <value>Preposition</value>
+    <value>Preposition</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>
@@ -330,7 +330,7 @@
     <value>Upload profile picture</value>
   </data>
   <data name="AgreementPrivacyStatement" xml:space="preserve">
-    <value>I agree with the &lt;a href="/privacyverklaring"&gt;privacy statement&lt;/a&gt; of MatchMaker.</value>
+    <value>I agree with the &lt;a href="/privacyverklaring" target="_blank"&gt;privacy statement&lt;/a&gt; of MatchMaker.</value>
   </data>
   <data name="NoItemsFound" xml:space="preserve">
     <value>No tags found, add this one or change your search term.</value>

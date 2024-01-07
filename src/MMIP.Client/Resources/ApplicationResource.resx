@@ -289,7 +289,7 @@
     <value>Onze visie</value>
   </data>
   <data name="ProfileDescription" xml:space="preserve">
-    <value>Profielbeschrijving</value>
+    <value>Beschrijving</value>
   </data>
   <data name="VisionMatchMakerDescription" xml:space="preserve">
     <value>MatchMaker draagt bij aan een vitaal MKB in Noord-Nederland door te faciliteren in innovatie.</value>
@@ -328,7 +328,7 @@
     <value>Profielfoto uploaden</value>
   </data>
   <data name="AgreementPrivacyStatement" xml:space="preserve">
-    <value>Ik ga akkoord met de &lt;a href="/privacyverklaring"&gt;privacyverklaring&lt;/a&gt; van MatchMaker.</value>
+    <value>Ik ga akkoord met de &lt;a href="/privacyverklaring" target="_blank"&gt;privacyverklaring&lt;/a&gt; van MatchMaker.</value>
   </data>
   <data name="NoItemsFound" xml:space="preserve">
     <value>Geen tags gevonden, voeg deze toe of zoek op iets anders.</value>
@@ -341,9 +341,6 @@
   </data>
   <data name="Request_Unknown" xml:space="preserve">
     <value>Onbekende fout</value>
-  </data>
-  <data name="ProfileDescription" xml:space="preserve">
-    <value>Beschrijving</value>
   </data>
   <data name="ProfileTitle" xml:space="preserve">
     <value>Profiel</value>

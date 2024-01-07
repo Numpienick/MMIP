@@ -10,7 +10,6 @@ namespace MMIP.Server.Controllers
     //[Authorize] // -> To specify that this class requires specific authorization
     //[AllowAnonymous]
     [ApiController]
-    [Route("[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly UserService _userService;
@@ -29,7 +28,7 @@ namespace MMIP.Server.Controllers
         }
 
         [HttpPost]
-        //[AllowAnonymous]
+        [Route("users/register")]
         public async Task<ActionResult<string>> CreateUser([FromBody] UserModel userModel)
         {
             if (userModel.Email != null)
@@ -40,13 +39,28 @@ namespace MMIP.Server.Controllers
             return BadRequest("E-mail is missing");
         }
 
-        //[HttpGet("{email:string}")]
-        //public async Task<IActionResult> GetUser(string email)
-        //{
-        //    var result = await _userService.GetByEmailAsync(email);
-        //    if (result == null)
-        //        return NotFound();
-        //    return Ok(result);
-        //}
+        [HttpPost]
+        [Route("users/login")]
+        public async Task<ActionResult> LoginUser([FromBody] UserModel userModel)
+        {
+            if (userModel.Email != null)
+            {
+                var user = await _userManager.FindByEmailAsync(userModel.Email);
+                if (user != null)
+                {
+                    var test = await _signInManager.PasswordSignInAsync(
+                        user.Email,
+                        userModel.Password,
+                        false,
+                        false
+                    );
+                    if (test.Succeeded)
+                        return Ok("Succesfully logged-in");
+                }
+
+                return BadRequest("E-mail not found");
+            }
+            return BadRequest("E-mail is missing");
+        }
     }
 }

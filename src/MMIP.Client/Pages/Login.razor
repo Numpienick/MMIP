@@ -1,10 +1,6 @@
 ﻿@page "/login"
 @using Microsoft.AspNetCore.Components.Forms
-@using Microsoft.AspNetCore.Http
-@using Microsoft.AspNetCore.Http.Features.Authentication
-@using Microsoft.AspNetCore.Identity
 @using MMIP.Client.Controllers
-@using MMIP.Shared.Entities
 @using MMIP.Shared.Models
 @inject IStringLocalizer<ApplicationResource> Localizer
 @inject RequestController RequestController
@@ -77,9 +73,13 @@
 
     private async void _formSubmitted(EditContext editContext)
     {
-        var test = await RequestController.Get<List<User>>("users");
-        
-        _snackbar.Add(@Localizer["SnackbarInvalid"], Severity.Error);
+        _user.RepeatPassword = _user.Password;
+        _user.Description = "test";
+        _user.FirstName = "test";
+        _user.LastName = "test";
+        _user.AgreedToPrivacy = true;
+        _user.AgreedToPrivacyDateTimeStamp = DateTime.Now;
+        await RequestController.Post("users/login", _user);
         StateHasChanged();
     }
 }
