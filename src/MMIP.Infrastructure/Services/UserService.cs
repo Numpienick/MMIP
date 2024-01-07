@@ -3,35 +3,46 @@ using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
 using MMIP.Infrastructure.Context;
 using MMIP.Shared.Entities;
+using MMIP.Shared.Models;
 
 namespace MMIP.Infrastructure.Services
 {
     public class UserService : IProfileService
     {
-        //// https://stackoverflow.com/questions/63003540/how-do-i-add-end-user-self-registration-to-identityserver/77401550#77401550
-        private readonly ApplicationContext _dbContext;
         private readonly UserManager<User> _userManager;
 
-        public UserService(ApplicationContext dbContext, UserManager<User> userManager)
+        public UserService(UserManager<User> userManager)
         {
-            _dbContext = dbContext;
             _userManager = userManager;
         }
 
-        public async Task<string> CreateUserAsync(User newUser)
+        public async Task<string> CreateUserAsync(UserModel userModel)
         {
-            if (newUser.Email != null && await _userManager.FindByEmailAsync(newUser.Email) == null)
+            if (
+                userModel.Email != null
+                && await _userManager.FindByEmailAsync(userModel.Email) == null
+            )
             {
-                IdentityResult result = await _userManager.CreateAsync(newUser);
+                var user = new User
+                {
+                    Email = userModel.Email,
+                    UserName = userModel.Email,
+                    FirstName = userModel.FirstName,
+                    LastName = userModel.LastName,
+                    Preposition = userModel.Preposition,
+                    Description = userModel.Description,
+                    AvatarPath = userModel.AvatarPath,
+                    AgreedToPrivacy = userModel.AgreedToPrivacy,
+                    AgreedToPrivacyDateTimeStamp = DateTime.Now
+                };
+
+                IdentityResult result = await _userManager.CreateAsync(user, userModel.Password);
 
                 if (result.Succeeded)
                 {
                     return "User is created";
                 }
-                else
-                {
-                    return "There was a problem with the user creation";
-                }
+                return "There was a problem with the user creation";
             }
             return "This E-mail is already being used";
         }

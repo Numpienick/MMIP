@@ -1,8 +1,7 @@
 ﻿@page "/register"
 @using Microsoft.AspNetCore.Components.Forms
 @using MMIP.Client.Controllers
-@using MMIP.Client.Models
-@using MMIP.Shared.Helpers
+@using MMIP.Shared.Models
 @inject RequestController RequestController
 @inject IStringLocalizer<ApplicationResource> Localizer
 
@@ -67,7 +66,7 @@
                             <MudItem md="6"></MudItem> @* For the alignment of the rest of the items in this grid*@
                             <MudItem md="4" xs="12">
                                 @*TODO: check if checkbox is checked*@
-                                <MudCheckBox @bind-Checked="@IsChecked">
+                                <MudCheckBox @bind-Checked="@_user.AgreedToPrivacy">
                                     @((MarkupString)Localizer["AgreementPrivacyStatement"].ToString())
                                 </MudCheckBox>
                             </MudItem>
@@ -88,9 +87,6 @@
     public NavigationManager NavigationManager { get; set; }
     [Inject]
     private ISnackbar _snackbar { get; set; }
-    public bool IsChecked { get; set; }
-    public bool ShowRegistrationErrors { get; set; }
-    public IEnumerable<string> Errors { get; set; }
     #endregion
 
     #region Variables
@@ -118,7 +114,6 @@
 
     private async void _validFormSubmitted(EditContext editContext)
     {
-        _user.PasswordHash = UserPasswordHasher.HashPassword(_user.Password);
         await RequestController.Post("users", _user);
         StateHasChanged();
     }

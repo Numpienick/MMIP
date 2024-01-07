@@ -6,8 +6,6 @@ using MMIP.Client.Extensions;
 using MMIP.Environment;
 using MudBlazor;
 using MudBlazor.Services;
-using MMIP.Shared.Contexts;
-using MMIP.Shared.Entities;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -15,9 +13,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddLocalization();
 
 builder.Services.AddMudServices();
-
-// Was IdentityUser. TODO: check if IdentityUser is replaced with User somewhere in the project
-builder.Services.AddIdentityCore<User>().AddEntityFrameworkStores<ChallengeContext>();
 
 builder.Services.AddScoped(
     _ => new HttpClient { BaseAddress = new Uri(EnvironmentConstants.ApiUrl) }

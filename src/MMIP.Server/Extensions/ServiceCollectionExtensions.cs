@@ -44,6 +44,7 @@ internal static class ServiceCollectionExtensions
             .AddDeveloperSigningCredential();
 
         JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+        services.AddIdentityOptions();
         return services;
     }
 

@@ -4,7 +4,6 @@ using MMIP.Server.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddIdentity();
-builder.Services.AddIdentityOptions();
 
 //Cors
 builder.Services.AddCors(options =>
