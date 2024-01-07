@@ -1,5 +1,13 @@
 ﻿@page "/login"
+@using Microsoft.AspNetCore.Components.Forms
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Features.Authentication
+@using Microsoft.AspNetCore.Identity
+@using MMIP.Client.Controllers
+@using MMIP.Shared.Entities
+@using MMIP.Shared.Models
 @inject IStringLocalizer<ApplicationResource> Localizer
+@inject RequestController RequestController
 
 <PageTitle>MMIP - @Localizer["Login"]</PageTitle>
 
@@ -9,21 +17,19 @@
         <MudCard Elevation="4" Class="rounded-lg">
             <MudCardContent>
                 @*TODO: add functionality to the form*@
-                @* <EditForm Model=@_user OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted> *@
-                    @* <DataAnnotationsValidator/> *@
-                    @*TODO: add bind value with the User class -> replace the T="string"*@
+                <EditForm Model=@_user OnSubmit=@_formSubmitted>
+                    <DataAnnotationsValidator/>
                     <MudItem Class="mb-10 mt-4">
                         <h2 class="alignment-center">@Localizer["E-mail"]</h2>
-                        <MudTextField T="string" Label="@Localizer["E-mail"]" Variant="Variant.Outlined" InputType=InputType.Email></MudTextField>
+                    <MudTextField @bind-Value=@_user.Email Label="@Localizer["E-mail"]" Variant="Variant.Outlined" InputType=InputType.Email></MudTextField>
                     </MudItem>
-                    @*TODO: add bind value with the User class -> replace the T="string"*@
                     <MudItem Class="mb-2">
                         <h2 class="alignment-center">@Localizer["Password"]</h2>
-                        <MudTextField T="string" Label="@Localizer["Password"]" Variant="Variant.Outlined" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="@showPasswordIconClick" AdornmentAriaLabel="Show password"></MudTextField>
+                    <MudTextField @bind-Value=@_user.Password Label="@Localizer["Password"]" Variant="Variant.Outlined" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="@showPasswordIconClick" AdornmentAriaLabel="Show password"></MudTextField>
                     </MudItem>
-                    @*TODO: change the redirect*@
+                    @*TODO: change the redirect to the proper page*@
                     <MudItem Class="mb-10">
-                        <a class="alignment-center" href="/register">
+                        <a class="alignment-center" href="/Error">
                             @Localizer["ForgotPassword"]
                         </a>
                     </MudItem>
@@ -36,16 +42,22 @@
                             @Localizer["NoAccount"]
                         </a>
                     </MudItem>
-                @* </EditForm> *@
+                </EditForm>
             </MudCardContent>
         </MudCard>
     </MudItem>
 </MudGrid>
 
 @code {
+    [Inject]
+    private ISnackbar _snackbar { get; set; }
+
+    #region Variables
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
     private bool _isShown;
+    private UserModel _user = new();
+    #endregion
 
     private void showPasswordIconClick()
     {
@@ -61,5 +73,13 @@
             _passwordInputIcon = Icons.Material.Filled.Visibility;
             _passwordInput = InputType.Text;
         }
+    }
+
+    private async void _formSubmitted(EditContext editContext)
+    {
+        var test = await RequestController.Get<List<User>>("users");
+        
+        _snackbar.Add(@Localizer["SnackbarInvalid"], Severity.Error);
+        StateHasChanged();
     }
 }

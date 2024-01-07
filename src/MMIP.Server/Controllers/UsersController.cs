@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using MMIP.Infrastructure.Services;
+using MMIP.Shared.Entities;
 using MMIP.Shared.Models;
 
 namespace MMIP.Server.Controllers
@@ -12,10 +14,18 @@ namespace MMIP.Server.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UserService _userService;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public UsersController(UserService userService)
+        public UsersController(
+            UserService userService,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager
+        )
         {
             _userService = userService;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         [HttpPost]
@@ -30,11 +40,13 @@ namespace MMIP.Server.Controllers
             return BadRequest("E-mail is missing");
         }
 
-        //private readonly UserManager<User> _userManager;
-
-        //public UserController(UserManager<User> userManager)
+        //[HttpGet("{email:string}")]
+        //public async Task<IActionResult> GetUser(string email)
         //{
-        //    this._userManager = userManager;
+        //    var result = await _userService.GetByEmailAsync(email);
+        //    if (result == null)
+        //        return NotFound();
+        //    return Ok(result);
         //}
     }
 }

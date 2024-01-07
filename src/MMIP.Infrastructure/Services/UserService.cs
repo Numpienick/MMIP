@@ -1,6 +1,7 @@
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
+using MMIP.Application.Interfaces.Repositories;
 using MMIP.Infrastructure.Context;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Models;
@@ -10,10 +11,12 @@ namespace MMIP.Infrastructure.Services
     public class UserService : IProfileService
     {
         private readonly UserManager<User> _userManager;
+        private readonly IUserRepository _repository;
 
-        public UserService(UserManager<User> userManager)
+        public UserService(UserManager<User> userManager, IUserRepository repository)
         {
             _userManager = userManager;
+            _repository = repository;
         }
 
         public async Task<string> CreateUserAsync(UserModel userModel)
@@ -60,5 +63,10 @@ namespace MMIP.Infrastructure.Services
             throw new NotImplementedException();
             //await Task.CompletedTask;
         }
+
+        //public async Task<User?> GetByEmailAsync(string email)
+        //{
+        //    return await _repository.GetUserAsync(email);
+        //}
     }
 }

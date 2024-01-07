@@ -43,6 +43,13 @@ internal static class ServiceCollectionExtensions
             .AddApiAuthorization<User, ApplicationContext>()
             .AddDeveloperSigningCredential();
 
+        //services.ConfigureApplicationCookie(config =>
+        //{
+        //    config.Cookie.Name = "IdentityServer.Cookie";
+        //    config.LoginPath = "/Login";
+        //    config.LogoutPath = "/Logout";
+        //});
+
         JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
         services.AddIdentityOptions();
         return services;
