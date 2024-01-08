@@ -15,7 +15,7 @@ public class StubUnitOfWork : IUnitOfWork
     }
 
     public IDataRepository<TEntity> Repository<TEntity>()
-        where TEntity : BaseEntity
+        where TEntity : class
     {
         if (_repositories.ContainsKey(typeof(TEntity)))
         {
