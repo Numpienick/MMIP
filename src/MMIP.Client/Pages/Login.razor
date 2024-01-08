@@ -48,7 +48,7 @@
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
     private bool _isShown;
-    private UserModel _user = new();
+    private LoginModel _user = new();
     #endregion
 
     private void showPasswordIconClick()
@@ -69,12 +69,6 @@
 
     private async void _formSubmitted(EditContext editContext)
     {
-        _user.RepeatPassword = _user.Password;
-        _user.Description = "test";
-        _user.FirstName = "test";
-        _user.LastName = "test";
-        _user.AgreedToPrivacy = true;
-        _user.AgreedToPrivacyDateTimeStamp = DateTime.Now;
         await RequestController.Post("users/login", _user);
         StateHasChanged();
     }

@@ -37,26 +37,21 @@ namespace MMIP.Server.Controllers
 
         [HttpPost]
         [Route("users/login")]
-        public async Task<ActionResult> LoginUser([FromBody] UserModel userModel)
+        public async Task<ActionResult> LoginUser([FromBody] LoginModel loginModel)
         {
-            if (userModel.Email != null)
+            var user = await _userManager.FindByEmailAsync(loginModel.Email);
+            if (user != null)
             {
-                var user = await _userManager.FindByEmailAsync(userModel.Email);
-                if (user != null)
-                {
-                    var test = await _signInManager.PasswordSignInAsync(
-                        user.Email,
-                        userModel.Password,
-                        false,
-                        false
-                    );
-                    if (test.Succeeded)
-                        return Ok("Succesfully logged-in");
-                }
-
-                return BadRequest("E-mail not found");
+                var test = await _signInManager.PasswordSignInAsync(
+                    user.Email,
+                    loginModel.Password,
+                    false,
+                    false
+                );
+                if (test.Succeeded)
+                    return Ok("Succesfully logged-in");
             }
-            return BadRequest("E-mail is missing");
+            return BadRequest("No existing user found");
         }
     }
 }
