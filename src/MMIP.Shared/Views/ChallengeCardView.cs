@@ -10,6 +10,7 @@ public class ChallengeCardView : ICarouselItem
     public string ShortDescription { get; set; } = null!;
     public Visibility ChallengeVisibility { get; set; }
     public string BannerImagePath { get; set; } = null!;
+    public string? LogoImagePath { get; set; }
     public Guid OrganizationId { get; set; }
     public string OrganizationName { get; set; } = null!;
 
