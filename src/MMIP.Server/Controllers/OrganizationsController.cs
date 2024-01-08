@@ -28,5 +28,12 @@ namespace MMIP.Server.Controllers
 
             return NotFound();
         }
+
+        [HttpGet("carousel")]
+        public async Task<IActionResult> GetCarousel(int take)
+        {
+            var result = await _organizationService.GetCarouselAsync(take);
+            return Ok(result);
+        }
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using MMIP.Application.Interfaces.Repositories;
 using MMIP.Shared.Entities;
+using MMIP.Shared.Enums;
 using MMIP.Shared.Views;
 
 namespace MMIP.Infrastructure.Repositories
@@ -42,6 +43,15 @@ namespace MMIP.Infrastructure.Repositories
                 .Where(cc => cc.OrganizationId == orgId)
                 .Skip(skip)
                 .Take(take)
+                .ToListAsync();
+        }
+
+        public Task<List<ChallengeCardView>> GetCarouselAsync(int take)
+        {
+            return _overviewRepository.Entities
+                .Where(cv => cv.ChallengeVisibility == Visibility.VisibleToAll)
+                .Take(take)
+                .AsNoTracking()
                 .ToListAsync();
         }
     }

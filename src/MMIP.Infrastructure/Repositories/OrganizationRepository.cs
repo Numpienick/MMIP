@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using MMIP.Application.Interfaces.Repositories;
 using MMIP.Shared.Entities;
+using MMIP.Shared.Projections;
 
 namespace MMIP.Infrastructure.Repositories;
 
@@ -27,5 +28,15 @@ internal class OrganizationRepository : IOrganizationRepository
             .ProjectTo<OrganizationProfile>(_mapper.ConfigurationProvider)
             .AsNoTracking()
             .SingleOrDefaultAsync();
+    }
+
+    public Task<List<OrganizationCarouselItemProjection>> GetCarouselAsync(int take)
+    {
+        return _repository.Entities
+            .Include(o => o.Profile)
+            .Take(take)
+            .ProjectTo<OrganizationCarouselItemProjection>(_mapper.ConfigurationProvider)
+            .AsNoTracking()
+            .ToListAsync();
     }
 }

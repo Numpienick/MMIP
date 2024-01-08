@@ -1,13 +1,21 @@
 ﻿@inherits LayoutComponentBase
+@inject IStringLocalizer<ApplicationResource> Localizer
 
 <MudThemeProvider/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
-<MudLayout>
-    <NavMenu/>
-    <MudMainContent>
-        <MudContainer MaxWidth="MaxWidth.ExtraLarge">
-            @Body
-        </MudContainer>
-    </MudMainContent>
-</MudLayout>
+<div>
+    <MudLayout>
+        <NavMenu/>
+        <MudMainContent Class="flex-1 d-flex flex-column">
+            <MudContainer Class="flex-1 d-flex flex-column" MaxWidth="MaxWidth.ExtraLarge">
+                @Body
+            </MudContainer>
+        </MudMainContent>
+        <footer class="mt-16 py-6 px-4">
+            <a href="/privacyverklaring">
+                @Localizer["PrivacyPageTitle"] | 2023
+            </a>
+        </footer>
+    </MudLayout>
+</div>

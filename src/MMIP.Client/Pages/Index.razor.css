@@ -1,0 +1,19 @@
+﻿.mud-nav-link-text {
+  color: white;
+}
+
+::deep .challenge-card-root > .mud-card:hover,
+::deep .carousel-banner:hover {
+  cursor: pointer;
+  box-shadow: var(--mud-elevation-8);
+}
+
+::deep .mud-carousel {
+  min-height: 40em;
+  max-height: 50em;
+}
+
+::deep .mud-carousel-item {
+  display: flex;
+  padding: 2rem 4em;
+}

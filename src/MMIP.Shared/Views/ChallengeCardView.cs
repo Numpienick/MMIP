@@ -1,8 +1,9 @@
 using MMIP.Shared.Enums;
+using MMIP.Shared.Interfaces;
 
 namespace MMIP.Shared.Views;
 
-public class ChallengeCardView
+public class ChallengeCardView : ICarouselItem
 {
     public Guid ChallengeId { get; set; }
     public string Title { get; set; } = null!;

@@ -17,8 +17,8 @@ namespace MMIP.Client.Controllers
             _snackbar = snackbar;
         }
 
+        // TODO: This needs to be remade, empty lists break this for example
         public virtual async Task<List<TEntity>> GetRange<TEntity>(string uri)
-            where TEntity : class
         {
             try
             {

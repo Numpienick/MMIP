@@ -6,6 +6,18 @@ h1:focus {
   text-align: center;
 }
 
+.mud-button {
+  background-color: var(--secondary-color);
+}
+
+.mud-button-label {
+  color: white;
+}
+
+.mud-expand-panel {
+  background-color: var(--primary-color);
+}
+
 .mud-popover {
   background: var(--tertiary-color);
 }

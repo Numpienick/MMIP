@@ -2,6 +2,7 @@ using MMIP.Application.Interfaces.Repositories;
 using MMIP.Infrastructure.Helpers;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Views;
+using MMIP.Shared.Projections;
 
 namespace MMIP.Infrastructure.Services
 {
@@ -35,6 +36,11 @@ namespace MMIP.Infrastructure.Services
         public Task<OrganizationProfile?> GetProfileAsync(Guid id)
         {
             return _repository.GetProfileAsync(id);
+        }
+
+        public Task<List<OrganizationCarouselItemProjection>> GetCarouselAsync(int take)
+        {
+            return _repository.GetCarouselAsync(take);
         }
     }
 }
