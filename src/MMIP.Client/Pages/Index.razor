@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using MMIP.Shared.Views
+@using MMIP.Shared.Projections
 @inject IStringLocalizer<ApplicationResource> Localizer
 
 <PageTitle>MatchMaker @Localizer["Innovationplatform"]</PageTitle>
@@ -7,9 +9,17 @@
 <div class="d-flex flex-1 flex-column">
     <MudGrid Spacing="2" Justify="Justify.Center" Class="flex-initial">
         <MudItem xl="4" lg="5" md="6" sm="10" xs="12">
-            <MudCarousel @ref="_carousel" ItemsSource="_challenges" ShowBullets="false" AutoCycleTime="TimeSpan.FromSeconds(10)">
+            <MudCarousel @ref="_carousel" ItemsSource="_items" ShowBullets="false" AutoCycleTime="TimeSpan.FromSeconds(10)">
                 <ItemTemplate>
-                    <ChallengeCardComponent CardData="@context"/>
+                    @switch (context)
+                    {
+                        case ChallengeCardView cardData:
+                            <ChallengeCardComponent CardData="cardData"/>
+                            break;
+                        case OrganizationCarouselItemProjection projection:
+                            <OrganizationCarouselItem Organization="projection"/>
+                            break;
+                    }
                 </ItemTemplate>
             </MudCarousel>
         </MudItem>

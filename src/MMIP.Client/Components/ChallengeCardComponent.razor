@@ -4,7 +4,7 @@
 @inject IStringLocalizer<ApplicationResource> Localizer;
 @inject NavigationManager NavigationManager;
 
-<div class="root">
+<div class="challenge-card-root">
     <MudCard @onclick="() => _navigateToChallengeView(CardData.ChallengeId)" Elevation="4" Class="flex-auto">
         <MudCardMedia Image=@CardData.BannerImagePath Height="100"></MudCardMedia>
         <MudCardContent Class="d-flex flex-column flex-auto gap-2">
