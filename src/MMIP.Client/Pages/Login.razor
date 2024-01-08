@@ -14,7 +14,7 @@
                     @*TODO: add bind value with the User class -> replace the T="string"*@
                     <MudItem Class="mb-10 mt-4">
                         <h2 class="alignment-center">@Localizer["E-mail"]</h2>
-                        <MudTextField T="string" Label="@Localizer["E-mail"]" Variant="Variant.Outlined" InputType="_emailInput"></MudTextField>
+                        <MudTextField T="string" Label="@Localizer["E-mail"]" Variant="Variant.Outlined" InputType=InputType.Email></MudTextField>
                     </MudItem>
                     @*TODO: add bind value with the User class -> replace the T="string"*@
                     <MudItem Class="mb-2">
@@ -43,11 +43,9 @@
 </MudGrid>
 
 @code {
-    private readonly InputType _emailInput = InputType.Email;
     private InputType _passwordInput = InputType.Password;
-
-    private bool _isShown;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
+    private bool _isShown;
 
     private void showPasswordIconClick()
     {

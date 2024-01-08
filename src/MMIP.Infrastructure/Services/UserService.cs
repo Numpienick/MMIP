@@ -3,43 +3,43 @@ using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
 using MMIP.Infrastructure.Context;
 using MMIP.Shared.Entities;
+using MMIP.Shared.Models;
 
 namespace MMIP.Infrastructure.Services
 {
-    //TODO: Work in progress
     public class UserService : IProfileService
     {
-        //// https://stackoverflow.com/questions/63003540/how-do-i-add-end-user-self-registration-to-identityserver/77401550#77401550
-        private readonly ApplicationContext _dbContext;
         private readonly UserManager<User> _userManager;
 
-        //private readonly IMapper _mapper;
-
-        public UserService(ApplicationContext dbContext, UserManager<User> userManager)
+        public UserService(UserManager<User> userManager)
         {
-            _dbContext = dbContext;
             _userManager = userManager;
-            //_mapper = mapper;
         }
 
-        public async Task<string> CreateUserAsync(User newUser)
+        public async Task<string> CreateUserAsync(UserModel userModel)
         {
-            if (newUser.Email != null && await _userManager.FindByEmailAsync(newUser.Email) == null)
+            if (await _userManager.FindByEmailAsync(userModel.Email) == null)
             {
-                //AppUser appModel = _mapper.Map<AppUser>(newUser);
-                //AppUser newAppUser = _mapper.Map<AppUser>(appModel);
-                //newAppUser.UserName = newUser.UserName;
+                var user = new User
+                {
+                    Email = userModel.Email,
+                    UserName = userModel.Email,
+                    FirstName = userModel.FirstName,
+                    LastName = userModel.LastName,
+                    Preposition = userModel.Preposition,
+                    Description = userModel.Description,
+                    AvatarPath = userModel.AvatarPath,
+                    AgreedToPrivacy = userModel.AgreedToPrivacy,
+                    AgreedToPrivacyOn = DateTimeOffset.Now
+                };
 
-                IdentityResult result = await _userManager.CreateAsync(newUser);
+                IdentityResult result = await _userManager.CreateAsync(user, userModel.Password);
 
                 if (result.Succeeded)
                 {
                     return "User is created";
                 }
-                else
-                {
-                    return "There was a problem with the user creation";
-                }
+                return "There was a problem with the user creation";
             }
             return "This E-mail is already being used";
         }
