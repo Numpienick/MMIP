@@ -1,0 +1,13 @@
+﻿@using MMIP.Shared.Projections
+
+<a class="container d-flex justify-center align-center" href="/profile/organization/@Organization.Id">
+    <MudImage Fluid="true" Elevation="4" Class="carousel-banner rounded-lg" Src="@Organization.ImagePath"/>
+    <div id="text" class="d-flex px-4">
+        <h1>@Organization.Name</h1>
+    </div>
+</a>
+
+@code
+{
+    [Parameter] public OrganizationCarouselItemProjection? Organization { get; set; }
+}

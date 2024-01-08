@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MMIP.Shared.Entities;
 
-namespace MMIP.Infrastructure.Context.Configuration.EntityConfiguration;
+namespace MMIP.Infrastructure.Context.Configuration.EntityConfigurations;
 
 internal class SectorConfiguration : BaseEntityConfiguration<Sector>
 {

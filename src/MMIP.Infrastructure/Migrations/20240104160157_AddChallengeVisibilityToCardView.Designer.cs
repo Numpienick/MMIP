@@ -3,6 +3,7 @@ using System;
 using MMIP.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MMIP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240104160157_AddChallengeVisibilityToCardView")]
+    partial class AddChallengeVisibilityToCardView
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -545,10 +548,6 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnName("created_date")
                         .HasDefaultValueSql("NOW()");
 
-                    b.Property<Guid?>("OrganizationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("organization_id");
-
                     b.Property<DateTimeOffset>("UpdatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
@@ -563,9 +562,6 @@ namespace MMIP.Infrastructure.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_tags");
-
-                    b.HasIndex("OrganizationId")
-                        .HasDatabaseName("ix_tags_organization_id");
 
                     b.HasIndex("Value")
                         .IsUnique()
@@ -583,16 +579,6 @@ namespace MMIP.Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer")
                         .HasColumnName("access_failed_count");
-
-                    b.Property<bool>("AgreedToPrivacy")
-                        .HasColumnType("boolean")
-                        .HasColumnName("agreed_to_privacy");
-
-                    b.Property<DateTimeOffset>("AgreedToPrivacyOn")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("agreed_to_privacy_on")
-                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("AvatarPath")
                         .HasMaxLength(254)
@@ -656,10 +642,6 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("character varying(256)")
                         .HasColumnName("normalized_user_name");
 
-                    b.Property<Guid?>("OrganizationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("organization_id");
-
                     b.Property<string>("PasswordHash")
                         .HasColumnType("text")
                         .HasColumnName("password_hash");
@@ -691,9 +673,6 @@ namespace MMIP.Infrastructure.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
-
-                    b.HasIndex("OrganizationId")
-                        .HasDatabaseName("ix_users_organization_id");
 
                     b.ToTable("users", (string)null);
                 });
@@ -739,15 +718,6 @@ namespace MMIP.Infrastructure.Migrations
                     b.Property<Guid>("ChallengeId")
                         .HasColumnType("uuid")
                         .HasColumnName("challenge_id");
-
-                    b.Property<string>("ChallengeVisibility")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("challenge_visibility");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("organization_id");
 
                     b.Property<string>("OrganizationName")
                         .IsRequired()
@@ -796,10 +766,6 @@ namespace MMIP.Infrastructure.Migrations
                     b.Property<string>("FinalReport")
                         .HasColumnType("text")
                         .HasColumnName("final_report");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("organization_id");
 
                     b.Property<string>("OrganizationName")
                         .IsRequired()
@@ -1140,85 +1106,12 @@ namespace MMIP.Infrastructure.Migrations
 
             modelBuilder.Entity("MMIP.Shared.Entities.Organization", b =>
                 {
-                    b.HasOne("MMIP.Shared.Entities.Sector", "Sector")
+                    b.HasOne("MMIP.Shared.Entities.Sector", null)
                         .WithMany()
                         .HasForeignKey("SectorId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_organizations_sectors_sector_id");
-
-                    b.OwnsOne("MMIP.Shared.Entities.OrganizationProfile", "Profile", b1 =>
-                        {
-                            b1.Property<Guid>("OrganizationId")
-                                .HasColumnType("uuid")
-                                .HasColumnName("id");
-
-                            b1.Property<string>("AvatarPath")
-                                .IsRequired()
-                                .HasMaxLength(254)
-                                .HasColumnType("character varying(254)")
-                                .HasColumnName("profile_avatar_path");
-
-                            b1.Property<string>("BannerImagePath")
-                                .IsRequired()
-                                .HasMaxLength(254)
-                                .HasColumnType("character varying(254)")
-                                .HasColumnName("profile_banner_image_path");
-
-                            b1.Property<string>("Description")
-                                .IsRequired()
-                                .HasMaxLength(10000)
-                                .HasColumnType("character varying(10000)")
-                                .HasColumnName("profile_description");
-
-                            b1.Property<Guid>("Id")
-                                .HasColumnType("uuid")
-                                .HasColumnName("profile_id");
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasColumnType("text")
-                                .HasColumnName("profile_name");
-
-                            b1.Property<string>("Sector")
-                                .IsRequired()
-                                .HasColumnType("text")
-                                .HasColumnName("profile_sector");
-
-                            b1.Property<string[]>("Tags")
-                                .IsRequired()
-                                .HasColumnType("text[]")
-                                .HasColumnName("profile_tags");
-
-                            b1.HasKey("OrganizationId");
-
-                            b1.ToTable("organizations");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrganizationId")
-                                .HasConstraintName("fk_organizations_organizations_id");
-                        });
-
-                    b.Navigation("Profile")
-                        .IsRequired();
-
-                    b.Navigation("Sector");
-                });
-
-            modelBuilder.Entity("MMIP.Shared.Entities.Tag", b =>
-                {
-                    b.HasOne("MMIP.Shared.Entities.Organization", null)
-                        .WithMany("Tags")
-                        .HasForeignKey("OrganizationId")
-                        .HasConstraintName("fk_tags_organizations_organization_id");
-                });
-
-            modelBuilder.Entity("MMIP.Shared.Entities.User", b =>
-                {
-                    b.HasOne("MMIP.Shared.Entities.Organization", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("OrganizationId")
-                        .HasConstraintName("fk_users_organizations_organization_id");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1332,10 +1225,6 @@ namespace MMIP.Infrastructure.Migrations
             modelBuilder.Entity("MMIP.Shared.Entities.Organization", b =>
                 {
                     b.Navigation("Challenges");
-
-                    b.Navigation("Employees");
-
-                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

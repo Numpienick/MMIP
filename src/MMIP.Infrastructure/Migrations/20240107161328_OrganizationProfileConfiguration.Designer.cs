@@ -3,6 +3,7 @@ using System;
 using MMIP.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MMIP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240107161328_OrganizationProfileConfiguration")]
+    partial class OrganizationProfileConfiguration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -584,16 +587,6 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("access_failed_count");
 
-                    b.Property<bool>("AgreedToPrivacy")
-                        .HasColumnType("boolean")
-                        .HasColumnName("agreed_to_privacy");
-
-                    b.Property<DateTimeOffset>("AgreedToPrivacyOn")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("agreed_to_privacy_on")
-                        .HasDefaultValueSql("NOW()");
-
                     b.Property<string>("AvatarPath")
                         .HasMaxLength(254)
                         .HasColumnType("character varying(254)")
@@ -739,15 +732,6 @@ namespace MMIP.Infrastructure.Migrations
                     b.Property<Guid>("ChallengeId")
                         .HasColumnType("uuid")
                         .HasColumnName("challenge_id");
-
-                    b.Property<string>("ChallengeVisibility")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("challenge_visibility");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("organization_id");
 
                     b.Property<string>("OrganizationName")
                         .IsRequired()
