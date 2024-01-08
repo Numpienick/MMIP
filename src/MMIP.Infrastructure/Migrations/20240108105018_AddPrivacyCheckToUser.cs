@@ -16,27 +16,26 @@ namespace MMIP.Infrastructure.Migrations
                 table: "users",
                 type: "boolean",
                 nullable: false,
-                defaultValue: false
-            );
+                defaultValue: false);
 
             migrationBuilder.AddColumn<DateTimeOffset>(
-                name: "agreed_to_privacy_date_time_stamp",
+                name: "agreed_to_privacy_on",
                 table: "users",
                 type: "timestamp with time zone",
                 nullable: false,
-                defaultValue: new DateTimeOffset(
-                    new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                    new TimeSpan(0, 0, 0, 0, 0)
-                )
-            );
+                defaultValueSql: "NOW()");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(name: "agreed_to_privacy", table: "users");
+            migrationBuilder.DropColumn(
+                name: "agreed_to_privacy",
+                table: "users");
 
-            migrationBuilder.DropColumn(name: "agreed_to_privacy_date_time_stamp", table: "users");
+            migrationBuilder.DropColumn(
+                name: "agreed_to_privacy_on",
+                table: "users");
         }
     }
 }

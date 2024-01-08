@@ -18,10 +18,7 @@ namespace MMIP.Infrastructure.Services
 
         public async Task<string> CreateUserAsync(UserModel userModel)
         {
-            if (
-                userModel.Email != null
-                && await _userManager.FindByEmailAsync(userModel.Email) == null
-            )
+            if (await _userManager.FindByEmailAsync(userModel.Email) == null)
             {
                 var user = new User
                 {
@@ -33,7 +30,7 @@ namespace MMIP.Infrastructure.Services
                     Description = userModel.Description,
                     AvatarPath = userModel.AvatarPath,
                     AgreedToPrivacy = userModel.AgreedToPrivacy,
-                    AgreedToPrivacyDateTimeStamp = DateTime.Now
+                    AgreedToPrivacyOn = DateTimeOffset.Now
                 };
 
                 IdentityResult result = await _userManager.CreateAsync(user, userModel.Password);

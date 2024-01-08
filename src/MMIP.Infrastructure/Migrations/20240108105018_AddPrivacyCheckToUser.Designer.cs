@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MMIP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240107153525_AddPrivacyCheckToUser")]
+    [Migration("20240108105018_AddPrivacyCheckToUser")]
     partial class AddPrivacyCheckToUser
     {
         /// <inheritdoc />
@@ -584,9 +584,11 @@ namespace MMIP.Infrastructure.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("agreed_to_privacy");
 
-                    b.Property<DateTimeOffset>("AgreedToPrivacyDateTimeStamp")
+                    b.Property<DateTimeOffset>("AgreedToPrivacyOn")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone")
-                        .HasColumnName("agreed_to_privacy_date_time_stamp");
+                        .HasColumnName("agreed_to_privacy_on")
+                        .HasDefaultValueSql("NOW()");
 
                     b.Property<string>("AvatarPath")
                         .HasMaxLength(254)
