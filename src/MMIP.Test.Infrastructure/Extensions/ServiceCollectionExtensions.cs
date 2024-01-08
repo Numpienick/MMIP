@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MMIP.Application.Interfaces.Repositories;
-using MMIP.Infrastructure.Context;
 using MMIP.Infrastructure.Repositories;
 using MMIP.Infrastructure.Services;
+using MMIP.Test.Infrastructure.Stubs;
 
 namespace MMIP.Test.Infrastructure.Extensions;
 
@@ -14,7 +14,7 @@ internal static class ServiceCollectionExtensions
         string connectionString
     )
     {
-        return services.AddDbContextFactory<ApplicationContext>(
+        return services.AddDbContextFactory<StubApplicationContext>(
             opt =>
                 opt.UseNpgsql(connectionString)
                     .UseSnakeCaseNamingConvention()
@@ -33,8 +33,8 @@ internal static class ServiceCollectionExtensions
     internal static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         return services
-            .AddTransient(typeof(IDataRepository<>), typeof(DataRepository<>))
-            .AddTransient<IUnitOfWork, UnitOfWork>()
+            .AddTransient(typeof(IDataRepository<>), typeof(StubDataRepository<>))
+            .AddTransient<IUnitOfWork, StubUnitOfWork>()
             .AddTransient<IChallengeRepository, ChallengeRepository>();
     }
 }
