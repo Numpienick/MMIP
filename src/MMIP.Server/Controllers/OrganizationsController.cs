@@ -12,14 +12,21 @@ namespace MMIP.Server.Controllers
         public OrganizationsController(OrganizationService organizationService) =>
             _organizationService = organizationService;
 
-        [HttpGet("challenges")]
-        public async Task<IActionResult> GetChallenges(Guid id, int take, int skip)
+        [HttpGet("challenges/overview")]
+        public async Task<IActionResult> GetChallengesOverview(Guid id, int take, int skip)
         {
-            var result = await _organizationService.GetChallenges(id);
-            if (result.Any())
+            var result = await _organizationService.GetChallengesOverviewAsync(id, take, skip);
+            return Ok(result);
+        }
+
+        [HttpGet("profile")]
+        public async Task<IActionResult> GetProfile(Guid id)
+        {
+            var result = await _organizationService.GetProfileAsync(id);
+            if (result is not null)
                 return Ok(result);
 
-            return Empty;
+            return NotFound();
         }
 
         [HttpGet("carousel")]

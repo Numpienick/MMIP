@@ -1,91 +1,73 @@
-﻿@page "/profile/{Entity}/{Id}"
+﻿@page "/profile/{ProfileType}/{EntityId:guid}"
+
 @using MMIP.Shared.Entities
 @using MMIP.Client.Controllers
-@using MMIP.Shared.Views
 
 @inject IStringLocalizer<ApplicationResource> Localizer
 @inject RequestController RequestController;
-@inject NavigationManager NavigationManager;
 
 <PageTitle>MMIP - @Localizer["ProfileTitle"]</PageTitle>
-<MudCard Elevation="4" Class="px-6">
-    <MudGrid Justify="Justify.Center">
-        <MudItem md="2" xs="12" Class="card-centered-text">
-            <MudAvatar id="user-avatar">
-                <MudImage Src="Assets/Img/ProfilePictureTest.jpg"></MudImage>
-            </MudAvatar>
+
+@if (@ProfileData == null)
+    return;
+
+@if (ProfileData is OrganizationProfile organizationProfile)
+{
+    <div Class="d-flex banner px-2 mb-12 justify-center">
+        <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" Class="rounded-lg" Elevation="4" Src=@organizationProfile.BannerImagePath></MudImage>
+    </div>
+}
+<MudCard Elevation="4" Class="px-6 pb-4 mb-6">
+    <MudGrid Justify="Justify.Center" Class="pt-4">
+        <MudItem xs="6" md="3" xl="2" Class="d-flex">
+            <div>
+                <MudAvatar id="avatar">
+                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" Src=@ProfileData.AvatarPath></MudImage>
+                </MudAvatar>
+            </div>
         </MudItem>
-        <MudItem md="10" xs="12" Class="card-centered-text">
-            <h1>@(CurrentEntity is User ? $"{User.FullName}"  : Organization.Name)</h1>
+        <MudItem xs="12" md="6" lg="5" xl="5" Class="d-flex align-center justify-center">
+            <h1>@ProfileData.Name</h1>
         </MudItem>
-        <MudItem md="10" xs="12" Class="card-centered-text">
-            <h2>@Localizer["ProfileDescription"]</h2>
-            @*TODO: implement OrganizationProfile and UserProfile*@
-            @* <p>@(CurrentEntity is User ? User.Description : Organization.Description)</p>  *@
-            <p>@Description</p>
+        <MudItem xs="12">
+            <MudDivider></MudDivider>
+        </MudItem>
+        <MudItem md="10" xs="12" Class="centered-text my-4">
+            <h2 class="mb-2">@Localizer["ProfileDescription"]</h2>
+            <div>
+                <MudPaper Elevation="25" Class="description pa-2 border-double border-8">
+                    <p>@ProfileData.Description</p>
+                </MudPaper>
+            </div>
         </MudItem>
 
-        <MudItem xs="10" Class="card-centered-text">
-            <MudDivider DividerType="DividerType.Middle" Class="my-6" />
-            <h2>Challenges</h2>
-        </MudItem>
-        @if (CurrentEntity is Organization)
+        @if (ProfileData is OrganizationProfile)
         {
-            <MudItem xs="2">
-                <MudButton href="/challenge/create">@Localizer["CreateChallengeTitle"]</MudButton>
+            <MudItem xs="0" md="9" lg="10">
+                <MudSpacer></MudSpacer>
+            </MudItem>
+            <MudItem xs="12" md="3" lg="2" Class="d-flex justify-center">
+                <MudButton Class="py-2" href="/challenge/create">@Localizer["CreateChallengeTitle"]</MudButton>
             </MudItem>
         }
-        <MudGrid Justify="Justify.FlexStart" Spacing="4">
-            @foreach (var cardData in Challenges)
+    </MudGrid>
+    @if (_challenges.Any())
+    {
+        <MudDivider DividerType="DividerType.Middle" Class="my-6"/>
+        <h2 class="centered-text">Challenges</h2>
+        <MudGrid Class="px-2 py-6" Justify="Justify.Center" Spacing="4">
+            @foreach (var cardData in _challenges)
             {
-                <MudItem xs="12" sm="6" md="4" lg="4" xl="3">
+                <MudItem xs="12" sm="10" md="5" lg="4" xl="3">
                     <ChallengeCardComponent CardData="@cardData"></ChallengeCardComponent>
                 </MudItem>
             }
         </MudGrid>
-    </MudGrid>
+        @if (!_gotAllChallenges)
+        {
+            <div id="load-challenges-button" class="d-flex mx-auto mt-6 mb-4">
+                <MudButton FullWidth="true" Class="py-2" @onclick="@_loadChallenges" Variant="Variant.Filled" Color="Color.Inherit">@Localizer["ChallengesLoadMore"]</MudButton>
+            </div>
+        }
+    }
 </MudCard>
-
-@code {
-    //TODO: remove if database connected
-    public User User = new() { Id = default, FirstName = "John", LastName = "Wick", Description = "Ik bezit interessante vaardigheden die waardevol kunnen zijn voor elk bedrijf." };
-    public Organization Organization = new() { Id = new Guid(), CreatedDate = default, UpdatedDate = default, Name = "Continental Hotel", /* Description = "Heel mooi hotel, super discreet, voor al uw verblijven geschikt.", */ Challenges = null };
-    public string Description = "Ik ben de eigenaar van het Continental Hotel, een luxe hotel dat bekend staat om zijn discretie en service voor de elite. Ik wil graag deelnemen aan het Matchmaker Innovatieplatform om meer innovatie te brengen in mijn bedrijf. Ik ben geïnteresseerd in het ontwikkelen van nieuwe producten en diensten die de veiligheid, het comfort en de beleving van mijn gasten kunnen verbeteren. Ik zoek naar personen die gespecialiseerd zijn in zaken als beveiliging, domotica, kunstmatige intelligentie, biometrie, blockchain en virtual reality. Ik sta open voor samenwerkingen, pilots en investeringen. Als je denkt dat jij een goede match bent voor mijn hotel, neem dan contact met me op via het Matchmaker Innovatieplatform. Ik kijk ernaar uit om van je te horen.";
-    public Object CurrentEntity;
-    private const int PageSize = 6;
-    private bool _loadMoreChallenges = false;
-
-    public List<ChallengeCardView> Challenges = new();
-    [Parameter]
-    public string Entity { get; set; }
-    [Parameter]
-    public string Id { get; set; }
-
-
-    protected override async Task OnInitializedAsync()
-    {
-        if (!Entity.ToLower().Equals("user") || string.IsNullOrEmpty(Entity))
-            if (!Entity.ToLower().Equals("organization") || string.IsNullOrEmpty(Entity))
-                NavigationManager.NavigateTo($"/Error/{Entity}", forceLoad: true);
-
-        if (Entity.ToLower().Equals("user"))
-            CurrentEntity = User;
-        else if (Entity.ToLower().Equals("organization"))
-            CurrentEntity = Organization;
-
-        await LoadBatch();
-        await base.OnInitializedAsync();
-    }
-
-    // TODO: Change this to only get 6 from the database each time.
-    public async Task LoadBatch()
-    {
-        Challenges.AddRange(await _getChallengesById());
-    }
-
-    // TODO: Change to take only 6 challanges a time.
-    private async Task<List<ChallengeCardView>> _getChallengesById()
-    {
-        return await RequestController.Get<List<ChallengeCardView>>($"organizations/challenges?id={Id}&&take={PageSize}&&skip={Challenges.Count}");
-    }
-}

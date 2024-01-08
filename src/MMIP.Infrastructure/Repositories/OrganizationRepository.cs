@@ -18,15 +18,16 @@ internal class OrganizationRepository : IOrganizationRepository
         _mapper = mapper;
     }
 
-    public async Task<List<Challenge>> GetChallengesAsync(Guid id)
+    public async Task<OrganizationProfile?> GetProfileAsync(Guid id)
     {
-        var result =
-            await _repository.Entities
-                .Include(o => o.Challenges)
-                .Where(o => o.Id == id)
-                .Select(o => o.Challenges)
-                .SingleOrDefaultAsync() ?? Enumerable.Empty<Challenge>();
-        return result.ToList();
+        return await _repository.Entities
+            .Where(o => o.Id == id)
+            .Include(o => o.Profile)
+            .Include(o => o.Sector)
+            .Include(o => o.Tags)
+            .ProjectTo<OrganizationProfile>(_mapper.ConfigurationProvider)
+            .AsNoTracking()
+            .SingleOrDefaultAsync();
     }
 
     public Task<List<OrganizationCarouselItemProjection>> GetCarouselAsync(int take)
