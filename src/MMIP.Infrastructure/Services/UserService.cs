@@ -1,8 +1,6 @@
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
-using MMIP.Application.Interfaces.Repositories;
-using MMIP.Infrastructure.Context;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Models;
 

@@ -23,7 +23,6 @@ public static class ServiceCollectionExtensions
             .AddTransient(typeof(IDataRepository<>), typeof(DataRepository<>))
             .AddTransient<IUnitOfWork, UnitOfWork>()
             .AddTransient<IChallengeRepository, ChallengeRepository>()
-            .AddTransient<IUserRepository, UserRepository>()
             .AddTransient<ITagRepository, TagRepository>()
             .AddTransient<ICommentRepository, CommentRepository>()
             .AddTransient<IOrganizationRepository, OrganizationRepository>();
