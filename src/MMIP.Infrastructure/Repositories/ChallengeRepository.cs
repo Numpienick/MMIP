@@ -34,10 +34,11 @@ namespace MMIP.Infrastructure.Repositories
             return _viewRepository.Entities.Where(cv => cv.ChallengeId == id).FirstOrDefaultAsync();
         }
 
-        public Task<List<ChallengeCardView>> GetCarouselAsync()
+        public Task<List<ChallengeCardView>> GetCarouselAsync(int take)
         {
             return _cardViewRepository.Entities
                 .Where(cv => cv.ChallengeVisibility == Visibility.VisibleToAll)
+                .Take(take)
                 .AsNoTracking()
                 .ToListAsync();
         }

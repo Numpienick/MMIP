@@ -47,9 +47,9 @@ namespace MMIP.Infrastructure.Services
             return _repository.GetChallengeCardsAsync(pageNumber, take);
         }
 
-        public Task<List<ChallengeCardView>> GetCarouselAsync()
+        public Task<List<ChallengeCardView>> GetCarouselAsync(int take)
         {
-            return _repository.GetCarouselAsync();
+            return _repository.GetCarouselAsync(take);
         }
     }
 }

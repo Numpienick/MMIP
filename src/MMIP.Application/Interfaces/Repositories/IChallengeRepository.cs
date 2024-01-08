@@ -6,5 +6,5 @@ public interface IChallengeRepository
 {
     Task<List<ChallengeCardView>> GetChallengeCardsAsync(int pageNumber, int pageSize);
     Task<ChallengeView?> GetChallengeViewAsync(Guid id);
-    Task<List<ChallengeCardView>> GetCarouselAsync();
+    Task<List<ChallengeCardView>> GetCarouselAsync(int take);
 }

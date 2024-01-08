@@ -72,9 +72,9 @@ namespace MMIP.Server.Controllers
         }
 
         [HttpGet("carousel")]
-        public async Task<IActionResult> GetChallengesCarousel()
+        public async Task<IActionResult> GetChallengesCarousel(int take)
         {
-            var challenges = await _challengeService.GetCarouselAsync();
+            var challenges = await _challengeService.GetCarouselAsync(take);
             if (challenges.Any())
                 return Ok(challenges);
 

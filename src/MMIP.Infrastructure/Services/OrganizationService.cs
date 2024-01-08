@@ -1,6 +1,7 @@
 using MMIP.Application.Interfaces.Repositories;
 using MMIP.Infrastructure.Helpers;
 using MMIP.Shared.Entities;
+using MMIP.Shared.Projections;
 
 namespace MMIP.Infrastructure.Services
 {
@@ -23,6 +24,11 @@ namespace MMIP.Infrastructure.Services
         public Task<List<Challenge>> GetChallenges(Guid id)
         {
             return _repository.GetChallengesAsync(id);
+        }
+
+        public Task<List<OrganizationCarouselItemProjection>> GetCarouselAsync(int take)
+        {
+            return _repository.GetCarouselAsync(take);
         }
     }
 }
