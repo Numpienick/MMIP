@@ -1,5 +1,9 @@
 ﻿@page "/login"
+@using Microsoft.AspNetCore.Components.Forms
+@using MMIP.Client.Controllers
+@using MMIP.Shared.Models
 @inject IStringLocalizer<ApplicationResource> Localizer
+@inject RequestController RequestController
 
 <PageTitle>MMIP - @Localizer["Login"]</PageTitle>
 
@@ -8,35 +12,32 @@
     <MudItem md="6">
         <MudCard Elevation="4" Class="rounded-lg">
             <MudCardContent>
-                @*TODO: add functionality to the form*@
-                @* <EditForm Model=@_user OnValidSubmit=@_validFormSubmitted OnInvalidSubmit=@_invalidFormSubmitted> *@
-                    @* <DataAnnotationsValidator/> *@
-                    @*TODO: add bind value with the User class -> replace the T="string"*@
+                <EditForm Model=@_user OnSubmit=@_formSubmitted>
+                    <DataAnnotationsValidator/>
                     <MudItem Class="mb-10 mt-4">
                         <h2 class="alignment-center">@Localizer["E-mail"]</h2>
-                        <MudTextField T="string" Label="@Localizer["E-mail"]" Variant="Variant.Outlined" InputType=InputType.Email></MudTextField>
+                    <MudTextField @bind-Value=@_user.Email Label="@Localizer["E-mail"]" Variant="Variant.Outlined" InputType=InputType.Email></MudTextField>
                     </MudItem>
-                    @*TODO: add bind value with the User class -> replace the T="string"*@
                     <MudItem Class="mb-2">
                         <h2 class="alignment-center">@Localizer["Password"]</h2>
-                        <MudTextField T="string" Label="@Localizer["Password"]" Variant="Variant.Outlined" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="@showPasswordIconClick" AdornmentAriaLabel="Show password"></MudTextField>
+                    <MudTextField @bind-Value=@_user.Password Label="@Localizer["Password"]" Variant="Variant.Outlined" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="@showPasswordIconClick" AdornmentAriaLabel="Show password"></MudTextField>
                     </MudItem>
                     @*TODO: change the redirect*@
                     <MudItem Class="mb-10">
-                        <a class="alignment-center" href="/register">
+                        <a class="alignment-center" href="/Error">
                             @Localizer["ForgotPassword"]
                         </a>
                     </MudItem>
                     @*TODO: add redirect when there is a successful login*@
-                    <MudItem md="7" Class="mb-10">
-                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer["Login"]</MudButton>
+                    <MudItem md="12" Class="mb-10 d-flex justify-center">
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="d-flex" justify-end>@Localizer["Login"]</MudButton>
                     </MudItem>
                     <MudItem>
                         <a class="alignment-center" href="/register">
                             @Localizer["NoAccount"]
                         </a>
                     </MudItem>
-                @* </EditForm> *@
+                </EditForm>
             </MudCardContent>
         </MudCard>
     </MudItem>
@@ -46,6 +47,7 @@
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
     private bool _isShown;
+    private LoginModel _user = new();
 
     private void showPasswordIconClick()
     {
@@ -61,5 +63,11 @@
             _passwordInputIcon = Icons.Material.Filled.Visibility;
             _passwordInput = InputType.Text;
         }
+    }
+
+    private async void _formSubmitted(EditContext editContext)
+    {
+        await RequestController.Post("users/login", _user);
+        StateHasChanged();
     }
 }

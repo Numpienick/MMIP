@@ -39,6 +39,7 @@ internal static class ApplicationBuilderExtensions
 
     internal static IApplicationBuilder UseIdentityServices(this IApplicationBuilder app)
     {
+        app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax, });
         return app.UseIdentityServer().UseAuthentication().UseAuthorization();
     }
 }

@@ -65,7 +65,6 @@
                         <MudGrid>
                             <MudItem md="6"></MudItem> @* For the alignment of the rest of the items in this grid*@
                             <MudItem md="4" xs="12">
-                                @*TODO: check if checkbox is checked*@
                                 <MudCheckBox @bind-Checked="@_user.AgreedToPrivacy">
                                     @((MarkupString)Localizer["AgreementPrivacyStatement"].ToString())
                                 </MudCheckBox>
@@ -114,7 +113,7 @@
 
     private async void _validFormSubmitted(EditContext editContext)
     {
-        await RequestController.Post("users", _user);
+        await RequestController.Post("users/register", _user);
         StateHasChanged();
     }
 

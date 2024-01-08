@@ -1,7 +1,6 @@
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
-using MMIP.Infrastructure.Context;
 using MMIP.Shared.Entities;
 using MMIP.Shared.Models;
 
@@ -44,18 +43,14 @@ namespace MMIP.Infrastructure.Services
             return "This E-mail is already being used";
         }
 
-        public async Task GetProfileDataAsync(ProfileDataRequestContext context)
+        public Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
             throw new NotImplementedException();
-            //var nameClaim = context.Subject.FindAll(JwtClaimTypes.Name);
-
-            //await Task.CompletedTask;
         }
 
-        public async Task IsActiveAsync(IsActiveContext context)
+        public Task IsActiveAsync(IsActiveContext context)
         {
             throw new NotImplementedException();
-            //await Task.CompletedTask;
         }
     }
 }
