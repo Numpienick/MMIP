@@ -20,14 +20,14 @@ AS SELECT c.id AS challenge_id,
     c.banner_image_path,
     c.challenge_visibility,
     c.organization_id,
-    o.profile_avatar_path,
+    o.profile_avatar_path AS logo_image_path,
     o.name AS organization_name,
     string_agg(t.value::text, ';'::text) AS tags
    FROM challenges c
     LEFT JOIN organizations o ON c.organization_id = o.id
     LEFT JOIN challenge_tags ct ON c.id = ct.challenge_id
     LEFT JOIN tags t ON ct.tag_id = t.id
-  GROUP BY c.id, c.title, c.short_description, c.banner_image_path, c.challenge_visibility, c.organization_id, o.profile_avatar_path, o.name
+  GROUP BY c.id, c.title, c.short_description, c.banner_image_path, c.challenge_visibility, c.organization_id, logo_image_path, o.name
   ORDER BY c.created_date DESC;"
             );
         }
