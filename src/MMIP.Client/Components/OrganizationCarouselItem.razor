@@ -1,11 +1,11 @@
 ﻿@using MMIP.Shared.Projections
 
-<div class="d-flex align-center">
-    <MudImage Fluid="true" Elevation="4" Class="carousel-banner rounded-lg" Src="@Organization.ImagePath"></MudImage>
-    <a href="/profile/organization/@Organization.Id">
+<a class="container d-flex justify-center align-center" href="/profile/organization/@Organization.Id">
+    <MudImage Fluid="true" Elevation="4" Class="carousel-banner rounded-lg" Src="@Organization.ImagePath"/>
+    <div id="text" class="d-flex px-4">
         <h1>@Organization.Name</h1>
-    </a>
-</div>
+    </div>
+</a>
 
 @code
 {
