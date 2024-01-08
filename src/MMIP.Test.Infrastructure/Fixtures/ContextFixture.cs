@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using MMIP.Infrastructure.Context;
 using MMIP.Test.Infrastructure.Extensions;
+using MMIP.Test.Infrastructure.Stubs;
 
 namespace MMIP.Test.Infrastructure.Fixtures;
 
@@ -44,8 +44,8 @@ public class ContextFixture : IDisposable
         context.Database.EnsureCreated();
     }
 
-    public IDbContextFactory<ApplicationContext> GetContextFactory() =>
-        _provider.GetRequiredService<IDbContextFactory<ApplicationContext>>();
+    public IDbContextFactory<StubApplicationContext> GetContextFactory() =>
+        _provider.GetRequiredService<IDbContextFactory<StubApplicationContext>>();
 
     public void Dispose()
     {

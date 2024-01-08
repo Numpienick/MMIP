@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MMIP.Infrastructure.Services;
-using MMIP.Shared.Entities;
+using MMIP.Shared.Models;
 
 namespace MMIP.Server.Controllers
 {
@@ -22,11 +20,11 @@ namespace MMIP.Server.Controllers
 
         [HttpPost]
         //[AllowAnonymous]
-        public async Task<ActionResult<string>> CreateUser([FromBody] User newUser)
+        public async Task<ActionResult<string>> CreateUser([FromBody] UserModel userModel)
         {
-            if (newUser.Email != null)
+            if (userModel.Email != null)
             {
-                string result = await _userService.CreateUserAsync(newUser);
+                string result = await _userService.CreateUserAsync(userModel);
                 return Ok(result);
             }
             return BadRequest("E-mail is missing");

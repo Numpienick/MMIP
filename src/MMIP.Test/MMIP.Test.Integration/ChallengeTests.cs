@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MMIP.Infrastructure.Services;
+using MMIP.Test.Infrastructure.Stubs;
 
 namespace MMIP.Test.Integration;
 
@@ -7,7 +8,7 @@ namespace MMIP.Test.Integration;
 public class ChallengeTests
 {
     private readonly ContextFixture _fixture;
-    private readonly IDbContextFactory<ApplicationContext> _contextFactory;
+    private readonly IDbContextFactory<StubApplicationContext> _contextFactory;
     private readonly ChallengesController _controller;
 
     public ChallengeTests(ContextFixture fixture)

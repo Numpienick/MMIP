@@ -11,9 +11,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.ToTable("users");
         builder.Property(u => u.FirstName).HasMaxLength(60).IsRequired();
         builder.Property(u => u.LastName).HasMaxLength(60).IsRequired();
+        builder.Property(u => u.Email).HasMaxLength(256).IsRequired();
         builder.Property(u => u.Description).HasMaxLength(100000).IsRequired();
         builder.Property(u => u.AvatarPath).HasMaxLength(254);
         builder.Property(u => u.Preposition).HasMaxLength(50);
+        builder.Property(u => u.AgreedToPrivacy).IsRequired();
+        builder.Property(u => u.AgreedToPrivacyOn).HasDefaultValueSql("NOW()");
         builder
             .Property(u => u.FullName)
             .HasComputedColumnSql(
