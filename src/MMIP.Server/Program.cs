@@ -31,8 +31,6 @@ if (app.Environment.IsDevelopment())
     app.UseMigrationsEndPoint();
 }
 
-app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax, });
-
 app.UseHttpsRedirection();
 
 app.UseCors();

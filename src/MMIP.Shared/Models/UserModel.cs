@@ -43,6 +43,5 @@ namespace MMIP.Shared.Models
             ErrorMessage = "Acceptatie van de voorwaarden is verplicht"
         )]
         public bool AgreedToPrivacy { get; set; }
-        public DateTime? AgreedToPrivacyDateTimeStamp { get; set; }
     }
 }

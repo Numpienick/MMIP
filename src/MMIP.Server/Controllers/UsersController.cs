@@ -42,13 +42,13 @@ namespace MMIP.Server.Controllers
             var user = await _userManager.FindByEmailAsync(loginModel.Email);
             if (user != null)
             {
-                var test = await _signInManager.PasswordSignInAsync(
+                var signInResult = await _signInManager.PasswordSignInAsync(
                     user.Email,
                     loginModel.Password,
                     false,
                     false
                 );
-                if (test.Succeeded)
+                if (signInResult.Succeeded)
                     return Ok("Succesfully logged-in");
             }
             return BadRequest("No existing user found");

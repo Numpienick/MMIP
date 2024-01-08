@@ -29,8 +29,8 @@
                         </a>
                     </MudItem>
                     @*TODO: add redirect when there is a successful login*@
-                    <MudItem md="7" Class="mb-10">
-                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto d-flex" justify-end>@Localizer["Login"]</MudButton>
+                    <MudItem md="7" Class="mb-10 d-flex justify-center">
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="d-flex" justify-end>@Localizer["Login"]</MudButton>
                     </MudItem>
                     <MudItem>
                         <a class="alignment-center" href="/register">
@@ -44,12 +44,10 @@
 </MudGrid>
 
 @code {
-    #region Variables
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;
     private bool _isShown;
     private LoginModel _user = new();
-    #endregion
 
     private void showPasswordIconClick()
     {
