@@ -6,9 +6,6 @@ using MMIP.Shared.Models;
 
 namespace MMIP.Server.Controllers
 {
-    // TODO: check attributes and functionality -> work in progress
-    //[Authorize] // -> To specify that this class requires specific authorization
-    //[AllowAnonymous]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -27,7 +24,6 @@ namespace MMIP.Server.Controllers
             _signInManager = signInManager;
         }
 
-        [HttpPost]
         [Route("users/register")]
         public async Task<ActionResult<string>> CreateUser([FromBody] UserModel userModel)
         {

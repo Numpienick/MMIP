@@ -17,7 +17,7 @@ namespace MMIP.Shared.Models
         [DataType(DataType.Password)]
         [RegularExpression(
             @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$",
-            ErrorMessage = "Het wachtwoord moet ten minste 1 hoofdletter, 1 kleine letter, 1 nummer en 1 bijzonder karakter bevatten."
+            ErrorMessage = "Het wachtwoord moet minstens 1 hoofdletter, 1 kleine letter, 1 cijfer en 1 bijzonder karakter bevatten."
         )]
         public string Password { get; set; }
 

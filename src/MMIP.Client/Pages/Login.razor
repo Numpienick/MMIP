@@ -12,7 +12,6 @@
     <MudItem md="6">
         <MudCard Elevation="4" Class="rounded-lg">
             <MudCardContent>
-                @*TODO: add functionality to the form*@
                 <EditForm Model=@_user OnSubmit=@_formSubmitted>
                     <DataAnnotationsValidator/>
                     <MudItem Class="mb-10 mt-4">
@@ -23,7 +22,7 @@
                         <h2 class="alignment-center">@Localizer["Password"]</h2>
                     <MudTextField @bind-Value=@_user.Password Label="@Localizer["Password"]" Variant="Variant.Outlined" InputType="@_passwordInput" Adornment="Adornment.End" AdornmentIcon="@_passwordInputIcon" OnAdornmentClick="@showPasswordIconClick" AdornmentAriaLabel="Show password"></MudTextField>
                     </MudItem>
-                    @*TODO: change the redirect to the proper page*@
+                    @*TODO: change the redirect*@
                     <MudItem Class="mb-10">
                         <a class="alignment-center" href="/Error">
                             @Localizer["ForgotPassword"]
@@ -45,9 +44,6 @@
 </MudGrid>
 
 @code {
-    [Inject]
-    private ISnackbar _snackbar { get; set; }
-
     #region Variables
     private InputType _passwordInput = InputType.Password;
     private string _passwordInputIcon = Icons.Material.Filled.VisibilityOff;

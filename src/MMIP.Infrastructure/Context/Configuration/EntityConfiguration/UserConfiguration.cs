@@ -16,7 +16,7 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.AvatarPath).HasMaxLength(254);
         builder.Property(u => u.Preposition).HasMaxLength(50);
         builder.Property(u => u.AgreedToPrivacy).IsRequired();
-        builder.Property(u => u.AgreedToPrivacyDateTimeStamp);
+        builder.Property(u => u.AgreedToPrivacyOn).HasDefaultValueSql("NOW()");
         builder
             .Property(u => u.FullName)
             .HasComputedColumnSql(

@@ -12,6 +12,6 @@ namespace MMIP.Shared.Entities
         public override string? UserName => Email;
         public string? AvatarPath { get; set; }
         public bool AgreedToPrivacy { get; set; } = false;
-        public DateTimeOffset AgreedToPrivacyDateTimeStamp { get; set; }
+        public DateTimeOffset AgreedToPrivacyOn { get; set; }
     }
 }

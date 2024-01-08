@@ -11,20 +11,15 @@ namespace MMIP.Infrastructure.Services
     public class UserService : IProfileService
     {
         private readonly UserManager<User> _userManager;
-        private readonly IUserRepository _repository;
 
-        public UserService(UserManager<User> userManager, IUserRepository repository)
+        public UserService(UserManager<User> userManager)
         {
             _userManager = userManager;
-            _repository = repository;
         }
 
         public async Task<string> CreateUserAsync(UserModel userModel)
         {
-            if (
-                userModel.Email != null
-                && await _userManager.FindByEmailAsync(userModel.Email) == null
-            )
+            if (await _userManager.FindByEmailAsync(userModel.Email) == null)
             {
                 var user = new User
                 {
@@ -36,7 +31,7 @@ namespace MMIP.Infrastructure.Services
                     Description = userModel.Description,
                     AvatarPath = userModel.AvatarPath,
                     AgreedToPrivacy = userModel.AgreedToPrivacy,
-                    AgreedToPrivacyDateTimeStamp = DateTime.Now
+                    AgreedToPrivacyOn = DateTimeOffset.Now
                 };
 
                 IdentityResult result = await _userManager.CreateAsync(user, userModel.Password);
@@ -50,23 +45,14 @@ namespace MMIP.Infrastructure.Services
             return "This E-mail is already being used";
         }
 
-        public async Task GetProfileDataAsync(ProfileDataRequestContext context)
+        public Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
             throw new NotImplementedException();
-            //var nameClaim = context.Subject.FindAll(JwtClaimTypes.Name);
-
-            //await Task.CompletedTask;
         }
 
-        public async Task IsActiveAsync(IsActiveContext context)
+        public Task IsActiveAsync(IsActiveContext context)
         {
             throw new NotImplementedException();
-            //await Task.CompletedTask;
         }
-
-        //public async Task<User?> GetByEmailAsync(string email)
-        //{
-        //    return await _repository.GetUserAsync(email);
-        //}
     }
 }
