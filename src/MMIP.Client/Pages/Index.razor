@@ -1,68 +1,50 @@
 ﻿@page "/"
+@using MMIP.Shared.Views
+@using MMIP.Shared.Projections
 @inject IStringLocalizer<ApplicationResource> Localizer
 
 <PageTitle>MatchMaker @Localizer["Innovationplatform"]</PageTitle>
 
 <h1>MatchMaker</h1>
-<MudGrid Justify="Justify.Center" Class="grid-margin">
-    <MudItem md="6" xs="12" Class="carousel-alignment">
-        <MudCard Class="mudcard-background" Elevation="0">
-            <MudCarousel Class="carousel-height" TData="object" ShowBullets="false" AutoCycleTime="TimeSpan.FromSeconds(10)">
-                <MudCarouselItem>
-                    <div class="alignment-center">
-                        <a>
-                            <img class="carousel-image-style" src="Assets/Img/MatchmakerLogo.png" alt="MatchMaker logo" />
-                        </a>
-                    </div>
-                </MudCarouselItem>
-                <MudCarouselItem Class="alignment-center">
-                    <div class="alignment-center">
-                        <a href="/login">
-                            <h2>@Localizer["Login"]</h2>
-                        </a>
-                    </div>
-                </MudCarouselItem>
+<div class="d-flex flex-1 flex-column">
+    <MudGrid Spacing="2" Justify="Justify.Center" Class="flex-initial">
+        <MudItem xl="4" lg="5" md="6" sm="10" xs="12">
+            <MudCarousel @ref="_carousel" ItemsSource="_items" ShowBullets="false" AutoCycleTime="TimeSpan.FromSeconds(10)">
+                <ItemTemplate>
+                    @switch (context)
+                    {
+                        case ChallengeCardView cardData:
+                            <ChallengeCardComponent CardData="cardData"/>
+                            break;
+                        case OrganizationCarouselItemProjection projection:
+                            <OrganizationCarouselItem Organization="projection"/>
+                            break;
+                    }
+                </ItemTemplate>
             </MudCarousel>
-        </MudCard>
-    </MudItem>
-    <MudItem md="6" xs="12">
-        <MudCard>
-            <MudCardContent>
-                <h2>@Localizer["AboutMatchMaker"]</h2>
-                <p>
-                    @Localizer["AboutMatchMakerDescription"]
-                </p>
-            </MudCardContent>
-            <MudCardContent>
-                <h3>@Localizer["MissionMatchMaker"]</h3>
-                <em>
-                    @Localizer["MissionMatchMakerDescription"]
-                </em>
-            </MudCardContent>
-            <MudCardContent>
-                <h3>@Localizer["VisionMatchMaker"]</h3>
-                <em>
-                    @Localizer["VisionMatchMakerDescription"]
-                </em>
-            </MudCardContent>
-            <MudCardContent>
-                <h3>@Localizer["GoalMatchMaker"]</h3>
-                <em>
-                    @Localizer["GoalMatchMakerDescription"]
-                </em>
-            </MudCardContent>
-        </MudCard>
-    </MudItem>
-</MudGrid>
-<div class="footer-position">
-    <div class="footer-layout px-4">
-        <a href="/privacyverklaring">
-            @Localizer["PrivacyPageTitle"] | 2023
-        </a>
-    </div>
-</div>
-@* TODO: Add list with carousel items and randomize them *@
-@code
-{
+        </MudItem>
+        <MudItem xl="8" lg="7" md="6" sm="10" xs="12" Class="d-flex flex-column">
+            <MudCard Class="flex-1">
+                <MudCardContent>
+                    <h2>@Localizer["AboutMatchMaker"]</h2>
+                    <p>@Localizer["AboutMatchMakerDescription"]</p>
 
-}
+                    <br/>
+
+                    <h3>@Localizer["MissionMatchMaker"]</h3>
+                    <em>@Localizer["MissionMatchMakerDescription"]</em>
+
+                    <br/> <br/>
+
+                    <h3>@Localizer["VisionMatchMaker"]</h3>
+                    <em>@Localizer["VisionMatchMakerDescription"]</em>
+
+                    <br/> <br/>
+
+                    <h3>@Localizer["GoalMatchMaker"]</h3>
+                    <em>@Localizer["GoalMatchMakerDescription"]</em>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</div>

@@ -1,0 +1,14 @@
+﻿.container {
+  position: relative;
+}
+
+#text {
+  position: absolute;
+  max-height: 4em;
+  overflow: hidden;
+}
+
+h1 {
+  color: var(--main-bg-color);
+  text-shadow: black 1px 0 0.5rem;
+}

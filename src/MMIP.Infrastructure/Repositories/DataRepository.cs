@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MMIP.Application.Interfaces.Repositories;
 using MMIP.Infrastructure.Context;
-using MMIP.Shared.Entities;
 
 namespace MMIP.Infrastructure.Repositories;
 
@@ -27,11 +26,10 @@ internal class DataRepository<TEntity> : IDataRepository<TEntity>
         return _context.Set<TEntity>().ToListAsync();
     }
 
-    public Task<List<T>> GetPagedResponseAsync<T>(int pageNumber, int pageSize)
-        where T : class
+    public Task<List<TEntity>> GetPagedResponseAsync(int pageNumber, int pageSize)
     {
         return _context
-            .Set<T>()
+            .Set<TEntity>()
             .Skip((pageNumber) * pageSize)
             .Take(pageSize)
             .AsNoTracking()

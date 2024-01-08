@@ -1,0 +1,21 @@
+﻿.challenge-card-root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+::deep .mud-card {
+  transition: box-shadow 0.1s ease;
+}
+
+::deep .mud-card:hover {
+  box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.center-text {
+  text-align: center;
+}
+
+.logo {
+  max-width: 50%;
+}

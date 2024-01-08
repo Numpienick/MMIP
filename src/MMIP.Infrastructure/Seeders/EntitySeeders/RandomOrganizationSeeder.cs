@@ -44,21 +44,29 @@ public class RandomOrganizationSeeder : IEntitySeeder<Organization>
             "Breezy",
         };
 
-        var sectorId = await _context.Sectors.Select(s => s.Id).FirstOrDefaultAsync();
-        if (sectorId == default)
+        var sector = await _context.Sectors.FirstOrDefaultAsync();
+        if (sector == default)
         {
             await _sectorSeeder.Seed();
-            sectorId = await _context.Sectors.Select(s => s.Id).FirstAsync();
+            sector = await _context.Sectors.FirstAsync();
         }
 
         for (int i = 0; i < amount; i++)
         {
+            var orgProfile = new OrganizationProfile
+            {
+                AvatarPath = $"https://picsum.photos/seed/{new Random().Next(999999)}/400/400",
+                Description = $"Default Organization Description {i}",
+                BannerImagePath = $"https://picsum.photos/seed/{new Random().Next(999999)}/1600/888"
+            };
+
             organizations.Add(
                 new Organization
                 {
                     Name = testOrganizations[i],
                     EnrollmentCode = EnrollmentCodeGenerator.GenerateEnrollmentCode(),
-                    SectorId = sectorId
+                    Sector = sector,
+                    Profile = orgProfile,
                 }
             );
         }
