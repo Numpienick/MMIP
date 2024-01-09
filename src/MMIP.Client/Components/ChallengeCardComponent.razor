@@ -5,42 +5,46 @@
 @inject NavigationManager NavigationManager;
 
 <div class="challenge-card-root">
-    <MudCard @onclick="() => _navigateToChallengeView(CardData.ChallengeId)" Elevation="4" Class="flex-auto">
-        <MudCardMedia Image=@CardData.BannerImagePath Height="100"></MudCardMedia>
-        <MudCardContent Class="d-flex flex-column flex-auto gap-2">
-            <h2 class="center-text">@CardData.Title</h2>
-            <MudStack Class="py-2 px-1" Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Spacing="2">
-                <h3>@CardData.OrganizationName</h3>
-                <div class="logo">
-                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" Src="Assets/Img/1600x888.jpg"></MudImage>
-                </div>
-            </MudStack>
-            <p class="center-text">@CardData.ShortDescription</p>
-            <MudDivider></MudDivider>
-            <div class="d-inline-flex justify-center flex-wrap">
-                @foreach (var tag in CardData.Tags.Take(VisibleTagsLimit))
-                {
-                    <MudChip Size="Size.Small" Color="Color.Primary">@tag</MudChip>
-                }
+    <NavLink href="@ChallengeUri" class="flex-auto d-flex flex-column">
+        <MudCard Elevation="4" Class="d-flex flex-column flex-auto">
+            <MudCardMedia Class="flex-none" Image=@CardData.BannerImagePath Height="100"></MudCardMedia>
+            <MudCardContent Class="d-flex flex-column flex-auto gap-2">
+                <h2 class="centered-text">@CardData.Title</h2>
+                <NavLink class="organization-nav mb-auto py-2 px-2" href="@OrganizationUri" @onclick:preventDefault="@_isAtOrganization()">
+                    <MudStack Class="stack" Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Spacing="2">
+                        <h3>@CardData.OrganizationName</h3>
+                        <div>
+                            <MudImage Class="rounded-lg" Fluid="true" ObjectFit="ObjectFit.Cover" Src="@CardData.LogoImagePath"></MudImage>
+                        </div>
+                    </MudStack>
+                </NavLink>
+                <p class="centered-text">@CardData.ShortDescription</p>
+                <MudDivider Class="flex-none"></MudDivider>
+                <div class="d-inline-flex justify-center flex-wrap">
+                    @foreach (var tag in CardData.Tags.Take(VisibleTagsLimit))
+                    {
+                        <MudChip Size="Size.Small" Color="Color.Primary">@tag</MudChip>
+                    }
 
-                @if (_totalAmountOfTags > VisibleTagsLimit)
-                {
-                    <MudTooltip Arrow="true" Placement="Placement.Bottom" Class="grey lighten-2 icon-tooltip">
-                        <ChildContent>
-                            <MudChip Size="Size.Small" Color="Color.Primary">+@_amountOfAdditionalTags @Localizer["OtherTags"]</MudChip>
-                        </ChildContent>
-                        <TooltipContent>
-                            <h3>@Localizer["RemainingTags"]:</h3>
-                            @foreach (var tag in CardData.Tags.Skip(VisibleTagsLimit))
-                            {
-                                <p>@tag</p>
-                            }
-                        </TooltipContent>
-                    </MudTooltip>
-                }
-            </div>
-        </MudCardContent>
-    </MudCard>
+                    @if (_totalAmountOfTags > VisibleTagsLimit)
+                    {
+                        <MudTooltip Arrow="true" Placement="Placement.Bottom" Class="grey lighten-2 icon-tooltip">
+                            <ChildContent>
+                                <MudChip Size="Size.Small" Color="Color.Primary">+@_amountOfAdditionalTags @Localizer["OtherTags"]</MudChip>
+                            </ChildContent>
+                            <TooltipContent>
+                                <h3>@Localizer["RemainingTags"]:</h3>
+                                @foreach (var tag in CardData.Tags.Skip(VisibleTagsLimit))
+                                {
+                                    <p>@tag</p>
+                                }
+                            </TooltipContent>
+                        </MudTooltip>
+                    }
+                </div>
+            </MudCardContent>
+        </MudCard>
+    </NavLink>
 </div>
 
 @code {
@@ -48,6 +52,8 @@
 
     [Parameter] public ChallengeCardView CardData { get; set; } = null!;
 
+    private string ChallengeUri => $"/challenge-view/{CardData.ChallengeId}";
+    private string OrganizationUri => $"/profile/organization/{CardData.OrganizationId}";
     private int _totalAmountOfTags;
     private int _amountOfAdditionalTags => _totalAmountOfTags - VisibleTagsLimit;
 
@@ -56,9 +62,10 @@
         _totalAmountOfTags = CardData.Tags.Length;
     }
 
-    private void _navigateToChallengeView(Guid challengeId)
-    {
-        NavigationManager.NavigateTo($"/challenge-view/{challengeId}");
-    }
+    private bool _isAtChallenge() =>
+        NavigationManager.Uri == NavigationManager.ToAbsoluteUri(ChallengeUri).ToString();
+
+    private bool _isAtOrganization() =>
+        NavigationManager.Uri == NavigationManager.ToAbsoluteUri(OrganizationUri).ToString();
 
 }
