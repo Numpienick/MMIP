@@ -1,25 +1,30 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using MMIP.Infrastructure.Services;
+using MMIP.Shared.Entities;
 using MMIP.Shared.Models;
 
 namespace MMIP.Server.Controllers
 {
-    // TODO: check attributes and functionality -> work in progress
-    //[Authorize] // -> To specify that this class requires specific authorization
-    //[AllowAnonymous]
     [ApiController]
-    [Route("[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly UserService _userService;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public UsersController(UserService userService)
+        public UsersController(
+            UserService userService,
+            UserManager<User> userManager,
+            SignInManager<User> signInManager
+        )
         {
             _userService = userService;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
-        [HttpPost]
-        //[AllowAnonymous]
+        [Route("users/register")]
         public async Task<ActionResult<string>> CreateUser([FromBody] UserModel userModel)
         {
             if (userModel.Email != null)
@@ -30,11 +35,23 @@ namespace MMIP.Server.Controllers
             return BadRequest("E-mail is missing");
         }
 
-        //private readonly UserManager<User> _userManager;
-
-        //public UserController(UserManager<User> userManager)
-        //{
-        //    this._userManager = userManager;
-        //}
+        [HttpPost]
+        [Route("users/login")]
+        public async Task<ActionResult> LoginUser([FromBody] LoginModel loginModel)
+        {
+            var user = await _userManager.FindByEmailAsync(loginModel.Email);
+            if (user != null)
+            {
+                var signInResult = await _signInManager.PasswordSignInAsync(
+                    user.Email,
+                    loginModel.Password,
+                    false,
+                    false
+                );
+                if (signInResult.Succeeded)
+                    return Ok("Succesfully logged-in");
+            }
+            return BadRequest("No existing user found");
+        }
     }
 }

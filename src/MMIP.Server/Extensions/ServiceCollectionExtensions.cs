@@ -4,6 +4,7 @@ using MMIP.Infrastructure.Seeders.EntitySeeders;
 using MMIP.Application.Interfaces;
 using MMIP.Shared.Entities;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 
 namespace MMIP.Server.Extensions;
@@ -34,7 +35,7 @@ internal static class ServiceCollectionExtensions
     {
         services
             .AddIdentity<User, IdentityRole>(
-                options => options.SignIn.RequireConfirmedAccount = true
+                options => options.SignIn.RequireConfirmedAccount = false
             )
             .AddEntityFrameworkStores<ApplicationContext>();
 
@@ -43,7 +44,6 @@ internal static class ServiceCollectionExtensions
             .AddApiAuthorization<User, ApplicationContext>()
             .AddDeveloperSigningCredential();
 
-        JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
         services.AddIdentityOptions();
         return services;
     }
@@ -70,6 +70,16 @@ internal static class ServiceCollectionExtensions
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
             options.User.RequireUniqueEmail = true; // default is false
         });
+
+        services
+            .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromDays(1);
+                options.LoginPath = "/Login";
+                options.AccessDeniedPath = "/Error";
+            });
         return services;
     }
 }
