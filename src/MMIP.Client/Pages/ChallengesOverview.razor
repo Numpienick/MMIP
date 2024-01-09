@@ -30,18 +30,18 @@
                 }
             </MudGrid>
 
-            @* TODO: Remove grid *@
-            <MudGrid Justify="Justify.Center" Class="mt-15">
-                <MudItem md="6">
-                    <MudButton @onclick="@_loadBatch" FullWidth="true" Variant="Variant.Filled" Color="Color.Inherit" Disabled="@_gotAllChallenges">@Localizer["ChallengesLoadMore"]</MudButton>
-                </MudItem>
-            </MudGrid>
+            @if (!_gotAllChallenges)
+            {
+                <div id="load-challenges-button" class="d-flex mx-auto mt-6 pb-4">
+                    <MudButton FullWidth="true" Class="py-2" @onclick="@_loadBatch" Variant="Variant.Filled" Color="Color.Inherit">@Localizer["ChallengesLoadMore"]</MudButton>
+                </div>
+            }
         </MudCard>
     </MudItem>
 </MudGrid>
 
 @code {
-        private const int BatchSize = 6;
+    private const int BatchSize = 6;
 
     public string? SearchTerms { get; set; }
 
@@ -62,7 +62,7 @@
 
     private async Task<IEnumerable<ChallengeCardView>> _getChallengeCardViews(int take, int skip)
     {
-    // TODO: replace with requestcontroller when Whim is done
+        // TODO: replace with requestcontroller when Whim is done
         var cards = await Client.GetFromJsonAsync<List<ChallengeCardView>>($"challenges/overview?take={take}&&skip={skip}")
                     ?? new List<ChallengeCardView>();
 
