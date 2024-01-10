@@ -79,7 +79,7 @@ public class DefaultsSeeder : IDatabaseSeeder
 
         var orgProfile = new OrganizationProfile
         {
-            AvatarPath = $"https://picsum.photos/seed/{new Random().Next(999999)}/400/400",
+            AvatarPath = $"https://picsum.photos/seed/{new Random().Next(999999)}/1000/1000",
             Description =
                 @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut fermentum tellus. Sed convallis dui a ultrices consectetur. Pellentesque facilisis, arcu ac aliquam pretium, enim massa pellentesque ipsum, et faucibus nisl nisl iaculis dolor. In faucibus commodo ultrices. Aenean convallis fringilla porta. Suspendisse dictum semper justo ut porta. Aliquam erat volutpat. In sed consequat metus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum euismod nisl ac nulla accumsan, in ultrices mauris fermentum. Nam bibendum ligula est, sit amet iaculis mauris feugiat ut.
 

@@ -1,5 +1,6 @@
-﻿.icon-tooltip {
-  width: 280px;
+﻿::deep .mud-avatar {
+  width: 100%;
+  height: auto;
 }
 
 .concluded-comment {

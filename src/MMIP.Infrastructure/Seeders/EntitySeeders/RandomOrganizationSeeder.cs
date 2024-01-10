@@ -55,7 +55,7 @@ public class RandomOrganizationSeeder : IEntitySeeder<Organization>
         {
             var orgProfile = new OrganizationProfile
             {
-                AvatarPath = $"https://picsum.photos/seed/{new Random().Next(999999)}/400/400",
+                AvatarPath = $"https://picsum.photos/seed/{new Random().Next(999999)}/1000/1000",
                 Description = $"Default Organization Description {i}",
                 BannerImagePath = $"https://picsum.photos/seed/{new Random().Next(999999)}/1600/888"
             };

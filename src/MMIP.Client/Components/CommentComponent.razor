@@ -1,5 +1,53 @@
-﻿<h3>CommentComponent</h3>
+﻿@using MMIP.Shared.Entities;
+@using MMIP.Shared.Utilities;
+@using MMIP.Shared.Views;
+@inject IStringLocalizer<ApplicationResource> Localizer
+@inject NavigationManager NavigationManager;
+
+<div class="flex-auto d-flex flex-column">
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="3" lg="2" Class="d-flex align-self-center">
+            <div>
+                <MudAvatar>
+                    <MudImage Fluid="true" ObjectFit="ObjectFit.Cover" Src=@($"https://picsum.photos/seed/{new Random().Next(9999)}/1000/1000")></MudImage>
+                </MudAvatar>
+            </div>
+        </MudItem>
+        <MudItem xs="8" lg="9" Class="d-flex">
+            <MudCard Elevation="4" Class="@_isCommentConcluded()">
+                <MudCardContent Class="d-flex flex-grow-1">
+                    <MudGrid Justify="Justify.FlexStart" Spacing="0">
+                        <MudItem xs="9" md="10" xl="11" Class="pr-4 pb-2">
+                            @* TODO: Change according to the User and Organization linked to the comment. *@
+                            <h2 class="pb-2">Naam van de gebruiker</h2>
+                            <h3>Naam van het bedrijf</h3>
+                        </MudItem>
+                        <MudItem xs="3" md="2" xl="1" Class="">
+                            <MudTooltip Arrow="true" Placement="Placement.Right" Class="grey lighten-2 icon-tooltip">
+                                <ChildContent>
+                                    <MudImage Fluid="true" Src="@CommentData.CommentTypeIconPath"></MudImage>
+                                </ChildContent>
+                                <TooltipContent>
+                                    <h3>@CommentData.CommentTypeName</h3>
+                                    <p>@CommentData.CommentTypeDescription</p>
+                                </TooltipContent>
+                            </MudTooltip>
+                        </MudItem>
+                        <MudItem xs="10">
+                            <MudDivider DividerType="DividerType.FullWidth"></MudDivider>
+                        </MudItem>
+                        <MudItem xs="12" Class="pt-4">
+                            <p>@CommentData.Text</p>
+                        </MudItem>
+                    </MudGrid>
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</div>
 
 @code {
+    [Parameter] public CommentView CommentData { get; set; } = null!;
 
+    private string _isCommentConcluded() => CommentData.Concluded ? "concluded-comment d-flex flex-grow-1" : "d-flex flex-grow-1";
 }

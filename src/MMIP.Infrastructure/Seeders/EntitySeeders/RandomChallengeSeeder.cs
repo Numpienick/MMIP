@@ -90,7 +90,7 @@ public class RandomChallengeSeeder : IEntitySeeder<Challenge>
                     ShortDescription = testShortDescriptions[curRandom],
                     Deadline = DateTime.Now.AddDays(10),
                     ChallengeVisibility = visibility,
-                    BannerImagePath = $"https://picsum.photos/seed/{i}/556/200",
+                    BannerImagePath = $"https://picsum.photos/seed/{i}/1024/400",
                     FinalReport = $"Final report {i}",
                     StartDate = DateTime.Now,
                     OrganizationId = organizationId,

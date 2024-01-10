@@ -1,0 +1,18 @@
+﻿::deep a {
+  text-decoration: none;
+}
+
+::deep a:hover {
+  text-decoration: underline;
+}
+
+.banner {
+  min-width: 100%;
+  max-height: 20dvw;
+}
+
+@media only screen and (max-width: 960px) {
+  .banner {
+    max-height: 40dvw;
+  }
+}
