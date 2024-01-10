@@ -10,6 +10,5 @@ internal class ChallengeViewConfiguration : IEntityTypeConfiguration<ChallengeVi
     {
         builder.ToView("challenge_view").HasNoKey();
         builder.Ignore(cv => cv.CreatorName); // TODO: remove when identity is implemented
-        builder.Ignore(cv => cv.OrganizationProfilePicturePath); // TODO: remove when organization profile is implemented
     }
 }

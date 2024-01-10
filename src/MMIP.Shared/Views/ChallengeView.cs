@@ -11,8 +11,8 @@ public class ChallengeView
     public DateTimeOffset Deadline { get; set; }
     public string PhaseName { get; set; } = null!;
     public int Progress { get; set; }
-    public string CreatorName { get; set; } = "";
+    public string CreatorName { get; set; } = "Leander Jelgersma";
     public Guid OrganizationId { get; set; }
-    public string OrganizationProfilePicturePath { get; set; } = "";
+    public string? OrganizationAvatarPath { get; set; }
     public string OrganizationName { get; set; } = null!;
 }
