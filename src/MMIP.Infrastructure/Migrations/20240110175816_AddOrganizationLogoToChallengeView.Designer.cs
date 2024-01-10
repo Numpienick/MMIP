@@ -3,6 +3,7 @@ using System;
 using MMIP.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MMIP.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240110175816_AddOrganizationLogoToChallengeView")]
+    partial class AddOrganizationLogoToChallengeView
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1147,7 +1150,7 @@ namespace MMIP.Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_organizations_sectors_sector_id");
 
-                    b.OwnsOne("MMIP.Shared.Entities.Organization.Profile#MMIP.Shared.Entities.OrganizationProfile", "Profile", b1 =>
+                    b.OwnsOne("MMIP.Shared.Entities.OrganizationProfile", "Profile", b1 =>
                         {
                             b1.Property<Guid>("OrganizationId")
                                 .HasColumnType("uuid")
@@ -1192,7 +1195,7 @@ namespace MMIP.Infrastructure.Migrations
 
                             b1.HasKey("OrganizationId");
 
-                            b1.ToTable("organizations", (string)null);
+                            b1.ToTable("organizations");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrganizationId")

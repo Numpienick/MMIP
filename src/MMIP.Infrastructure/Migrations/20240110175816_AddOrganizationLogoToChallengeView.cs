@@ -5,14 +5,14 @@
 namespace MMIP.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddOrganizationIdChallengeView : Migration
+    public partial class AddOrganizationLogoToChallengeView : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql(@"DROP VIEW IF EXISTS challenge_view;");
             migrationBuilder.Sql(
-                @"CREATE OR REPLACE VIEW challenge_view
+                @"CREATE OR REPLACE VIEW public.challenge_view
 AS  SELECT c.id AS challenge_id,
     c.title,
     c.description,
@@ -23,12 +23,13 @@ AS  SELECT c.id AS challenge_id,
     c.organization_id,
     p.name AS phase_name,
     round((100 * p.""order"" / count(cp.*))::numeric, 1) AS progress,
-    o.name AS organization_name
+    o.name AS organization_name,
+    o.profile_avatar_path AS organization_avatar_path
    FROM challenges c
      LEFT JOIN challenge_phases cp ON c.id = cp.challenge_id
      LEFT JOIN phases p ON c.current_phase_id = p.id
      LEFT JOIN organizations o ON c.organization_id = o.id
-  GROUP BY c.id, c.title, c.description, c.banner_image_path, c.final_report, c.start_date, c.deadline, p.name, p.""order"", o.name
+  GROUP BY c.id, c.title, c.description, c.banner_image_path, c.final_report, c.start_date, c.deadline, p.name, p.""order"", o.name, organization_avatar_path
   ORDER BY c.id;"
             );
         }
@@ -46,6 +47,7 @@ AS  SELECT c.id AS challenge_id,
     c.final_report,
     c.start_date,
     c.deadline,
+    c.organization_id,
     p.name AS phase_name,
     round((100 * p.""order"" / count(cp.*))::numeric, 1) AS progress,
     o.name AS organization_name
