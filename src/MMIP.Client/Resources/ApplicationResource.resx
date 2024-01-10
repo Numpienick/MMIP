@@ -339,6 +339,9 @@
   <data name="Request_Unknown" xml:space="preserve">
     <value>Onbekende fout</value>
   </data>
+  <data name="ProfileDescription" xml:space="preserve">
+    <value>Beschrijving</value>
+  </data>
   <data name="ProfileTitle" xml:space="preserve">
     <value>Profiel</value>
   </data>
