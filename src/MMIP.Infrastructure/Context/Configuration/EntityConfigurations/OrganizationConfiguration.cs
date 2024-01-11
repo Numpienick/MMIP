@@ -13,11 +13,7 @@ internal class OrganizationConfiguration : BaseEntityConfiguration<Organization>
         base.Configure(builder);
         builder.Property(o => o.Name).IsRequired().HasMaxLength(NameLength);
         builder.Property(o => o.EnrollmentCode).HasMaxLength(8).IsRequired();
-        builder
-            .HasOne(o => o.Sector)
-            .WithMany()
-            .IsRequired()
-            .OnDelete(DeleteBehavior.Restrict);
+        builder.HasOne(o => o.Sector).WithMany().IsRequired().OnDelete(DeleteBehavior.Restrict);
 
         builder.OwnsOne(
             o => o.Profile,

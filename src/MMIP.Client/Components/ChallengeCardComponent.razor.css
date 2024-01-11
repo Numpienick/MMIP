@@ -4,18 +4,25 @@
   height: 100%;
 }
 
-::deep .mud-card {
-  transition: box-shadow 0.1s ease;
-}
-
 ::deep .mud-card:hover {
+  transition: box-shadow 0.3s;
   box-shadow: 10px 20px 40px rgba(0, 0, 0, 0.5);
 }
 
-.center-text {
-  text-align: center;
+::deep a {
+  text-decoration: none;
 }
 
-.logo {
+::deep .organization-nav:hover {
+  transition: box-shadow 0.2s;
+  box-shadow: 0.1em 0.1em 2em rgba(0, 0, 0, 0.1);
+}
+
+::deep .active:hover {
+  cursor: default;
+  box-shadow: none;
+}
+
+::deep .stack > * {
   max-width: 50%;
 }

@@ -26,7 +26,7 @@ public class RandomChallengeSeeder : IEntitySeeder<Challenge>
         var challenges = new List<Challenge>();
         var random = new Random();
         var visibilityValues = Enum.GetValues<Visibility>();
-        var allOrganizations = (await _getOrganizations(random.Next(0, 12))).ToList();
+        var allOrganizations = (await _getOrganizations(random.Next(1, 12))).ToList();
         var allTags = (await _getTags(random.Next(0, 20))).ToArray();
         var allPhases = (await _getPhases(4)).ToArray();
 
